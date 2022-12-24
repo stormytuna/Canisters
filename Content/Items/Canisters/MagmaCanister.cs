@@ -32,6 +32,7 @@ namespace Canisters.Content.Items.Canisters {
             Item.crit = 4;
             Item.knockBack = 8f;
             Item.DamageType = DamageClass.Ranged;
+            Item.ammo = Type;
 
             // CanisterItem stats
             LaunchedProjectileType = Item.shoot;
