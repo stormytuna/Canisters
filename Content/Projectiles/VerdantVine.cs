@@ -4,6 +4,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace Canisters.Content.Projectiles {
+    // TODO: Change the actual sprite of this so it's not /just/ the vilethorn
     public class VerdantVine : ModProjectile {
         /// <summary>
         /// The number of vine projectiles to create after this one. If this is 0, the texture will be replaced with the tip texture
