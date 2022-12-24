@@ -58,22 +58,6 @@ namespace Canisters.Content.Projectiles.Canisters {
             }
 
             // Leafy dust
-            /*
-            for (int i = 0; i < 45; i++) {
-                Vector2 velocity = Main.rand.NextVector2Circular(15f, 15f);
-                Dust dust = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.Grass);
-                dust.noGravity = true;
-                dust.velocity = velocity;
-                dust.noLight = true;
-
-                if (Main.rand.NextBool(3)) {
-                    // 1/3 dust becomes medium dust
-                    float sizeMult = Main.rand.NextFloat(1.3f, 2f);
-                    dust.scale *= sizeMult;
-                    dust.velocity /= sizeMult;
-                }
-            }
-            */
             for (int i = 0; i < 80; i++) {
                 // Our base dust properties
                 Vector2 velocity = Main.rand.NextVector2Circular(15f, 15f);
