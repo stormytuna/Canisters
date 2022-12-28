@@ -1,5 +1,7 @@
+using Canisters.Common.Systems;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -134,13 +136,55 @@ public abstract class CanisterItem : ModItem {
 }
 
 /// <summary>
+/// Handles weapons that visually show the canister <para/>
+/// This class overrides these ModItem methods, so be sure to either call base or understand what each override does when overriding in your weapon
+/// <list type="bullet">
+///     <item><term>PreDrawInInventory</term><description> Draws the item with the canister coloured based on what canister the player will fire</description></item>
+/// </list>
+/// </summary>
+public abstract class CanisterWeapon : ModItem {
+    private Asset<Texture2D> _baseTexture;
+    private Asset<Texture2D> BaseTexture {
+        get {
+            _baseTexture ??= ModContent.Request<Texture2D>(Texture + "_Base");
+            return _baseTexture;
+        }
+    }
+
+    private Asset<Texture2D> _canisterTexture;
+    private Asset<Texture2D> CanisterTexture {
+        get {
+            _canisterTexture ??= ModContent.Request<Texture2D>(Texture + "_Canister");
+            return _canisterTexture;
+        }
+    }
+
+    public override bool PreDrawInInventory(SpriteBatch spriteBatch, Vector2 position, Rectangle frame, Color drawColor, Color itemColor, Vector2 origin, float scale) {
+        // Check if we have any canisters
+        var player = Main.LocalPlayer;
+        if (player.PickAmmo(Item, out _, out _, out _, out _, out int usedAmmoItemId, true)) {
+            // Draw the weapon base
+            spriteBatch.Draw(BaseTexture.Value, position, frame, drawColor, 0f, origin, scale, SpriteEffects.None, 0);
+
+            // Draw the canister
+            Color canisterColor = CanisterColorSystem.GetCanisterColor(usedAmmoItemId);
+            spriteBatch.Draw(CanisterTexture.Value, position, frame, canisterColor, 0f, origin, scale, SpriteEffects.None, 0);
+
+            return false;
+        }
+
+        return true;
+    }
+}
+
+/// <summary>
 /// Handles projectile held weapons for us <para/>
 /// Be sure to set these helper properties in SetDefaults hook <para/>
 /// <list type="bullet">
 ///     <item><term>HoldOutOffset</term><description> How far away the projectile will display from your character</description></item>
-///     <item><term>FiringType</term><description> The firing type, either Canister or Regular</description></item>
+///     <item><term>CanisterFiringType</term><description> The firing type, either Canister or Regular</description></item>
 ///     <item><term>RotationOffset</term><description> How many extra radians this projectile will rotate when it's pointed to the mouse</description></item>
-///     <item><term>CanisterOnSpriteFilepath</term><description> The filepath of the on sprite canister</description></item>
+///     <item><term>Texture</term><description> This is actually provided by ModProjectile, but make sure to override it and set it to the items sprite filepath</description></item>
 /// </list>
 /// This class overrides these ModProjectile methods, so be sure to either call base or understand what each override does when overriding in your weapon
 /// <list type="bullet">
@@ -166,9 +210,6 @@ public abstract class CanisterHeldProjectile : ModProjectile {
     /// <summary>How much this projectile should be rotated when it points to the mouse</summary>
     public float RotationOffset { get; set; }
 
-    /// <summary>The filepath of the canister on sprite texture this weapon should use. Set this to an empty string if the weapon doesn't have any canister on sprite</summary>
-    public string CanisterOnSpriteFilepath { get; set; }
-
     /// <summary>This property acts as a frame counter</summary>
     public int AI_FrameCount { get; set; } = 0;
 
@@ -183,13 +224,14 @@ public abstract class CanisterHeldProjectile : ModProjectile {
         toMouse.Normalize();
 
         // Kill the projectile if we stop using it or can't use it
-        if (!Owner.channel || Owner.CCed || !Owner.PickAmmo(Owner.HeldItem, out _, out _, out _, out _, out _, true)) {
+        if (((!Owner.channel || !Owner.PickAmmo(Owner.HeldItem, out _, out _, out _, out _, out _, true)) && Owner.ItemAnimationEndingOrEnded) || Owner.CCed) {
             Projectile.Kill();
+            return;
         }
 
         // Calls our Shoot override if we should
         int shootFrame = UseTimeAfterBuffs - 1;
-        if (AI_FrameCount % shootFrame == 0) {
+        if (AI_FrameCount % UseTimeAfterBuffs == 0) {
             Owner.PickAmmo(Owner.HeldItem, out int projToShoot, out float speed, out int damage, out float knockback, out int usedAmmoItemId);
             var canisterItem = ContentSamples.ItemsByType[usedAmmoItemId].ModItem as CanisterItem;
             if (CanisterFiringType == FiringType.Canister) {
@@ -197,24 +239,25 @@ public abstract class CanisterHeldProjectile : ModProjectile {
                 damage += canisterItem.DamageWhenLaunched;
             } else {
                 projToShoot = canisterItem.DepletedProjectileType;
-                damage += canisterItem.DamageWhenLaunched;
+                damage += canisterItem.DamageWhenDepleted;
             }
             EntitySource_ItemUse_WithAmmo source = new(Owner, Owner.HeldItem, usedAmmoItemId);
             Vector2 velocity = toMouse * speed;
-
             Shoot(Owner, source, Owner.MountedCenter, velocity, projToShoot, damage, knockback);
+
+            Owner.SetDummyItemTime(UseTimeAfterBuffs + 1);
+
+            // Set rotation and direction
+            Projectile.rotation = toMouse.ToRotation() - Projectile.direction * RotationOffset + MathHelper.PiOver2;
         }
 
-        // Set direction and rotation
-        Projectile.direction = 1;
-        if (Math.Sign(Main.MouseWorld.X - Owner.Center.X) == -1)
-            Projectile.direction = -1;
-        Projectile.rotation = toMouse.ToRotation() - Projectile.direction * RotationOffset + MathHelper.PiOver2;
-        Projectile.spriteDirection = Projectile.direction;
-
         // Set position and velocity
-        Projectile.Center = Owner.RotatedRelativePoint(Owner.MountedCenter) + toMouse * HoldOutOffset;
+        Projectile.Center = Owner.RotatedRelativePoint(Owner.MountedCenter) + Projectile.rotation.ToRotationVector2() * HoldOutOffset;
         Projectile.velocity = Vector2.Zero;
+
+        // Resets our direction and sprite direction
+        Projectile.direction = Math.Sign(Projectile.Center.X - Owner.Center.X);
+        Projectile.spriteDirection = Projectile.direction;
 
         // Set timeleft
         Projectile.timeLeft = 2;
@@ -222,12 +265,14 @@ public abstract class CanisterHeldProjectile : ModProjectile {
         // Set some values on our player
         Owner.ChangeDir(Projectile.direction);
         Owner.heldProj = Projectile.whoAmI;
-        Owner.SetDummyItemTime(2);
         Owner.itemRotation = Projectile.DirectionFrom(Owner.MountedCenter).ToRotation();
         if (Projectile.Center.X < Owner.MountedCenter.X) {
             Owner.itemRotation += (float)Math.PI;
         }
         Owner.itemRotation = MathHelper.WrapAngle(Owner.itemRotation);
+
+        // Set timeleft
+        Projectile.timeLeft = 2;
 
         // Increment our frame count
         AI_FrameCount++;
@@ -235,23 +280,40 @@ public abstract class CanisterHeldProjectile : ModProjectile {
         base.AI();
     }
 
-    private Texture2D _canisterOnSprite;
-    private Texture2D CanisterOnSprite {
+    private Asset<Texture2D> _baseTexture;
+    private Asset<Texture2D> BaseTexture {
         get {
-            if (_canisterOnSprite is null) {
-                _canisterOnSprite = ModContent.Request<Texture2D>(CanisterOnSpriteFilepath).Value;
-            }
+            _baseTexture ??= ModContent.Request<Texture2D>(Texture + "_Base");
+            return _baseTexture;
+        }
+    }
 
-            return _canisterOnSprite;
+    private Asset<Texture2D> _canisterTexture;
+    private Asset<Texture2D> CanisterTexture {
+        get {
+            _canisterTexture ??= ModContent.Request<Texture2D>(Texture + "_Canister");
+            return _canisterTexture;
         }
     }
 
     public override bool PreDraw(ref Color lightColor) {
-        if (CanisterOnSpriteFilepath == "") {
-            return base.PreDraw(ref lightColor);
-        }
+        if (Owner.PickAmmo(Owner.HeldItem, out _, out _, out _, out _, out int usedAmmoItemID, true)) {
+            Vector2 position = Projectile.Center - Main.screenPosition;
+            Rectangle frame = new(0, 0, BaseTexture.Width(), BaseTexture.Height());
+            Color drawColor = lightColor;
+            float rotation = Projectile.rotation;
+            Vector2 origin = frame.Size() / 2f;
+            float scale = Projectile.scale;
+            SpriteEffects effects = Projectile.spriteDirection == 1 ? SpriteEffects.None : SpriteEffects.FlipVertically;
 
-        // TODO: Draw canister
+            Main.EntitySpriteDraw(BaseTexture.Value, position, frame, drawColor, rotation, origin, scale, effects, 0);
+
+            Point projectileTileCoords = Projectile.Center.ToTileCoordinates();
+            Color canisterColor = CanisterColorSystem.GetCanisterColor(usedAmmoItemID) * Lighting.Brightness(projectileTileCoords.X, projectileTileCoords.Y);
+            Main.EntitySpriteDraw(CanisterTexture.Value, position, frame, canisterColor, rotation, origin, scale, effects, 0);
+
+            return false;
+        }
 
         return base.PreDraw(ref lightColor);
     }
