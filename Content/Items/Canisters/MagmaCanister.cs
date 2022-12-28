@@ -1,4 +1,5 @@
-﻿using Terraria;
+﻿using Canisters.Content.Projectiles.Canisters;
+using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -36,7 +37,7 @@ namespace Canisters.Content.Items.Canisters {
 
             // CanisterItem stats
             LaunchedProjectileType = Item.shoot;
-            DepletedProjectileType = -1;
+            DepletedProjectileType = ModContent.ProjectileType<MagmaCanister_Depleted>();
             DamageWhenLaunched = 14;
             DamageWhenDepleted = 3;
 

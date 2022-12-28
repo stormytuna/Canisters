@@ -85,4 +85,33 @@ namespace Canisters.Content.Projectiles.Canisters {
             }
         }
     }
+
+    public class MagmaCanister_Depleted : ModProjectile {
+        public override void SetStaticDefaults() {
+            DisplayName.SetDefault("Magma Blob");
+            Main.projFrames[Type] = 2;
+
+            base.SetStaticDefaults();
+        }
+
+        public override void SetDefaults() {
+            // Base stats
+            Projectile.width = 20;
+            Projectile.height = 20;
+            Projectile.aiStyle = 1;
+
+            // Weapon stats
+            Projectile.friendly = true;
+            Projectile.penetrate = -1;
+            Projectile.DamageType = DamageClass.Ranged;
+
+            base.SetDefaults();
+        }
+
+        public override bool OnTileCollide(Vector2 oldVelocity) {
+            // TODO: Make it stick to tiles and vibe
+
+            return base.OnTileCollide(oldVelocity);
+        }
+    }
 }
