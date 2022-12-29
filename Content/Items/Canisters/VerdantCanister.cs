@@ -34,8 +34,6 @@ namespace Canisters.Content.Items.Canisters {
 
             base.SetDefaults();
         }
-    }
-
 
         public override void AddRecipes() {
             CreateRecipe(300)
