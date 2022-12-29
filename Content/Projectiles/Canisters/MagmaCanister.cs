@@ -2,6 +2,7 @@ using Microsoft.Xna.Framework;
 using System;
 using Terraria;
 using Terraria.Audio;
+using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -94,11 +95,18 @@ namespace Canisters.Content.Projectiles.Canisters {
             base.SetStaticDefaults();
         }
 
+        public override void OnSpawn(IEntitySource source) {
+            Projectile.rotation = Main.rand.NextFloat(MathHelper.TwoPi);
+            rotPerFrame = Main.rand.NextFloat(0.1f, 0.2f);
+
+            base.OnSpawn(source);
+        }
+
         public override void SetDefaults() {
             // Base stats
             Projectile.width = 20;
             Projectile.height = 20;
-            Projectile.aiStyle = 1;
+            Projectile.aiStyle = -1;
 
             // Weapon stats
             Projectile.friendly = true;
@@ -108,10 +116,16 @@ namespace Canisters.Content.Projectiles.Canisters {
             base.SetDefaults();
         }
 
-        public override bool OnTileCollide(Vector2 oldVelocity) {
-            // TODO: Make it stick to tiles and vibe
+        private float rotPerFrame;
 
-            return base.OnTileCollide(oldVelocity);
+        public override void AI() {
+            // Rotate slightly
+            Projectile.rotation += rotPerFrame;
+
+            // Gravity
+            Projectile.velocity += Vector2.UnitY * 0.2f;
+
+            base.AI();
         }
     }
 }
