@@ -15,7 +15,7 @@ namespace Canisters.Content.Items.Canisters {
             Item.width = 22;
             Item.height = 22;
             Item.maxStack = 999;
-            Item.value = 2;
+            Item.value = Item.buyPrice(copper: 5);
 
             base.SetDefaults();
         }
@@ -28,6 +28,19 @@ namespace Canisters.Content.Items.Canisters {
                 .Register();
 
             base.AddRecipes();
+        }
+    }
+
+    public class EmptyCanisterGlobalNPC : GlobalNPC {
+        public override void SetupShop(int type, Chest shop, ref int nextSlot) {
+            if (type != NPCID.Demolitionist) {
+                return;
+            }
+
+            shop.item[nextSlot].SetDefaults(ModContent.ItemType<EmptyCanister>());
+            nextSlot++;
+
+            base.SetupShop(type, shop, ref nextSlot);
         }
     }
 }
