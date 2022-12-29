@@ -20,7 +20,7 @@ namespace Canisters.Content.Items.Canisters {
 
             // Weapon stats
             Item.shoot = ModContent.ProjectileType<Projectiles.Canisters.MagmaCanister>();
-            Item.shootSpeed = 9f;
+            Item.shootSpeed = 2f;
             Item.damage = 1;
             Item.crit = 4;
             Item.knockBack = 8f;

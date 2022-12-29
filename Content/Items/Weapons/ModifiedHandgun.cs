@@ -22,7 +22,7 @@ namespace Canisters.Content.Items.Weapons {
 
             // Use stats
             Item.useStyle = ItemUseStyleID.Shoot;
-            Item.useTime = Item.useAnimation = 24;
+            Item.useTime = Item.useAnimation = 15;
             Item.autoReuse = true;
             Item.noMelee = true;
             Item.noUseGraphic = true;
