@@ -17,14 +17,6 @@ namespace Canisters.Content.Items.Canisters {
             Item.maxStack = 999;
             Item.value = 2;
 
-            // Use stats
-            Item.useStyle = ItemUseStyleID.Swing;
-            Item.useTime = Item.useAnimation = 20;
-            Item.autoReuse = true;
-            Item.noMelee = true;
-            Item.noUseGraphic = true;
-            Item.consumable = true;
-
             // Weapon stats
             Item.shoot = ModContent.ProjectileType<Projectiles.Canisters.VerdantCanister>();
             Item.shootSpeed = 8f;
@@ -44,14 +36,15 @@ namespace Canisters.Content.Items.Canisters {
         }
     }
 
-    public class VerdantCanisterGlobalNPC : GlobalNPC {
-        public override void SetupShop(int type, Chest shop, ref int nextSlot) {
-            if (type != NPCID.Dryad) return;
 
-            shop.item[nextSlot].SetDefaults(ModContent.ItemType<VerdantCanister>());
-            nextSlot++;
+        public override void AddRecipes() {
+            CreateRecipe(300)
+                .AddIngredient<EmptyCanister>(300)
+                .AddIngredient(ItemID.JungleSpores)
+                .AddTile(TileID.Bottles)
+                .Register();
 
-            base.SetupShop(type, shop, ref nextSlot);
+            base.AddRecipes();
         }
     }
 }

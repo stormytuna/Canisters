@@ -18,14 +18,6 @@ namespace Canisters.Content.Items.Canisters {
             Item.maxStack = 999;
             Item.value = 2;
 
-            // Use stats
-            Item.useStyle = ItemUseStyleID.Swing;
-            Item.useTime = Item.useAnimation = 20;
-            Item.autoReuse = true;
-            Item.noMelee = true;
-            Item.noUseGraphic = true;
-            Item.consumable = true;
-
             // Weapon stats
             Item.shoot = ModContent.ProjectileType<Projectiles.Canisters.MagmaCanister>();
             Item.shootSpeed = 9f;
