@@ -21,7 +21,7 @@ namespace Canisters.Content.Items.Canisters {
         }
 
         public override void AddRecipes() {
-            CreateRecipe(150)
+            CreateRecipe(300)
                 .AddRecipeGroup(RecipeGroupID.IronBar)
                 .AddIngredient(ItemID.Glass)
                 .AddTile(TileID.Anvils)

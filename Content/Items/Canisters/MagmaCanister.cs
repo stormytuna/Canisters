@@ -37,8 +37,8 @@ namespace Canisters.Content.Items.Canisters {
         }
 
         public override void AddRecipes() {
-            CreateRecipe(150)
-                .AddIngredient<EmptyCanister>(150)
+            CreateRecipe(300)
+                .AddIngredient<EmptyCanister>(300)
                 .AddTile(TileID.Bottles)
                 .AddCondition(Recipe.Condition.NearLava)
                 .Register();
