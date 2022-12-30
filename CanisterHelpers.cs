@@ -229,28 +229,6 @@ public abstract class CanisterHeldProjectile : ModProjectile {
             return;
         }
 
-        // Calls our Shoot override if we should
-        int shootFrame = UseTimeAfterBuffs - 1;
-        if (AI_FrameCount % UseTimeAfterBuffs == 0) {
-            Owner.PickAmmo(Owner.HeldItem, out int projToShoot, out float speed, out int damage, out float knockback, out int usedAmmoItemId);
-            var canisterItem = ContentSamples.ItemsByType[usedAmmoItemId].ModItem as CanisterItem;
-            if (CanisterFiringType == FiringType.Canister) {
-                projToShoot = canisterItem.LaunchedProjectileType;
-                damage += canisterItem.DamageWhenLaunched;
-            } else {
-                projToShoot = canisterItem.DepletedProjectileType;
-                damage += canisterItem.DamageWhenDepleted;
-            }
-            EntitySource_ItemUse_WithAmmo source = new(Owner, Owner.HeldItem, usedAmmoItemId);
-            Vector2 velocity = toMouse * speed;
-            Shoot(Owner, source, Owner.MountedCenter, velocity, projToShoot, damage, knockback);
-
-            Owner.SetDummyItemTime(UseTimeAfterBuffs + 1);
-
-            // Set rotation and direction
-            Projectile.rotation = toMouse.ToRotation() - Projectile.direction * RotationOffset + MathHelper.PiOver2;
-        }
-
         // Set position and velocity
         Projectile.Center = Owner.RotatedRelativePoint(Owner.MountedCenter) + Projectile.rotation.ToRotationVector2() * HoldOutOffset;
         Projectile.velocity = Vector2.Zero;
@@ -270,6 +248,27 @@ public abstract class CanisterHeldProjectile : ModProjectile {
             Owner.itemRotation += (float)Math.PI;
         }
         Owner.itemRotation = MathHelper.WrapAngle(Owner.itemRotation);
+
+        // Calls our Shoot override if we should
+        if (AI_FrameCount % UseTimeAfterBuffs == 0) {
+            Owner.PickAmmo(Owner.HeldItem, out int projToShoot, out float speed, out int damage, out float knockback, out int usedAmmoItemId);
+            var canisterItem = ContentSamples.ItemsByType[usedAmmoItemId].ModItem as CanisterItem;
+            if (CanisterFiringType == FiringType.Canister) {
+                projToShoot = canisterItem.LaunchedProjectileType;
+                damage += canisterItem.DamageWhenLaunched;
+            } else {
+                projToShoot = canisterItem.DepletedProjectileType;
+                damage += canisterItem.DamageWhenDepleted;
+            }
+            EntitySource_ItemUse_WithAmmo source = new(Owner, Owner.HeldItem, usedAmmoItemId);
+            Vector2 velocity = toMouse * speed;
+            Shoot(Owner, source, Owner.MountedCenter, velocity, projToShoot, damage, knockback);
+
+            Owner.SetDummyItemTime(UseTimeAfterBuffs + 1);
+
+            // Set rotation and direction
+            Projectile.rotation = toMouse.ToRotation() - Projectile.direction * RotationOffset + MathHelper.PiOver2;
+        }
 
         // Set timeleft
         Projectile.timeLeft = 2;
