@@ -40,6 +40,10 @@ namespace Canisters.Content.Items.Weapons {
             base.SetDefaults();
         }
 
+        public override bool CanConsumeAmmo(Item ammo, Player player) {
+            return player.heldProj != -1;
+        }
+
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback) {
             Vector2 spawnPos = player.RotatedRelativePoint(player.MountedCenter, true);
             Projectile.NewProjectile(source, player.Center, spawnPos, ModContent.ProjectileType<ModifiedHandgun_HeldProjectile>(), damage, knockback, player.whoAmI);
