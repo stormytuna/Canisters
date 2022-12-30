@@ -2,12 +2,11 @@ using Microsoft.Xna.Framework;
 using System;
 using Terraria;
 using Terraria.Audio;
-using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace Canisters.Content.Projectiles.Canisters {
-    public class MagmaCanister : ModProjectile {
+    public class VolatileCanister : ModProjectile {
         public override void SetDefaults() {
             // Base stats
             Projectile.width = 22;
@@ -87,45 +86,26 @@ namespace Canisters.Content.Projectiles.Canisters {
         }
     }
 
-    public class MagmaCanister_Depleted : ModProjectile {
+    public class VolatileCanister_Depleted : ModProjectile {
         public override void SetStaticDefaults() {
-            DisplayName.SetDefault("Magma Blob");
+            DisplayName.SetDefault("Gel Stream");
             Main.projFrames[Type] = 2;
 
             base.SetStaticDefaults();
-        }
-
-        public override void OnSpawn(IEntitySource source) {
-            Projectile.rotation = Main.rand.NextFloat(MathHelper.TwoPi);
-            rotPerFrame = Main.rand.NextFloat(0.1f, 0.2f);
-
-            base.OnSpawn(source);
         }
 
         public override void SetDefaults() {
             // Base stats
             Projectile.width = 20;
             Projectile.height = 20;
-            Projectile.aiStyle = -1;
+            Projectile.aiStyle = 1;
 
             // Weapon stats
             Projectile.friendly = true;
-            Projectile.penetrate = -1;
+            Projectile.penetrate = 1;
             Projectile.DamageType = DamageClass.Ranged;
 
             base.SetDefaults();
-        }
-
-        private float rotPerFrame;
-
-        public override void AI() {
-            // Rotate slightly
-            Projectile.rotation += rotPerFrame;
-
-            // Gravity
-            Projectile.velocity += Vector2.UnitY * 0.2f;
-
-            base.AI();
         }
     }
 }

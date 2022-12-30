@@ -4,10 +4,9 @@ using Terraria.ModLoader;
 
 namespace Canisters.Common.Systems {
     public class CanisterColorSystem : ModSystem {
-        private static int magma => ModContent.ItemType<MagmaCanister>();
-        public static Color Magma {
+        public static Color Volatile {
             get {
-                return Color.Red;
+                return Color.Blue;
             }
         }
 
@@ -18,8 +17,8 @@ namespace Canisters.Common.Systems {
         }
 
         public static Color GetCanisterColor(int canisterItemId) {
-            if (canisterItemId == ModContent.ItemType<MagmaCanister>()) {
-                return Magma;
+            if (canisterItemId == ModContent.ItemType<VolatileCanister>()) {
+                return Volatile;
             }
 
             if (canisterItemId == ModContent.ItemType<VerdantCanister>()) {

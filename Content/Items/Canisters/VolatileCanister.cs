@@ -4,7 +4,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace Canisters.Content.Items.Canisters {
-    public class MagmaCanister : CanisterItem {
+    public class VolatileCanister : CanisterItem {
         public override void SetStaticDefaults() {
             SacrificeTotal = 99;
 
@@ -18,18 +18,18 @@ namespace Canisters.Content.Items.Canisters {
             Item.maxStack = 999;
             Item.value = 2;
 
-            // Weapon stats
-            Item.shoot = ModContent.ProjectileType<Projectiles.Canisters.MagmaCanister>();
+            // Ammo stats
+            Item.shoot = ModContent.ProjectileType<Projectiles.Canisters.VolatileCanister>();
             Item.shootSpeed = 2f;
             Item.damage = 1;
-            Item.crit = 4;
-            Item.knockBack = 8f;
+            Item.knockBack = 0f;
             Item.DamageType = DamageClass.Ranged;
             Item.ammo = Type;
+            Item.consumable = true;
 
             // CanisterItem stats
             LaunchedProjectileType = Item.shoot;
-            DepletedProjectileType = ModContent.ProjectileType<MagmaCanister_Depleted>();
+            DepletedProjectileType = ModContent.ProjectileType<VolatileCanister_Depleted>();
             DamageWhenLaunched = 14;
             DamageWhenDepleted = 3;
 
@@ -39,8 +39,8 @@ namespace Canisters.Content.Items.Canisters {
         public override void AddRecipes() {
             CreateRecipe(300)
                 .AddIngredient<EmptyCanister>(300)
+                .AddIngredient(ItemID.Gel)
                 .AddTile(TileID.Bottles)
-                .AddCondition(Recipe.Condition.NearLava)
                 .Register();
 
             base.AddRecipes();

@@ -35,7 +35,7 @@ namespace Canisters.Content.Items.Weapons {
             Item.crit = 4;
             Item.knockBack = 1f;
             Item.DamageType = DamageClass.Ranged;
-            Item.useAmmo = ModContent.ItemType<MagmaCanister>();
+            Item.useAmmo = ModContent.ItemType<VolatileCanister>();
 
             base.SetDefaults();
         }

@@ -24,7 +24,7 @@ namespace Canisters.Content.Items.Canisters {
             Item.crit = 4;
             Item.knockBack = 6f;
             Item.DamageType = DamageClass.Ranged;
-            Item.ammo = ModContent.ItemType<MagmaCanister>();
+            Item.ammo = ModContent.ItemType<VolatileCanister>();
 
             // CanisterItem stats
             LaunchedProjectileType = Item.shoot;
