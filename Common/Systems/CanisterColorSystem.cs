@@ -6,7 +6,7 @@ namespace Canisters.Common.Systems {
     public class CanisterColorSystem : ModSystem {
         public static Color Volatile {
             get {
-                return Color.Blue;
+                return new Color(45, 144, 255, 255);
             }
         }
 
