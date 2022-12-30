@@ -51,7 +51,7 @@ public static class CanisterHelpers {
         List<float> angles = new();
 
         // Build our list
-        float offset = randomOffset ? Main.rand.NextFloat(MathHelper.TwoPi) : 0f;
+        float offset = randomOffset ? rand.NextFloat(MathHelper.TwoPi) : 0f;
         for (int i = 0; i < numSegments; i++) {
             float angle = (((float)i / (float)numSegments) * MathHelper.TwoPi) + offset;
             angles.Add(angle);
@@ -65,6 +65,13 @@ public static class CanisterHelpers {
         }
 
         return angles;
+    }
+
+    /// <summary>
+    /// Generates a random float between 0 and two pi
+    /// </summary>
+    public static float NextRadian(this UnifiedRandom rand) {
+        return rand.NextFloat(MathHelper.TwoPi);
     }
 }
 
@@ -210,6 +217,9 @@ public abstract class CanisterHeldProjectile : ModProjectile {
     /// <summary>How much this projectile should be rotated when it points to the mouse</summary>
     public float RotationOffset { get; set; }
 
+    /// <summary>How far from the center the projectile will be fired from, assuming the projectile looks like its sprite (facing to the right)</summary>
+    public Vector2 MuzzleOffset { get; set; }
+
     /// <summary>This property acts as a frame counter</summary>
     public int AI_FrameCount { get; set; } = 0;
 
@@ -219,26 +229,29 @@ public abstract class CanisterHeldProjectile : ModProjectile {
     public virtual void Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback) { }
 
     public override void AI() {
-        // Just a var we use a couple times
         Vector2 toMouse = Main.MouseWorld - Projectile.Center;
         toMouse.Normalize();
+        bool hasAmmo = Owner.PickAmmo(Owner.HeldItem, out _, out _, out _, out _, out _, true);
+        bool doShoot = false; // Used so we can delay the calling of our actual shoot hook since we need rotation set early
 
         // Kill the projectile if we stop using it or can't use it
-        if (((!Owner.channel || !Owner.PickAmmo(Owner.HeldItem, out _, out _, out _, out _, out _, true)) && Owner.ItemAnimationEndingOrEnded) || Owner.CCed) {
+        if (((!Owner.channel || !hasAmmo) && Owner.ItemAnimationEndingOrEnded) || Owner.CCed) {
             Projectile.Kill();
             return;
         }
 
-        // Set position and velocity
+        // Set our rotation and doShoot if we are shooting this frame
+        if (AI_FrameCount % UseTimeAfterBuffs == 0) {
+            // Set rotation
+            Projectile.rotation = toMouse.ToRotation() + RotationOffset;
+            doShoot = true;
+        }
+
+        // Set some stuff based on our rotation
         Projectile.Center = Owner.RotatedRelativePoint(Owner.MountedCenter) + Projectile.rotation.ToRotationVector2() * HoldOutOffset;
         Projectile.velocity = Vector2.Zero;
-
-        // Resets our direction and sprite direction
         Projectile.direction = Math.Sign(Projectile.Center.X - Owner.Center.X);
         Projectile.spriteDirection = Projectile.direction;
-
-        // Set timeleft
-        Projectile.timeLeft = 2;
 
         // Set some values on our player
         Owner.ChangeDir(Projectile.direction);
@@ -249,9 +262,11 @@ public abstract class CanisterHeldProjectile : ModProjectile {
         }
         Owner.itemRotation = MathHelper.WrapAngle(Owner.itemRotation);
 
-        // Calls our Shoot override if we should
-        if (AI_FrameCount % UseTimeAfterBuffs == 0) {
+        // Actually call our shoot hook
+        if (doShoot) {
             Owner.PickAmmo(Owner.HeldItem, out int projToShoot, out float speed, out int damage, out float knockback, out int usedAmmoItemId);
+
+            // Get our projectile type
             var canisterItem = ContentSamples.ItemsByType[usedAmmoItemId].ModItem as CanisterItem;
             if (CanisterFiringType == FiringType.Canister) {
                 projToShoot = canisterItem.LaunchedProjectileType;
@@ -260,14 +275,19 @@ public abstract class CanisterHeldProjectile : ModProjectile {
                 projToShoot = canisterItem.DepletedProjectileType;
                 damage += canisterItem.DamageWhenDepleted;
             }
+
+            // Get some other params
             EntitySource_ItemUse_WithAmmo source = new(Owner, Owner.HeldItem, usedAmmoItemId);
             Vector2 velocity = toMouse * speed;
-            Shoot(Owner, source, Owner.MountedCenter, velocity, projToShoot, damage, knockback);
+            Vector2 offset = MuzzleOffset.RotatedBy(Projectile.rotation);
+            offset.Y *= Projectile.direction;
 
+            Vector2 position = Projectile.Center + offset;
+
+            Shoot(Owner, source, position, velocity, projToShoot, damage, knockback);
+
+            // This makes it so we keep our item used until the potential next shot
             Owner.SetDummyItemTime(UseTimeAfterBuffs + 1);
-
-            // Set rotation and direction
-            Projectile.rotation = toMouse.ToRotation() - Projectile.direction * RotationOffset + MathHelper.PiOver2;
         }
 
         // Set timeleft
