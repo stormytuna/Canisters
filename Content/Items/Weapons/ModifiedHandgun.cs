@@ -15,8 +15,8 @@ namespace Canisters.Content.Items.Weapons {
 
         public override void SetDefaults() {
             // Base stats
-            Item.width = 28;
-            Item.height = 20;
+            Item.width = 36;
+            Item.height = 18;
             Item.value = Item.sellPrice(gold: 2);
             Item.rare = ItemRarityID.Blue;
 
@@ -40,13 +40,22 @@ namespace Canisters.Content.Items.Weapons {
             base.SetDefaults();
         }
 
+        public override void AddRecipes() {
+            CreateRecipe()
+                .AddIngredient(ItemID.FlintlockPistol)
+                .AddIngredient(ItemID.IllegalGunParts)
+                .AddTile(TileID.Anvils)
+                .Register();
+
+            base.AddRecipes();
+        }
+
         public override bool CanConsumeAmmo(Item ammo, Player player) {
             return player.heldProj != -1;
         }
 
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback) {
-            Vector2 spawnPos = player.RotatedRelativePoint(player.MountedCenter, true);
-            Projectile.NewProjectile(source, player.Center, spawnPos, ModContent.ProjectileType<ModifiedHandgun_HeldProjectile>(), damage, knockback, player.whoAmI);
+            Projectile.NewProjectile(source, player.Center, position, ModContent.ProjectileType<ModifiedHandgun_HeldProjectile>(), damage, knockback, player.whoAmI);
 
             return false;
         }
@@ -61,8 +70,8 @@ namespace Canisters.Content.Items.Weapons {
 
         public override void SetDefaults() {
             // Base stats
-            Projectile.width = 28;
-            Projectile.height = 20;
+            Projectile.width = 36;
+            Projectile.height = 18;
             Projectile.aiStyle = -1;
 
             // Weapon stats
@@ -79,7 +88,8 @@ namespace Canisters.Content.Items.Weapons {
             // CanisterHeldProjectile stats
             HoldOutOffset = 14f;
             CanisterFiringType = FiringType.Regular;
-            RotationOffset = MathHelper.PiOver2;
+            RotationOffset = 0f;
+            MuzzleOffset = new Vector2(16f, -6f);
 
             base.SetDefaults();
         }
@@ -87,7 +97,14 @@ namespace Canisters.Content.Items.Weapons {
         public override string Texture => "Canisters/Content/Items/Weapons/ModifiedHandgun";
 
         public override void Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback) {
-            Projectile.NewProjectile(source, position, velocity, type, damage, knockback, Owner.whoAmI);
+            if (Collision.CanHit(player.Center, 0, 0, position, 0, 0)) {
+                Projectile proj = Projectile.NewProjectileDirect(source, position, velocity, type, damage, knockback, Owner.whoAmI);
+                proj.velocity *= 1.2f;
+                proj.scale /= 1.2f;
+                proj.knockBack /= 1.2f;
+
+                Main.NewText(Main.netMode);
+            }
 
             base.Shoot(player, source, position, velocity, type, damage, knockback);
         }
