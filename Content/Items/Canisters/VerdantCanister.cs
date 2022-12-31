@@ -1,4 +1,5 @@
-﻿using Terraria;
+﻿using Canisters.Content.Projectiles.Canisters;
+using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -28,7 +29,7 @@ namespace Canisters.Content.Items.Canisters {
 
             // CanisterItem stats
             LaunchedProjectileType = Item.shoot;
-            DepletedProjectileType = -1;
+            DepletedProjectileType = ModContent.ProjectileType<VerdantCanister_Depleted>();
             DamageWhenLaunched = 15;
             DamageWhenDepleted = 2;
 
