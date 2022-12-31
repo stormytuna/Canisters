@@ -50,10 +50,6 @@ namespace Canisters.Content.Items.Weapons {
             base.AddRecipes();
         }
 
-        public override bool CanConsumeAmmo(Item ammo, Player player) {
-            return player.heldProj != -1;
-        }
-
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback) {
             Projectile.NewProjectile(source, player.Center, position, ModContent.ProjectileType<ModifiedHandgun_HeldProjectile>(), damage, knockback, player.whoAmI);
 
@@ -85,7 +81,7 @@ namespace Canisters.Content.Items.Weapons {
             Projectile.hide = true;
             Projectile.ignoreWater = true;
 
-            // CanisterHeldProjectile stats
+            // CanisterUsingHeldProjectile stats
             HoldOutOffset = 14f;
             CanisterFiringType = FiringType.Regular;
             RotationOffset = 0f;
@@ -98,12 +94,13 @@ namespace Canisters.Content.Items.Weapons {
 
         public override void Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback) {
             if (Collision.CanHit(player.Center, 0, 0, position, 0, 0)) {
+                // TODO: Using this gun to debug canisters for now
+                // Come back later and change these comments
+                //velocity *= 1.2f;
+                //knockback /= 1.2f;
                 Projectile proj = Projectile.NewProjectileDirect(source, position, velocity, type, damage, knockback, Owner.whoAmI);
-                proj.velocity *= 1.2f;
-                proj.scale /= 1.2f;
-                proj.knockBack /= 1.2f;
 
-                Main.NewText(Main.netMode);
+                //proj.scale /= 1.2f;
             }
 
             base.Shoot(player, source, position, velocity, type, damage, knockback);
