@@ -6,7 +6,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace Canisters.Content.Items.Weapons {
-    public class ModifiedHandgun : CanisterWeapon {
+    public class ModifiedHandgun : CanisterUsingWeapon {
         public override void SetStaticDefaults() {
             SacrificeTotal = 1;
 
@@ -61,7 +61,7 @@ namespace Canisters.Content.Items.Weapons {
         }
     }
 
-    public class ModifiedHandgun_HeldProjectile : CanisterHeldProjectile {
+    public class ModifiedHandgun_HeldProjectile : CanisterUsingHeldProjectile {
         public override void SetStaticDefaults() {
             DisplayName.SetDefault("Modified Handgun");
 

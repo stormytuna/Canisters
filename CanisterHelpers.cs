@@ -149,7 +149,7 @@ public abstract class CanisterItem : ModItem {
 ///     <item><term>PreDrawInInventory</term><description> Draws the item with the canister coloured based on what canister the player will fire</description></item>
 /// </list>
 /// </summary>
-public abstract class CanisterWeapon : ModItem {
+public abstract class CanisterUsingWeapon : ModItem {
     private Asset<Texture2D> _baseTexture;
     private Asset<Texture2D> BaseTexture {
         get {
@@ -204,7 +204,7 @@ public abstract class CanisterWeapon : ModItem {
 ///     <item><term>Shoot</term><description> This is called each time the projectile shoots</description></item>
 /// </list>
 /// </summary>
-public abstract class CanisterHeldProjectile : ModProjectile {
+public abstract class CanisterUsingHeldProjectile : ModProjectile {
     /// <summary>Returns Main.player[Projectile.owner]</summary>
     public Player Owner => Main.player[Projectile.owner];
 
