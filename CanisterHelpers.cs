@@ -146,6 +146,7 @@ public abstract class CanisterItem : ModItem {
 /// Handles weapons that visually show the canister <para/>
 /// This class overrides these ModItem methods, so be sure to either call base or understand what each override does when overriding in your weapon
 /// <list type="bullet">
+///     <item><term>CanConsumeAmmo</term><description> Prevents the item from consuming ammo itself so only our held projectile will consume ammo</description></item>
 ///     <item><term>PreDrawInInventory</term><description> Draws the item with the canister coloured based on what canister the player will fire</description></item>
 /// </list>
 /// </summary>
@@ -165,6 +166,8 @@ public abstract class CanisterUsingWeapon : ModItem {
             return _canisterTexture;
         }
     }
+
+    public override bool CanConsumeAmmo(Item ammo, Player player) => player.heldProj != -1;
 
     public override bool PreDrawInInventory(SpriteBatch spriteBatch, Vector2 position, Rectangle frame, Color drawColor, Color itemColor, Vector2 origin, float scale) {
         // Check if we have any canisters
@@ -224,7 +227,7 @@ public abstract class CanisterUsingHeldProjectile : ModProjectile {
     public int AI_FrameCount { get; set; } = 0;
 
     // Helper property that applies attack speed for us
-    private int UseTimeAfterBuffs => (int)((float)Owner.HeldItem.useTime * Owner.GetWeaponAttackSpeed(Owner.HeldItem));
+    public int UseTimeAfterBuffs => (int)((float)Owner.HeldItem.useTime * Owner.GetWeaponAttackSpeed(Owner.HeldItem));
 
     public virtual void Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback) { }
 
@@ -279,9 +282,8 @@ public abstract class CanisterUsingHeldProjectile : ModProjectile {
             // Get some other params
             EntitySource_ItemUse_WithAmmo source = new(Owner, Owner.HeldItem, usedAmmoItemId);
             Vector2 velocity = toMouse * speed;
-            Vector2 offset = MuzzleOffset.RotatedBy(Projectile.rotation);
-            offset.Y *= Projectile.direction;
-
+            Vector2 offset = new(MuzzleOffset.X, MuzzleOffset.Y * Projectile.direction);
+            offset = offset.RotatedBy(Projectile.rotation);
             Vector2 position = Projectile.Center + offset;
 
             Shoot(Owner, source, position, velocity, projToShoot, damage, knockback);
