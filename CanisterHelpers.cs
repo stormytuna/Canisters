@@ -180,8 +180,10 @@ public abstract class CanisterUsingHeldProjectile : ModProjectile {
     /// <summary>This property acts as a frame counter</summary>
     public int AI_FrameCount { get; set; } = 0;
 
+    private int AI_Lifetime { get; set; }
+
     // Helper property that applies attack speed for us
-    public int UseTimeAfterBuffs => (int)((float)Owner.HeldItem.useTime * Owner.GetWeaponAttackSpeed(Owner.HeldItem));
+    public int UseTimeAfterBuffs => (int)((float)Owner.HeldItem.useTime * CombinedHooks.TotalUseTimeMultiplier(Owner, Owner.HeldItem));
 
     public virtual void Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback) { }
 
@@ -192,7 +194,7 @@ public abstract class CanisterUsingHeldProjectile : ModProjectile {
         bool doShoot = false; // Used so we can delay the calling of our actual shoot hook since we need rotation set early
 
         // Kill the projectile if we stop using it or can't use it
-        if (((!Owner.channel || !hasAmmo) && Owner.ItemAnimationEndingOrEnded) || Owner.CCed) {
+        if (((!Owner.channel || !hasAmmo) && AI_Lifetime <= 1) || Owner.CCed) {
             Projectile.Kill();
             return;
         }
@@ -224,13 +226,11 @@ public abstract class CanisterUsingHeldProjectile : ModProjectile {
             Owner.PickAmmo(Owner.HeldItem, out int projToShoot, out float speed, out int damage, out float knockback, out int usedAmmoItemId);
 
             // Get our projectile type
-            var canisterItem = ContentSamples.ItemsByType[usedAmmoItemId].ModItem as CanisterItem;
+            var canisterItem = ContentSamples.ItemsByType[usedAmmoItemId].ModItem as ICanisterItem;
             if (CanisterFiringType == FiringType.Canister) {
                 projToShoot = canisterItem.LaunchedProjectileType;
-                damage += canisterItem.DamageWhenLaunched;
             } else {
                 projToShoot = canisterItem.DepletedProjectileType;
-                damage += canisterItem.DamageWhenDepleted;
             }
 
             // Get some other params
@@ -244,13 +244,16 @@ public abstract class CanisterUsingHeldProjectile : ModProjectile {
 
             // This makes it so we keep our item used until the potential next shot
             Owner.SetDummyItemTime(UseTimeAfterBuffs + 1);
+
+            AI_Lifetime = UseTimeAfterBuffs + 1;
+            Projectile.netUpdate = true;
         }
 
         // Set timeleft
         Projectile.timeLeft = 2;
 
-        // Increment our frame count
         AI_FrameCount++;
+        AI_Lifetime--;
 
         base.AI();
     }
@@ -296,11 +299,13 @@ public abstract class CanisterUsingHeldProjectile : ModProjectile {
     // Sends and receives our ai fields, not even sure if we need this but w/e
     public override void SendExtraAI(BinaryWriter writer) {
         writer.Write(AI_FrameCount);
+        writer.Write(AI_Lifetime);
 
         base.SendExtraAI(writer);
     }
     public override void ReceiveExtraAI(BinaryReader reader) {
         AI_FrameCount = reader.ReadInt32();
+        AI_Lifetime = reader.ReadInt32();
 
         base.ReceiveExtraAI(reader);
     }
