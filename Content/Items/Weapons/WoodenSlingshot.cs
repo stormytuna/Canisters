@@ -25,9 +25,11 @@ namespace Canisters.Content.Items.Weapons {
             Item.useTime = Item.useAnimation = 30;
             Item.autoReuse = true;
             Item.noMelee = true;
+            Item.noUseGraphic = true;
+            Item.channel = true;
 
             // Weapon stats
-            Item.shoot = ItemID.PurificationPowder;
+            Item.shoot = ModContent.ProjectileType<WoodenSlingshot_HeldProjectile>();
             Item.shootSpeed = 9f;
             Item.damage = 11;
             Item.crit = 4;
@@ -48,7 +50,11 @@ namespace Canisters.Content.Items.Weapons {
             base.AddRecipes();
         }
 
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback) {
+            Projectile.NewProjectile(source, player.Center, position, ModContent.ProjectileType<WoodenSlingshot_HeldProjectile>(), damage, knockback, player.whoAmI);
 
+            return false;
+        }
     }
 
     public class WoodenSlingshot_HeldProjectile : CanisterUsingHeldProjectile {
@@ -76,7 +82,7 @@ namespace Canisters.Content.Items.Weapons {
             Projectile.ignoreWater = true;
 
             // CanisterHeldProjectile stats
-            HoldOutOffset = 0f;
+            HoldOutOffset = 10f;
             CanisterFiringType = FiringType.Canister;
             RotationOffset = 0f;
             MuzzleOffset = new Vector2(0, -10f);
