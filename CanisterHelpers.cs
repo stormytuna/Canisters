@@ -86,60 +86,14 @@ public enum FiringType {
 /// <list type="bullet">
 ///     <item><term>LaunchedProjectileType</term><description> The projectile type of this canisters launched canister</description></item>
 ///     <item><term>DepletedProjetileType</term><description> The projectile type of this canisters shot projectile</description></item>
-///     <item><term>DamageWhenLaunched</term><description> The damage this canister deals when launched</description></item>
-///     <item><term>DamageWhenDepleted</term><description> The damage this canister deals when depleted to shoot a projectile</description></item>
-/// </list>
-/// This class overrides these ModProjectile methods, so be sure to either call base or understand what each override does when overriding in your weapon
-/// <list type="bullet">
-///     <item><term>ModifyTooltips</term><description> Handles damage when launched and depleted tooltips</description></item>
-///     <item><term>ModifyShootStats</term><description> Sets the damage to the correct value when this item is used</description></item>
 /// </list>
 /// </summary>
-public abstract class CanisterItem : ModItem {
+public interface ICanisterItem {
     /// <summary>The projectile type of this canisters launched canister</summary>
-    public int LaunchedProjectileType { get; set; }
+    public int LaunchedProjectileType { get => -1; }
 
     /// <summary>The projectile type of this canisters shot projectile</summary>
-    public int DepletedProjectileType { get; set; }
-
-    /// <summary>The damage this canister deals when launched</summary>
-    private int _damageWhenLaunched;
-    public int DamageWhenLaunched {
-        get {
-            return (int)Main.LocalPlayer.GetDamage(DamageClass.Ranged).ApplyTo(_damageWhenLaunched);
-        }
-        set {
-            _damageWhenLaunched = value;
-        }
-    }
-
-    /// <summary>The damage this canister deals when depleted to shoot a projectile</summary>
-    private int _damageWhenDepleted;
-    public int DamageWhenDepleted {
-        get {
-            return (int)Main.LocalPlayer.GetDamage(DamageClass.Ranged).ApplyTo(_damageWhenDepleted);
-        }
-        set {
-            _damageWhenDepleted = value;
-        }
-    }
-
-    public override void ModifyTooltips(List<TooltipLine> tooltips) {
-        var damageTip = tooltips.Find((tip) => tip.Name == "Damage");
-        damageTip.Text = $"{DamageWhenLaunched} when launched";
-        int index = tooltips.IndexOf(damageTip) + 1;
-        tooltips.Insert(index, new(Mod, "DamageWhenDepleted", $"{DamageWhenDepleted} when depleted"));
-
-        // TODO: Make these tooltips have the same colour, ie coloured damage types support
-
-        base.ModifyTooltips(tooltips);
-    }
-
-    public override void ModifyShootStats(Player player, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback) {
-        damage = DamageWhenLaunched;
-
-        base.ModifyShootStats(player, ref position, ref velocity, ref type, ref damage, ref knockback);
-    }
+    public int DepletedProjectileType { get => -1; }
 }
 
 /// <summary>

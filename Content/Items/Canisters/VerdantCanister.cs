@@ -4,7 +4,10 @@ using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace Canisters.Content.Items.Canisters {
-    public class VerdantCanister : CanisterItem {
+    public class VerdantCanister : ModItem, ICanisterItem {
+        public int LaunchedProjectileType { get => ModContent.ProjectileType<Projectiles.Canisters.VerdantCanister>(); }
+        public int DepletedProjectileType { get => ModContent.ProjectileType<Projectiles.Canisters.VerdantCanister_Depleted>(); }
+
         public override void SetStaticDefaults() {
             SacrificeTotal = 99;
 
@@ -26,12 +29,6 @@ namespace Canisters.Content.Items.Canisters {
             Item.knockBack = 6f;
             Item.DamageType = DamageClass.Ranged;
             Item.ammo = ModContent.ItemType<VolatileCanister>();
-
-            // CanisterItem stats
-            LaunchedProjectileType = Item.shoot;
-            DepletedProjectileType = ModContent.ProjectileType<VerdantCanister_Depleted>();
-            DamageWhenLaunched = 15;
-            DamageWhenDepleted = 2;
 
             base.SetDefaults();
         }
