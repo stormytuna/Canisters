@@ -19,12 +19,13 @@ namespace Canisters.Content.Items.Canisters {
             Item.height = 22;
             Item.maxStack = 999;
             Item.value = 2;
+            Item.rare = ItemRarityID.Green;
 
             // Weapon stats
             Item.shoot = ModContent.ProjectileType<Projectiles.Canisters.VerdantCanister>();
-            Item.shootSpeed = 8f;
-            Item.damage = 1;
-            Item.knockBack = 6f;
+            Item.shootSpeed = 1f;
+            Item.damage = 4;
+            Item.knockBack = 5f;
             Item.DamageType = DamageClass.Ranged;
             Item.ammo = ModContent.ItemType<VolatileCanister>();
 
