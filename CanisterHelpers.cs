@@ -75,6 +75,60 @@ public static class CanisterHelpers {
     }
 }
 
+public static class LightningHelper {
+    public static void MakeDust(Vector2 source, Vector2 dest, int dustId, float scale, float sway = 80f, float jagednessNumerator = 1f) {
+        var dustPoints = CreateBolt(source, dest, sway, jagednessNumerator);
+        foreach (var point in dustPoints) {
+            Dust d = Dust.NewDustPerfect(point, dustId, Scale: scale);
+            d.noGravity = true;
+            d.velocity = Vector2.Zero;
+        }
+    }
+
+    public static List<Vector2> CreateBolt(Vector2 source, Vector2 dest, float sway = 80f, float jagednessNumerator = 1f) {
+        var results = new List<Vector2>();
+        Vector2 tangent = dest - source;
+        Vector2 normal = Vector2.Normalize(new Vector2(tangent.Y, -tangent.X));
+        float length = tangent.Length();
+
+        List<float> positions = new List<float> {
+            0
+        };
+
+        for (int i = 0; i < length; i++)
+            positions.Add(Main.rand.NextFloat(0f, 1f));
+
+        positions.Sort();
+
+        float jaggedness = jagednessNumerator / sway;
+
+        Vector2 prevPoint = source;
+        float prevDisplacement = 0f;
+        for (int i = 1; i < positions.Count; i++) {
+            float pos = positions[i];
+
+            // used to prevent sharp angles by ensuring very close positions also have small perpendicular variation.
+            float scale = (length * jaggedness) * (pos - positions[i - 1]);
+
+            // defines an envelope. Points near the middle of the bolt can be further from the central line.
+            float envelope = pos > 0.95f ? 20 * (1 - pos) : 1;
+
+            float displacement = Main.rand.NextFloat(-sway, sway);
+            displacement -= (displacement - prevDisplacement) * (1 - scale);
+            displacement *= envelope;
+
+            Vector2 point = source + pos * tangent + displacement * normal;
+            results.Add(point);
+            prevPoint = point;
+            prevDisplacement = displacement;
+        }
+
+        results.Add(prevPoint);
+
+        return results;
+    }
+}
+
 public enum FiringType {
     Canister,
     Regular
