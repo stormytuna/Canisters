@@ -1,5 +1,4 @@
-﻿using Canisters.Content.Projectiles.Canisters;
-using Terraria;
+﻿using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -25,7 +24,6 @@ namespace Canisters.Content.Items.Canisters {
             Item.shoot = ModContent.ProjectileType<Projectiles.Canisters.VerdantCanister>();
             Item.shootSpeed = 8f;
             Item.damage = 1;
-            Item.crit = 4;
             Item.knockBack = 6f;
             Item.DamageType = DamageClass.Ranged;
             Item.ammo = ModContent.ItemType<VolatileCanister>();

@@ -1,5 +1,4 @@
-﻿using Canisters.Content.Projectiles.Canisters;
-using Terraria;
+﻿using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
