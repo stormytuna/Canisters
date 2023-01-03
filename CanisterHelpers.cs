@@ -13,11 +13,14 @@ using Terraria.Utilities;
 
 public static class CanisterHelpers {
     public static void TurnToExplosion(this Projectile proj, int width, int height) {
+        proj.velocity = new Vector2(0f, 0f);
         proj.timeLeft = 3;
+        proj.penetrate = -1;
         proj.tileCollide = false;
-        proj.velocity = Vector2.Zero;
         proj.alpha = 255;
         proj.Resize(width, height);
+        // TODO: implement this
+        //proj.knockback = /* param */ knockback;
     }
 
     // Adapted from here https://bitbucket.org/Superbest/superbest-random/src/f067e1dc014c31be62c5280ee16544381e04e303/Superbest%20random/RandomExtensions.cs#lines-19
