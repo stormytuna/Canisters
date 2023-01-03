@@ -28,6 +28,12 @@ namespace Canisters.Common.Systems {
             }
         }
 
+        public static Color Starfall {
+            get {
+                return Color.LightGoldenrodYellow;
+            }
+        }
+
         public static Color GetCanisterColor(int canisterItemId) {
             if (canisterItemId == ModContent.ItemType<VolatileCanister>()) {
                 return Volatile;
@@ -43,6 +49,10 @@ namespace Canisters.Common.Systems {
 
             if (canisterItemId == ModContent.ItemType<BlightedCanister>()) {
                 return Blighted;
+            }
+
+            if (canisterItemId == ModContent.ItemType<StarfallCanister>()) {
+                return Starfall;
             }
 
             // Should never be hit, but compiler shouts at us without it
