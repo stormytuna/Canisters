@@ -13,8 +13,6 @@ namespace Canisters.Content.Items.Canisters {
             base.SetStaticDefaults();
         }
 
-
-
         public override void SetDefaults() {
             // Base stats
             Item.width = 22;

@@ -6,8 +6,10 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Canisters.Content.Projectiles {
-    public class FallingStar : ModProjectile {
+namespace Canisters.Content.Projectiles
+{
+    public class FallingStar : ModProjectile
+    {
         public override void SetStaticDefaults() {
             ProjectileID.Sets.TrailCacheLength[Type] = 5;
             ProjectileID.Sets.TrailingMode[Type] = 0;
@@ -57,7 +59,7 @@ namespace Canisters.Content.Projectiles {
         }
 
         public override void Kill(int timeLeft) {
-            // TODO: Dust explosion
+            // Dust explosion
             for (int i = 0; i < 20; i++) {
                 Dust d = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.YellowStarDust, Scale: Main.rand.NextFloat(0.6f, 0.9f));
                 d.noGravity = true;
@@ -110,6 +112,5 @@ namespace Canisters.Content.Projectiles {
 
             return false;
         }
-
     }
 }
