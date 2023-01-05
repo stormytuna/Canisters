@@ -5,13 +5,15 @@ using ReLogic.Content;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.Utilities;
 
-public static class CanisterHelpers {
+public static class CanisterHelpers
+{
     public static void TurnToExplosion(this Projectile proj, int width, int height) {
         proj.velocity = new Vector2(0f, 0f);
         proj.timeLeft = 3;
@@ -76,9 +78,41 @@ public static class CanisterHelpers {
     public static float NextRadian(this UnifiedRandom rand) {
         return rand.NextFloat(MathHelper.TwoPi);
     }
+
+    /// <summary>
+    /// An enumerable of all nearby npcs
+    /// </summary>
+    public static IEnumerable<NPC> FindNearbyNPCs(float range, Vector2 worldPos) {
+        return Main.npc.SkipLast(1).Where((npc) => npc.DistanceSQ(worldPos) < range * range && npc.active && !npc.CountsAsACritter && !npc.friendly && !npc.dontTakeDamage && !npc.immortal);
+    }
+
+    /// <summary>Ease in interpolation between the start and end</summary>
+    /// <param name="start">The starting value, will return this when amount == 0</param>
+    /// <param name="end">The ending value, will return this when amount == 1</param>
+    /// <param name="amount">The amount to lerp by</param>
+    /// <param name="exponent">The exponent of the easing curve to use, larger values cause more easing</param>
+    /// <returns>Returns the ease in interpolation between start and end</returns>
+    public static float EaseIn(float start, float end, float amount, int exponent) {
+        if (amount <= 0f) {
+            return start;
+        }
+        if (amount >= 1f) {
+            return end;
+        }
+
+        float amountExp = MathF.Pow(amount, exponent);
+        return MathHelper.Lerp(start, end, amountExp);
+    }
+
+    public static void MakeDebugDust(Vector2 position, Color color) {
+        Dust d = Dust.NewDustPerfect(position, 303, newColor: color);
+        d.velocity = Vector2.Zero;
+        d.noGravity = true;
+    }
 }
 
-public static class LightningHelper {
+public static class LightningHelper
+{
     public static void MakeDust(Vector2 source, Vector2 dest, int dustId, float scale, float sway = 80f, float jagednessNumerator = 1f) {
         var dustPoints = CreateBolt(source, dest, sway, jagednessNumerator);
         foreach (var point in dustPoints) {
@@ -132,7 +166,8 @@ public static class LightningHelper {
     }
 }
 
-public enum FiringType {
+public enum FiringType
+{
     Canister,
     Regular
 }
@@ -145,7 +180,8 @@ public enum FiringType {
 ///     <item><term>DepletedProjetileType</term><description> The projectile type of this canisters shot projectile</description></item>
 /// </list>
 /// </summary>
-public interface ICanisterItem {
+public interface ICanisterItem
+{
     /// <summary>The projectile type of this canisters launched canister</summary>
     public int LaunchedProjectileType { get => -1; }
 
@@ -161,7 +197,8 @@ public interface ICanisterItem {
 ///     <item><term>PreDrawInInventory</term><description> Draws the item with the canister coloured based on what canister the player will fire</description></item>
 /// </list>
 /// </summary>
-public abstract class CanisterUsingWeapon : ModItem {
+public abstract class CanisterUsingWeapon : ModItem
+{
     private Asset<Texture2D> _baseTexture;
     private Asset<Texture2D> BaseTexture {
         get {
@@ -218,7 +255,8 @@ public abstract class CanisterUsingWeapon : ModItem {
 ///     <item><term>Shoot</term><description> This is called each time the projectile shoots</description></item>
 /// </list>
 /// </summary>
-public abstract class CanisterUsingHeldProjectile : ModProjectile {
+public abstract class CanisterUsingHeldProjectile : ModProjectile
+{
     /// <summary>Returns Main.player[Projectile.owner]</summary>
     public Player Owner => Main.player[Projectile.owner];
 
