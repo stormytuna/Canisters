@@ -55,7 +55,6 @@ namespace Canisters.Content.Projectiles.BlightedCanister
         private void Explode() {
             SoundEngine.PlaySound(SoundID.DD2_GoblinBomb, Projectile.Center);
 
-            // TODO: Create spiraly cursed flame balls
             float rotationOffset = Main.rand.NextRadian();
             float sign = MathF.Sign(Main.rand.NextFloat(-1f, 1f));
             for (int i = 0; i < 5; i++) {
@@ -71,13 +70,13 @@ namespace Canisters.Content.Projectiles.BlightedCanister
             for (int i = 0; i < 90; i++) {
                 // Our base dust properties
                 Vector2 velocity = Main.rand.NextVector2Circular(15f, 15f);
-                Dust dust = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.CursedTorch, Alpha: Main.rand.Next(100, 150), Scale: Main.rand.NextFloat(0.8f, 1.2f));
+                Dust dust = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.CursedTorch, Alpha: Main.rand.Next(100, 150), Scale: Main.rand.NextFloat(1f, 1.3f));
                 dust.velocity = velocity;
                 dust.noGravity = true;
 
                 if (Main.rand.NextBool(3)) {
                     // 1/3 dust becomes medium dust
-                    float sizeMult = Main.rand.NextFloat(1f, 1.5f);
+                    float sizeMult = Main.rand.NextFloat(1.3f, 1.6f);
                     dust.scale *= sizeMult;
                     dust.velocity /= sizeMult;
                 } else if (Main.rand.NextBool(4)) {
