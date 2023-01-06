@@ -1,4 +1,5 @@
 using Microsoft.Xna.Framework;
+using System;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -39,7 +40,15 @@ namespace Canisters.Content.Projectiles.VerdantCanister
 
         public override string Texture => AI_Vines == 0 ? "Canisters/Content/Projectiles/VerdantCanister/VerdantVine_Tip" : "Canisters/Content/Projectiles/VerdantCanister/VerdantVine_Base";
 
+        private bool firstFrame = true;
+
         public override void AI() {
+            // Flip our sprite sometimes for a bit of variety
+            if (firstFrame) {
+                firstFrame = false;
+                Projectile.spriteDirection = MathF.Sign(Main.rand.NextFloat(-1f, 1f));
+            }
+
             // Make our projectile disappear gradually
             Projectile.alpha += 15;
             if (Projectile.alpha >= 255) {
