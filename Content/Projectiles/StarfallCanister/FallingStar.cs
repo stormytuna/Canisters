@@ -73,20 +73,10 @@ namespace Canisters.Content.Projectiles.StarfallCanister
         }
 
         private Asset<Texture2D> _star;
-        private Asset<Texture2D> Star {
-            get {
-                _star ??= ModContent.Request<Texture2D>("Canisters/Content/Projectiles/StarfallCanister/FallingStar");
-                return _star;
-            }
-        }
+        private Asset<Texture2D> Star { get => _star ??= ModContent.Request<Texture2D>("Canisters/Content/Projectiles/StarfallCanister/FallingStar"); }
 
         private Asset<Texture2D> _trail;
-        private Asset<Texture2D> Trail {
-            get {
-                _trail ??= ModContent.Request<Texture2D>("Canisters/Content/Projectiles/StarfallCanister/FallingStar_Trail");
-                return _trail;
-            }
-        }
+        private Asset<Texture2D> Trail { get => _trail ??= ModContent.Request<Texture2D>("Canisters/Content/Projectiles/StarfallCanister/FallingStar_Trail"); }
 
         public override bool PreDraw(ref Color lightColor) {
             // Trail

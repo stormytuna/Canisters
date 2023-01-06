@@ -207,20 +207,10 @@ public interface ICanisterItem
 public abstract class CanisterUsingWeapon : ModItem
 {
     private Asset<Texture2D> _baseTexture;
-    private Asset<Texture2D> BaseTexture {
-        get {
-            _baseTexture ??= ModContent.Request<Texture2D>(Texture + "_Base");
-            return _baseTexture;
-        }
-    }
+    private Asset<Texture2D> BaseTexture { get => _baseTexture ??= ModContent.Request<Texture2D>(Texture + "_Base"); }
 
     private Asset<Texture2D> _canisterTexture;
-    private Asset<Texture2D> CanisterTexture {
-        get {
-            _canisterTexture ??= ModContent.Request<Texture2D>(Texture + "_Canister");
-            return _canisterTexture;
-        }
-    }
+    private Asset<Texture2D> CanisterTexture { get => _canisterTexture ??= ModContent.Request<Texture2D>(Texture + "_Canister"); }
 
     public override bool CanConsumeAmmo(Item ammo, Player player) => player.heldProj != -1;
 
@@ -361,20 +351,10 @@ public abstract class CanisterUsingHeldProjectile : ModProjectile
     }
 
     private Asset<Texture2D> _baseTexture;
-    private Asset<Texture2D> BaseTexture {
-        get {
-            _baseTexture ??= ModContent.Request<Texture2D>(Texture + "_Base");
-            return _baseTexture;
-        }
-    }
+    private Asset<Texture2D> BaseTexture { get => _baseTexture ??= ModContent.Request<Texture2D>(Texture + "_Base"); }
 
     private Asset<Texture2D> _canisterTexture;
-    private Asset<Texture2D> CanisterTexture {
-        get {
-            _canisterTexture ??= ModContent.Request<Texture2D>(Texture + "_Canister");
-            return _canisterTexture;
-        }
-    }
+    private Asset<Texture2D> CanisterTexture { get => _canisterTexture ??= ModContent.Request<Texture2D>(Texture + "_Canister"); }
 
     public override bool PreDraw(ref Color lightColor) {
         if (Owner.PickAmmo(Owner.HeldItem, out _, out _, out _, out _, out int usedAmmoItemID, true)) {
