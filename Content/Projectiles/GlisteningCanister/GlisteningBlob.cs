@@ -6,6 +6,7 @@ using Terraria.ModLoader;
 
 namespace Canisters.Content.Projectiles.GlisteningCanister
 {
+    // TODO: Change this effect, kinda don't like it
     /// <summary>
     ///     Bouncy balls that the glistening canister explodes into
     /// </summary>
