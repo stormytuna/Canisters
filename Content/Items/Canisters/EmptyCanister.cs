@@ -2,8 +2,10 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Canisters.Content.Items.Canisters {
-    public class EmptyCanister : ModItem {
+namespace Canisters.Content.Items.Canisters
+{
+    public class EmptyCanister : ModItem
+    {
         public override void SetStaticDefaults() {
             SacrificeTotal = 99;
 
@@ -31,7 +33,8 @@ namespace Canisters.Content.Items.Canisters {
         }
     }
 
-    public class EmptyCanisterGlobalNPC : GlobalNPC {
+    public class EmptyCanisterGlobalNPC : GlobalNPC
+    {
         public override void SetupShop(int type, Chest shop, ref int nextSlot) {
             if (type != NPCID.Demolitionist) {
                 return;
