@@ -2,10 +2,12 @@
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Canisters.Content.Items.Canisters {
-    public class StarfallCanister : ModItem, ICanisterItem {
-        public int LaunchedProjectileType { get => ModContent.ProjectileType<Projectiles.Canisters.StarfallCanister>(); }
-        public int DepletedProjectileType { get => ModContent.ProjectileType<Projectiles.Canisters.StarfallCanister_Depleted>(); }
+namespace Canisters.Content.Items.Canisters
+{
+    public class StarfallCanister : ModItem, ICanisterItem
+    {
+        public int LaunchedProjectileType { get => ModContent.ProjectileType<Projectiles.StarfallCanister.StarfallCanister>(); }
+        public int DepletedProjectileType { get => ModContent.ProjectileType<Projectiles.StarfallCanister.SplittingStar>(); }
 
         public override void SetStaticDefaults() {
             SacrificeTotal = 99;
@@ -24,7 +26,7 @@ namespace Canisters.Content.Items.Canisters {
             Item.rare = ItemRarityID.LightRed;
 
             // Weapon stats
-            Item.shoot = ModContent.ProjectileType<Projectiles.Canisters.StarfallCanister>();
+            Item.shoot = ModContent.ProjectileType<Projectiles.StarfallCanister.StarfallCanister>();
             Item.shootSpeed = 1f;
             Item.damage = 6;
             Item.knockBack = 4f;

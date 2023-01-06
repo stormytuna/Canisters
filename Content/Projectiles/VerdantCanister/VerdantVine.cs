@@ -3,9 +3,14 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Canisters.Content.Projectiles {
+namespace Canisters.Content.Projectiles.VerdantCanister
+{
     // TODO: Change the actual sprite of this so it's not /just/ the vilethorn
-    public class VerdantVine : ModProjectile {
+    /// <summary>
+    ///     The vines our verdant canister releases when it explodes
+    /// </summary>
+    public class VerdantVine : ModProjectile
+    {
         /// <summary>
         /// The number of vine projectiles to create after this one. If this is 0, the texture will be replaced with the tip texture
         /// </summary>
@@ -32,7 +37,7 @@ namespace Canisters.Content.Projectiles {
             base.SetDefaults();
         }
 
-        public override string Texture => AI_Vines == 0 ? "Canisters/Content/Projectiles/VerdantVine_Tip" : "Canisters/Content/Projectiles/VerdantVine_Base";
+        public override string Texture => AI_Vines == 0 ? "Canisters/Content/Projectiles/VerdantCanister/VerdantVine_Tip" : "Canisters/Content/Projectiles/VerdantCanister/VerdantVine_Base";
 
         public override void AI() {
             // Make our projectile disappear gradually

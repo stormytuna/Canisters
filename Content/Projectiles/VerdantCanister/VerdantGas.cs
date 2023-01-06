@@ -3,8 +3,13 @@ using Terraria;
 using Terraria.DataStructures;
 using Terraria.ModLoader;
 
-namespace Canisters.Content.Projectiles {
-    public class VerdantGas : ModProjectile {
+namespace Canisters.Content.Projectiles.VerdantCanister
+{
+    /// <summary>
+    ///     The actual gas that the depleted verdant canister shoots
+    /// </summary>
+    public class VerdantGas : ModProjectile
+    {
         public override void SetStaticDefaults() {
             Main.projFrames[Type] = 3;
 

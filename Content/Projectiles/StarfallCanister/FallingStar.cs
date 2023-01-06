@@ -6,8 +6,11 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Canisters.Content.Projectiles
+namespace Canisters.Content.Projectiles.StarfallCanister
 {
+    /// <summary>
+    ///     Falling star that the starfall canister produces when it explodes
+    /// </summary>
     public class FallingStar : ModProjectile
     {
         public override void SetStaticDefaults() {
@@ -72,7 +75,7 @@ namespace Canisters.Content.Projectiles
         private Asset<Texture2D> _star;
         private Asset<Texture2D> Star {
             get {
-                _star ??= ModContent.Request<Texture2D>("Canisters/Content/Projectiles/FallingStar");
+                _star ??= ModContent.Request<Texture2D>("Canisters/Content/Projectiles/StarfallCanister/FallingStar");
                 return _star;
             }
         }
@@ -80,7 +83,7 @@ namespace Canisters.Content.Projectiles
         private Asset<Texture2D> _trail;
         private Asset<Texture2D> Trail {
             get {
-                _trail ??= ModContent.Request<Texture2D>("Canisters/Content/Projectiles/FallingStar_Trail");
+                _trail ??= ModContent.Request<Texture2D>("Canisters/Content/Projectiles/StarfallCanister/FallingStar_Trail");
                 return _trail;
             }
         }

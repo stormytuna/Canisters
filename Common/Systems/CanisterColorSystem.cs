@@ -2,8 +2,11 @@ using Canisters.Content.Items.Canisters;
 using Microsoft.Xna.Framework;
 using Terraria.ModLoader;
 
-namespace Canisters.Common.Systems {
-    public class CanisterColorSystem : ModSystem {
+namespace Canisters.Common.Systems
+{
+    public class CanisterColorSystem : ModSystem
+    {
+        // TODO: Finalise colours, possibly add some cycling between colours?
         public static Color Volatile {
             get {
                 return new Color(45, 144, 255, 255);

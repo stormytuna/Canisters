@@ -4,8 +4,13 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Canisters.Content.Projectiles {
-    public class BouncyIchorBall : ModProjectile {
+namespace Canisters.Content.Projectiles.GlisteningCanister
+{
+    /// <summary>
+    ///     Bouncy balls that the glistening canister explodes into
+    /// </summary>
+    public class GlisteningBlob : ModProjectile
+    {
         public override void SetDefaults() {
             // Base stats
             Projectile.width = 16;

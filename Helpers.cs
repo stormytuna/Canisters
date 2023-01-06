@@ -12,8 +12,13 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.Utilities;
 
-public static class CanisterHelpers
+public static class Helpers
 {
+    /// <summary>
+    ///     Turns the projectile into an explosion
+    /// </summary>
+    /// <param name="width">The width of the explosion</param>
+    /// <param name="height">The height of the explosion</param>
     public static void TurnToExplosion(this Projectile proj, int width, int height) {
         proj.velocity = new Vector2(0f, 0f);
         proj.timeLeft = 3;
@@ -27,7 +32,7 @@ public static class CanisterHelpers
 
     // Adapted from here https://bitbucket.org/Superbest/superbest-random/src/f067e1dc014c31be62c5280ee16544381e04e303/Superbest%20random/RandomExtensions.cs#lines-19
     /// <summary>
-    /// Generates normally distributed numbers. Each operation makes two Gaussians for the price of one, and apparently they can be cached or something for better performance, but who cares.
+    ///     Generates normally distributed numbers. Each operation makes two Gaussians for the price of one, and apparently they can be cached or something for better performance, but who cares.
     /// </summary>
     /// <param name="r"></param>
     /// <param name = "mu">Mean of the distribution</param>
@@ -45,7 +50,7 @@ public static class CanisterHelpers
     }
 
     /// <summary>
-    /// Generates a list of angles generated within segments of a circle
+    ///     Generates a list of angles generated within segments of a circle
     /// </summary>
     /// <param name="rand">The UnifiedRandom to use</param>
     /// <param name="numSegments">The number of segments, or the number of angles to generate</param>
@@ -73,20 +78,22 @@ public static class CanisterHelpers
     }
 
     /// <summary>
-    /// Generates a random float between 0 and two pi
+    ///     Generates a random float between 0 and two pi
     /// </summary>
     public static float NextRadian(this UnifiedRandom rand) {
         return rand.NextFloat(MathHelper.TwoPi);
     }
 
     /// <summary>
-    /// An enumerable of all nearby npcs
+    ///     An enumerable of all nearby npcs
     /// </summary>
     public static IEnumerable<NPC> FindNearbyNPCs(float range, Vector2 worldPos) {
         return Main.npc.SkipLast(1).Where((npc) => npc.DistanceSQ(worldPos) < range * range && npc.active && !npc.CountsAsACritter && !npc.friendly && !npc.dontTakeDamage && !npc.immortal);
     }
 
-    /// <summary>Ease in interpolation between the start and end</summary>
+    /// <summary>
+    ///     Ease in interpolation between the start and end
+    /// </summary>
     /// <param name="start">The starting value, will return this when amount == 0</param>
     /// <param name="end">The ending value, will return this when amount == 1</param>
     /// <param name="amount">The amount to lerp by</param>

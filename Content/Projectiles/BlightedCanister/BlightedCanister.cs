@@ -5,8 +5,19 @@ using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Canisters.Content.Projectiles.Canisters {
-    public class BlightedCanister : ModProjectile {
+namespace Canisters.Content.Projectiles.BlightedCanister
+{
+    /// <summary>
+    ///     Cursed flame canister
+    /// </summary>
+    public class BlightedCanister : ModProjectile
+    {
+        public override void SetStaticDefaults() {
+            DisplayName.SetDefault("Blighted Canister");
+
+            base.SetStaticDefaults();
+        }
+
         public override void SetDefaults() {
             // Base stats
             Projectile.width = 22;
@@ -53,7 +64,7 @@ namespace Canisters.Content.Projectiles.Canisters {
                 Vector2 positionOffset = velocity * 2f;
                 Vector2 position = Projectile.Center + positionOffset;
 
-                Projectile.NewProjectile(Projectile.GetSource_FromThis(), position, velocity, ModContent.ProjectileType<CursedFlameBall>(), Projectile.damage / 3, Projectile.knockBack / 3f, Projectile.owner, sign);
+                Projectile.NewProjectile(Projectile.GetSource_FromThis(), position, velocity, ModContent.ProjectileType<BlightedBall>(), Projectile.damage / 3, Projectile.knockBack / 3f, Projectile.owner, sign);
             }
 
             // More dust 
@@ -78,63 +89,6 @@ namespace Canisters.Content.Projectiles.Canisters {
             }
 
             Projectile.TurnToExplosion(96, 96);
-        }
-    }
-
-    public class BlightedCanister_Depleted : ModProjectile {
-        public override void SetDefaults() {
-            // Base stats
-            Projectile.width = 8;
-            Projectile.height = 8;
-            Projectile.aiStyle = -1;
-            Projectile.timeLeft = 200;
-            Projectile.extraUpdates = 200;
-
-            // Weapon stats
-            Projectile.friendly = true;
-            Projectile.penetrate = 5;
-            Projectile.DamageType = DamageClass.Ranged;
-
-            base.SetDefaults();
-        }
-
-        private Vector2 StartLocation => new Vector2(Projectile.ai[0], Projectile.ai[1]);
-
-        private bool firstFrame = true;
-
-        public override void AI() {
-            if (firstFrame) {
-                Projectile.ai[0] = Projectile.Center.X;
-                Projectile.ai[1] = Projectile.Center.Y;
-                Projectile.netUpdate = true;
-
-                firstFrame = false;
-            }
-
-            base.AI();
-        }
-
-        public override bool? CanCutTiles() => false;
-
-        public override void Kill(int timeLeft) {
-            // Lightning dust
-            LightningHelper.MakeDust(StartLocation, Projectile.Center, DustID.CursedTorch, 1.2f, 500f, 2f);
-
-            // Mini dust explosion
-            for (int i = 0; i < 10; i++) {
-                Vector2 velocity = Main.rand.NextVector2Circular(8f, 8f);
-                Dust dust = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.CursedTorch, Alpha: Main.rand.Next(100, 150), Scale: Main.rand.NextFloat(1f, 1.2f));
-                dust.velocity = velocity;
-                dust.noGravity = true;
-            }
-
-            base.Kill(timeLeft);
-        }
-
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit) {
-            target.AddBuff(BuffID.CursedInferno, 600);
-
-            base.OnHitNPC(target, damage, knockback, crit);
         }
     }
 }

@@ -2,10 +2,12 @@
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Canisters.Content.Items.Canisters {
-    public class GlisteningCanister : ModItem, ICanisterItem {
-        public int LaunchedProjectileType { get => ModContent.ProjectileType<Projectiles.Canisters.GlisteningCanister>(); }
-        public int DepletedProjectileType { get => ModContent.ProjectileType<Projectiles.Canisters.GlisteningCanister_Depleted>(); }
+namespace Canisters.Content.Items.Canisters
+{
+    public class GlisteningCanister : ModItem, ICanisterItem
+    {
+        public int LaunchedProjectileType { get => ModContent.ProjectileType<Projectiles.GlisteningCanister.GlisteningCanister>(); }
+        public int DepletedProjectileType { get => ModContent.ProjectileType<Projectiles.GlisteningCanister.GlisteningBall>(); }
 
         public override void SetStaticDefaults() {
             SacrificeTotal = 99;
@@ -24,7 +26,7 @@ namespace Canisters.Content.Items.Canisters {
             Item.rare = ItemRarityID.LightRed;
 
             // Weapon stats
-            Item.shoot = ModContent.ProjectileType<Projectiles.Canisters.VerdantCanister>();
+            Item.shoot = ModContent.ProjectileType<Projectiles.VerdantCanister.VerdantCanister>();
             Item.shootSpeed = 1f;
             Item.damage = 6;
             Item.knockBack = 4f;

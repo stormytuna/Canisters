@@ -1,8 +1,11 @@
 ﻿using Terraria;
 using Terraria.ModLoader;
 
-namespace Canisters.Content.Projectiles
+namespace Canisters.Content.Projectiles.StarfallCanister
 {
+    /// <summary>
+    ///     Star shard that the splitting star fires when it 'explodes'
+    /// </summary>
     public class StarShard : ModProjectile
     {
         public override void SetDefaults() {

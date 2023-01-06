@@ -4,8 +4,13 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Canisters.Content.Projectiles {
-    public class CursedFlameBall : ModProjectile {
+namespace Canisters.Content.Projectiles.BlightedCanister
+{
+    /// <summary>
+    ///     Balls that the blighted canister releases when it explodes
+    /// </summary>
+    public class BlightedBall : ModProjectile
+    {
         public override void SetDefaults() {
             // Base stats
             Projectile.width = 16;

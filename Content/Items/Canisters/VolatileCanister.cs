@@ -2,10 +2,12 @@
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Canisters.Content.Items.Canisters {
-    public class VolatileCanister : ModItem, ICanisterItem {
-        public int LaunchedProjectileType { get => ModContent.ProjectileType<Projectiles.Canisters.VolatileCanister>(); }
-        public int DepletedProjectileType { get => ModContent.ProjectileType<Projectiles.Canisters.VolatileCanister_Depleted>(); }
+namespace Canisters.Content.Items.Canisters
+{
+    public class VolatileCanister : ModItem, ICanisterItem
+    {
+        public int LaunchedProjectileType { get => ModContent.ProjectileType<Projectiles.VolatileCanister.VolatileCanister>(); }
+        public int DepletedProjectileType { get => ModContent.ProjectileType<Projectiles.VolatileCanister.GelBall>(); }
 
         public override void SetStaticDefaults() {
             SacrificeTotal = 99;
@@ -22,7 +24,7 @@ namespace Canisters.Content.Items.Canisters {
             Item.rare = ItemRarityID.Blue;
 
             // Ammo stats
-            Item.shoot = ModContent.ProjectileType<Projectiles.Canisters.VolatileCanister>();
+            Item.shoot = ModContent.ProjectileType<Projectiles.VolatileCanister.VolatileCanister>();
             Item.shootSpeed = 2f;
             Item.damage = 3;
             Item.knockBack = 5f;
