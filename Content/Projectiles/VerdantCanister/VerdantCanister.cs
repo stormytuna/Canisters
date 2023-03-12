@@ -18,7 +18,6 @@ namespace Canisters.Content.Projectiles.VerdantCanister
             Projectile.width = 22;
             Projectile.height = 22;
             Projectile.aiStyle = 2;
-            Projectile.alpha = 100;
 
             // Weapon stats
             Projectile.friendly = true;

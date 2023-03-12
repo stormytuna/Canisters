@@ -4,10 +4,10 @@ using Terraria.ModLoader;
 
 namespace Canisters.Content.Items.Canisters
 {
-    public class StarfallCanister : ModItem, ICanisterItem
+    public class ToxicCanister : ModItem, ICanisterItem
     {
-        public int LaunchedProjectileType { get => ModContent.ProjectileType<Projectiles.StarfallCanister.StarfallCanister>(); }
-        public int DepletedProjectileType { get => ModContent.ProjectileType<Projectiles.StarfallCanister.SplittingStar>(); }
+        public int LaunchedProjectileType { get => ModContent.ProjectileType<Projectiles.ToxicCanister.ToxicCanister>(); }
+        public int DepletedProjectileType { get => ModContent.ProjectileType<Projectiles.ToxicCanister.ToxicBarb>(); }
 
         public override void SetStaticDefaults() {
             SacrificeTotal = 99;
@@ -15,19 +15,17 @@ namespace Canisters.Content.Items.Canisters
             base.SetStaticDefaults();
         }
 
-
-
         public override void SetDefaults() {
             // Base stats
             Item.width = 22;
             Item.height = 22;
             Item.maxStack = 999;
-            Item.value = Item.sellPrice(silver: 9);
+            Item.value = Item.sellPrice(silver: 3);
             Item.rare = ItemRarityID.LightRed;
 
             // Weapon stats
-            Item.shoot = ModContent.ProjectileType<Projectiles.StarfallCanister.StarfallCanister>();
-            Item.shootSpeed = 1f;
+            Item.shoot = ModContent.ProjectileType<Projectiles.ToxicCanister.ToxicCanister>();
+            Item.shootSpeed = 2f;
             Item.damage = 6;
             Item.knockBack = 4f;
             Item.DamageType = DamageClass.Ranged;
@@ -39,8 +37,7 @@ namespace Canisters.Content.Items.Canisters
         public override void AddRecipes() {
             CreateRecipe(300)
                 .AddIngredient<EmptyCanister>(300)
-                .AddIngredient(ItemID.PixieDust)
-                .AddIngredient(ItemID.FallenStar)
+                .AddIngredient(ItemID.VialofVenom)
                 .AddTile(TileID.Bottles)
                 .Register();
 

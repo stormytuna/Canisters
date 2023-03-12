@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -72,6 +73,15 @@ namespace Canisters.Content.Projectiles.GlisteningCanister
                 proj.timeLeft = 10;
                 proj.extraUpdates = 1;
                 proj.tileCollide = false;
+            }
+
+            // Le epic sound
+            if (IsParent) {
+                var soundStyle = SoundID.Item154 with {
+                    Volume = 0.5f,
+                    PitchRange = (-0.8f, -0.6f)
+                };
+                SoundEngine.PlaySound(soundStyle, Projectile.Center);
             }
 
             base.Kill(timeLeft);

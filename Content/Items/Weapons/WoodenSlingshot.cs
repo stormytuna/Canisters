@@ -89,6 +89,7 @@ namespace Canisters.Content.Items.Weapons
             CanisterFiringType = FiringType.Canister;
             RotationOffset = 0f;
             MuzzleOffset = new Vector2(0, -10f);
+            ShootSound = SoundID.Item5;
 
             base.SetDefaults();
         }

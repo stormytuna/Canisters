@@ -23,7 +23,6 @@ namespace Canisters.Content.Projectiles.BlightedCanister
             Projectile.width = 22;
             Projectile.height = 22;
             Projectile.aiStyle = 2;
-            Projectile.alpha = 100;
 
             // Weapon stats
             Projectile.friendly = true;

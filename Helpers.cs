@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Terraria;
+using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -26,6 +27,7 @@ public static class Helpers
         proj.tileCollide = false;
         proj.alpha = 255;
         proj.Resize(width, height);
+        proj.netUpdate = true;
         // TODO: implement this
         //proj.knockback = /* param */ knockback;
     }
@@ -87,8 +89,9 @@ public static class Helpers
     /// <summary>
     ///     An enumerable of all nearby npcs
     /// </summary>
-    public static IEnumerable<NPC> FindNearbyNPCs(float range, Vector2 worldPos) {
-        return Main.npc.SkipLast(1).Where((npc) => npc.DistanceSQ(worldPos) < range * range && npc.active && !npc.CountsAsACritter && !npc.friendly && !npc.dontTakeDamage && !npc.immortal);
+    public static IEnumerable<NPC> FindNearbyNPCs(float range, Vector2 worldPos, List<int> ignoredNPCs = null) {
+        ignoredNPCs ??= new();
+        return Main.npc.SkipLast(1).Where((npc) => npc.DistanceSQ(worldPos) < range * range && npc.active && !npc.CountsAsACritter && !npc.friendly && !npc.dontTakeDamage && !npc.immortal && !ignoredNPCs.Contains(npc.type));
     }
 
     /// <summary>
@@ -115,61 +118,6 @@ public static class Helpers
         Dust d = Dust.NewDustPerfect(position, 303, newColor: color);
         d.velocity = Vector2.Zero;
         d.noGravity = true;
-    }
-}
-
-public static class LightningHelper
-{
-    public static void MakeDust(Vector2 source, Vector2 dest, int dustId, float scale, float sway = 80f, float jagednessNumerator = 1f) {
-        var dustPoints = CreateBolt(source, dest, sway, jagednessNumerator);
-        foreach (var point in dustPoints) {
-            Dust d = Dust.NewDustPerfect(point, dustId, Scale: scale);
-            d.noGravity = true;
-            d.velocity = Vector2.Zero;
-        }
-    }
-
-    public static List<Vector2> CreateBolt(Vector2 source, Vector2 dest, float sway = 80f, float jagednessNumerator = 1f) {
-        var results = new List<Vector2>();
-        Vector2 tangent = dest - source;
-        Vector2 normal = Vector2.Normalize(new Vector2(tangent.Y, -tangent.X));
-        float length = tangent.Length();
-
-        List<float> positions = new List<float> {
-            0
-        };
-
-        for (int i = 0; i < length; i++)
-            positions.Add(Main.rand.NextFloat(0f, 1f));
-
-        positions.Sort();
-
-        float jaggedness = jagednessNumerator / sway;
-
-        Vector2 prevPoint = source;
-        float prevDisplacement = 0f;
-        for (int i = 1; i < positions.Count; i++) {
-            float pos = positions[i];
-
-            // used to prevent sharp angles by ensuring very close positions also have small perpendicular variation.
-            float scale = (length * jaggedness) * (pos - positions[i - 1]);
-
-            // defines an envelope. Points near the middle of the bolt can be further from the central line.
-            float envelope = pos > 0.95f ? 20 * (1 - pos) : 1;
-
-            float displacement = Main.rand.NextFloat(-sway, sway);
-            displacement -= (displacement - prevDisplacement) * (1 - scale);
-            displacement *= envelope;
-
-            Vector2 point = source + pos * tangent + displacement * normal;
-            results.Add(point);
-            prevPoint = point;
-            prevDisplacement = displacement;
-        }
-
-        results.Add(prevPoint);
-
-        return results;
     }
 }
 
@@ -272,6 +220,9 @@ public abstract class CanisterUsingHeldProjectile : ModProjectile
     /// <summary>This property acts as a frame counter</summary>
     public int AI_FrameCount { get; set; } = 0;
 
+    /// <summary>The sound this held projectile will play when shooting a projectile</summary>
+    public SoundStyle? ShootSound { get; set; } = null;
+
     private int AI_Lifetime { get; set; }
 
     // Helper property that applies attack speed for us
@@ -334,6 +285,12 @@ public abstract class CanisterUsingHeldProjectile : ModProjectile
 
             Shoot(Owner, source, position, velocity, projToShoot, damage, knockback);
 
+            // Play our sound
+            SoundStyle? shootSound = CanisterFiringType == FiringType.Canister ? ShootSound : CanisterSoundSystem.GetDepletedCanisterSound(usedAmmoItemId);
+            if (shootSound is not null) {
+                SoundEngine.PlaySound(shootSound, Projectile.Center);
+            }
+
             // This makes it so we keep our item used until the potential next shot
             Owner.SetDummyItemTime(UseTimeAfterBuffs + 1);
 
@@ -370,6 +327,7 @@ public abstract class CanisterUsingHeldProjectile : ModProjectile
 
             Point projectileTileCoords = Projectile.Center.ToTileCoordinates();
             Color canisterColor = CanisterColorSystem.GetCanisterColor(usedAmmoItemID) * Lighting.Brightness(projectileTileCoords.X, projectileTileCoords.Y);
+            canisterColor.A = 255;
             Main.EntitySpriteDraw(CanisterTexture.Value, position, frame, canisterColor, rotation, origin, scale, effects, 0);
 
             return false;

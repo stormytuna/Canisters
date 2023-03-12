@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -80,6 +81,14 @@ namespace Canisters.Content.Projectiles.VolatileCanister
                 dust.velocity *= Main.rand.NextVector2Circular(15f, 15f);
                 dust.noGravity = true;
             }
+
+            // Tiny sound
+            var soundStyle = SoundID.SplashWeak with {
+                MaxInstances = 0,
+                Volume = 0.2f,
+                PitchRange = (0.9f, 1f)
+            };
+            SoundEngine.PlaySound(soundStyle, Projectile.Center);
 
             base.Kill(timeLeft);
         }

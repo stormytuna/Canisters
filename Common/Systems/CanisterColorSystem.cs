@@ -31,9 +31,9 @@ namespace Canisters.Common.Systems
             }
         }
 
-        public static Color Starfall {
+        public static Color Harmonic {
             get {
-                return Color.LightGoldenrodYellow;
+                return Color.Purple;
             }
         }
 
@@ -54,8 +54,8 @@ namespace Canisters.Common.Systems
                 return Blighted;
             }
 
-            if (canisterItemId == ModContent.ItemType<StarfallCanister>()) {
-                return Starfall;
+            if (canisterItemId == ModContent.ItemType<HarmonicCanister>()) {
+                return Harmonic;
             }
 
             // Should never be hit, but compiler shouts at us without it
