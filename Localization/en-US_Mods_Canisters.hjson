@@ -1,0 +1,69 @@
+Canisters: {
+	Projectiles: {
+		WoodenSlingshot_HeldProjectile.DisplayName: Wooden Slingshot_ Held Projectile
+		ModifiedHandgun_HeldProjectile.DisplayName: Modified Handgun_ Held Projectile
+		BlightedBall.DisplayName: Blighted Ball
+		BlightedBolt.DisplayName: Blighted Bolt
+		BlightedCanister.DisplayName: Blighted Canister
+		GlisteningBall.DisplayName: Glistening Ball
+		GlisteningBlob.DisplayName: Glistening Blob
+		GlisteningCanister.DisplayName: Glistening Canister
+		HarmonicCanister.DisplayName: Harmonic Canister
+		HelixBolt.DisplayName: Helix Bolt
+		ToxicBarb.DisplayName: Toxic Barb
+		ToxicCanister.DisplayName: Toxic Canister
+		VerdantCanister.DisplayName: Verdant Canister
+		VerdantGas.DisplayName: Verdant Gas
+		VerdantGas_Helper.DisplayName: Verdant Gas_ Helper
+		VerdantVine.DisplayName: Verdant Vine
+		GelBall.DisplayName: Gel Ball
+		VolatileCanister.DisplayName: Volatile Canister
+	}
+
+	Items: {
+		WoodenSlingshot: {
+			Tooltip: ""
+			DisplayName: Wooden Slingshot
+		}
+
+		ModifiedHandgun: {
+			Tooltip: ""
+			DisplayName: Modified Handgun
+		}
+
+		VolatileCanister: {
+			Tooltip: ""
+			DisplayName: Volatile Canister
+		}
+
+		VerdantCanister: {
+			Tooltip: ""
+			DisplayName: Verdant Canister
+		}
+
+		ToxicCanister: {
+			Tooltip: ""
+			DisplayName: Toxic Canister
+		}
+
+		HarmonicCanister: {
+			Tooltip: ""
+			DisplayName: Harmonic Canister
+		}
+
+		GlisteningCanister: {
+			Tooltip: ""
+			DisplayName: Glistening Canister
+		}
+
+		EmptyCanister: {
+			Tooltip: ""
+			DisplayName: Empty Canister
+		}
+
+		BlightedCanister: {
+			Tooltip: ""
+			DisplayName: Blighted Canister
+		}
+	}
+}
