@@ -1,8 +1,5 @@
 using Terraria.ModLoader;
 
-namespace Canisters
-{
-    public class Canisters : Mod
-    {
-    }
-}
+namespace Canisters;
+
+public class Canisters : Mod { }

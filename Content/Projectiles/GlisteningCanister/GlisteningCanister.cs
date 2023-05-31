@@ -1,89 +1,84 @@
-using Microsoft.Xna.Framework;
 using System;
+using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Canisters.Content.Projectiles.GlisteningCanister
+namespace Canisters.Content.Projectiles.GlisteningCanister;
+
+/// <summary>
+///     Ichor canister
+/// </summary>
+public class GlisteningCanister : ModProjectile
 {
-    /// <summary>
-    ///     Ichor canister
-    /// </summary>
-    public class GlisteningCanister : ModProjectile
-    {
-        public override void SetDefaults() {
-            // Base stats
-            Projectile.width = 22;
-            Projectile.height = 22;
-            Projectile.aiStyle = 2;
+	public override void SetDefaults() {
+		// Base stats
+		Projectile.width = 22;
+		Projectile.height = 22;
+		Projectile.aiStyle = 2;
 
-            // Weapon stats
-            Projectile.friendly = true;
-            Projectile.penetrate = -1;
-            Projectile.DamageType = DamageClass.Ranged;
+		// Weapon stats
+		Projectile.friendly = true;
+		Projectile.penetrate = -1;
+		Projectile.DamageType = DamageClass.Ranged;
+	}
 
-            base.SetDefaults();
-        }
+	public override string Texture => "Canisters/Content/Items/Canisters/GlisteningCanister";
 
-        public override string Texture => "Canisters/Content/Items/Canisters/GlisteningCanister";
+	public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone) {
+		if (Projectile.alpha != 255) {
+			Explode();
+		}
+	}
 
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit) {
-            if (Projectile.alpha != 255) {
-                Explode();
-            }
+	public override bool OnTileCollide(Vector2 oldVelocity) {
+		if (Projectile.alpha != 255) {
+			Explode();
+			return false;
+		}
 
-            base.OnHitNPC(target, damage, knockback, crit);
-        }
+		return base.OnTileCollide(oldVelocity);
+	}
 
-        public override bool OnTileCollide(Vector2 oldVelocity) {
-            if (Projectile.alpha != 255) {
-                Explode();
-                return false;
-            }
+	private void Explode() {
+		SoundEngine.PlaySound(SoundID.DD2_GoblinBomb, Projectile.Center);
 
-            return base.OnTileCollide(oldVelocity);
-        }
+		for (int i = 0; i < 4; i++) {
+			Vector2 velocity = new(Main.rand.NextFloat(0.8f, 3f), Main.rand.NextFloat(0.8f, 1.5f));
+			velocity *= Main.rand.NextBool() ? -1f : 1f;
+			Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, velocity, ModContent.ProjectileType<GlisteningBlob>(), Projectile.damage / 3, Projectile.knockBack / 3f, Projectile.owner);
+		}
 
-        private void Explode() {
-            SoundEngine.PlaySound(SoundID.DD2_GoblinBomb, Projectile.Center);
+		// Ichor dust
+		for (int i = 0; i < 20; i++) {
+			Vector2 velocity = Main.rand.NextVector2Circular(8f, 8f);
+			Dust dust = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.Ichor, Alpha: Main.rand.Next(90, 150), Scale: Main.rand.NextFloat(0.8f, 1.5f));
+			dust.velocity = velocity;
+			dust.noGravity = true;
+		}
 
-            for (int i = 0; i < 4; i++) {
-                Vector2 velocity = new(Main.rand.NextFloat(0.8f, 3f), Main.rand.NextFloat(0.8f, 1.5f));
-                velocity *= Main.rand.NextBool() ? -1f : 1f;
-                Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, velocity, ModContent.ProjectileType<GlisteningBlob>(), Projectile.damage / 3, Projectile.knockBack / 3f, Projectile.owner);
-            }
+		// More dust 
+		for (int i = 0; i < 90; i++) {
+			// Our base dust properties
+			Vector2 velocity = Main.rand.NextVector2Circular(15f, 15f);
+			Dust dust = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.IchorTorch, Alpha: Main.rand.Next(100, 150), Scale: Main.rand.NextFloat(0.8f, 1.2f));
+			dust.velocity = velocity;
+			dust.noGravity = true;
 
-            // Ichor dust
-            for (int i = 0; i < 20; i++) {
-                Vector2 velocity = Main.rand.NextVector2Circular(8f, 8f);
-                Dust dust = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.Ichor, Alpha: Main.rand.Next(90, 150), Scale: Main.rand.NextFloat(0.8f, 1.5f));
-                dust.velocity = velocity;
-                dust.noGravity = true;
-            }
+			if (Main.rand.NextBool(3)) {
+				// 1/3 dust becomes medium dust
+				float sizeMult = Main.rand.NextFloat(1f, 1.5f);
+				dust.scale *= sizeMult;
+				dust.velocity /= sizeMult;
+			} else if (Main.rand.NextBool(4)) {
+				// 1/4 of the rest become little grass that's gravity effected
+				dust.velocity.X /= 4f;
+				dust.velocity.Y = MathF.Abs(dust.velocity.Y) / -4f;
+				dust.noGravity = false;
+			}
+		}
 
-            // More dust 
-            for (int i = 0; i < 90; i++) {
-                // Our base dust properties
-                Vector2 velocity = Main.rand.NextVector2Circular(15f, 15f);
-                Dust dust = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.IchorTorch, Alpha: Main.rand.Next(100, 150), Scale: Main.rand.NextFloat(0.8f, 1.2f));
-                dust.velocity = velocity;
-                dust.noGravity = true;
-
-                if (Main.rand.NextBool(3)) {
-                    // 1/3 dust becomes medium dust
-                    float sizeMult = Main.rand.NextFloat(1f, 1.5f);
-                    dust.scale *= sizeMult;
-                    dust.velocity /= sizeMult;
-                } else if (Main.rand.NextBool(4)) {
-                    // 1/4 of the rest become little grass that's gravity effected
-                    dust.velocity.X /= 4f;
-                    dust.velocity.Y = MathF.Abs(dust.velocity.Y) / -4f;
-                    dust.noGravity = false;
-                }
-            }
-
-            Projectile.TurnToExplosion(96, 96);
-        }
-    }
+		Projectile.TurnToExplosion(96, 96);
+	}
 }

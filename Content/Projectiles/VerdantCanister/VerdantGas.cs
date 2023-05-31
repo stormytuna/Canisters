@@ -3,75 +3,64 @@ using Terraria;
 using Terraria.DataStructures;
 using Terraria.ModLoader;
 
-namespace Canisters.Content.Projectiles.VerdantCanister
+namespace Canisters.Content.Projectiles.VerdantCanister;
+
+/// <summary>
+///     The actual gas that the depleted verdant canister shoots
+/// </summary>
+public class VerdantGas : ModProjectile
 {
-    /// <summary>
-    ///     The actual gas that the depleted verdant canister shoots
-    /// </summary>
-    public class VerdantGas : ModProjectile
-    {
-        public override void SetStaticDefaults() {
-            Main.projFrames[Type] = 3;
+	public override void SetStaticDefaults() {
+		Main.projFrames[Type] = 3;
+	}
 
-            base.SetStaticDefaults();
-        }
+	public override void SetDefaults() {
+		// Base stats
+		Projectile.width = 60;
+		Projectile.height = 60;
+		Projectile.aiStyle = -1;
+		Projectile.alpha = 40;
 
-        public override void SetDefaults() {
-            // Base stats
-            Projectile.width = 60;
-            Projectile.height = 60;
-            Projectile.aiStyle = -1;
-            Projectile.alpha = 40;
+		// Weapon stats
+		Projectile.friendly = true;
+		Projectile.penetrate = -1;
+		Projectile.DamageType = DamageClass.Ranged;
+	}
 
-            // Weapon stats
-            Projectile.friendly = true;
-            Projectile.penetrate = -1;
-            Projectile.DamageType = DamageClass.Ranged;
+	public override void OnSpawn(IEntitySource source) {
+		Projectile.frame = Main.rand.Next(Main.projFrames[Type]);
+	}
 
-            base.SetDefaults();
-        }
+	public override void AI() {
+		// Fade out
+		Projectile.alpha += 5;
+		if (Projectile.alpha >= 255) {
+			Projectile.Kill();
+		}
 
-        public override void OnSpawn(IEntitySource source) {
-            Projectile.frame = Main.rand.Next(Main.projFrames[Type]);
+		// Scale up
+		Projectile.scale += 0.08f;
 
-            base.OnSpawn(source);
-        }
+		// Velocity slowdown
+		Projectile.velocity *= 0.95f;
 
-        public override void AI() {
-            // Fade out
-            Projectile.alpha += 5;
-            if (Projectile.alpha >= 255) {
-                Projectile.Kill();
-            }
+		// Animate
+		Projectile.frameCounter++;
+		if (Projectile.frameCounter >= 12) {
+			Projectile.frameCounter = 0;
+			Projectile.frame++;
+			if (Projectile.frame >= Main.projFrames[Type]) {
+				Projectile.frame = 0;
+			}
+		}
+	}
 
-            // Scale up
-            Projectile.scale += 0.08f;
+	public override bool OnTileCollide(Vector2 oldVelocity) => false;
 
-            // Velocity slowdown
-            Projectile.velocity *= 0.95f;
+	public override bool TileCollideStyle(ref int width, ref int height, ref bool fallThrough, ref Vector2 hitboxCenterFrac) {
+		width = 20;
+		height = 20;
 
-            // Animate
-            Projectile.frameCounter++;
-            if (Projectile.frameCounter >= 12) {
-                Projectile.frameCounter = 0;
-                Projectile.frame++;
-                if (Projectile.frame >= Main.projFrames[Type]) {
-                    Projectile.frame = 0;
-                }
-            }
-
-            base.AI();
-        }
-
-        public override bool OnTileCollide(Vector2 oldVelocity) {
-            return false;
-        }
-
-        public override bool TileCollideStyle(ref int width, ref int height, ref bool fallThrough, ref Vector2 hitboxCenterFrac) {
-            width = 20;
-            height = 20;
-
-            return base.TileCollideStyle(ref width, ref height, ref fallThrough, ref hitboxCenterFrac);
-        }
-    }
+		return base.TileCollideStyle(ref width, ref height, ref fallThrough, ref hitboxCenterFrac);
+	}
 }

@@ -5,103 +5,90 @@ using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Canisters.Content.Items.Weapons
+namespace Canisters.Content.Items.Weapons;
+
+public class WoodenSlingshot : CanisterUsingWeapon
 {
-    public class WoodenSlingshot : CanisterUsingWeapon
-    {
-        public override void SetStaticDefaults() {
-            SacrificeTotal = 1;
+	public override void SetStaticDefaults() {
+		Item.ResearchUnlockCount = 1;
 
-            base.SetStaticDefaults();
-        }
+		base.SetStaticDefaults();
+	}
 
-        public override void SetDefaults() {
-            // Base stats
-            Item.width = 20;
-            Item.height = 32;
-            Item.value = Item.sellPrice(silver: 2);
-            Item.rare = ItemRarityID.Blue;
+	public override void SetDefaults() {
+		// Base stats
+		Item.width = 20;
+		Item.height = 32;
+		Item.value = Item.sellPrice(silver: 2);
+		Item.rare = ItemRarityID.Blue;
 
-            // Use stats
-            Item.useStyle = ItemUseStyleID.Shoot;
-            Item.useTime = Item.useAnimation = 30;
-            Item.autoReuse = true;
-            Item.noMelee = true;
-            Item.noUseGraphic = true;
-            Item.channel = true;
+		// Use stats
+		Item.useStyle = ItemUseStyleID.Shoot;
+		Item.useTime = Item.useAnimation = 30;
+		Item.autoReuse = true;
+		Item.noMelee = true;
+		Item.noUseGraphic = true;
+		Item.channel = true;
 
-            // Weapon stats
-            Item.shoot = ModContent.ProjectileType<WoodenSlingshot_HeldProjectile>();
-            Item.shootSpeed = 9f;
-            Item.damage = 11;
-            Item.crit = 4;
-            Item.knockBack = 1f;
-            Item.DamageType = DamageClass.Ranged;
-            Item.useAmmo = ModContent.ItemType<VolatileCanister>();
+		// Weapon stats
+		Item.shoot = ModContent.ProjectileType<WoodenSlingshot_HeldProjectile>();
+		Item.shootSpeed = 9f;
+		Item.damage = 11;
+		Item.crit = 4;
+		Item.knockBack = 1f;
+		Item.DamageType = DamageClass.Ranged;
+		Item.useAmmo = ModContent.ItemType<VolatileCanister>();
+	}
 
-            base.SetDefaults();
-        }
+	public override void AddRecipes() {
+		CreateRecipe()
+			.AddIngredient(ItemID.Silk)
+			.AddIngredient(ItemID.Wood, 8)
+			.AddTile(TileID.WorkBenches)
+			.Register();
 
-        public override void AddRecipes() {
-            CreateRecipe()
-                .AddIngredient(ItemID.Silk)
-                .AddIngredient(ItemID.Wood, 8)
-                .AddTile(TileID.WorkBenches)
-                .Register();
+		base.AddRecipes();
+	}
 
-            base.AddRecipes();
-        }
+	public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback) {
+		Projectile.NewProjectile(source, player.Center, position, ModContent.ProjectileType<WoodenSlingshot_HeldProjectile>(), damage, knockback, player.whoAmI);
 
-        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback) {
-            Projectile.NewProjectile(source, player.Center, position, ModContent.ProjectileType<WoodenSlingshot_HeldProjectile>(), damage, knockback, player.whoAmI);
+		return false;
+	}
+}
 
-            return false;
-        }
-    }
+public class WoodenSlingshot_HeldProjectile : CanisterUsingHeldProjectile
+{
+	public override void SetDefaults() {
+		// Base stats
+		Projectile.width = 20;
+		Projectile.height = 32;
+		Projectile.aiStyle = -1;
 
-    public class WoodenSlingshot_HeldProjectile : CanisterUsingHeldProjectile
-    {
-        public override void SetStaticDefaults() {
-            DisplayName.SetDefault("Wooden Slingshot");
+		// Weapon stats
+		Projectile.friendly = true;
+		Projectile.hostile = false;
+		Projectile.penetrate = -1;
+		Projectile.DamageType = DamageClass.Ranged;
 
-            base.SetStaticDefaults();
-        }
+		// Held projectile stats
+		Projectile.tileCollide = false;
+		Projectile.hide = true;
+		Projectile.ignoreWater = true;
 
-        public override void SetDefaults() {
-            // Base stats
-            Projectile.width = 20;
-            Projectile.height = 32;
-            Projectile.aiStyle = -1;
+		// CanisterHeldProjectile stats
+		HoldOutOffset = 10f;
+		CanisterFiringType = FiringType.Canister;
+		RotationOffset = 0f;
+		MuzzleOffset = new Vector2(0, -10f);
+		ShootSound = SoundID.Item5;
+	}
 
-            // Weapon stats
-            Projectile.friendly = true;
-            Projectile.hostile = false;
-            Projectile.penetrate = -1;
-            Projectile.DamageType = DamageClass.Ranged;
+	public override string Texture => "Canisters/Content/Items/Weapons/WoodenSlingshot";
 
-            // Held projectile stats
-            Projectile.tileCollide = false;
-            Projectile.hide = true;
-            Projectile.ignoreWater = true;
-
-            // CanisterHeldProjectile stats
-            HoldOutOffset = 10f;
-            CanisterFiringType = FiringType.Canister;
-            RotationOffset = 0f;
-            MuzzleOffset = new Vector2(0, -10f);
-            ShootSound = SoundID.Item5;
-
-            base.SetDefaults();
-        }
-
-        public override string Texture => "Canisters/Content/Items/Weapons/WoodenSlingshot";
-
-        public override void Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback) {
-            if (Collision.CanHit(player.Center, 0, 0, position, 0, 0)) {
-                Projectile.NewProjectileDirect(source, position, velocity, type, damage, knockback, player.whoAmI);
-            }
-
-            base.Shoot(player, source, position, velocity, type, damage, knockback);
-        }
-    }
+	public override void Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback) {
+		if (Collision.CanHit(player.Center, 0, 0, position, 0, 0)) {
+			Projectile.NewProjectileDirect(source, position, velocity, type, damage, knockback, player.whoAmI);
+		}
+	}
 }
