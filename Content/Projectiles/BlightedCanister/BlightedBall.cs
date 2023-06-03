@@ -16,8 +16,6 @@ public class BlightedBall : ModProjectile
 	public override void SetStaticDefaults() {
 		ProjectileID.Sets.TrailCacheLength[Type] = 10;
 		ProjectileID.Sets.TrailingMode[Type] = 0;
-
-		base.SetStaticDefaults();
 	}
 
 	public override void SetDefaults() {
@@ -33,8 +31,6 @@ public class BlightedBall : ModProjectile
 		Projectile.friendly = true;
 		Projectile.penetrate = -1;
 		Projectile.DamageType = DamageClass.Ranged;
-
-		base.SetDefaults();
 	}
 
 	public override void AI() {
@@ -50,8 +46,6 @@ public class BlightedBall : ModProjectile
 
 		// Point where it's travelling
 		Projectile.rotation = Projectile.velocity.ToRotation() + MathHelper.PiOver2;
-
-		base.AI();
 	}
 
 	public override Color? GetAlpha(Color lightColor) => Color.White;
