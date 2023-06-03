@@ -1,4 +1,5 @@
 ﻿using Canisters.Content.Projectiles.BlightedCanister;
+using Canisters.Helpers.Interfaces;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;

@@ -1,4 +1,5 @@
 using System;
+using Canisters.Helpers;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.Audio;

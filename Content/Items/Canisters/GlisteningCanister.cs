@@ -1,4 +1,5 @@
 ﻿using Canisters.Content.Projectiles.GlisteningCanister;
+using Canisters.Helpers.Interfaces;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -23,7 +24,7 @@ public class GlisteningCanister : ModItem, ICanisterItem
 		Item.rare = ItemRarityID.LightRed;
 
 		// Weapon stats
-		Item.shoot = ModContent.ProjectileType<Projectiles.VerdantCanister.VerdantCanister>();
+		Item.shoot = ModContent.ProjectileType<Projectiles.GlisteningCanister.GlisteningCanister>();
 		Item.shootSpeed = 1f;
 		Item.damage = 6;
 		Item.knockBack = 4f;

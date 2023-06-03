@@ -1,4 +1,6 @@
 ﻿using Canisters.Content.Items.Canisters;
+using Canisters.Helpers;
+using Canisters.Helpers.Abstracts;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.DataStructures;

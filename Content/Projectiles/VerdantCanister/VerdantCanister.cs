@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Canisters.Helpers;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.Audio;

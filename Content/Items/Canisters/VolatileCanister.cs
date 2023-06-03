@@ -1,4 +1,5 @@
 ﻿using Canisters.Content.Projectiles.VolatileCanister;
+using Canisters.Helpers.Interfaces;
 using Terraria.ID;
 using Terraria.ModLoader;
 

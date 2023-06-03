@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Canisters.Helpers.Abstracts;
+using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
