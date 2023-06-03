@@ -18,6 +18,9 @@ Canisters: {
 		VerdantVine.DisplayName: Verdant Vine
 		GelBall.DisplayName: Gel Ball
 		VolatileCanister.DisplayName: Volatile Canister
+		Nanites.DisplayName: Nanites
+		NaniteCanister.DisplayName: Nanite Canister
+		NaniteBlob.DisplayName: Nanite Blob
 	}
 
 	Items: {
@@ -64,6 +67,18 @@ Canisters: {
 		BlightedCanister: {
 			Tooltip: ""
 			DisplayName: Blighted Canister
+		}
+
+		NaniteCanister: {
+			Tooltip: ""
+			DisplayName: Nanite Canister
+		}
+	}
+
+	Buffs: {
+		Devoured: {
+			Description: Mods.Canisters.Buffs.Devoured.Description
+			DisplayName: Devoured
 		}
 	}
 }
