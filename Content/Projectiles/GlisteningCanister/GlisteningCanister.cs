@@ -1,5 +1,6 @@
 using System;
 using Canisters.Helpers;
+using Canisters.Helpers.Abstracts;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.Audio;
@@ -11,38 +12,11 @@ namespace Canisters.Content.Projectiles.GlisteningCanister;
 /// <summary>
 ///     Ichor canister
 /// </summary>
-public class GlisteningCanister : ModProjectile
+public class GlisteningCanister : CanisterProjectile
 {
-	public override void SetDefaults() {
-		// Base stats
-		Projectile.width = 22;
-		Projectile.height = 22;
-		Projectile.aiStyle = 2;
-
-		// Weapon stats
-		Projectile.friendly = true;
-		Projectile.penetrate = -1;
-		Projectile.DamageType = DamageClass.Ranged;
-	}
-
 	public override string Texture => "Canisters/Content/Items/Canisters/GlisteningCanister";
 
-	public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone) {
-		if (Projectile.alpha != 255) {
-			Explode();
-		}
-	}
-
-	public override bool OnTileCollide(Vector2 oldVelocity) {
-		if (Projectile.alpha != 255) {
-			Explode();
-			return false;
-		}
-
-		return base.OnTileCollide(oldVelocity);
-	}
-
-	private void Explode() {
+	public override void Explode() {
 		SoundEngine.PlaySound(SoundID.DD2_GoblinBomb, Projectile.Center);
 
 		for (int i = 0; i < 4; i++) {

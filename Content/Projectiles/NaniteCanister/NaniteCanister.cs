@@ -1,4 +1,5 @@
 ﻿using Canisters.Helpers;
+using Canisters.Helpers.Abstracts;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.Audio;
@@ -7,38 +8,11 @@ using Terraria.ModLoader;
 
 namespace Canisters.Content.Projectiles.NaniteCanister;
 
-public class NaniteCanister : ModProjectile
+public class NaniteCanister : CanisterProjectile
 {
-	public override void SetDefaults() {
-		// Base stats
-		Projectile.width = 22;
-		Projectile.height = 22;
-		Projectile.aiStyle = 2;
-
-		// Weapon stats
-		Projectile.friendly = true;
-		Projectile.penetrate = -1;
-		Projectile.DamageType = DamageClass.Ranged;
-	}
-
 	public override string Texture => "Canisters/Content/Items/Canisters/NaniteCanister";
 
-	public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone) {
-		if (Projectile.alpha != 255) {
-			Explode();
-		}
-	}
-
-	public override bool OnTileCollide(Vector2 oldVelocity) {
-		if (Projectile.alpha != 255) {
-			Explode();
-			return false;
-		}
-
-		return base.OnTileCollide(oldVelocity);
-	}
-
-	private void Explode() {
+	public override void Explode() {
 		SoundEngine.PlaySound(SoundID.DD2_GoblinBomb, Projectile.Center);
 
 		Projectile.TurnToExplosion(96, 96);

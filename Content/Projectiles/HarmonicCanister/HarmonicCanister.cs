@@ -1,30 +1,18 @@
 using System.IO;
 using Canisters.Helpers;
+using Canisters.Helpers.Abstracts;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
-using Terraria.ModLoader;
 
 namespace Canisters.Content.Projectiles.HarmonicCanister;
 
 /// <summary>
 ///     Soul of night and soul of light canister
 /// </summary>
-public class HarmonicCanister : ModProjectile
+public class HarmonicCanister : CanisterProjectile
 {
-	public override void SetDefaults() {
-		// Base stats
-		Projectile.width = 22;
-		Projectile.height = 22;
-		Projectile.aiStyle = 2;
-
-		// Weapon stats
-		Projectile.friendly = true;
-		Projectile.penetrate = -1;
-		Projectile.DamageType = DamageClass.Ranged;
-	}
-
 	public override string Texture => "Canisters/Content/Items/Canisters/HarmonicCanister";
 
 	private bool hasExploded;
@@ -74,27 +62,13 @@ public class HarmonicCanister : ModProjectile
 		frameCounter++;
 	}
 
-	public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone) {
-		if (Projectile.alpha != 255) {
-			Explode();
-		}
-	}
-
-	public override bool OnTileCollide(Vector2 oldVelocity) {
-		if (Projectile.alpha != 255) {
-			Explode();
-			return false;
-		}
-
-		return base.OnTileCollide(oldVelocity);
-	}
-
-	private void Explode() {
+	public override void Explode() {
 		SoundEngine.PlaySound(SoundID.DD2_GoblinBomb, Projectile.Center);
 
 		Projectile.TurnToExplosion(96, 96);
 		Projectile.timeLeft = 120;
 		hasExploded = true;
+		Projectile.netUpdate = true;
 
 		// TODO: Dust explosion
 	}

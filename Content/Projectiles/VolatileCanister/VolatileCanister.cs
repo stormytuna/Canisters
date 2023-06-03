@@ -1,50 +1,19 @@
 using System;
 using Canisters.Helpers;
+using Canisters.Helpers.Abstracts;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
-using Terraria.ModLoader;
 
 namespace Canisters.Content.Projectiles.VolatileCanister;
 
 /// <summary>
 ///     Gel canister
 /// </summary>
-public class VolatileCanister : ModProjectile
+public class VolatileCanister : CanisterProjectile
 {
-	public override void SetDefaults() {
-		// Base stats
-		Projectile.width = 22;
-		Projectile.height = 22;
-		Projectile.aiStyle = 2;
-
-		// Weapon stats
-		Projectile.friendly = true;
-		Projectile.penetrate = -1;
-		Projectile.DamageType = DamageClass.Ranged;
-	}
-
 	public override string Texture => "Canisters/Content/Items/Canisters/VolatileCanister";
-
-	public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone) {
-		if (Projectile.alpha != 255) {
-			Explode();
-		}
-
-		if (Main.rand.NextBool(3)) {
-			target.AddBuff(BuffID.OnFire, 180);
-		}
-	}
-
-	public override bool OnTileCollide(Vector2 oldVelocity) {
-		if (Projectile.alpha != 255) {
-			Explode();
-			return false;
-		}
-
-		return base.OnTileCollide(oldVelocity);
-	}
 
 	private void Explode() {
 		SoundEngine.PlaySound(SoundID.DD2_GoblinBomb, Projectile.Center);
