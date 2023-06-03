@@ -13,7 +13,7 @@ public abstract class CanisterItem : ModItem, ICanisterItem
 	public virtual void SafeSetStaticDefaults() { }
 	public virtual void SafeSetDefaults() { }
 
-	public override void SetStaticDefaults() {
+	public sealed override void SetStaticDefaults() {
 		SafeSetStaticDefaults();
 
 		Item.ResearchUnlockCount = 99;
