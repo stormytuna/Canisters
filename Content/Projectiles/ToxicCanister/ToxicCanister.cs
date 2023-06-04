@@ -13,7 +13,7 @@ public class ToxicCanister : CanisterProjectile
 {
 	public override string Texture => "Canisters/Content/Items/Canisters/ToxicCanister";
 
-	private void Explode() {
+	public override void Explode() {
 		SoundEngine.PlaySound(SoundID.DD2_GoblinBomb, Projectile.Center);
 
 		Projectile.TurnToExplosion(96, 96);

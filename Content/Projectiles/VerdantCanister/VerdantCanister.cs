@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Canisters.Helpers;
 using Canisters.Helpers.Abstracts;
@@ -17,7 +16,7 @@ public class VerdantCanister : CanisterProjectile
 {
 	public override string Texture => "Canisters/Content/Items/Canisters/VerdantCanister";
 
-	private void Explode() {
+	public override void Explode() {
 		SoundEngine.PlaySound(SoundID.DD2_GoblinBomb, Projectile.Center);
 
 		List<float> startRots = Main.rand.NextSegmentedAngles(4, 0.5f);
@@ -32,33 +31,10 @@ public class VerdantCanister : CanisterProjectile
 			}
 		}
 
-		// Leafy dust
-		for (int i = 0; i < 80; i++) {
-			// Our base dust properties
-			Vector2 velocity = Main.rand.NextVector2Circular(15f, 15f);
-			Dust dust = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.Grass, Alpha: Main.rand.Next(100, 150), Scale: Main.rand.NextFloat(0.8f, 1.2f));
-			dust.velocity = velocity;
-			dust.noGravity = true;
-
-			if (Main.rand.NextBool(3)) {
-				// 1/3 dust becomes medium dust
-				float sizeMult = Main.rand.NextFloat(1f, 1.5f);
-				dust.scale *= sizeMult;
-				dust.velocity /= sizeMult;
-			} else if (Main.rand.NextBool(4)) {
-				// 1/4 of the rest become little grass that's gravity effected
-				dust.velocity.X /= 4f;
-				dust.velocity.Y = MathF.Abs(dust.velocity.Y) / -4f;
-				dust.noGravity = false;
-			}
-		}
-
-		// Nature energy dust
-		for (int i = 0; i < 15; i++) {
-			Vector2 velocity = Main.rand.NextVector2Circular(4f, 4f);
-			Dust dust = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.GreenFairy, Alpha: Main.rand.Next(0, 50), Scale: Main.rand.NextFloat(0.8f, 1.5f));
-			dust.velocity = velocity;
-		}
+		DustHelpers.MakeDustExplosion(Projectile.Center, 10f, DustID.Grass, Main.rand.Next(50, 65), 0f, 15f, 100, 150, 1f, 1.3f, true);
+		DustHelpers.MakeDustExplosion(Projectile.Center, 10f, DustID.Grass, Main.rand.Next(12, 20), 0f, 10f, 100, 150, 1.3f, 1.6f, true);
+		DustHelpers.MakeDustExplosion(Projectile.Center, 10f, DustID.Grass, Main.rand.Next(10, 15), 0f, 3f, 100, 150, 1f, 1.3f);
+		DustHelpers.MakeDustExplosion(Projectile.Center, 10f, DustID.GreenFairy, 15, 0f, 4f, 0, 50, 0.8f, 1.5f);
 
 		// TODO: leaf gore
 

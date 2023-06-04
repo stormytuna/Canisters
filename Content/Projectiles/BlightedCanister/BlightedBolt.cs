@@ -1,4 +1,5 @@
 ﻿using Canisters.Common.Systems;
+using Canisters.Helpers;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
@@ -38,16 +39,8 @@ public class BlightedBolt : ModProjectile
 	public override bool? CanCutTiles() => false;
 
 	public override void Kill(int timeLeft) {
-		// Lightning dust
 		LightningSystem.MakeDust(startLocation, Projectile.Center, DustID.CursedTorch, 1.4f);
-
-		// Mini dust explosion
-		for (int i = 0; i < 13; i++) {
-			Vector2 velocity = Main.rand.NextVector2Circular(8f, 8f);
-			Dust dust = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.CursedTorch, Alpha: Main.rand.Next(100, 150), Scale: Main.rand.NextFloat(1f, 1.2f));
-			dust.velocity = velocity;
-			dust.noGravity = true;
-		}
+		DustHelpers.MakeDustExplosion(Projectile.Center, 2f, DustID.CursedTorch, Main.rand.Next(10, 15), 0f, 8f, 100, 150, 1f, 1.2f, true);
 	}
 
 	public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone) {

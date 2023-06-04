@@ -17,6 +17,7 @@ public class BlightedCanister : CanisterProjectile
 	public override string Texture => "Canisters/Content/Items/Canisters/BlightedCanister";
 
 	public override void Explode() {
+		Projectile.TurnToExplosion(96, 96);
 		SoundEngine.PlaySound(SoundID.DD2_GoblinBomb, Projectile.Center);
 
 		float rotationOffset = Main.rand.NextRadian();
@@ -30,27 +31,8 @@ public class BlightedCanister : CanisterProjectile
 			Projectile.NewProjectile(Projectile.GetSource_FromThis(), position, velocity, ModContent.ProjectileType<BlightedBall>(), Projectile.damage / 3, Projectile.knockBack / 3f, Projectile.owner, sign);
 		}
 
-		// More dust 
-		for (int i = 0; i < 90; i++) {
-			// Our base dust properties
-			Vector2 velocity = Main.rand.NextVector2Circular(15f, 15f);
-			Dust dust = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.CursedTorch, Alpha: Main.rand.Next(100, 150), Scale: Main.rand.NextFloat(1f, 1.3f));
-			dust.velocity = velocity;
-			dust.noGravity = true;
-
-			if (Main.rand.NextBool(3)) {
-				// 1/3 dust becomes medium dust
-				float sizeMult = Main.rand.NextFloat(1.3f, 1.6f);
-				dust.scale *= sizeMult;
-				dust.velocity /= sizeMult;
-			} else if (Main.rand.NextBool(4)) {
-				// 1/4 of the rest become little grass that's gravity effected
-				dust.velocity.X /= 4f;
-				dust.velocity.Y = MathF.Abs(dust.velocity.Y) / -4f;
-				dust.noGravity = false;
-			}
-		}
-
-		Projectile.TurnToExplosion(96, 96);
+		DustHelpers.MakeDustExplosion(Projectile.Center, 10f, DustID.CursedTorch, Main.rand.Next(50, 65), 0f, 15f, 100, 150, 1f, 1.3f, true);
+		DustHelpers.MakeDustExplosion(Projectile.Center, 10f, DustID.CursedTorch, Main.rand.Next(12, 20), 0f, 10f, 100, 150, 1.3f, 1.6f, true);
+		DustHelpers.MakeDustExplosion(Projectile.Center, 10f, DustID.CursedTorch, Main.rand.Next(10, 15), 0f, 3f, 100, 150, 1f, 1.3f);
 	}
 }

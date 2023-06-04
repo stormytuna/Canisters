@@ -1,4 +1,5 @@
 ﻿using System;
+using Canisters.Helpers;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.Audio;
@@ -25,11 +26,11 @@ public class HelixBolt : ModProjectile
 
 	private ref float AI_FrameCount => ref Projectile.ai[0];
 
-    /// <summary>
-    ///     1f == dark + 1f multiplier <br />
-    ///     -1f == light + -1f multiplier
-    /// </summary>
-    private ref float AI_State => ref Projectile.ai[1];
+	/// <summary>
+	///     1f == dark + 1f multiplier <br />
+	///     -1f == light + -1f multiplier
+	/// </summary>
+	private ref float AI_State => ref Projectile.ai[1];
 
 	private bool firstFrame = true;
 	private float startVelocityRotation;
@@ -67,14 +68,7 @@ public class HelixBolt : ModProjectile
 	}
 
 	public override void Kill(int timeLeft) {
-		// Dusty dust
-		for (int i = 0; i < 15; i++) {
-			int dustType = AI_State == 1f ? DustID.PinkTorch : DustID.PurpleTorch;
-			Dust d = Dust.NewDustPerfect(Projectile.Center, dustType);
-			d.scale = Main.rand.NextFloat(1f, 1.3f);
-			d.velocity *= 5f;
-			d.noGravity = true;
-		}
+		DustHelpers.MakeDustExplosion(Projectile.Center, 4f, AI_State == 1f ? DustID.PinkTorch : DustID.PurpleTorch, 15, 0f, 5f, 0, 0, 1f, 1.3f, true);
 
 		// Sound
 		SoundStyle soundStyle = SoundID.Item30 with {

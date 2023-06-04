@@ -13,7 +13,7 @@ public abstract class CanisterProjectile : ModProjectile
 
 	public virtual void SafeSetDefaults() { }
 	public virtual void SafeOnHitNPC() { }
-	public virtual bool SafeOnTileCollide(Vector2 oldVelocity) => base.OnTileCollide(oldVelocity);
+	public virtual bool SafeOnTileCollide(Vector2 oldVelocity) => false;
 
 	public sealed override void SetDefaults() {
 		// Base stats

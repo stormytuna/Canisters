@@ -30,11 +30,11 @@ public class GelBall : ModProjectile
 		Projectile.DamageType = DamageClass.Ranged;
 	}
 
-    /// <summary>
-    ///     0f == Unaffected by gravity <br />
-    ///     1f == Affected by gravity
-    /// </summary>
-    private ref float AI_State => ref Projectile.ai[0];
+	/// <summary>
+	///     0f == Unaffected by gravity <br />
+	///     1f == Affected by gravity
+	/// </summary>
+	private ref float AI_State => ref Projectile.ai[0];
 
 	private ref float AI_FrameCounter => ref Projectile.ai[1];
 
@@ -63,13 +63,7 @@ public class GelBall : ModProjectile
 	}
 
 	public override void Kill(int timeLeft) {
-		// Little dust explosion
-		for (int i = 0; i < 20; i++) {
-			// Our base dust properties
-			Dust dust = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.Water, Scale: Main.rand.NextFloat(1f, 1.2f));
-			dust.velocity *= Main.rand.NextVector2Circular(15f, 15f);
-			dust.noGravity = true;
-		}
+		DustHelpers.MakeDustExplosion(Projectile.Center, 5f, DustID.Water, 20, 0f, 10f, 0, 0, 1f, 1.2f, true);
 
 		// Tiny sound
 		SoundStyle soundStyle = SoundID.SplashWeak with {

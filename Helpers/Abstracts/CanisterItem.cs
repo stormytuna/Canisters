@@ -1,5 +1,4 @@
 ﻿using Canisters.Content.Items.Canisters;
-using Canisters.Helpers.Interfaces;
 using Terraria.ModLoader;
 using VolatileCanisterProjectile = Canisters.Content.Projectiles.VolatileCanister.VolatileCanister;
 
@@ -8,8 +7,11 @@ namespace Canisters.Helpers.Abstracts;
 /// <summary>
 ///     This is an abstract class that sets common values we use on all Canisters
 /// </summary>
-public abstract class CanisterItem : ModItem, ICanisterItem
+public abstract class CanisterItem : ModItem
 {
+	public abstract int LaunchedProjectileType { get; }
+	public abstract int DepletedProjectileType { get; }
+
 	public virtual void SafeSetStaticDefaults() { }
 	public virtual void SafeSetDefaults() { }
 
@@ -19,7 +21,7 @@ public abstract class CanisterItem : ModItem, ICanisterItem
 		Item.ResearchUnlockCount = 99;
 	}
 
-	public override void SetDefaults() {
+	public sealed override void SetDefaults() {
 		SafeSetDefaults();
 
 		// Base stats

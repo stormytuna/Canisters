@@ -1,4 +1,4 @@
-﻿using System;
+﻿using Canisters.Helpers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
@@ -20,7 +20,7 @@ public class BlightedBall : ModProjectile
 
 	public override void SetDefaults() {
 		// Base stats
-		Projectile.width = 16;
+		Projectile.width = 20;
 		Projectile.height = 20;
 		Projectile.aiStyle = -1;
 		Projectile.extraUpdates = 2;
@@ -62,25 +62,9 @@ public class BlightedBall : ModProjectile
 	}
 
 	public override void Kill(int timeLeft) {
-		for (int i = 0; i < 20; i++) {
-			// Our base dust properties
-			Vector2 velocity = Main.rand.NextVector2Circular(15f, 15f);
-			Dust dust = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.CursedTorch, Alpha: Main.rand.Next(100, 150), Scale: Main.rand.NextFloat(1f, 1.3f));
-			dust.velocity = velocity;
-			dust.noGravity = true;
-
-			if (Main.rand.NextBool(3)) {
-				// 1/3 dust becomes medium dust
-				float sizeMult = Main.rand.NextFloat(1.3f, 1.6f);
-				dust.scale *= sizeMult;
-				dust.velocity /= sizeMult;
-			} else if (Main.rand.NextBool(4)) {
-				// 1/4 of the rest become little grass that's gravity effected
-				dust.velocity.X /= 4f;
-				dust.velocity.Y = MathF.Abs(dust.velocity.Y) / -4f;
-				dust.noGravity = false;
-			}
-		}
+		DustHelpers.MakeDustExplosion(Projectile.Center, 8f, DustID.CursedTorch, Main.rand.Next(12, 15), 0f, 15f, 100, 150, 1f, 1.3f, true);
+		DustHelpers.MakeDustExplosion(Projectile.Center, 8f, DustID.CursedTorch, Main.rand.Next(3, 6), 0f, 10f, 100, 150, 1.3f, 1.6f, true);
+		DustHelpers.MakeDustExplosion(Projectile.Center, 8f, DustID.CursedTorch, Main.rand.Next(3, 6), 0f, 3f, 100, 150, 1f, 1.3f);
 	}
 
 	public override bool PreDraw(ref Color lightColor) {

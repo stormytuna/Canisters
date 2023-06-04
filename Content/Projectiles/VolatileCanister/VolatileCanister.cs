@@ -1,7 +1,5 @@
-using System;
 using Canisters.Helpers;
 using Canisters.Helpers.Abstracts;
-using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
@@ -15,44 +13,14 @@ public class VolatileCanister : CanisterProjectile
 {
 	public override string Texture => "Canisters/Content/Items/Canisters/VolatileCanister";
 
-	private void Explode() {
+	public override void Explode() {
 		SoundEngine.PlaySound(SoundID.DD2_GoblinBomb, Projectile.Center);
-
-		for (int i = 0; i < 80; i++) {
-			// Our base dust properties
-			Vector2 velocity = Main.rand.NextVector2Circular(15f, 15f);
-			Color color = Main.rand.NextBool(10) ? Color.Red : default;
-			Dust dust = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.Torch, newColor: color, Scale: Main.rand.NextFloat(0.8f, 1.2f));
-			dust.velocity = velocity;
-			dust.noGravity = true;
-			dust.noLight = true;
-
-			if (Main.rand.NextBool(6)) {
-				// 1/7 dust become large, slow dust
-				float sizeMult = Main.rand.NextFloat(3f, 4f);
-				dust.scale *= sizeMult;
-				dust.velocity /= sizeMult;
-			} else if (Main.rand.NextBool(3)) {
-				// 1/4 dust becomes medium dust
-				float sizeMult = Main.rand.NextFloat(2f, 3f);
-				dust.scale *= sizeMult;
-				dust.velocity /= sizeMult;
-			} else {
-				// Rest of dust are little sparks that are gravity affected
-				dust.velocity.X /= 4f;
-				dust.velocity.Y = MathF.Abs(dust.velocity.Y) / -4f;
-				dust.noGravity = false;
-			}
-		}
-
 		Projectile.TurnToExplosion(96, 96);
 
-		// Smoke dust
-		for (int i = 0; i < 20; i++) {
-			Vector2 velocity = Main.rand.NextVector2Circular(5f, 5f);
-			Dust dust = Dust.NewDustDirect(Projectile.position, 96, 96, DustID.Smoke, Scale: Main.rand.NextFloat(1f, 1.5f));
-			dust.velocity = velocity;
-			dust.noGravity = true;
-		}
+		DustHelpers.MakeDustExplosion(Projectile.Center, 15f, DustID.Torch, Main.rand.Next(40, 55), 0f, 15f, 0, 0, 0.8f, 1.2f, true, true);
+		DustHelpers.MakeDustExplosion(Projectile.Center, 13f, DustID.Torch, Main.rand.Next(10, 15), 0f, 10f, 0, 0, 1.2f, 1.5f, true, true);
+		DustHelpers.MakeDustExplosion(Projectile.Center, 10f, DustID.Torch, Main.rand.Next(8, 12), 0f, 7f, 0, 0, 1.8f, 2.5f, true, true);
+		DustHelpers.MakeDustExplosion(Projectile.Center, 20f, DustID.Torch, Main.rand.Next(8, 12), 0f, 4f, 0, 0, 0.8f, 1.2f, noLight: true);
+		DustHelpers.MakeDustExplosion(Projectile.Center, 50f, DustID.Smoke, Main.rand.Next(20, 25), 0f, 5f, 0, 0, 1f, 1.5f);
 	}
 }

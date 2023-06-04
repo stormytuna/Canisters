@@ -18,12 +18,7 @@ public class NaniteCanister : CanisterProjectile
 		Projectile.TurnToExplosion(96, 96);
 		Projectile.timeLeft = 3;
 
-		int numDust = Main.rand.Next(30, 40);
-		for (int i = 0; i < numDust; i++) {
-			Dust dust = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.Clentaminator_Red);
-			dust.noGravity = true;
-			dust.velocity *= 2.5f;
-		}
+		DustHelpers.MakeDustExplosion(Projectile.Center, 10f, DustID.Clentaminator_Red, Main.rand.Next(30, 40), 0f, 2.5f, noGravity: true);
 
 		for (int i = 0; i < 6; i++) {
 			Vector2 velocity = Main.rand.NextVector2CircularEdge(5f, 5f) * Main.rand.NextFloat(0.5f, 1f);

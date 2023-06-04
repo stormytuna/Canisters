@@ -1,4 +1,5 @@
 ﻿using Canisters.Content.Dusts;
+using Canisters.Helpers;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
@@ -36,12 +37,7 @@ public class NaniteBlob : ModProjectile
 	}
 
 	public override void Kill(int timeLeft) {
-		int numDust = Main.rand.Next(20, 30);
-		for (int i = 0; i < numDust; i++) {
-			Dust dust = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.Clentaminator_Red);
-			dust.noGravity = true;
-			dust.velocity *= 2f;
-		}
+		DustHelpers.MakeDustExplosion(Projectile.Center, 15f, DustID.Clentaminator_Red, 15, 0f, 5f, 0, 0, 1f, 1.3f, true);
 
 		if (Projectile.owner == Main.myPlayer) {
 			for (int i = 0; i < 3; i++) {

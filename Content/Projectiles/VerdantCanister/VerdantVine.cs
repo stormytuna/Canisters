@@ -1,4 +1,5 @@
 using System;
+using Canisters.Helpers;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
@@ -12,15 +13,15 @@ namespace Canisters.Content.Projectiles.VerdantCanister;
 /// </summary>
 public class VerdantVine : ModProjectile
 {
-    /// <summary>
-    ///     The number of vine projectiles to create after this one. If this is 0, the texture will be replaced with the tip texture
-    /// </summary>
-    private ref float AI_Vines => ref Projectile.ai[0];
+	/// <summary>
+	///     The number of vine projectiles to create after this one. If this is 0, the texture will be replaced with the tip texture
+	/// </summary>
+	private ref float AI_Vines => ref Projectile.ai[0];
 
-    /// <summary>
-    ///     The amount of radians to rotate the next vine projectile
-    /// </summary>
-    private ref float AI_Rotation => ref Projectile.ai[1];
+	/// <summary>
+	///     The amount of radians to rotate the next vine projectile
+	/// </summary>
+	private ref float AI_Rotation => ref Projectile.ai[1];
 
 	private int timer;
 
@@ -71,10 +72,6 @@ public class VerdantVine : ModProjectile
 	}
 
 	public override void Kill(int timeLeft) {
-		int numDust = Main.rand.Next(3, 6);
-		for (int i = 0; i < numDust; i++) {
-			Dust dust = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.Grass, Alpha: Main.rand.Next(100, 150), Scale: Main.rand.NextFloat(0.8f, 1.2f));
-			dust.noGravity = true;
-		}
+		DustHelpers.MakeDustExplosion(Projectile.Center, 5f, DustID.Grass, Main.rand.Next(3, 6), 0f, 1f, 100, 150, 0.8f, 1.2f, true);
 	}
 }

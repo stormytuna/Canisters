@@ -65,7 +65,7 @@ public class Nanites : ModProjectile
 		// Movement
 		if (State == AIState.Idle) {
 			// Try find target
-			NPC closestNPC = GeneralHelpers.FindClosestNPC(DetectionRange, Projectile.Center);
+			NPC closestNPC = NPCHelpers.FindClosestNPC(DetectionRange, Projectile.Center);
 			if (closestNPC is not null) {
 				State = AIState.Homing;
 				Target = closestNPC;

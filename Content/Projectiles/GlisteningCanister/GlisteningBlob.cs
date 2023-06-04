@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Canisters.Helpers;
+using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -61,13 +62,7 @@ public class GlisteningBlob : ModProjectile
 
 		Projectile.penetrate--;
 
-		// Mini dust explosion
-		for (int i = 0; i < 10; i++) {
-			Vector2 velocity = Main.rand.NextVector2Circular(8f, 8f);
-			Dust dust = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.IchorTorch, Alpha: Main.rand.Next(100, 150), Scale: Main.rand.NextFloat(1f, 1.2f));
-			dust.velocity = velocity;
-			dust.noGravity = true;
-		}
+		DustHelpers.MakeDustExplosion(Projectile.Center, 8f, DustID.IchorTorch, 10, 0f, 8f, 100, 150, 1f, 1.2f, true);
 
 		return false;
 	}
