@@ -8,8 +8,8 @@ namespace Canisters.Content.Items.Canisters;
 
 public class GlisteningCanister : CanisterItem
 {
-	public int LaunchedProjectileType => ModContent.ProjectileType<Projectiles.GlisteningCanister.GlisteningCanister>();
-	public int DepletedProjectileType => ModContent.ProjectileType<GlisteningBall>();
+	public override int LaunchedProjectileType => ModContent.ProjectileType<Projectiles.GlisteningCanister.GlisteningCanister>();
+	public override int DepletedProjectileType => ModContent.ProjectileType<GlisteningBall>();
 
 	public override void SafeSetDefaults() {
 		// Base stats

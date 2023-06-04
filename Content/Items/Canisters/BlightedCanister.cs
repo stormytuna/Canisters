@@ -8,8 +8,8 @@ namespace Canisters.Content.Items.Canisters;
 
 public class BlightedCanister : CanisterItem
 {
-	public int LaunchedProjectileType => ModContent.ProjectileType<Projectiles.BlightedCanister.BlightedCanister>();
-	public int DepletedProjectileType => ModContent.ProjectileType<BlightedBolt>();
+	public override int LaunchedProjectileType => ModContent.ProjectileType<Projectiles.BlightedCanister.BlightedCanister>();
+	public override int DepletedProjectileType => ModContent.ProjectileType<BlightedBolt>();
 
 	public override void SafeSetDefaults() {
 		// Base stats

@@ -7,8 +7,8 @@ namespace Canisters.Content.Items.Canisters;
 
 public class VerdantCanister : CanisterItem
 {
-	public int LaunchedProjectileType => ModContent.ProjectileType<Projectiles.VerdantCanister.VerdantCanister>();
-	public int DepletedProjectileType => ModContent.ProjectileType<VerdantGas_Helper>();
+	public override int LaunchedProjectileType => ModContent.ProjectileType<Projectiles.VerdantCanister.VerdantCanister>();
+	public override int DepletedProjectileType => ModContent.ProjectileType<VerdantGas_Helper>();
 
 	public override void SafeSetDefaults() {
 		// Base stats

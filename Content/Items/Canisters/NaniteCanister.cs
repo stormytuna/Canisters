@@ -8,8 +8,8 @@ namespace Canisters.Content.Items.Canisters;
 
 public class NaniteCanister : CanisterItem
 {
-	public int LaunchedProjectileType => ModContent.ProjectileType<Projectiles.NaniteCanister.NaniteCanister>();
-	public int DepletedProjectileType => ModContent.ProjectileType<NaniteBlob>();
+	public override int LaunchedProjectileType => ModContent.ProjectileType<Projectiles.NaniteCanister.NaniteCanister>();
+	public override int DepletedProjectileType => ModContent.ProjectileType<NaniteBlob>();
 
 	public override void SafeSetDefaults() {
 		// Base stats

@@ -8,8 +8,8 @@ namespace Canisters.Content.Items.Canisters;
 
 public class HarmonicCanister : CanisterItem
 {
-	public int LaunchedProjectileType => ModContent.ProjectileType<Projectiles.HarmonicCanister.HarmonicCanister>();
-	public int DepletedProjectileType => ModContent.ProjectileType<HelixBolt>();
+	public override int LaunchedProjectileType => ModContent.ProjectileType<Projectiles.HarmonicCanister.HarmonicCanister>();
+	public override int DepletedProjectileType => ModContent.ProjectileType<HelixBolt>();
 
 	public override void SafeSetDefaults() {
 		// Base stats

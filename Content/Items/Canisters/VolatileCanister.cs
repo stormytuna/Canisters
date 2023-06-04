@@ -7,10 +7,10 @@ namespace Canisters.Content.Items.Canisters;
 
 public class VolatileCanister : CanisterItem
 {
-	public int LaunchedProjectileType => ModContent.ProjectileType<Projectiles.VolatileCanister.VolatileCanister>();
-	public int DepletedProjectileType => ModContent.ProjectileType<GelBall>();
+	public override int LaunchedProjectileType => ModContent.ProjectileType<Projectiles.VolatileCanister.VolatileCanister>();
+	public override int DepletedProjectileType => ModContent.ProjectileType<GelBall>();
 
-	public override void SetDefaults() {
+	public override void SafeSetDefaults() {
 		// Base stats
 		Item.value = 2;
 		Item.rare = ItemRarityID.Blue;

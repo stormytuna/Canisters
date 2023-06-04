@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using Canisters.Common.Systems;
-using Canisters.Helpers.Interfaces;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
@@ -12,7 +9,6 @@ using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
-using Terraria.Utilities; 
 
 namespace Canisters.Helpers.Abstracts;
 
@@ -124,7 +120,7 @@ public abstract class CanisterUsingHeldProjectile : ModProjectile
 			Owner.PickAmmo(Owner.HeldItem, out int projToShoot, out float speed, out int damage, out float knockback, out int usedAmmoItemId);
 
 			// Get our projectile type
-			ICanisterItem canisterItem = ContentSamples.ItemsByType[usedAmmoItemId].ModItem as ICanisterItem;
+			CanisterItem canisterItem = ContentSamples.ItemsByType[usedAmmoItemId].ModItem as CanisterItem;
 			if (CanisterFiringType == FiringType.Canister) {
 				projToShoot = canisterItem.LaunchedProjectileType;
 			} else {
