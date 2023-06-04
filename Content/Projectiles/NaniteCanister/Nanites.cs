@@ -89,12 +89,7 @@ public class Nanites : ModProjectile
 
 	public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone) {
 		target.AddBuff(ModContent.BuffType<Devoured>(), 5 * 60);
-
-		// Hack because buff won't work if we one shot it
-		if (!target.GetGlobalNPC<DevouredGlobalNPC>().Devoured) {
-			Vector2 velocity = Main.rand.NextVector2CircularEdge(5f, 5f) * Main.rand.NextFloat(0.5f, 1f);
-			Projectile.NewProjectile(target.GetSource_Death(), target.Center, velocity, ModContent.ProjectileType<Nanites>(), 1000, 2f, Projectile.owner);
-		}
+		target.GetGlobalNPC<DevouredGlobalNPC>().Devoured = true; // Hack because buff won't update if we one shot it
 	}
 
 	public override bool OnTileCollide(Vector2 oldVelocity) {
