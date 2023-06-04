@@ -17,8 +17,8 @@ public class ToxicCanister : CanisterItem
 		Item.rare = ItemRarityID.LightRed;
 
 		// Weapon stats
-		Item.shootSpeed = 2f;
-		Item.damage = 6;
+		Item.shootSpeed = 3f;
+		Item.damage = 12;
 		Item.knockBack = 4f;
 	}
 

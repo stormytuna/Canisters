@@ -17,8 +17,8 @@ public class NaniteCanister : CanisterItem
 		Item.rare = ItemRarityID.Yellow;
 
 		// Weapon stats
-		Item.shootSpeed = 1f;
-		Item.damage = 8;
+		Item.shootSpeed = 4f;
+		Item.damage = 16;
 		Item.knockBack = 2f;
 	}
 }

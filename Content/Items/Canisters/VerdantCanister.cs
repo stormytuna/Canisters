@@ -16,9 +16,9 @@ public class VerdantCanister : CanisterItem
 		Item.rare = ItemRarityID.Green;
 
 		// Weapon stats
-		Item.shootSpeed = 1f;
-		Item.damage = 4;
-		Item.knockBack = 5f;
+		Item.shootSpeed = 2f;
+		Item.damage = 8;
+		Item.knockBack = 2f;
 	}
 
 	public override void AddRecipes() {

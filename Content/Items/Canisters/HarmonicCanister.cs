@@ -17,8 +17,8 @@ public class HarmonicCanister : CanisterItem
 		Item.rare = ItemRarityID.LightRed;
 
 		// Weapon stats
-		Item.shootSpeed = 2f;
-		Item.damage = 6;
+		Item.shootSpeed = 2.5f;
+		Item.damage = 11;
 		Item.knockBack = 4f;
 	}
 

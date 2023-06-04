@@ -17,8 +17,8 @@ public class VolatileCanister : CanisterItem
 
 		// Ammo stats
 		Item.shootSpeed = 2f;
-		Item.damage = 3;
-		Item.knockBack = 5f;
+		Item.damage = 6;
+		Item.knockBack = 3f;
 	}
 
 	public override void AddRecipes() {
