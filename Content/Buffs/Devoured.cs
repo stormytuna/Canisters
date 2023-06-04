@@ -27,6 +27,22 @@ public class DevouredGlobalNPC : GlobalNPC
 		Devoured = false;
 	}
 
+	public override void UpdateLifeRegen(NPC npc, ref int damage) {
+		if (!Devoured) {
+			return;
+		}
+
+		if (npc.lifeRegen > 0) {
+			npc.lifeRegen = 0;
+		}
+
+		npc.lifeRegen -= 40;
+
+		if (damage < 5) {
+			damage = 5;
+		}
+	}
+
 	public override void OnKill(NPC npc) {
 		if (Main.netMode != NetmodeID.MultiplayerClient && Devoured) {
 			Vector2 velocity = Main.rand.NextVector2CircularEdge(5f, 5f) * Main.rand.NextFloat(0.5f, 1f);
