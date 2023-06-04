@@ -2,8 +2,8 @@
   "profiles": {
     "Terraria": {
       "commandName": "Executable",
-      "executablePath": "dotnet",
-      "commandLineArgs": "$(tMLPath)",
+      "executablePath": "$(DotnetPath)",
+      "commandLineArgs": "$(tMLPath) -skipselect \"dev:dev-classic\"",
       "workingDirectory": "$(tMLSteamPath)"
     },
     "TerrariaServer": {
