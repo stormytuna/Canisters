@@ -1,4 +1,5 @@
 ﻿using Canisters.Content.Items.Canisters;
+using Microsoft.Xna.Framework;
 using Terraria.ModLoader;
 using VolatileCanisterProjectile = Canisters.Content.Projectiles.VolatileCanister.VolatileCanister;
 
@@ -14,6 +15,7 @@ public abstract class CanisterItem : ModItem
 
 	public virtual void SafeSetStaticDefaults() { }
 	public virtual void SafeSetDefaults() { }
+	public virtual void ApplyAmmoStats(bool isLaunched, ref Vector2 velocity, ref Vector2 offset, ref Vector2 position, ref int damage, ref float knockBack, ref int amount, ref float spread) { }
 
 	public sealed override void SetStaticDefaults() {
 		SafeSetStaticDefaults();

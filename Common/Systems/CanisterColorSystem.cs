@@ -7,17 +7,13 @@ namespace Canisters.Common.Systems;
 public class CanisterColorSystem : ModSystem
 {
 	// TODO: Finalise colours, possibly add some cycling between colours?
-	public static Color Volatile => new Color(45, 144, 255, 255);
-
+	public static Color Volatile => new(45, 144, 255, 255);
 	public static Color Verdant => Color.Green;
-
 	public static Color Glistening => Color.Yellow;
-
 	public static Color Blighted => Color.Lime;
-
 	public static Color Harmonic => Color.Purple;
-
 	public static Color Nanite => Color.Red;
+	public static Color Ghastly => Color.Cyan;
 
 	public static Color GetCanisterColor(int canisterItemId) {
 		if (canisterItemId == ModContent.ItemType<VolatileCanister>()) {
@@ -42,6 +38,10 @@ public class CanisterColorSystem : ModSystem
 
 		if (canisterItemId == ModContent.ItemType<NaniteCanister>()) {
 			return Nanite;
+		}
+
+		if (canisterItemId == ModContent.ItemType<GhastlyCanister>()) {
+			return Ghastly;
 		}
 
 		// Should never be hit, but compiler shouts at us without it

@@ -21,6 +21,9 @@ Canisters: {
 		Nanites.DisplayName: Nanites
 		NaniteCanister.DisplayName: Nanite Canister
 		NaniteBlob.DisplayName: Nanite Blob
+		GhastlyShot.DisplayName: Ghastly Shot
+		GhastlyExplosion.DisplayName: Ghastly Explosion
+		GhastlyCanister.DisplayName: Ghastly Canister
 	}
 
 	Items: {
@@ -72,6 +75,11 @@ Canisters: {
 		NaniteCanister: {
 			Tooltip: ""
 			DisplayName: Nanite Canister
+		}
+
+		GhastlyCanister: {
+			Tooltip: ""
+			DisplayName: Ghastly Canister
 		}
 	}
 

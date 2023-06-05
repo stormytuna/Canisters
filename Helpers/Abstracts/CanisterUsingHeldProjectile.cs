@@ -133,8 +133,15 @@ public abstract class CanisterUsingHeldProjectile : ModProjectile
 			Vector2 offset = new(MuzzleOffset.X, MuzzleOffset.Y * Projectile.direction);
 			offset = offset.RotatedBy(Projectile.rotation);
 			Vector2 position = Projectile.Center + offset;
+			int amount = 1;
+			float spread = 0f;
 
-			Shoot(Owner, source, position, velocity, projToShoot, damage, knockback);
+			canisterItem.ApplyAmmoStats(CanisterFiringType == FiringType.Canister, ref velocity, ref offset, ref position, ref damage, ref knockback, ref amount, ref spread);
+
+			for (int i = 0; i < amount; i++) {
+				Vector2 perturbedVelocity = velocity.RotatedByRandom(spread);
+				Shoot(Owner, source, position, perturbedVelocity, projToShoot, damage, knockback);
+			}
 
 			// Play our sound
 			SoundStyle? shootSound = CanisterFiringType == FiringType.Canister ? ShootSound : CanisterSoundSystem.GetDepletedCanisterSound(usedAmmoItemId);
