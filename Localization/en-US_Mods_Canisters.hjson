@@ -24,6 +24,11 @@ Canisters: {
 		GhastlyShot.DisplayName: Ghastly Shot
 		GhastlyExplosion.DisplayName: Ghastly Explosion
 		GhastlyCanister.DisplayName: Ghastly Canister
+		LunarCanister.DisplayName: Lunar Canister
+		LunarLaser.DisplayName: Lunar Laser
+		LunarLaser_Helper.DisplayName: Lunar Laser_ Helper
+		LunarShot.DisplayName: Lunar Shot
+		LunarExplosion.DisplayName: Lunar Explosion
 	}
 
 	Items: {
@@ -80,6 +85,11 @@ Canisters: {
 		GhastlyCanister: {
 			Tooltip: ""
 			DisplayName: Ghastly Canister
+		}
+
+		LunarCanister: {
+			Tooltip: ""
+			DisplayName: Lunar Canister
 		}
 	}
 

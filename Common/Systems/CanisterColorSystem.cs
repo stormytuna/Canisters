@@ -14,6 +14,7 @@ public class CanisterColorSystem : ModSystem
 	public static Color Harmonic => Color.Purple;
 	public static Color Nanite => Color.Red;
 	public static Color Ghastly => Color.Cyan;
+	public static Color Lunar => new(208, 253, 235);
 
 	public static Color GetCanisterColor(int canisterItemId) {
 		if (canisterItemId == ModContent.ItemType<VolatileCanister>()) {
@@ -42,6 +43,10 @@ public class CanisterColorSystem : ModSystem
 
 		if (canisterItemId == ModContent.ItemType<GhastlyCanister>()) {
 			return Ghastly;
+		}
+
+		if (canisterItemId == ModContent.ItemType<LunarCanister>()) {
+			return Lunar;
 		}
 
 		// Should never be hit, but compiler shouts at us without it
