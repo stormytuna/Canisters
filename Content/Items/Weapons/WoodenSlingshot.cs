@@ -50,7 +50,7 @@ public class WoodenSlingshot : CanisterUsingWeapon
 	}
 
 	public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback) {
-		Projectile.NewProjectile(source, player.Center, position, ModContent.ProjectileType<WoodenSlingshot_HeldProjectile>(), damage, knockback, player.whoAmI);
+		Projectile.NewProjectile(source, player.Center, velocity, ModContent.ProjectileType<WoodenSlingshot_HeldProjectile>(), damage, knockback, player.whoAmI);
 
 		return false;
 	}
@@ -81,6 +81,7 @@ public class WoodenSlingshot_HeldProjectile : CanisterUsingHeldProjectile
 		RotationOffset = 0f;
 		MuzzleOffset = new Vector2(0, -10f);
 		ShootSound = SoundID.Item5;
+		TotalRandomSpread = 0.2f;
 	}
 
 	public override string Texture => "Canisters/Content/Items/Weapons/WoodenSlingshot";

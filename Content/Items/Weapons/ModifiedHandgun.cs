@@ -48,7 +48,7 @@ public class ModifiedHandgun : CanisterUsingWeapon
 	}
 
 	public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback) {
-		Projectile.NewProjectile(source, player.Center, position, ModContent.ProjectileType<ModifiedHandgun_HeldProjectile>(), damage, knockback, player.whoAmI);
+		Projectile.NewProjectile(source, player.Center, velocity, ModContent.ProjectileType<ModifiedHandgun_HeldProjectile>(), damage, knockback, player.whoAmI);
 
 		return false;
 	}
@@ -78,6 +78,7 @@ public class ModifiedHandgun_HeldProjectile : CanisterUsingHeldProjectile
 		CanisterFiringType = FiringType.Depleted;
 		RotationOffset = 0f;
 		MuzzleOffset = new Vector2(16f, -6f);
+		TotalRandomSpread = 0.1f;
 	}
 
 	public override string Texture => "Canisters/Content/Items/Weapons/ModifiedHandgun";
