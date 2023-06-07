@@ -29,6 +29,7 @@ Canisters: {
 		LunarExplosion.DisplayName: Lunar Explosion
 		GraniteCannon_HeldProjectile.DisplayName: Granite Cannon_ Held Projectile
 		AncientSprayer_HeldProjectile.DisplayName: Ancient Sprayer_ Held Projectile
+		BarkBellower_HeldProjectile.DisplayName: Bark Bellower_ Held Projectile
 	}
 
 	Items: {
@@ -140,6 +141,11 @@ Canisters: {
 		AncientSprayer: {
 			Tooltip: ""
 			DisplayName: Ancient Sprayer
+		}
+
+		BarkBellower: {
+			DisplayName: Bark Bellower
+			Tooltip: ""
 		}
 	}
 
