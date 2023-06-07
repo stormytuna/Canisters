@@ -1,7 +1,7 @@
 Canisters: {
 	Projectiles: {
-		WoodenSlingshot_HeldProjectile.DisplayName: Wooden Slingshot_ Held Projectile
-		ModifiedHandgun_HeldProjectile.DisplayName: Modified Handgun_ Held Projectile
+		WoodenSlingshot_HeldProjectile.DisplayName: Wooden Slingshot Held Projectile
+		ModifiedHandgun_HeldProjectile.DisplayName: Modified Handgun Held Projectile
 		BlightedBall.DisplayName: Blighted Ball
 		BlightedBolt.DisplayName: Blighted Bolt
 		BlightedCanister.DisplayName: Blighted Canister
@@ -14,7 +14,7 @@ Canisters: {
 		ToxicCanister.DisplayName: Toxic Canister
 		VerdantCanister.DisplayName: Verdant Canister
 		VerdantGas.DisplayName: Verdant Gas
-		VerdantGas_Helper.DisplayName: Verdant Gas_ Helper
+		VerdantGas_Helper.DisplayName: Verdant Gas Helper
 		VerdantVine.DisplayName: Verdant Vine
 		GelBall.DisplayName: Gel Ball
 		VolatileCanister.DisplayName: Volatile Canister
@@ -25,77 +25,121 @@ Canisters: {
 		GhastlyExplosion.DisplayName: Ghastly Explosion
 		GhastlyCanister.DisplayName: Ghastly Canister
 		LunarCanister.DisplayName: Lunar Canister
-		LunarLaser.DisplayName: Lunar Laser
-		LunarLaser_Helper.DisplayName: Lunar Laser_ Helper
 		LunarShot.DisplayName: Lunar Shot
 		LunarExplosion.DisplayName: Lunar Explosion
+		GraniteCannon_HeldProjectile.DisplayName: Granite Cannon_ Held Projectile
 	}
 
 	Items: {
 		WoodenSlingshot: {
-			Tooltip: ""
+			Tooltip: Launches canisters
 			DisplayName: Wooden Slingshot
 		}
 
 		ModifiedHandgun: {
-			Tooltip: ""
+			Tooltip:
+				'''
+				Depletes canisters
+				Fires smaller but faster
+				'''
 			DisplayName: Modified Handgun
 		}
 
 		VolatileCanister: {
-			Tooltip: ""
+			Tooltip:
+				'''
+				Detonates in a fiery explosion when launched
+				Fires a stream of gel when depleted
+				'''
 			DisplayName: Volatile Canister
 		}
 
 		VerdantCanister: {
-			Tooltip: ""
+			Tooltip:
+				'''
+				Bursts into vines when launched
+				Fires a cloud of poison gas when depleted
+				'''
 			DisplayName: Verdant Canister
 		}
 
 		ToxicCanister: {
-			Tooltip: ""
+			Tooltip:
+				'''
+				Explodes into 3 bouncing ichor balls when launched
+				Fires a splitting blobl of ichor when depleted
+				'''
 			DisplayName: Toxic Canister
 		}
 
 		HarmonicCanister: {
-			Tooltip: ""
+			Tooltip:
+				'''
+				Erupts with harmonic energy when launched
+				Fires a spiraling helix when depleted
+				'''
 			DisplayName: Harmonic Canister
 		}
 
 		GlisteningCanister: {
-			Tooltip: ""
+			Tooltip:
+				'''
+				Explodes into 3 bouncing ichor balls when launched
+				Fires a splitting blobl of ichor when depleted
+				'''
 			DisplayName: Glistening Canister
 		}
 
 		EmptyCanister: {
-			Tooltip: ""
+			Tooltip: Used to craft various types of ammo
 			DisplayName: Empty Canister
 		}
 
 		BlightedCanister: {
-			Tooltip: ""
+			Tooltip:
+				'''
+				Releases a spiral of 5 cursed fireballs when launched
+				Fires a lightning bolt of cursed energy when depleted
+				'''
 			DisplayName: Blighted Canister
 		}
 
 		NaniteCanister: {
-			Tooltip: ""
+			Tooltip:
+				'''
+				Explodes into a swarm of nanites when launched
+				Fires a blob of nanites when depleted
+				'''
 			DisplayName: Nanite Canister
 		}
 
 		GhastlyCanister: {
-			Tooltip: ""
+			Tooltip:
+				'''
+				Explodes into a cluster bomb when launched
+				Fires a shotgun blast of quick spectral bolts when depleted
+				'''
 			DisplayName: Ghastly Canister
 		}
 
 		LunarCanister: {
-			Tooltip: ""
+			Tooltip:
+				'''
+				Explodes, calling a burst of lightning when launched
+				Fires lunar bolts that pierce, explode and home in on enemies when depleted
+				'''
 			DisplayName: Lunar Canister
+		}
+
+		GraniteCannon: {
+			DisplayName: Granite Cannon
+			Tooltip: ""
 		}
 	}
 
 	Buffs: {
 		Devoured: {
-			Description: Mods.Canisters.Buffs.Devoured.Description
+			Description: Nanite time
 			DisplayName: Devoured
 		}
 	}
