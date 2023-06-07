@@ -2,6 +2,6 @@
 
 public enum FiringType
 {
-	Canister,
-	Regular
+	Launched,
+	Depleted
 }

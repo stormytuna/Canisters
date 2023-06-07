@@ -13,8 +13,6 @@ public class WoodenSlingshot : CanisterUsingWeapon
 {
 	public override void SetStaticDefaults() {
 		Item.ResearchUnlockCount = 1;
-
-		base.SetStaticDefaults();
 	}
 
 	public override void SetDefaults() {
@@ -36,7 +34,6 @@ public class WoodenSlingshot : CanisterUsingWeapon
 		Item.shoot = ModContent.ProjectileType<WoodenSlingshot_HeldProjectile>();
 		Item.shootSpeed = 9f;
 		Item.damage = 11;
-		Item.crit = 4;
 		Item.knockBack = 1f;
 		Item.DamageType = DamageClass.Ranged;
 		Item.useAmmo = ModContent.ItemType<VolatileCanister>();
@@ -80,17 +77,11 @@ public class WoodenSlingshot_HeldProjectile : CanisterUsingHeldProjectile
 
 		// CanisterHeldProjectile stats
 		HoldOutOffset = 10f;
-		CanisterFiringType = FiringType.Canister;
+		CanisterFiringType = FiringType.Launched;
 		RotationOffset = 0f;
 		MuzzleOffset = new Vector2(0, -10f);
 		ShootSound = SoundID.Item5;
 	}
 
 	public override string Texture => "Canisters/Content/Items/Weapons/WoodenSlingshot";
-
-	public override void Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback) {
-		if (Collision.CanHit(player.Center, 0, 0, position, 0, 0)) {
-			Projectile.NewProjectileDirect(source, position, velocity, type, damage, knockback, player.whoAmI);
-		}
-	}
 }

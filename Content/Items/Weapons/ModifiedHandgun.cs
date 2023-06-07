@@ -34,7 +34,6 @@ public class ModifiedHandgun : CanisterUsingWeapon
 		Item.shoot = ModContent.ProjectileType<ModifiedHandgun_HeldProjectile>();
 		Item.shootSpeed = 9f;
 		Item.damage = 11;
-		Item.crit = 4;
 		Item.knockBack = 1f;
 		Item.DamageType = DamageClass.Ranged;
 		Item.useAmmo = ModContent.ItemType<VolatileCanister>();
@@ -76,7 +75,7 @@ public class ModifiedHandgun_HeldProjectile : CanisterUsingHeldProjectile
 
 		// CanisterUsingHeldProjectile stats
 		HoldOutOffset = 14f;
-		CanisterFiringType = FiringType.Regular;
+		CanisterFiringType = FiringType.Depleted;
 		RotationOffset = 0f;
 		MuzzleOffset = new Vector2(16f, -6f);
 	}
@@ -85,13 +84,10 @@ public class ModifiedHandgun_HeldProjectile : CanisterUsingHeldProjectile
 
 	public override void Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback) {
 		if (Collision.CanHit(player.Center, 0, 0, position, 0, 0)) {
-			// TODO: Using this gun to debug canisters for now
-			// Come back later and change these comments
-			//velocity *= 1.2f;
-			//knockback /= 1.2f;
+			velocity *= 1.2f;
+			knockback *= 0.83f;
 			Projectile proj = Projectile.NewProjectileDirect(source, position, velocity, type, damage, knockback, Owner.whoAmI);
-
-			//proj.scale /= 1.2f;
+			proj.scale *= 0.83f;
 		}
 	}
 }

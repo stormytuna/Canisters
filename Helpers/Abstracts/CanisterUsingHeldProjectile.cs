@@ -78,7 +78,11 @@ public abstract class CanisterUsingHeldProjectile : ModProjectile
 	// Helper property that applies attack speed for us
 	public int UseTimeAfterBuffs => (int)(Owner.HeldItem.useTime * CombinedHooks.TotalUseTimeMultiplier(Owner, Owner.HeldItem));
 
-	public virtual void Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback) { }
+	public virtual void Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback) {
+		if (Collision.CanHit(player.Center, 0, 0, position, 0, 0)) {
+			Projectile.NewProjectileDirect(source, position, velocity, type, damage, knockback, player.whoAmI);
+		}
+	}
 
 	public override void AI() {
 		Vector2 toMouse = Main.MouseWorld - Projectile.Center;
@@ -121,7 +125,7 @@ public abstract class CanisterUsingHeldProjectile : ModProjectile
 
 			// Get our projectile type
 			CanisterItem canisterItem = ContentSamples.ItemsByType[usedAmmoItemId].ModItem as CanisterItem;
-			if (CanisterFiringType == FiringType.Canister) {
+			if (CanisterFiringType == FiringType.Launched) {
 				projToShoot = canisterItem.LaunchedProjectileType;
 			} else {
 				projToShoot = canisterItem.DepletedProjectileType;
@@ -136,7 +140,7 @@ public abstract class CanisterUsingHeldProjectile : ModProjectile
 			int amount = 1;
 			float spread = 0f;
 
-			canisterItem.ApplyAmmoStats(CanisterFiringType == FiringType.Canister, ref velocity, ref offset, ref position, ref damage, ref knockback, ref amount, ref spread);
+			canisterItem.ApplyAmmoStats(CanisterFiringType == FiringType.Launched, ref velocity, ref offset, ref position, ref damage, ref knockback, ref amount, ref spread);
 
 			for (int i = 0; i < amount; i++) {
 				Vector2 perturbedVelocity = velocity.RotatedByRandom(spread);
@@ -144,7 +148,7 @@ public abstract class CanisterUsingHeldProjectile : ModProjectile
 			}
 
 			// Play our sound
-			SoundStyle? shootSound = CanisterFiringType == FiringType.Canister ? ShootSound : CanisterSoundSystem.GetDepletedCanisterSound(usedAmmoItemId);
+			SoundStyle? shootSound = CanisterFiringType == FiringType.Launched ? ShootSound : CanisterSoundSystem.GetDepletedCanisterSound(usedAmmoItemId);
 			if (shootSound is not null) {
 				SoundEngine.PlaySound(shootSound, Projectile.Center);
 			}
