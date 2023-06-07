@@ -63,7 +63,7 @@ public class GelBall : ModProjectile
 	}
 
 	public override void Kill(int timeLeft) {
-		DustHelpers.MakeDustExplosion(Projectile.Center, 5f, DustID.Water, 20, 0f, 10f, 0, 0, 1f, 1.2f, true);
+		DustHelpers.MakeDustExplosion(Projectile.Center, 5f, DustID.Water, 5, 0f, 4f, 150, 200, 1f, 1.2f, true);
 
 		// Tiny sound
 		SoundStyle soundStyle = SoundID.SplashWeak with {
