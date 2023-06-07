@@ -28,6 +28,7 @@ Canisters: {
 		LunarShot.DisplayName: Lunar Shot
 		LunarExplosion.DisplayName: Lunar Explosion
 		GraniteCannon_HeldProjectile.DisplayName: Granite Cannon_ Held Projectile
+		AncientSprayer_HeldProjectile.DisplayName: Ancient Sprayer_ Held Projectile
 	}
 
 	Items: {
@@ -134,6 +135,11 @@ Canisters: {
 		GraniteCannon: {
 			DisplayName: Granite Cannon
 			Tooltip: ""
+		}
+
+		AncientSprayer: {
+			Tooltip: ""
+			DisplayName: Ancient Sprayer
 		}
 	}
 

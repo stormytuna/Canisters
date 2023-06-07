@@ -73,6 +73,9 @@ public abstract class CanisterUsingHeldProjectile : ModProjectile
 	/// <summary>The sound this held projectile will play when shooting a projectile</summary>
 	public SoundStyle? ShootSound { get; set; } = null;
 
+	/// <summary>The amount of random spread this weapon has</summary>
+	public float TotalRandomSpread { get; set; } = 0f;
+
 	private int AI_Lifetime { get; set; }
 
 	// Helper property that applies attack speed for us
@@ -99,7 +102,8 @@ public abstract class CanisterUsingHeldProjectile : ModProjectile
 		// Set our rotation and doShoot if we are shooting this frame
 		if (AI_FrameCount % UseTimeAfterBuffs == 0) {
 			// Set rotation
-			Projectile.rotation = toMouse.ToRotation() + RotationOffset;
+			Projectile.DirectionTo(Main.MouseWorld);
+			Projectile.rotation = toMouse.ToRotation() + RotationOffset + Main.rand.NextFloat(-TotalRandomSpread / 2f, TotalRandomSpread / 2f);
 			doShoot = true;
 		}
 
@@ -120,7 +124,7 @@ public abstract class CanisterUsingHeldProjectile : ModProjectile
 		Owner.itemRotation = MathHelper.WrapAngle(Owner.itemRotation);
 
 		// Actually call our shoot hook
-		if (doShoot) {
+		if (doShoot && Projectile.owner == Main.myPlayer) {
 			Owner.PickAmmo(Owner.HeldItem, out int projToShoot, out float speed, out int damage, out float knockback, out int usedAmmoItemId);
 
 			// Get our projectile type
@@ -133,7 +137,7 @@ public abstract class CanisterUsingHeldProjectile : ModProjectile
 
 			// Get some other params
 			EntitySource_ItemUse_WithAmmo source = new(Owner, Owner.HeldItem, usedAmmoItemId);
-			Vector2 velocity = toMouse * speed;
+			Vector2 velocity = Projectile.rotation.ToRotationVector2().RotatedBy(-RotationOffset) * speed;
 			Vector2 offset = new(MuzzleOffset.X, MuzzleOffset.Y * Projectile.direction);
 			offset = offset.RotatedBy(Projectile.rotation);
 			Vector2 position = Projectile.Center + offset;
