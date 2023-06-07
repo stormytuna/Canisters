@@ -41,8 +41,8 @@ public class AncientSprayer : CanisterUsingWeapon
 
 	public override void AddRecipes() {
 		CreateRecipe()
-			.AddIngredient(ItemID.FlintlockPistol)
-			.AddIngredient(ItemID.IllegalGunParts)
+			.AddIngredient(ItemID.FossilOre, 15)
+			.AddRecipeGroup(RecipeGroupID.IronBar, 10)
 			.AddTile(TileID.Anvils)
 			.Register();
 	}
@@ -77,7 +77,7 @@ public class AncientSprayer_HeldProjectile : CanisterUsingHeldProjectile
 		HoldOutOffset = 32f;
 		CanisterFiringType = FiringType.Depleted;
 		RotationOffset = 0f;
-		MuzzleOffset = new Vector2(32f, -6f);
+		MuzzleOffset = new Vector2(32f, -2f);
 		TotalRandomSpread = 0.35f;
 	}
 
