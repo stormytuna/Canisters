@@ -30,6 +30,7 @@ Canisters: {
 		GraniteCannon_HeldProjectile.DisplayName: Granite Cannon_ Held Projectile
 		AncientSprayer_HeldProjectile.DisplayName: Ancient Sprayer_ Held Projectile
 		BarkBellower_HeldProjectile.DisplayName: Bark Bellower_ Held Projectile
+		LushSlinger_HeldProjectile.DisplayName: Lush Slinger_ Held Projectile
 	}
 
 	Items: {
@@ -146,6 +147,11 @@ Canisters: {
 		BarkBellower: {
 			DisplayName: Bark Bellower
 			Tooltip: ""
+		}
+
+		LushSlinger: {
+			Tooltip: ""
+			DisplayName: Lush Slinger
 		}
 	}
 
