@@ -1,9 +1,7 @@
-﻿using Canisters.Content.Items.Canisters;
+﻿using Canisters.Content.Projectiles.VolatileCanister;
 using Canisters.Helpers;
 using Canisters.Helpers.Abstracts;
-using Microsoft.Xna.Framework;
 using Terraria;
-using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -11,6 +9,8 @@ namespace Canisters.Content.Items.Weapons;
 
 public class LushSlinger : CanisterUsingWeapon
 {
+	public override FiringType FiringType => FiringType.Launched;
+
 	public override void SetStaticDefaults() {
 		Item.ResearchUnlockCount = 1;
 	}
@@ -31,12 +31,12 @@ public class LushSlinger : CanisterUsingWeapon
 		Item.channel = true;
 
 		// Weapon stats
-		Item.shoot = ModContent.ProjectileType<LushSlinger_HeldProjectile>();
+		Item.shoot = ModContent.ProjectileType<VolatileCanister>();
 		Item.shootSpeed = 10f;
 		Item.damage = 31;
 		Item.knockBack = 2f;
 		Item.DamageType = DamageClass.Ranged;
-		Item.useAmmo = ModContent.ItemType<VolatileCanister>();
+		Item.useAmmo = ModContent.ItemType<Canisters.VolatileCanister>();
 	}
 
 	public override void AddRecipes() {
@@ -46,44 +46,5 @@ public class LushSlinger : CanisterUsingWeapon
 			.AddIngredient(ItemID.JungleSpores, 10)
 			.AddTile(TileID.WorkBenches)
 			.Register();
-
-		base.AddRecipes();
 	}
-
-	public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback) {
-		Projectile.NewProjectile(source, player.Center, velocity, ModContent.ProjectileType<LushSlinger_HeldProjectile>(), damage, knockback, player.whoAmI);
-
-		return false;
-	}
-}
-
-public class LushSlinger_HeldProjectile : CanisterUsingHeldProjectile
-{
-	public override void SetDefaults() {
-		// Base stats
-		Projectile.width = 20;
-		Projectile.height = 32;
-		Projectile.aiStyle = -1;
-
-		// Weapon stats
-		Projectile.friendly = true;
-		Projectile.hostile = false;
-		Projectile.penetrate = -1;
-		Projectile.DamageType = DamageClass.Ranged;
-
-		// Held projectile stats
-		Projectile.tileCollide = false;
-		Projectile.hide = true;
-		Projectile.ignoreWater = true;
-
-		// CanisterHeldProjectile stats
-		HoldOutOffset = 10f;
-		CanisterFiringType = FiringType.Launched;
-		RotationOffset = 0f;
-		MuzzleOffset = new Vector2(0, -10f);
-		ShootSound = SoundID.Item5;
-		TotalRandomSpread = 0.15f;
-	}
-
-	public override string Texture => "Canisters/Content/Items/Weapons/LushSlinger";
 }

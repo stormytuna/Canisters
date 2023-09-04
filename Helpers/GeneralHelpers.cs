@@ -116,4 +116,8 @@ public static class GeneralHelpers
 			actor.velocity *= (float)Math.Pow(distance / 300, bufferStrength);
 		}
 	}
+
+	public static float GetBrightness(Point point) => Lighting.Brightness(point.X, point.Y);
+
+    public static float GetBrightness(Vector2 vector) => GetBrightness(vector.ToTileCoordinates());
 }

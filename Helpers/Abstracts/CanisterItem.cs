@@ -1,5 +1,6 @@
 ﻿using Canisters.Content.Items.Canisters;
 using Microsoft.Xna.Framework;
+using Terraria;
 using Terraria.ModLoader;
 using VolatileCanisterProjectile = Canisters.Content.Projectiles.VolatileCanister.VolatileCanister;
 
@@ -15,7 +16,9 @@ public abstract class CanisterItem : ModItem
 
 	public virtual void SafeSetStaticDefaults() { }
 	public virtual void SafeSetDefaults() { }
-	public virtual void ApplyAmmoStats(bool isLaunched, ref Vector2 velocity, ref Vector2 offset, ref Vector2 position, ref int damage, ref float knockBack, ref int amount, ref float spread) { }
+	public virtual void SafePickAmmo(Item weapon, Player player, ref int type, ref float speed, ref StatModifier damage, ref float knockback) { }
+
+	public virtual void ApplyAmmoStats(bool isLaunched, ref Vector2 velocity, ref Vector2 position, ref int damage, ref float knockBack, ref int amount, ref float spread) { }
 
 	public sealed override void SetStaticDefaults() {
 		SafeSetStaticDefaults();
@@ -35,5 +38,14 @@ public abstract class CanisterItem : ModItem
 		Item.shoot = ModContent.ProjectileType<VolatileCanisterProjectile>();
 		Item.DamageType = DamageClass.Ranged;
 		Item.ammo = ModContent.ItemType<VolatileCanister>();
+	}
+
+	public sealed override void PickAmmo(Item weapon, Player player, ref int type, ref float speed, ref StatModifier damage, ref float knockback) {
+		if (weapon.ModItem is not CanisterUsingWeapon canisterWeapon) {
+			return;
+		}
+
+		type = canisterWeapon.FiringType == FiringType.Depleted ? DepletedProjectileType : LaunchedProjectileType;
+		SafePickAmmo(weapon, player, ref type, ref speed, ref damage, ref knockback);
 	}
 }

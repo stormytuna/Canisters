@@ -1,5 +1,4 @@
-﻿using Canisters.Helpers.Abstracts;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
@@ -37,8 +36,7 @@ public class VerdantGas_Helper : ModProjectile
 		ownerOffset = Owner.Center - Projectile.Center;
 		startVelocity = Projectile.velocity;
 
-		CanisterUsingHeldProjectile heldProj = Main.projectile[Owner.heldProj].ModProjectile as CanisterUsingHeldProjectile;
-		Projectile.timeLeft = heldProj.UseTimeAfterBuffs;
+		Projectile.timeLeft = CombinedHooks.TotalUseTime(Owner.HeldItem.useTime, Owner, Owner.HeldItem);
 		maxFireCounter = Projectile.timeLeft / 3;
 	}
 
