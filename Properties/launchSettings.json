@@ -3,12 +3,12 @@
     "Terraria": {
       "commandName": "Executable",
       "executablePath": "$(DotnetPath)",
-      "commandLineArgs": "$(tMLPath) -skipselect \"dev:dev-classic\"",
+      "commandLineArgs": "$(tMLPath) -skipselect \"dev-canisters:dev-classic\"",
       "workingDirectory": "$(tMLSteamPath)"
     },
     "TerrariaServer": {
       "commandName": "Executable",
-      "executablePath": "dotnet",
+      "executablePath": "$(DotnetPath)",
       "commandLineArgs": "$(tMLServerPath)",
       "workingDirectory": "$(tMLSteamPath)"
     }
