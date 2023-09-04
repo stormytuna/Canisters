@@ -9,16 +9,16 @@ namespace Canisters.Common.Systems;
 // https://gamedevelopment.tutsplus.com/tutorials/how-to-generate-shockingly-good-2d-lightning-effects--gamedev-2681
 public class LightningSystem : ModSystem
 {
-    /// <summary>
-    ///     Creates a lightning bolt made of dust from the source to the destination
-    /// </summary>
-    /// <param name="source">The source location, where the lightning bolt starts</param>
-    /// <param name="dest">The destination location, where the lightning bolt ends</param>
-    /// <param name="dustId">The dust id of the dust to create along the lightning bolt</param>
-    /// <param name="scale">The scale of the dust</param>
-    /// <param name="sway">How far away from the center line the zigzag offset is allowed to be</param>
-    /// <param name="jagednessNumerator">How strictly the sway is moved back towards the center, usually don't make this higher than 2</param>
-    public static void MakeDust(Vector2 source, Vector2 dest, int dustId, float scale, float sway = 80f, float jagednessNumerator = 1f) {
+	/// <summary>
+	///     Creates a lightning bolt made of dust from the source to the destination
+	/// </summary>
+	/// <param name="source">The source location, where the lightning bolt starts</param>
+	/// <param name="dest">The destination location, where the lightning bolt ends</param>
+	/// <param name="dustId">The dust id of the dust to create along the lightning bolt</param>
+	/// <param name="scale">The scale of the dust</param>
+	/// <param name="sway">How far away from the center line the zigzag offset is allowed to be</param>
+	/// <param name="jagednessNumerator">How strictly the sway is moved back towards the center, usually don't make this higher than 2</param>
+	public static void MakeDust(Vector2 source, Vector2 dest, int dustId, float scale, float sway = 80f, float jagednessNumerator = 1f) {
 		List<Vector2> dustPoints = CreateBolt(source, dest, sway, jagednessNumerator);
 
 		for (int i = 1; i < dustPoints.Count; i++) {
@@ -38,7 +38,7 @@ public class LightningSystem : ModSystem
 	}
 
 	public static List<Vector2> CreateBolt(Vector2 source, Vector2 dest, float sway = 80f, float jagednessNumerator = 1f) {
-		List<Vector2> results = new List<Vector2>();
+		List<Vector2> results = new();
 		Vector2 tangent = dest - source;
 		Vector2 normal = Vector2.Normalize(new Vector2(tangent.Y, -tangent.X));
 		float length = tangent.Length();
