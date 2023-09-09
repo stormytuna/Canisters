@@ -46,7 +46,7 @@ Canisters: {
 			Tooltip:
 				'''
 				Detonates in a fiery explosion when launched
-				Fires a stream of gel when depleted
+				Fires a stream of gel that makes enemies vulnerable to fire when depleted
 				'''
 			DisplayName: Volatile Canister
 		}

@@ -62,6 +62,12 @@ public class GelBall : ModProjectile
 		Projectile.velocity += Vector2.UnitY * 0.2f;
 	}
 
+	public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone) {
+		if (Main.rand.NextBool(3)) {
+			target.AddBuff(BuffID.Oiled, 180);
+		}
+	}
+
 	public override void Kill(int timeLeft) {
 		DustHelpers.MakeDustExplosion(Projectile.Center, 5f, DustID.Water, 5, 0f, 4f, 150, 200, 1f, 1.2f, true);
 
