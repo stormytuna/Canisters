@@ -34,7 +34,7 @@ public class VerdantCanister : CanisterProjectile
 		DustHelpers.MakeDustExplosion(Projectile.Center, 10f, DustID.Grass, Main.rand.Next(50, 65), 0f, 15f, 100, 150, 1f, 1.3f, true);
 		DustHelpers.MakeDustExplosion(Projectile.Center, 10f, DustID.Grass, Main.rand.Next(12, 20), 0f, 10f, 100, 150, 1.3f, 1.6f, true);
 		DustHelpers.MakeDustExplosion(Projectile.Center, 10f, DustID.Grass, Main.rand.Next(10, 15), 0f, 3f, 100, 150, 1f, 1.3f);
-		DustHelpers.MakeDustExplosion(Projectile.Center, 10f, DustID.GreenFairy, 15, 0f, 4f, 0, 50, 0.8f, 1.5f);
+		DustHelpers.MakeDustExplosion(Projectile.Center, 10f, DustID.GreenFairy, Main.rand.Next(3, 5), 0f, 4f, 0, 50, 0.8f, 1.3f);
 
 		// TODO: leaf gore
 
