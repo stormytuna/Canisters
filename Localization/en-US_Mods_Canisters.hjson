@@ -1,7 +1,5 @@
 Canisters: {
 	Projectiles: {
-		WoodenSlingshot_HeldProjectile.DisplayName: Wooden Slingshot Held Projectile
-		ModifiedHandgun_HeldProjectile.DisplayName: Modified Handgun Held Projectile
 		BlightedBall.DisplayName: Blighted Ball
 		BlightedBolt.DisplayName: Blighted Bolt
 		BlightedCanister.DisplayName: Blighted Canister
@@ -27,10 +25,6 @@ Canisters: {
 		LunarCanister.DisplayName: Lunar Canister
 		LunarShot.DisplayName: Lunar Shot
 		LunarExplosion.DisplayName: Lunar Explosion
-		GraniteCannon_HeldProjectile.DisplayName: Granite Cannon_ Held Projectile
-		AncientSprayer_HeldProjectile.DisplayName: Ancient Sprayer_ Held Projectile
-		BarkBellower_HeldProjectile.DisplayName: Bark Bellower_ Held Projectile
-		LushSlinger_HeldProjectile.DisplayName: Lush Slinger_ Held Projectile
 	}
 
 	Items: {
