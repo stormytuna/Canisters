@@ -5,13 +5,14 @@ using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Microsoft.Xna.Framework.MathHelper;
 
 namespace Canisters.Content.Items.Weapons;
 
 public class ModifiedHandgun : CanisterUsingWeapon
 {
 	public override FiringType FiringType => FiringType.Depleted;
+
+	public override Vector2 MuzzleOffset => new(44f, -4f);
 
 	public override void SetDefaults() {
 		// Base stats
@@ -35,14 +36,6 @@ public class ModifiedHandgun : CanisterUsingWeapon
 		Item.knockBack = 1f;
 		Item.DamageType = DamageClass.Ranged;
 		Item.useAmmo = ModContent.ItemType<Canisters.VolatileCanister>();
-	}
-
-	public override void ModifyShootStats(Player player, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback) {
-		Vector2 muzzleOffset = velocity.SafeNormalize(Vector2.Zero) * 44f;
-		muzzleOffset += velocity.SafeNormalize(Vector2.Zero).RotatedBy(PiOver2) * player.direction * -4f;
-		if (CollisionHelpers.CanHit(position, position + muzzleOffset)) {
-			position += muzzleOffset;
-		}
 	}
 
 	public override void AddRecipes() {
