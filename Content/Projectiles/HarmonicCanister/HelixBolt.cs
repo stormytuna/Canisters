@@ -15,8 +15,8 @@ public class HelixBolt : ModProjectile
 {
 	public override void SetDefaults() {
 		// Base stats
-		Projectile.width = 8;
-		Projectile.height = 8;
+		Projectile.width = 16;
+		Projectile.height = 16;
 		Projectile.aiStyle = -1;
 
 		// Weapon stats
@@ -35,6 +35,7 @@ public class HelixBolt : ModProjectile
 	private bool firstFrame = true;
 	private float startVelocityRotation;
 	private float speed;
+	private short DustType => AI_State == 1f ? DustID.PinkTorch : DustID.PurpleTorch;
 
 	public override void AI() {
 		// Rotated velocity sine wave motion
@@ -54,21 +55,19 @@ public class HelixBolt : ModProjectile
 		float offset = MathF.Cos(radians) * AI_State * 0.2f;
 		float newRotation = offset + startVelocityRotation;
 		Projectile.velocity = newRotation.ToRotationVector2() * speed;
-		Projectile.rotation = Projectile.velocity.ToRotation() + MathHelper.PiOver2;
 
-		for (int i = 0; i < 3; i++) {
-			int dustType = AI_State == 1f ? DustID.PinkTorch : DustID.PurpleTorch;
-			Dust d = Dust.NewDustPerfect(Projectile.Center, dustType);
-			d.scale = Main.rand.NextFloat(1f, 1.3f);
-			d.velocity *= 0.5f;
-			d.noGravity = true;
+		for (int i = 0; i < 4; i++) {
+			Dust dust = Dust.NewDustPerfect(Projectile.Center, DustType);
+			dust.scale = Main.rand.NextFloat(1f, 1.3f);
+			dust.velocity *= 2f;
+			dust.noGravity = true;
 		}
 
 		AI_FrameCount++;
 	}
 
 	public override void Kill(int timeLeft) {
-		DustHelpers.MakeDustExplosion(Projectile.Center, 4f, AI_State == 1f ? DustID.PinkTorch : DustID.PurpleTorch, 15, 0f, 5f, 0, 0, 1f, 1.3f, true);
+		DustHelpers.MakeDustExplosion(Projectile.Center, 4f, DustType, 15, 0f, 5f, 0, 0, 1f, 1.3f, true);
 
 		// Sound
 		SoundStyle soundStyle = SoundID.Item30 with {
