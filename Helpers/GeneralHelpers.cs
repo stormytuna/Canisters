@@ -119,5 +119,13 @@ public static class GeneralHelpers
 
 	public static float GetBrightness(Point point) => Lighting.Brightness(point.X, point.Y);
 
-    public static float GetBrightness(Vector2 vector) => GetBrightness(vector.ToTileCoordinates());
+	public static float GetBrightness(Vector2 vector) => GetBrightness(vector.ToTileCoordinates());
+
+	public static Vector2 RotateTowards(Vector2 source, Vector2 target, Vector2 origin = default) {
+		target -= origin;
+
+		float length = source.Length();
+		float targetAngle = target.ToRotation();
+		return targetAngle.ToRotationVector2() * length;
+	}
 }

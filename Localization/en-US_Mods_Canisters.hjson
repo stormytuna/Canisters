@@ -63,8 +63,8 @@ Canisters: {
 		ToxicCanister: {
 			Tooltip:
 				'''
-				Explodes into 3 bouncing ichor balls when launched
-				Fires a splitting blobl of ichor when depleted
+				Does SOMETHING when launched
+				Fires smart-bouncing venomous barbs when depleted
 				'''
 			DisplayName: Toxic Canister
 		}
@@ -82,7 +82,7 @@ Canisters: {
 			Tooltip:
 				'''
 				Explodes into 3 bouncing ichor balls when launched
-				Fires a splitting blobl of ichor when depleted
+				Fires a splitting blobs of ichor when depleted
 				'''
 			DisplayName: Glistening Canister
 		}
@@ -146,6 +146,16 @@ Canisters: {
 		LushSlinger: {
 			Tooltip: ""
 			DisplayName: Lush Slinger
+		}
+
+		Guh: {
+			DisplayName: Guh
+			Tooltip: ""
+		}
+
+		TestTest: {
+			DisplayName: Test Test
+			Tooltip: ""
 		}
 	}
 

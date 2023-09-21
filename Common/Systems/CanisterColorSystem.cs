@@ -12,6 +12,7 @@ public class CanisterColorSystem : ModSystem
 	public static Color Glistening => Color.Yellow;
 	public static Color Blighted => Color.Lime;
 	public static Color Harmonic => Color.Purple;
+	public static Color Toxic => Color.MediumPurple;
 	public static Color Nanite => Color.Red;
 	public static Color Ghastly => Color.Cyan;
 	public static Color Lunar => new(208, 253, 235);
@@ -35,6 +36,10 @@ public class CanisterColorSystem : ModSystem
 
 		if (canisterItemId == ModContent.ItemType<HarmonicCanister>()) {
 			return Harmonic;
+		}
+
+		if (canisterItemId == ModContent.ItemType<ToxicCanister>()) {
+			return Toxic;
 		}
 
 		if (canisterItemId == ModContent.ItemType<NaniteCanister>()) {
