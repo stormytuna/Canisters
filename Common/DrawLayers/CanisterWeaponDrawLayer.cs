@@ -32,16 +32,16 @@ public class CanisterWeaponDrawLayer : PlayerDrawLayer
 			return;
 		}
 
+		Vector2 drawItemPos = Main.DrawPlayerItemPos(drawPlayer.gravDir, heldItem.type);
 		Vector2 drawPosition = drawInfo.ItemLocation - Main.screenPosition;
 		drawPosition = drawPosition.Floor();
 		Rectangle itemDrawFrame = drawPlayer.GetItemDrawFrame(heldItem.type);
 		float rotation = drawPlayer.itemRotation;
 		float scale = drawPlayer.GetAdjustedItemScale(heldItem);
-
-		float originX = drawPlayer.direction == -1 ? itemDrawFrame.Width + 10f : -10f;
+		float originX = drawPlayer.direction == -1 ? itemDrawFrame.Width + drawItemPos.X : -drawItemPos.X;
 		Vector2 origin = new(originX, itemDrawFrame.Height / 2f);
 
-		drawPosition += new Vector2(itemDrawFrame.Width / 2f, Main.DrawPlayerItemPos(drawPlayer.gravDir, heldItem.type).Y);
+		drawPosition += new Vector2(itemDrawFrame.Width / 2f, drawItemPos.Y);
 
 		DrawData baseDrawData = new(canisterWeapon.BaseTexture.Value, drawPosition, itemDrawFrame, heldItem.GetAlpha(drawInfo.itemColor), rotation, origin, scale, drawInfo.itemEffect);
 		drawInfo.DrawDataCache.Add(baseDrawData);
