@@ -76,9 +76,4 @@ public static class Extensions
 	///     Generates a random float between 0 and two pi
 	/// </summary>
 	public static float NextRadian(this UnifiedRandom rand) => rand.NextFloat(MathHelper.TwoPi);
-
-	public static Vector2 Normal(this Vector2 vector) {
-		Vector3 cross = Vector3.Cross(new Vector3(vector, 0f), Vector3.Up);
-		return new Vector2(cross.X, cross.Y).SafeNormalize(Vector2.Zero);
-	}
 }
