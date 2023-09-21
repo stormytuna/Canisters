@@ -38,6 +38,8 @@ public class ModifiedHandgun : CanisterUsingWeapon
 		Item.useAmmo = ModContent.ItemType<Canisters.VolatileCanister>();
 	}
 
+	public override Vector2? HoldoutOffset() => new Vector2(-4f, 0f);
+
 	public override void AddRecipes() {
 		CreateRecipe()
 			.AddIngredient(ItemID.FlintlockPistol)
