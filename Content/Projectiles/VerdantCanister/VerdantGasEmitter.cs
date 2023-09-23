@@ -17,10 +17,7 @@ public class VerdantGasEmitter : ModProjectile
 		Projectile.height = 2;
 		Projectile.aiStyle = -1;
 		Projectile.tileCollide = false;
-
-		// Weapon stats
 		Projectile.penetrate = -1;
-		Projectile.DamageType = DamageClass.Ranged;
 	}
 
 	private Vector2 ownerOffset;
@@ -28,7 +25,7 @@ public class VerdantGasEmitter : ModProjectile
 	private int maxFireCounter;
 	private int numFired;
 
-	private ref Player Owner => ref Main.player[Projectile.owner];
+	private Player Owner => Main.player[Projectile.owner];
 
 	private ref float AI_FireCounter => ref Projectile.ai[0];
 

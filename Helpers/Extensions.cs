@@ -10,20 +10,21 @@ namespace Canisters.Helpers;
 public static class Extensions
 {
 	/// <summary>
-	///     Turns the projectile into an explosion
+	///     Creates an explosion using the projectile. Calls <see cref="Projectile.Damage" />, then <see cref="Projectile.Kill" />.
 	/// </summary>
+	/// <param name="proj">The projectile</param>
 	/// <param name="width">The width of the explosion</param>
 	/// <param name="height">The height of the explosion</param>
-	public static void TurnToExplosion(this Projectile proj, int width, int height) {
-		proj.velocity = new Vector2(0f, 0f);
-		proj.timeLeft = 3;
+	/// <param name="knockback">The knockback of the explosion, if null, uses the projectile's knockback</param>
+	public static void CreateExplosion(this Projectile proj, int width, int height, float? knockback = null) {
 		proj.penetrate = -1;
 		proj.tileCollide = false;
 		proj.alpha = 255;
 		proj.Resize(width, height);
-		proj.netUpdate = true;
-		// TODO: implement this
-		//proj.knockback = /* param */ knockback;
+		proj.knockBack = knockback ?? proj.knockBack;
+
+		proj.Damage();
+		proj.Kill();
 	}
 
 	// Adapted from here https://bitbucket.org/Superbest/superbest-random/src/f067e1dc014c31be62c5280ee16544381e04e303/Superbest%20random/RandomExtensions.cs#lines-19

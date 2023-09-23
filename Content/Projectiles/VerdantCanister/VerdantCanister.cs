@@ -38,6 +38,6 @@ public class VerdantCanister : CanisterProjectile
 
 		// TODO: leaf gore
 
-		Projectile.TurnToExplosion(96, 96);
+		Projectile.CreateExplosion(96, 96);
 	}
 }

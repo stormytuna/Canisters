@@ -16,4 +16,6 @@ public static class CanisterHelpers
 
 		return Color.White;
 	}
+
+	public static string GetEmptyAssetString() => "Canisters/Assets/Empty";
 }

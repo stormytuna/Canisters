@@ -26,6 +26,10 @@ Canisters: {
 		LunarShot.DisplayName: Lunar Shot
 		LunarExplosion.DisplayName: Lunar Explosion
 		VerdantGasEmitter.DisplayName: Verdant Gas Emitter
+		GhastlyExplosionEmitter.DisplayName: Ghastly Explosion Emitter
+		HarmonicExplosion.DisplayName: Harmonic Explosion
+		LunarLightningEmitter.DisplayName: Lunar Lightning Emitter
+		ToxicFogEmitter.DisplayName: Toxic Fog Emitter
 	}
 
 	Items: {

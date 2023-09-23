@@ -17,7 +17,7 @@ public class BlightedCanister : CanisterProjectile
 	public override string Texture => "Canisters/Content/Items/Canisters/BlightedCanister";
 
 	public override void Explode() {
-		Projectile.TurnToExplosion(96, 96);
+		Projectile.CreateExplosion(96, 96);
 		SoundEngine.PlaySound(SoundID.DD2_GoblinBomb, Projectile.Center);
 
 		float rotationOffset = Main.rand.NextRadian();

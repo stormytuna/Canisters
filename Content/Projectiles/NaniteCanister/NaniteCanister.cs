@@ -15,8 +15,7 @@ public class NaniteCanister : CanisterProjectile
 	public override void Explode() {
 		SoundEngine.PlaySound(SoundID.DD2_GoblinBomb, Projectile.Center);
 
-		Projectile.TurnToExplosion(96, 96);
-		Projectile.timeLeft = 3;
+		Projectile.CreateExplosion(96, 96);
 
 		DustHelpers.MakeDustExplosion(Projectile.Center, 10f, DustID.Clentaminator_Red, Main.rand.Next(30, 40), 0f, 2.5f, noGravity: true);
 

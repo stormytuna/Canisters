@@ -15,7 +15,7 @@ public class VolatileCanister : CanisterProjectile
 
 	public override void Explode() {
 		SoundEngine.PlaySound(SoundID.DD2_GoblinBomb, Projectile.Center);
-		Projectile.TurnToExplosion(96, 96);
+		Projectile.CreateExplosion(96, 96);
 
 		DustHelpers.MakeDustExplosion(Projectile.Center, 15f, DustID.Torch, Main.rand.Next(40, 55), 0f, 15f, 0, 0, 0.8f, 1.2f, true, true);
 		DustHelpers.MakeDustExplosion(Projectile.Center, 13f, DustID.Torch, Main.rand.Next(10, 15), 0f, 10f, 0, 0, 1.2f, 1.5f, true, true);

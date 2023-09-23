@@ -22,8 +22,8 @@ public abstract class CanisterProjectile : ModProjectile
 		Projectile.aiStyle = 2;
 
 		// Weapon stats
+		Projectile.penetrate = 1;
 		Projectile.friendly = true;
-		Projectile.penetrate = -1;
 		Projectile.DamageType = DamageClass.Ranged;
 	}
 
