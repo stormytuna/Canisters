@@ -1,10 +1,10 @@
-using Canisters.Content.Items.Canisters;
+﻿using Canisters.Content.Items.Canisters;
 using Microsoft.Xna.Framework;
 using Terraria.ModLoader;
 
-namespace Canisters.Common.Systems;
+namespace Canisters.Helpers.Canisters;
 
-public class CanisterColorSystem : ModSystem
+public static class CanisterColors
 {
 	// TODO: Finalise colours, possibly add some cycling between colours?
 	public static Color Volatile => new(45, 144, 255, 255);
@@ -17,6 +17,7 @@ public class CanisterColorSystem : ModSystem
 	public static Color Ghastly => Color.Cyan;
 	public static Color Lunar => new(208, 253, 235);
 
+	// TODO: Refactor this into an abstract method on canisters
 	public static Color GetCanisterColor(int canisterItemId) {
 		if (canisterItemId == ModContent.ItemType<VolatileCanister>()) {
 			return Volatile;

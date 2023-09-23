@@ -3,9 +3,10 @@ using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Canisters.Common.Systems;
+namespace Canisters.Helpers.Canisters;
 
-public class CanisterSoundSystem : ModSystem
+// TODO: Refactor this into abstract property on canister item
+public static class CanisterSounds
 {
 	public static SoundStyle GetDepletedCanisterSound(int canisterItemId) {
 		if (canisterItemId == ModContent.ItemType<VolatileCanister>()) {

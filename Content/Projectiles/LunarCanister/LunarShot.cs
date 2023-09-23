@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using Canisters.Common.Systems;
 using Canisters.Helpers;
+using Canisters.Helpers.Canisters;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
@@ -98,7 +98,7 @@ public class LunarShot : ModProjectile
 		DustHelpers.MakeDustExplosion(Projectile.Center, 4f, DustID.Vortex, 8, 0f, 10f, noGravity: true);
 	}
 
-	public override Color? GetAlpha(Color lightColor) => CanisterColorSystem.Lunar;
+	public override Color? GetAlpha(Color lightColor) => CanisterColors.Lunar;
 
 	public override bool PreDraw(ref Color lightColor) {
 		Main.instance.LoadProjectile(Type);

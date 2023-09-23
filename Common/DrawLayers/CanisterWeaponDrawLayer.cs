@@ -1,6 +1,6 @@
-﻿using Canisters.Common.Systems;
-using Canisters.Helpers;
+﻿using Canisters.Helpers;
 using Canisters.Helpers.Abstracts;
+using Canisters.Helpers.Canisters;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.DataStructures;
@@ -48,7 +48,7 @@ public class CanisterWeaponDrawLayer : PlayerDrawLayer
 
 		DrawData canisterDrawData = baseDrawData with {
 			texture = canisterWeapon.CanisterTexture.Value,
-			color = CanisterColorSystem.GetCanisterColor(usedAmmoItemId) * GeneralHelpers.GetBrightness(drawInfo.ItemLocation)
+			color = CanisterColors.GetCanisterColor(usedAmmoItemId) * GeneralHelpers.GetBrightness(drawInfo.ItemLocation)
 		};
 		drawInfo.DrawDataCache.Add(canisterDrawData);
 	}
