@@ -34,3 +34,5 @@ Possibly abstract explosions into another projectile?
 - Longer explosions can become new projectiles
 
 Remove comments where they're not needed
+
+Refactor anything that uses empty textures to use empty texture asset
