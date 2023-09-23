@@ -1,5 +1,6 @@
 ﻿using Canisters.Content.Projectiles.ToxicCanister;
 using Canisters.Helpers.Abstracts;
+using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -10,6 +11,7 @@ public class ToxicCanister : CanisterItem
 {
 	public override int LaunchedProjectileType => ModContent.ProjectileType<Projectiles.ToxicCanister.ToxicCanister>();
 	public override int DepletedProjectileType => ModContent.ProjectileType<ToxicBarb>();
+	public override Color CanisterColor => Color.MediumPurple;
 
 	public override void SafeSetDefaults() {
 		// Base stats

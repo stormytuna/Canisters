@@ -1,5 +1,6 @@
 ﻿using Canisters.Content.Projectiles.VerdantCanister;
 using Canisters.Helpers.Abstracts;
+using Microsoft.Xna.Framework;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -9,6 +10,7 @@ public class VerdantCanister : CanisterItem
 {
 	public override int LaunchedProjectileType => ModContent.ProjectileType<Projectiles.VerdantCanister.VerdantCanister>();
 	public override int DepletedProjectileType => ModContent.ProjectileType<VerdantGasEmitter>();
+	public override Color CanisterColor => Color.Green;
 
 	public override void SafeSetDefaults() {
 		// Base stats

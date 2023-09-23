@@ -1,5 +1,6 @@
 ﻿using Canisters.Content.Projectiles.BlightedCanister;
 using Canisters.Helpers.Abstracts;
+using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -10,6 +11,7 @@ public class BlightedCanister : CanisterItem
 {
 	public override int LaunchedProjectileType => ModContent.ProjectileType<Projectiles.BlightedCanister.BlightedCanister>();
 	public override int DepletedProjectileType => ModContent.ProjectileType<BlightedBolt>();
+	public override Color CanisterColor => Color.Lime;
 
 	public override void SafeSetDefaults() {
 		// Base stats

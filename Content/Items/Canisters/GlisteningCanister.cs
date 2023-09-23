@@ -1,5 +1,6 @@
 ﻿using Canisters.Content.Projectiles.GlisteningCanister;
 using Canisters.Helpers.Abstracts;
+using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -10,6 +11,7 @@ public class GlisteningCanister : CanisterItem
 {
 	public override int LaunchedProjectileType => ModContent.ProjectileType<Projectiles.GlisteningCanister.GlisteningCanister>();
 	public override int DepletedProjectileType => ModContent.ProjectileType<GlisteningBall>();
+	public override Color CanisterColor => Color.Yellow;
 
 	public override void SafeSetDefaults() {
 		// Base stats

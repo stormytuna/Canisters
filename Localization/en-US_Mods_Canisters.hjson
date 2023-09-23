@@ -25,6 +25,7 @@ Canisters: {
 		LunarCanister.DisplayName: Lunar Canister
 		LunarShot.DisplayName: Lunar Shot
 		LunarExplosion.DisplayName: Lunar Explosion
+		VerdantGasEmitter.DisplayName: Verdant Gas Emitter
 	}
 
 	Items: {

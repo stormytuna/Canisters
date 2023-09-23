@@ -11,6 +11,7 @@ public class GhastlyCanister : CanisterItem
 {
 	public override int LaunchedProjectileType => ModContent.ProjectileType<Projectiles.GhastlyCanister.GhastlyCanister>();
 	public override int DepletedProjectileType => ModContent.ProjectileType<GhastlyShot>();
+	public override Color CanisterColor => Color.Cyan;
 
 	public override void SafeSetDefaults() {
 		// Base stats

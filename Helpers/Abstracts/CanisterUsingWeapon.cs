@@ -1,5 +1,4 @@
-﻿using Canisters.Helpers.Canisters;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using Terraria;
@@ -37,7 +36,7 @@ public abstract class CanisterUsingWeapon : ModItem
 		spriteBatch.Draw(BaseTexture.Value, position, frame, drawColor, 0f, origin, scale, SpriteEffects.None, 0);
 
 		// Draw the canister
-		Color canisterColor = CanisterColors.GetCanisterColor(usedAmmoItemId);
+		Color canisterColor = CanisterHelpers.GetCanisterColor(usedAmmoItemId);
 		spriteBatch.Draw(CanisterTexture.Value, position, frame, canisterColor, 0f, origin, scale, SpriteEffects.None, 0);
 
 		return false;

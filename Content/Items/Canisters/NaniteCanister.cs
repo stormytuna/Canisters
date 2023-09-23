@@ -1,5 +1,6 @@
 ﻿using Canisters.Content.Projectiles.NaniteCanister;
 using Canisters.Helpers.Abstracts;
+using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -11,6 +12,7 @@ public class NaniteCanister : CanisterItem
 {
 	public override int LaunchedProjectileType => ModContent.ProjectileType<Projectiles.NaniteCanister.NaniteCanister>();
 	public override int DepletedProjectileType => ModContent.ProjectileType<NaniteBlob>();
+	public override Color CanisterColor => Color.Red;
 
 	public override void SafeSetDefaults() {
 		// Base stats

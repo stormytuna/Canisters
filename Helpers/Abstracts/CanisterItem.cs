@@ -13,6 +13,7 @@ public abstract class CanisterItem : ModItem
 {
 	public abstract int LaunchedProjectileType { get; }
 	public abstract int DepletedProjectileType { get; }
+	public abstract Color CanisterColor { get; }
 
 	public virtual void SafeSetStaticDefaults() { }
 	public virtual void SafeSetDefaults() { }
