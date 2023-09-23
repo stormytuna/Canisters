@@ -11,10 +11,6 @@ public class LushSlinger : CanisterUsingWeapon
 {
 	public override FiringType FiringType => FiringType.Launched;
 
-	public override void SetStaticDefaults() {
-		Item.ResearchUnlockCount = 1;
-	}
-
 	public override void SetDefaults() {
 		// Base stats
 		Item.width = 20;

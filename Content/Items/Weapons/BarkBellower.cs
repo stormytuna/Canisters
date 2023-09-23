@@ -11,10 +11,6 @@ public class BarkBellower : CanisterUsingWeapon
 {
 	public override FiringType FiringType => FiringType.Depleted;
 
-	public override void SetStaticDefaults() {
-		Item.ResearchUnlockCount = 1;
-	}
-
 	public override void SetDefaults() {
 		// Base stats
 		Item.width = 44;
