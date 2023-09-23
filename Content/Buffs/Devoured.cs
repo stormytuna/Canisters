@@ -7,6 +7,7 @@ using Terraria.ModLoader;
 
 namespace Canisters.Content.Buffs;
 
+// TODO: Visuals, make dust, colour the npc
 public class Devoured : ModBuff
 {
 	public override void SetStaticDefaults() {
