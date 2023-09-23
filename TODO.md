@@ -32,3 +32,5 @@ Possibly abstract explosions into another projectile?
 
 - Standard explosions can become just a resize and then `Projectile.Damage()` call
 - Longer explosions can become new projectiles
+
+Remove comments where they're not needed
