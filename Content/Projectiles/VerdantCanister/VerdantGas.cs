@@ -1,6 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using Terraria;
-using Terraria.DataStructures;
 using Terraria.ModLoader;
 
 namespace Canisters.Content.Projectiles.VerdantCanister;
@@ -25,9 +24,8 @@ public class VerdantGas : ModProjectile
 		Projectile.friendly = true;
 		Projectile.penetrate = -1;
 		Projectile.DamageType = DamageClass.Ranged;
-	}
 
-	public override void OnSpawn(IEntitySource source) {
+		// First frame
 		Projectile.frame = Main.rand.Next(Main.projFrames[Type]);
 	}
 

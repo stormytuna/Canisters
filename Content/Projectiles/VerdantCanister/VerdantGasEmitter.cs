@@ -46,7 +46,8 @@ public class VerdantGasEmitter : ModProjectile
 		if (AI_FireCounter <= 0 && Collision.CanHit(Owner.Center, 0, 0, Projectile.Center, 0, 0) && numFired < 3 && Main.myPlayer == Projectile.owner) {
 			Vector2 velocity = startVelocity * Main.rand.NextFloat(0.95f, 1.05f);
 			velocity = velocity.RotatedByRandom(0.1f);
-			Projectile.NewProjectileDirect(Terraria.Entity.InheritSource(Projectile), Projectile.Center, velocity, ModContent.ProjectileType<VerdantGas>(), Projectile.damage / 3, Projectile.knockBack, Projectile.owner);
+			Projectile gasProj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, velocity, ModContent.ProjectileType<VerdantGas>(), Projectile.damage / 3, Projectile.knockBack, Projectile.owner);
+			gasProj.originalDamage = Projectile.originalDamage / 3;
 			AI_FireCounter = maxFireCounter;
 			numFired++;
 
