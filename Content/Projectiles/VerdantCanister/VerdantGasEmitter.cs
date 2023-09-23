@@ -9,7 +9,7 @@ namespace Canisters.Content.Projectiles.VerdantCanister;
 /// <summary>
 ///     Helps shoot the verdant gas. This projectile will sit on the weapons muzzle and fire 3 verdant gas projectiles over its lifetime
 /// </summary>
-public class VerdantGas_Helper : ModProjectile
+public class VerdantGasEmitter : ModProjectile
 {
 	public override void SetDefaults() {
 		// Base stats
