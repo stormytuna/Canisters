@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Canisters.Common.Systems;
 using Canisters.Helpers;
 using Canisters.Helpers.Abstracts;
 using Microsoft.Xna.Framework;
@@ -26,7 +25,7 @@ public class LunarCanister : CanisterProjectile
 		if (Timer % 8 == 0) {
 			Vector2 source = Projectile.Center + new Vector2(Main.rand.NextFloat(-300f, 300f), -1500f);
 			Vector2 destination = Projectile.Center + new Vector2(Main.rand.NextFloat(-8f, 8f), 0f);
-			LightningSystem.MakeDust(source, destination, DustID.Vortex, 1f);
+			DustHelpers.MakeLightningDust(source, destination, DustID.Vortex, 1f);
 			DustHelpers.MakeDustExplosion(destination, 4f, DustID.Vortex, 8, 0f, 10f, noGravity: true);
 
 			if (Projectile.owner == Main.myPlayer) {
