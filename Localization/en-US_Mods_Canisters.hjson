@@ -37,7 +37,7 @@ Canisters: {
 			Tooltip:
 				'''
 				Depletes canisters
-				Fires smaller but faster
+				Fires smaller but faster projectiles
 				'''
 			DisplayName: Modified Handgun
 		}
@@ -63,7 +63,7 @@ Canisters: {
 		ToxicCanister: {
 			Tooltip:
 				'''
-				Does SOMETHING when launched
+				Leaks a toxic aura when launched
 				Fires smart-bouncing venomous barbs when depleted
 				'''
 			DisplayName: Toxic Canister
