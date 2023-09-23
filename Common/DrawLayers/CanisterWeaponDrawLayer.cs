@@ -9,6 +9,9 @@ using Terraria.ModLoader;
 
 namespace Canisters.Common.DrawLayers;
 
+/// <summary>
+///     Allows canisters to have custom drawing without being held projectiles. Will need to refactor this when/if an API is added to do this
+/// </summary>
 public class CanisterWeaponDrawLayer : PlayerDrawLayer
 {
 	public override Position GetDefaultPosition() => new AfterParent(PlayerDrawLayers.HeldItem);

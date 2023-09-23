@@ -6,6 +6,7 @@ using Terraria.ModLoader;
 
 namespace Canisters.Content.Items.Canisters;
 
+// TODO: Probably make this blue, like the regular nanites 
 public class NaniteCanister : CanisterItem
 {
 	public override int LaunchedProjectileType => ModContent.ProjectileType<Projectiles.NaniteCanister.NaniteCanister>();
@@ -21,4 +22,6 @@ public class NaniteCanister : CanisterItem
 		Item.damage = 16;
 		Item.knockBack = 2f;
 	}
+
+	// TODO: Recipe lmao
 }
