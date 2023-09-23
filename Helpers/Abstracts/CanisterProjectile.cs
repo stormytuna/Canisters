@@ -7,7 +7,7 @@ namespace Canisters.Helpers.Abstracts;
 public abstract class CanisterProjectile : ModProjectile
 {
 	/// <summary>
-	///     Only called on clients
+	///     Only called for the owner of the projectile
 	/// </summary>
 	public virtual void Explode() { }
 
