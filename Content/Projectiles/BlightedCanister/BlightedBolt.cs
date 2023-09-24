@@ -38,7 +38,7 @@ public class BlightedBolt : ModProjectile
 	public override bool? CanCutTiles() => false;
 
 	public override void Kill(int timeLeft) {
-		DustHelpers.MakeLightningDust(startLocation, Projectile.Center, DustID.CursedTorch, 1.4f);
+		DustHelpers.MakeLightningDust(startLocation, Projectile.Center, DustID.CursedTorch, 1.4f, 30f, 0.4f);
 		DustHelpers.MakeDustExplosion(Projectile.Center, 2f, DustID.CursedTorch, Main.rand.Next(10, 15), 0f, 8f, 100, 150, 1f, 1.2f, true);
 	}
 
