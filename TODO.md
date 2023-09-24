@@ -14,8 +14,6 @@ Improve nanite canister visuals
 
 Revisit "shooting out of muzzle" thing
 
-Tone down the jaggedness of the blighted canister lightning
-
 Ghastly canister depleted visuals need some work
 
 Canisters should explode into little broken canister gore
