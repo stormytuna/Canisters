@@ -12,7 +12,7 @@ public class NaniteCanister : CanisterItem
 {
 	public override int LaunchedProjectileType => ModContent.ProjectileType<Projectiles.NaniteCanister.NaniteCanister>();
 	public override int DepletedProjectileType => ModContent.ProjectileType<NaniteMistEmitter>();
-	public override Color CanisterColor => Color.Red;
+	public override Color CanisterColor => Color.LightCyan;
 
 	public override void SafeSetDefaults() {
 		// Base stats

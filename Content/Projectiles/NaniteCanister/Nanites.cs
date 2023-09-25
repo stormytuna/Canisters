@@ -90,6 +90,7 @@ public class Nanites : ModProjectile
 	public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone) {
 		target.AddBuff(ModContent.BuffType<Devoured>(), 5 * 60);
 		target.GetGlobalNPC<DevouredGlobalNPC>().Devoured = true; // Hack because buff won't update if we one shot it
+		// TODO: Won't work in multiplayer
 	}
 
 	public override bool OnTileCollide(Vector2 oldVelocity) {
@@ -107,7 +108,7 @@ public class Nanites : ModProjectile
 	public override void Kill(int timeLeft) {
 		int numDust = Main.rand.Next(2, 6);
 		for (int i = 0; i < numDust; i++) {
-			Dust dust = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.Clentaminator_Red);
+			Dust dust = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.Clentaminator_Cyan);
 			dust.noGravity = true;
 			dust.velocity *= 2f;
 		}
