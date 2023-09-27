@@ -16,7 +16,7 @@ public class ToxicCanister : CanisterProjectile
 {
 	public override string Texture => "Canisters/Content/Items/Canisters/ToxicCanister";
 
-	public override void Explode() {
+	public override void OnExplode() {
 		SoundEngine.PlaySound(SoundID.DD2_GoblinBomb, Projectile.Center);
 
 		Projectile.CreateExplosion(200, 200);

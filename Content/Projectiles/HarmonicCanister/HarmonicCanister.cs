@@ -15,7 +15,7 @@ public class HarmonicCanister : CanisterProjectile
 {
 	public override string Texture => "Canisters/Content/Items/Canisters/HarmonicCanister";
 
-	public override void Explode() {
+	public override void OnExplode() {
 		SoundEngine.PlaySound(SoundID.DD2_GoblinBomb, Projectile.Center);
 
 		Projectile.CreateExplosion(96, 96);

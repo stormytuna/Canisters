@@ -16,11 +16,11 @@ public class GhastlyCanister : CanisterProjectile
 
 	public override void AI() {
 		if (Timer >= 30f) {
-			Explode();
+			TryExplode();
 		}
 	}
 
-	public override void Explode() {
+	public override void OnExplode() {
 		Projectile.CreateExplosion(96, 96);
 		SoundEngine.PlaySound(SoundID.DD2_GoblinBomb, Projectile.Center);
 

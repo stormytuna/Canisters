@@ -16,8 +16,6 @@ Revisit "shooting out of muzzle" thing
 
 Ghastly canister depleted visuals need some work
 
-Canisters should explode into little broken canister gore
-
 Make another pass on documentation and names of stuff
 
 Remove comments where they're not needed

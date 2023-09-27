@@ -13,7 +13,7 @@ public class VolatileCanister : CanisterProjectile
 {
 	public override string Texture => "Canisters/Content/Items/Canisters/VolatileCanister";
 
-	public override void Explode() {
+	public override void OnExplode() {
 		SoundEngine.PlaySound(SoundID.DD2_GoblinBomb, Projectile.Center);
 		Projectile.CreateExplosion(96, 96);
 

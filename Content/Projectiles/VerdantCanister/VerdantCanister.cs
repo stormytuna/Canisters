@@ -16,7 +16,7 @@ public class VerdantCanister : CanisterProjectile
 {
 	public override string Texture => "Canisters/Content/Items/Canisters/VerdantCanister";
 
-	public override void Explode() {
+	public override void OnExplode() {
 		SoundEngine.PlaySound(SoundID.DD2_GoblinBomb, Projectile.Center);
 
 		List<float> startRots = Main.rand.NextSegmentedAngles(4, 0.5f);
