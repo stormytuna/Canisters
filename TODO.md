@@ -1,5 +1,9 @@
 Achievements?
 
+Do a pass for balancing, maybe beg for testers?
+
+Pass for visuals
+
 Finalise sounds
 
 Glowy stuff should glow
@@ -10,11 +14,7 @@ Multiplayer compat
 
 Config option to make loot more common - reduces grinding but less vanilla-y
 
-Improve nanite canister visuals
-
 Revisit "shooting out of muzzle" thing
-
-Ghastly canister depleted visuals need some work
 
 Make another pass on documentation and names of stuff
 
