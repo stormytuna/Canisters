@@ -1,23 +1,46 @@
-Achievements?
+# High priority
 
-Do a pass for balancing, maybe beg for testers?
+## Balancing
 
-Pass for visuals
+Go through each canister and weapon, tweak balancing for:
 
-Finalise sounds
+- damage
+- knockback
+- explosion size
+- damage, knockback, amount of child projectiles created where applicable
 
-Glowy stuff should glow
+## Multiplayer compatibility
 
-Glowmasks?
+Go through basically everything, make sure netcode is correct
 
-Multiplayer compat
+Might end up just adding Dave's easy packets mod for custom netcode
 
-Config option to make loot more common - reduces grinding but less vanilla-y
+# Medium priority
 
-Revisit "shooting out of muzzle" thing
+## Visuals and effects
 
-Make another pass on documentation and names of stuff
+Go through each canister and weapon, tweak visuals:
 
-Remove comments where they're not needed
+- Add sounds
+- Tweak visuals where they look a bit shit
+- Add lighting and glowmasks
+- Add some fancy pulsing for colours
+- Revisit shooting out of muzzle, it's a bit imprecise
 
-Refactor anything that uses empty textures to use empty texture asset
+# Low priority
+
+## Achievements
+
+There's a mod for this, would require mod calls or weak refs probably
+
+## Config
+
+Add a config option to reduce grinding
+
+## Internal stuff
+
+Take another look at documentation and internal names/organisation
+
+## Empty asset
+
+Refactor anything that has an empty asset to use the existing empty asset
