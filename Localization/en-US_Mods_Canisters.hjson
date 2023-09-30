@@ -30,6 +30,7 @@ Canisters: {
 		HarmonicExplosion.DisplayName: Harmonic Explosion
 		LunarLightningEmitter.DisplayName: Lunar Lightning Emitter
 		ToxicFogEmitter.DisplayName: Toxic Fog Emitter
+		ToxicFog.DisplayName: Toxic Fog
 		NaniteMist.DisplayName: Nanite Mist
 		NaniteMistEmitter.DisplayName: Nanite Mist Emitter
 	}
