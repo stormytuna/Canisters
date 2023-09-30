@@ -44,3 +44,7 @@ Take another look at documentation and internal names/organisation
 ## Empty asset
 
 Refactor anything that has an empty asset to use the existing empty asset
+
+## Unused localisation
+
+Remove any unused localisation
