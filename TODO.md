@@ -27,6 +27,12 @@ Go through each canister and weapon, tweak visuals:
 - Add some fancy pulsing for colours
 - Revisit shooting out of muzzle, it's a bit imprecise
 
+## Refactors
+
+- Refactor `Player.PickAmmo` calls that `out _` to a new extension that does that for us
+- Possibly refactor `CanisterUsingWeapon` to not *require* canister using weapons to have `_Canister` and `_Base`
+  sprites
+
 # Low priority
 
 ## Achievements
