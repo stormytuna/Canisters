@@ -1,6 +1,7 @@
 ﻿using Canisters.Content.Projectiles.VolatileCanister;
 using Canisters.Helpers;
 using Canisters.Helpers.Abstracts;
+using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -10,6 +11,8 @@ namespace Canisters.Content.Items.Weapons;
 public class BarkBellower : CanisterUsingWeapon
 {
 	public override FiringType FiringType => FiringType.Depleted;
+
+	public override Vector2 MuzzleOffset => new(50f, -2f);
 
 	public override void SetDefaults() {
 		// Base stats

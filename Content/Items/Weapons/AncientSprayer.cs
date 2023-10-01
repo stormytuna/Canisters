@@ -15,6 +15,8 @@ public class AncientSprayer : CanisterUsingWeapon
 {
 	public override FiringType FiringType => FiringType.Depleted;
 
+	public override Vector2 MuzzleOffset => new(66f, 0f);
+
 	public override void SetDefaults() {
 		// Base stats
 		Item.width = 60;

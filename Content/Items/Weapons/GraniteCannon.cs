@@ -2,6 +2,7 @@
 using Canisters.Content.Projectiles.VolatileCanister;
 using Canisters.Helpers;
 using Canisters.Helpers.Abstracts;
+using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
@@ -12,6 +13,8 @@ namespace Canisters.Content.Items.Weapons;
 public class GraniteCannon : CanisterUsingWeapon
 {
 	public override FiringType FiringType => FiringType.Launched;
+
+	public override Vector2 MuzzleOffset => new(44f, -4f);
 
 	public override void SetDefaults() {
 		// Base stats
