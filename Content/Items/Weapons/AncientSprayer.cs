@@ -56,11 +56,12 @@ public class AncientSprayer : CanisterUsingWeapon
 	}
 }
 
-// TODO: Visuals for this
 public class AncientSprayerDrawLayer : PlayerDrawLayer
 {
-	private Asset<Texture2D> _texture;
-	private Asset<Texture2D> Texture => _texture ??= ModContent.Request<Texture2D>("Canisters/Content/Items/Weapons/AncientSprayer_Back");
+	private Asset<Texture2D> _baseTexture;
+	private Asset<Texture2D> BaseTexture => _baseTexture ??= ModContent.Request<Texture2D>("Canisters/Content/Items/Weapons/AncientSprayer_Back_Base");
+	private Asset<Texture2D> _canisterTexture;
+	private Asset<Texture2D> CanisterTexture => _canisterTexture ??= ModContent.Request<Texture2D>("Canisters/Content/Items/Weapons/AncientSprayer_Back_Canister");
 
 	public override Position GetDefaultPosition() => new AfterParent(PlayerDrawLayers.Backpacks);
 
@@ -70,13 +71,19 @@ public class AncientSprayerDrawLayer : PlayerDrawLayer
 		Player drawPlayer = drawInfo.drawPlayer;
 
 		Vector2 drawPosition = drawInfo.Position - Main.screenPosition + new Vector2(drawPlayer.width / 2, drawPlayer.height - drawPlayer.bodyFrame.Height / 2);
-		drawPosition.X += drawPlayer.direction * -13f;
-		drawPosition.Y += drawPlayer.gravDir * 2f;
+		drawPosition.X += drawPlayer.direction * -15f;
+		drawPosition.Y += drawPlayer.gravDir * 3f;
 		drawPosition = drawPosition.Floor();
-		Rectangle sourceRect = new(0, 0, Texture.Width(), Texture.Height());
+		Rectangle sourceRect = new(0, 0, BaseTexture.Width(), BaseTexture.Height());
 		Vector2 origin = sourceRect.Size() / 2f;
 
-		DrawData drawData = new(Texture.Value, drawPosition, sourceRect, drawInfo.colorArmorBody, drawPlayer.bodyRotation, origin, 1f, drawInfo.playerEffect);
+		DrawData drawData = new(BaseTexture.Value, drawPosition, sourceRect, drawInfo.colorArmorBody, drawPlayer.bodyRotation, origin, 1f, drawInfo.playerEffect);
 		drawInfo.DrawDataCache.Add(drawData);
+
+		Color canisterColor = CanisterHelpers.GetCanisterColorForHeldItem(drawPlayer);
+		drawInfo.DrawDataCache.Add(drawData with {
+			texture = CanisterTexture.Value,
+			color = canisterColor
+		});
 	}
 }
