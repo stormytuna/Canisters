@@ -15,7 +15,7 @@ public class AncientSprayer : CanisterUsingWeapon
 {
 	public override FiringType FiringType => FiringType.Depleted;
 
-	public override Vector2 MuzzleOffset => new(66f, 0f);
+	public override Vector2 MuzzleOffset => new(52f, 0f);
 
 	public override void SetDefaults() {
 		// Base stats
@@ -39,6 +39,12 @@ public class AncientSprayer : CanisterUsingWeapon
 		Item.knockBack = 1f;
 		Item.DamageType = DamageClass.Ranged;
 		Item.useAmmo = ModContent.ItemType<Canisters.VolatileCanister>();
+	}
+
+	public override Vector2? HoldoutOffset() => new Vector2(-6f, 0f);
+
+	public override void SafeModifyShootStats(Player player, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback) {
+		velocity = velocity.RotatedByRandom(0.4f);
 	}
 
 	public override void AddRecipes() {

@@ -12,7 +12,7 @@ public class BarkBellower : CanisterUsingWeapon
 {
 	public override FiringType FiringType => FiringType.Depleted;
 
-	public override Vector2 MuzzleOffset => new(50f, -2f);
+	public override Vector2 MuzzleOffset => new(38f, -2f);
 
 	public override void SetDefaults() {
 		// Base stats
@@ -36,6 +36,12 @@ public class BarkBellower : CanisterUsingWeapon
 		Item.knockBack = 3f;
 		Item.DamageType = DamageClass.Ranged;
 		Item.useAmmo = ModContent.ItemType<Canisters.VolatileCanister>();
+	}
+
+	public override Vector2? HoldoutOffset() => new Vector2(-2f, 0f);
+
+	public override void SafeModifyShootStats(Player player, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback) {
+		velocity = velocity.RotatedByRandom(0.15f);
 	}
 }
 

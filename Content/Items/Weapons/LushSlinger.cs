@@ -12,7 +12,7 @@ public class LushSlinger : CanisterUsingWeapon
 {
 	public override FiringType FiringType => FiringType.Launched;
 
-	public override Vector2 MuzzleOffset => new(20f, -10f);
+	public override Vector2 MuzzleOffset => new(12f, -10f);
 
 	public override void SetDefaults() {
 		// Base stats
@@ -36,6 +36,12 @@ public class LushSlinger : CanisterUsingWeapon
 		Item.knockBack = 2f;
 		Item.DamageType = DamageClass.Ranged;
 		Item.useAmmo = ModContent.ItemType<Canisters.VolatileCanister>();
+	}
+
+	public override Vector2? HoldoutOffset() => new Vector2(2f, -2f);
+
+	public override void SafeModifyShootStats(Player player, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback) {
+		velocity = velocity.RotatedByRandom(0.25f);
 	}
 
 	public override void AddRecipes() {

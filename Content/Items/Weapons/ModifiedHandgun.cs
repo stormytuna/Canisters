@@ -12,7 +12,7 @@ public class ModifiedHandgun : CanisterUsingWeapon
 {
 	public override FiringType FiringType => FiringType.Depleted;
 
-	public override Vector2 MuzzleOffset => new(44f, -4f);
+	public override Vector2 MuzzleOffset => new(30f, -4f);
 
 	public override void SetDefaults() {
 		// Base stats
@@ -39,6 +39,10 @@ public class ModifiedHandgun : CanisterUsingWeapon
 	}
 
 	public override Vector2? HoldoutOffset() => new Vector2(-4f, 0f);
+
+	public override void SafeModifyShootStats(Player player, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback) {
+		velocity = velocity.RotatedByRandom(0.22f);
+	}
 
 	public override void AddRecipes() {
 		CreateRecipe()

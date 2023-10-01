@@ -14,7 +14,7 @@ public class GraniteCannon : CanisterUsingWeapon
 {
 	public override FiringType FiringType => FiringType.Launched;
 
-	public override Vector2 MuzzleOffset => new(44f, -4f);
+	public override Vector2 MuzzleOffset => new(36f, 0f);
 
 	public override void SetDefaults() {
 		// Base stats
@@ -25,7 +25,7 @@ public class GraniteCannon : CanisterUsingWeapon
 
 		// Use stats
 		Item.useStyle = ItemUseStyleID.Shoot;
-		Item.useTime = Item.useAnimation = 26;
+		Item.useTime = Item.useAnimation = 42;
 		Item.autoReuse = true;
 		Item.noMelee = true;
 		Item.noUseGraphic = true;
@@ -38,6 +38,12 @@ public class GraniteCannon : CanisterUsingWeapon
 		Item.knockBack = 3f;
 		Item.DamageType = DamageClass.Ranged;
 		Item.useAmmo = ModContent.ItemType<Canisters.VolatileCanister>();
+	}
+
+	public override Vector2? HoldoutOffset() => new Vector2(-2f, 0f);
+
+	public override void SafeModifyShootStats(Player player, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback) {
+		velocity = velocity.RotatedByRandom(0.16f);
 	}
 }
 

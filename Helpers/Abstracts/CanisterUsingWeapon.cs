@@ -14,6 +14,7 @@ namespace Canisters.Helpers.Abstracts;
 public abstract class CanisterUsingWeapon : ModItem
 {
 	public virtual void SafeModifyShootStats(Player player, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback) { }
+	public virtual void ApplyShootStats(ref Vector2 velocity, ref Vector2 position, ref int damage, ref float knockBack, ref int amount, ref float spread) { }
 
 	public abstract FiringType FiringType { get; }
 
@@ -43,13 +44,13 @@ public abstract class CanisterUsingWeapon : ModItem
 	}
 
 	public sealed override void ModifyShootStats(Player player, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback) {
+		SafeModifyShootStats(player, ref position, ref velocity, ref type, ref damage, ref knockback);
+
 		Vector2 muzzleOffset = velocity.SafeNormalize(Vector2.Zero) * MuzzleOffset.X;
 		muzzleOffset += velocity.SafeNormalize(Vector2.Zero).RotatedBy(PiOver2) * player.direction * MuzzleOffset.Y;
 		if (CollisionHelpers.CanHit(position, position + muzzleOffset)) {
 			position += muzzleOffset;
 		}
-
-		SafeModifyShootStats(player, ref position, ref velocity, ref type, ref damage, ref knockback);
 	}
 
 	public sealed override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback) {
@@ -60,6 +61,7 @@ public abstract class CanisterUsingWeapon : ModItem
 		int amount = 1;
 		float spread = 0f;
 		canisterItem.ApplyAmmoStats(FiringType == FiringType.Launched, ref velocity, ref position, ref damage, ref knockback, ref amount, ref spread);
+		ApplyShootStats(ref velocity, ref position, ref damage, ref knockback, ref amount, ref spread);
 
 		for (int i = 0; i < amount; i++) {
 			Vector2 perturbedVelocity = velocity.RotatedByRandom(spread);
