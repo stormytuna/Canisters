@@ -33,7 +33,7 @@ public class GraniteCannon : CanisterUsingWeapon
 
 		// Weapon stats
 		Item.shoot = ModContent.ProjectileType<VolatileCanister>();
-		Item.shootSpeed = 11f;
+		Item.shootSpeed = 15f;
 		Item.damage = 16;
 		Item.knockBack = 3f;
 		Item.DamageType = DamageClass.Ranged;
