@@ -42,11 +42,7 @@ Canisters: {
 		}
 
 		ModifiedHandgun: {
-			Tooltip:
-				'''
-				Depletes canisters
-				Fires smaller but faster projectiles
-				'''
+			Tooltip: Depletes canisters
 			DisplayName: Modified Handgun
 		}
 
