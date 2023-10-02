@@ -144,7 +144,7 @@ Canisters: {
 
 		BarkBellower: {
 			DisplayName: Bark Bellower
-			Tooltip: ""
+			Tooltip: Shots inflict Nature's Bane
 		}
 
 		LushSlinger: {
