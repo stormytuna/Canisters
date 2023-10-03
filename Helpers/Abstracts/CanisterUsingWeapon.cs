@@ -63,8 +63,11 @@ public abstract class CanisterUsingWeapon : ModItem
 		canisterItem.ApplyAmmoStats(FiringType == FiringType.Launched, ref velocity, ref position, ref damage, ref knockback, ref amount, ref spread);
 		ApplyShootStats(ref velocity, ref position, ref damage, ref knockback, ref amount, ref spread);
 
+		// Corrects our recoil simulation
+		velocity = player.RotatedRelativePoint(player.MountedCenter).DirectionTo(Main.MouseWorld) * velocity.Length();
+
 		for (int i = 0; i < amount; i++) {
-			Vector2 perturbedVelocity = velocity.RotatedByRandom(spread);
+			Vector2 perturbedVelocity = i == 0 ? velocity : velocity.RotatedByRandom(spread); // Forces one projectile to go towards the cursor
 			Projectile.NewProjectile(source, position, perturbedVelocity, type, damage, knockback, player.whoAmI);
 		}
 

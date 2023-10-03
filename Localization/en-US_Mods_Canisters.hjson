@@ -161,6 +161,11 @@ Canisters: {
 			DisplayName: Test Test
 			Tooltip: ""
 		}
+
+		TheColony: {
+			DisplayName: The Colony
+			Tooltip: ""
+		}
 	}
 
 	Buffs: {
