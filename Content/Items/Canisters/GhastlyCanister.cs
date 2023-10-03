@@ -30,8 +30,8 @@ public class GhastlyCanister : CanisterItem
 		}
 
 		damage /= 6;
-		amount += 5;
-		spread = 0.25f;
+		amount *= 6;
+		spread += 0.25f;
 	}
 
 	public override void AddRecipes() {
