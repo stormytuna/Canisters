@@ -3,7 +3,6 @@ using Canisters.Helpers;
 using Canisters.Helpers.Abstracts;
 using Microsoft.Xna.Framework;
 using Terraria;
-using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -55,20 +54,22 @@ public class BarkBellowerGlobalNPC : GlobalNPC
 	}
 }
 
-public class BarkBellowerGlobalProjectile : GlobalProjectile
+public class BarkBellowerGlobalProjectile : ShotByWeaponGlobalProjectile<BarkBellower>
 {
+	/*
 	private bool shouldApply;
 
 	public override bool InstancePerEntity => true;
 
 	public override void OnSpawn(Projectile projectile, IEntitySource source) {
-		bool shotByBarkBellower = source is EntitySource_ItemUse_WithAmmo withAmmoSource && withAmmoSource.Item.ModItem is BarkBellower;
-		bool appliesToParent = source is EntitySource_Parent parentSource && parentSource.Entity is Projectile parentProjectile && parentProjectile.GetGlobalProjectile<BarkBellowerGlobalProjectile>().shouldApply;
+		bool shotByBarkBellower = source is EntitySource_ItemUse_WithAmmo { Item.ModItem: BarkBellower };
+		bool appliesToParent = source is EntitySource_Parent { Entity: Projectile parentProjectile } && parentProjectile.GetGlobalProjectile<BarkBellowerGlobalProjectile>().shouldApply;
 		shouldApply = shotByBarkBellower || appliesToParent;
 	}
+	*/
 
 	public override void AI(Projectile projectile) {
-		if (!shouldApply || projectile.hide || Main.rand.NextBool(4, 5)) {
+		if (!ShouldApply || projectile.hide || Main.rand.NextBool(4, 5)) {
 			return;
 		}
 
@@ -78,7 +79,7 @@ public class BarkBellowerGlobalProjectile : GlobalProjectile
 	}
 
 	public override void OnHitNPC(Projectile projectile, NPC target, NPC.HitInfo hit, int damageDone) {
-		if (!shouldApply || Main.rand.NextBool(2, 3)) {
+		if (!ShouldApply || Main.rand.NextBool(2, 3)) {
 			return;
 		}
 

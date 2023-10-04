@@ -16,13 +16,13 @@ public class HarmonicCanister : CanisterProjectile
 	public override string Texture => "Canisters/Content/Items/Canisters/HarmonicCanister";
 
 	public override void OnExplode() {
-		SoundEngine.PlaySound(SoundID.DD2_GoblinBomb, Projectile.Center);
-
-		Projectile.CreateExplosion(96, 96);
-
 		Projectile explosionProj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<HarmonicExplosion>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
 		explosionProj.originalDamage = Projectile.originalDamage;
 
 		// TODO: Dust explosion
+
+		SoundEngine.PlaySound(SoundID.DD2_GoblinBomb, Projectile.Center);
+
+		Projectile.CreateExplosion(96, 96);
 	}
 }

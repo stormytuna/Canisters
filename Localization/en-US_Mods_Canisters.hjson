@@ -166,6 +166,11 @@ Canisters: {
 			DisplayName: The Colony
 			Tooltip: ""
 		}
+
+		InfernalCannon: {
+			DisplayName: Infernal Cannon
+			Tooltip: ""
+		}
 	}
 
 	Buffs: {

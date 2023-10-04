@@ -41,7 +41,7 @@ public class HelixBolt : ModProjectile
 		// Rotated velocity sine wave motion
 		if (firstFrame) {
 			if (AI_State == 0f) {
-				Projectile.NewProjectile(Terraria.Entity.InheritSource(Entity), Projectile.Center, Projectile.velocity, Type, Projectile.damage, Projectile.knockBack, Projectile.owner, 0f, -1f);
+				Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Projectile.velocity, Type, Projectile.damage, Projectile.knockBack, Projectile.owner, 0f, -1f);
 				AI_State = 1f;
 			}
 

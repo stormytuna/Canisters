@@ -12,7 +12,7 @@ public class TheColony : CanisterUsingWeapon
 {
 	public override FiringType FiringType => FiringType.Depleted;
 
-	public override Vector2 MuzzleOffset => new(30f, -4f);
+	public override Vector2 MuzzleOffset => new(18f, -4f);
 
 	public override void SetDefaults() {
 		// Base stats
@@ -38,7 +38,9 @@ public class TheColony : CanisterUsingWeapon
 		Item.useAmmo = ModContent.ItemType<Canisters.VolatileCanister>();
 	}
 
-	public override Vector2? HoldoutOffset() => new Vector2(-4f, 0f);
+	public override bool CanAccessoryBeEquippedWith(Item equippedItem, Item incomingItem, Player player) => base.CanAccessoryBeEquippedWith(equippedItem, incomingItem, player);
+
+	public override Vector2? HoldoutOffset() => new Vector2(-10f, 0f);
 
 	public override void SafeModifyShootStats(Player player, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback) {
 		velocity = velocity.RotatedByRandom(0.22f);

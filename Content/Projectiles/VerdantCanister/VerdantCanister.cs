@@ -17,8 +17,6 @@ public class VerdantCanister : CanisterProjectile
 	public override string Texture => "Canisters/Content/Items/Canisters/VerdantCanister";
 
 	public override void OnExplode() {
-		SoundEngine.PlaySound(SoundID.DD2_GoblinBomb, Projectile.Center);
-
 		List<float> startRots = Main.rand.NextSegmentedAngles(4, 0.5f);
 		if (Main.myPlayer == Projectile.owner) {
 			for (int i = 0; i < 4; i++) {
@@ -37,6 +35,8 @@ public class VerdantCanister : CanisterProjectile
 		DustHelpers.MakeDustExplosion(Projectile.Center, 10f, DustID.GreenFairy, Main.rand.Next(3, 5), 0f, 4f, 0, 50, 0.8f, 1.3f);
 
 		// TODO: leaf gore
+
+		SoundEngine.PlaySound(SoundID.DD2_GoblinBomb, Projectile.Center);
 
 		Projectile.CreateExplosion(96, 96);
 	}
