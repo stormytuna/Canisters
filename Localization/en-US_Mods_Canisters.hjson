@@ -169,6 +169,11 @@ Canisters: {
 
 		InfernalCannon: {
 			DisplayName: Infernal Cannon
+			Tooltip: Canisters are wreathed in Shadowflame
+		}
+
+		RepurposedSprayBottle: {
+			DisplayName: Repurposed Spray Bottle
 			Tooltip: ""
 		}
 	}
