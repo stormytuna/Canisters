@@ -52,7 +52,7 @@ public class InfernalCannonGlobalProjectile : ShotByWeaponGlobalProjectile<Infer
 	// TODO: Dust while travelling	
 
 	public override void OnHitNPC(Projectile projectile, NPC target, NPC.HitInfo hit, int damageDone) {
-		if (ShouldApply || Main.rand.NextBool(2, 3)) {
+		if (!ShouldApply || Main.rand.NextBool(2, 3)) {
 			return;
 		}
 
