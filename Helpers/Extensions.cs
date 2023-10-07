@@ -6,7 +6,6 @@ using Terraria.Utilities;
 
 namespace Canisters.Helpers;
 
-// TODO: Refactor these into various static classes
 public static class Extensions
 {
 	/// <summary>

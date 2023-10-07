@@ -5,7 +5,6 @@ using Terraria.ModLoader;
 
 namespace Canisters.Content.Projectiles.GhastlyCanister;
 
-// TODO: Probably abstract this and other emitters into ProjectileEmitter base class
 public class GhastlyExplosionEmitter : ModProjectile
 {
 	private const float ExplosionEmissionRange = 100f;
