@@ -30,7 +30,6 @@ public class AncientSprayer : CanisterUsingWeapon
 		Item.autoReuse = true;
 		Item.noMelee = true;
 		Item.noUseGraphic = true;
-		Item.channel = true;
 
 		// Weapon stats
 		Item.shoot = ModContent.ProjectileType<VolatileCanister>();
