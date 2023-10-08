@@ -13,7 +13,7 @@ public class Icemire : CanisterUsingWeapon
 {
 	public override FiringType FiringType => FiringType.Launched;
 
-	public override Vector2 MuzzleOffset => new(36f, 0f);
+	public override Vector2 MuzzleOffset => new(52f, 0f);
 
 	public override void SetDefaults() {
 		// Base stats
@@ -63,9 +63,9 @@ public class IcemireGlobalProjectile : ShotByWeaponGlobalProjectile<Icemire>
 
 public class IcemireGlobalNPC : GlobalNPC
 {
-	public override bool AppliesToEntity(NPC entity, bool lateInstantiation) => entity.type == NPCID.IceElemental;
+	public override bool AppliesToEntity(NPC entity, bool lateInstantiation) => entity.type == NPCID.ArmoredViking || entity.type == NPCID.IceTortoise;
 
 	public override void ModifyNPCLoot(NPC npc, NPCLoot npcLoot) {
-		npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<Icemire>(), 100));
+		npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<Icemire>(), 50));
 	}
 }
