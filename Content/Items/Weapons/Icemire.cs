@@ -66,6 +66,6 @@ public class IcemireGlobalNPC : GlobalNPC
 	public override bool AppliesToEntity(NPC entity, bool lateInstantiation) => entity.type == NPCID.IceElemental;
 
 	public override void ModifyNPCLoot(NPC npc, NPCLoot npcLoot) {
-		npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<Icemire>(), 40));
+		npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<Icemire>(), 50));
 	}
 }
