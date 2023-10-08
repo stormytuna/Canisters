@@ -176,6 +176,11 @@ Canisters: {
 			DisplayName: Repurposed Spray Bottle
 			Tooltip: ""
 		}
+
+		Icemire: {
+			DisplayName: Icemire
+			Tooltip: ""
+		}
 	}
 
 	Buffs: {
