@@ -180,6 +180,10 @@ Canisters: {
 		Icemire: {
 			DisplayName: Icemire
 			Tooltip: ""
+
+		Resonance: {
+			DisplayName: Resonance
+			Tooltip: "Fires two projectiles in harmony"
 		}
 	}
 

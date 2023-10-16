@@ -15,6 +15,7 @@ public abstract class CanisterUsingWeapon : ModItem
 {
 	public virtual void SafeModifyShootStats(Player player, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback) { }
 	public virtual void ApplyShootStats(ref Vector2 velocity, ref Vector2 position, ref int damage, ref float knockBack, ref int amount, ref float spread) { }
+	public virtual void ShootProjectile(EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback, int owner) => Projectile.NewProjectile(source, position, velocity, type, damage, knockback, owner);
 
 	public abstract FiringType FiringType { get; }
 
@@ -53,7 +54,7 @@ public abstract class CanisterUsingWeapon : ModItem
 		}
 	}
 
-	public sealed override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback) {
+	public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback) {
 		if (ItemLoader.GetItem(source.AmmoItemIdUsed) is not CanisterItem canisterItem) {
 			return true;
 		}
@@ -68,7 +69,7 @@ public abstract class CanisterUsingWeapon : ModItem
 
 		for (int i = 0; i < amount; i++) {
 			Vector2 perturbedVelocity = i == 0 ? velocity : velocity.RotatedByRandom(spread); // Forces one projectile to go towards the cursor
-			Projectile.NewProjectile(source, position, perturbedVelocity, type, damage, knockback, player.whoAmI);
+			ShootProjectile(source, position, perturbedVelocity, type, damage, knockback, player.whoAmI);
 		}
 
 		return false;
