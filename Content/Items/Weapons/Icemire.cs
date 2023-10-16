@@ -24,9 +24,9 @@ public class Icemire : CanisterUsingWeapon
 
 		// Use stats
 		Item.useStyle = ItemUseStyleID.Shoot;
-		Item.useTime = 18;
-		Item.useAnimation = 18 * 3;
-		Item.reuseDelay = 20;
+		Item.useTime = 24;
+		Item.useAnimation = 24 * 3;
+		Item.reuseDelay = 40;
 		Item.autoReuse = true;
 		Item.noMelee = true;
 		Item.noUseGraphic = true;

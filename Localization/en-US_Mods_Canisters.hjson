@@ -179,7 +179,8 @@ Canisters: {
 
 		Icemire: {
 			DisplayName: Icemire
-			Tooltip: ""
+			Tooltip: "Fires a short burst of canisters coated in frostbite crystals"
+		}
 
 		Resonance: {
 			DisplayName: Resonance
