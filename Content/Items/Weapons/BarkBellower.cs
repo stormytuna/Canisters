@@ -55,18 +55,6 @@ public class BarkBellowerGlobalNPC : GlobalNPC
 
 public class BarkBellowerGlobalProjectile : ShotByWeaponGlobalProjectile<BarkBellower>
 {
-	/*
-	private bool shouldApply;
-
-	public override bool InstancePerEntity => true;
-
-	public override void OnSpawn(Projectile projectile, IEntitySource source) {
-		bool shotByBarkBellower = source is EntitySource_ItemUse_WithAmmo { Item.ModItem: BarkBellower };
-		bool appliesToParent = source is EntitySource_Parent { Entity: Projectile parentProjectile } && parentProjectile.GetGlobalProjectile<BarkBellowerGlobalProjectile>().shouldApply;
-		shouldApply = shotByBarkBellower || appliesToParent;
-	}
-	*/
-
 	public override void AI(Projectile projectile) {
 		if (!ShouldApply || projectile.hide || Main.rand.NextBool(4, 5)) {
 			return;
