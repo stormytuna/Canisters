@@ -50,7 +50,15 @@ public class Icemire : CanisterUsingWeapon
 
 public class IcemireGlobalProjectile : ShotByWeaponGlobalProjectile<Icemire>
 {
-	// TODO: Dust when travelling
+	public override void AI(Projectile projectile) {
+		if (!ShouldApply || projectile.hide || Main.rand.NextBool(4, 5)) {
+			return;
+		}
+
+		Dust dust = Dust.NewDustDirect(projectile.position, projectile.width, projectile.height, DustID.Frost);
+		dust.noGravity = true;
+		dust.noLight = true;
+	}
 
 	public override void OnHitNPC(Projectile projectile, NPC target, NPC.HitInfo hit, int damageDone) {
 		if (!ShouldApply || Main.rand.NextBool(2, 3)) {
