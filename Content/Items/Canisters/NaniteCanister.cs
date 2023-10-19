@@ -24,5 +24,11 @@ public class NaniteCanister : CanisterItem
 		Item.knockBack = 2f;
 	}
 
-	// TODO: Recipe lmao
+	public override void AddRecipes() {
+		CreateRecipe(300)
+			.AddIngredient<EmptyCanister>(300)
+			.AddIngredient(ItemID.Nanites, 5)
+			.AddTile(TileID.Bottles)
+			.Register();
+	}
 }

@@ -40,7 +40,21 @@ public class Resonance : CanisterUsingWeapon
 		Item.useAmmo = ModContent.ItemType<Canisters.VolatileCanister>();
 	}
 
-	// TODO: Recipe lol
+	public override void AddRecipes() {
+		CreateRecipe()
+			.AddIngredient(ItemID.LightShard)
+			.AddIngredient(ItemID.DarkShard)
+			.AddIngredient(ItemID.MythrilBar, 16)
+			.AddTile(TileID.MythrilAnvil)
+			.Register();
+
+		CreateRecipe()
+			.AddIngredient(ItemID.LightShard)
+			.AddIngredient(ItemID.DarkShard)
+			.AddIngredient(ItemID.PalladiumBar, 16)
+			.AddTile(TileID.MythrilAnvil)
+			.Register();
+	}
 
 	public override Vector2? HoldoutOffset() => new Vector2(-4f, 4f);
 

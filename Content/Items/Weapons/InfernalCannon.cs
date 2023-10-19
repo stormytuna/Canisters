@@ -44,7 +44,12 @@ public class InfernalCannon : CanisterUsingWeapon
 		velocity = velocity.RotatedByRandom(0.11f);
 	}
 
-	// TODO: Recipe lol
+	public override void AddRecipes() {
+		CreateRecipe()
+			.AddIngredient(ItemID.HellstoneBar)
+			.AddTile(TileID.Hellforge)
+			.Register();
+	}
 }
 
 public class InfernalCannonGlobalProjectile : ShotByWeaponGlobalProjectile<InfernalCannon>
