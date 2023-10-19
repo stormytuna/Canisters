@@ -19,8 +19,8 @@ public class HarmonicCanister : CanisterProjectile
 		Projectile explosionProj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<HarmonicExplosion>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
 		explosionProj.originalDamage = Projectile.originalDamage;
 
-		DustHelpers.MakeDustExplosion(Projectile.Center, 16f, DustID.PinkTorch, 15, 2f, 3f);
-		DustHelpers.MakeDustExplosion(Projectile.Center, 16f, DustID.PurpleTorch, 15, 2f, 3f);
+		DustHelpers.MakeDustExplosion(Projectile.Center, 16f, DustID.PinkTorch, 15, 8f, 16f, noGravity: true);
+		DustHelpers.MakeDustExplosion(Projectile.Center, 16f, DustID.PurpleTorch, 15, 8f, 16f, noGravity: true);
 
 		SoundEngine.PlaySound(SoundID.DD2_GoblinBomb, Projectile.Center);
 

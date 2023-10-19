@@ -59,5 +59,8 @@ public class HarmonicExplosion : ModProjectile
 		frameCounter++;
 	}
 
-	// TODO: Dust explosion on death?
+	public override void OnKill(int timeLeft) {
+		DustHelpers.MakeDustExplosion(Projectile.Center, 16f, DustID.PinkTorch, 15, 8f, 16f, noGravity: true);
+		DustHelpers.MakeDustExplosion(Projectile.Center, 16f, DustID.PurpleTorch, 15, 8f, 16f, noGravity: true);
+	}
 }
