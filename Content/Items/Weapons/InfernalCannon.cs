@@ -49,7 +49,16 @@ public class InfernalCannon : CanisterUsingWeapon
 
 public class InfernalCannonGlobalProjectile : ShotByWeaponGlobalProjectile<InfernalCannon>
 {
-	// TODO: Dust while travelling	
+	public override void AI(Projectile projectile) {
+		if (!ShouldApply || projectile.hide || Main.rand.NextBool(4, 5)) {
+			return;
+		}
+
+		Dust dust = Dust.NewDustDirect(projectile.position, projectile.width, projectile.height, DustID.ShadowbeamStaff);
+		dust.scale = Main.rand.NextFloat(1.5f, 2f);
+		dust.noGravity = true;
+		dust.noLight = true;
+	}
 
 	public override void OnHitNPC(Projectile projectile, NPC target, NPC.HitInfo hit, int damageDone) {
 		if (!ShouldApply || Main.rand.NextBool(2, 3)) {
