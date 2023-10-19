@@ -179,12 +179,12 @@ Canisters: {
 
 		Icemire: {
 			DisplayName: Icemire
-			Tooltip: "Fires a short burst of canisters coated in frostbite crystals"
+			Tooltip: Fires a short burst of canisters coated in frostbite crystals
 		}
 
 		Resonance: {
 			DisplayName: Resonance
-			Tooltip: "Fires two projectiles in harmony"
+			Tooltip: Fires two projectiles in harmony
 		}
 	}
 
