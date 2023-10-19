@@ -40,6 +40,8 @@ public class Resonance : CanisterUsingWeapon
 		Item.useAmmo = ModContent.ItemType<Canisters.VolatileCanister>();
 	}
 
+	// TODO: Recipe lol
+
 	public override Vector2? HoldoutOffset() => new Vector2(-4f, 4f);
 
 	// TODO: Effect
