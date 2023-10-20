@@ -58,7 +58,6 @@ public class Resonance : CanisterUsingWeapon
 
 	public override Vector2? HoldoutOffset() => new Vector2(-4f, 4f);
 
-	// TODO: Effect
 	public override void SafeModifyShootStats(Player player, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback) {
 		velocity = velocity.RotatedByRandom(0.08f);
 	}
