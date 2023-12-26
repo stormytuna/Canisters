@@ -1,0 +1,200 @@
+Projectiles: {
+	BlightedBall.DisplayName: Blighted Ball
+	BlightedBolt.DisplayName: Blighted Bolt
+	BlightedCanister.DisplayName: Blighted Canister
+	GlisteningBall.DisplayName: Glistening Ball
+	GlisteningBlob.DisplayName: Glistening Blob
+	GlisteningCanister.DisplayName: Glistening Canister
+	HarmonicCanister.DisplayName: Harmonic Canister
+	HelixBolt.DisplayName: Helix Bolt
+	ToxicBarb.DisplayName: Toxic Barb
+	ToxicCanister.DisplayName: Toxic Canister
+	VerdantCanister.DisplayName: Verdant Canister
+	VerdantGas.DisplayName: Verdant Gas
+	VerdantGas_Helper.DisplayName: Verdant Gas Helper
+	VerdantVine.DisplayName: Verdant Vine
+	GelBall.DisplayName: Gel Ball
+	VolatileCanister.DisplayName: Volatile Canister
+	Nanites.DisplayName: Nanites
+	NaniteCanister.DisplayName: Nanite Canister
+	NaniteBlob.DisplayName: Nanite Blob
+	GhastlyShot.DisplayName: Ghastly Shot
+	GhastlyExplosion.DisplayName: Ghastly Explosion
+	GhastlyCanister.DisplayName: Ghastly Canister
+	LunarCanister.DisplayName: Lunar Canister
+	LunarShot.DisplayName: Lunar Shot
+	LunarExplosion.DisplayName: Lunar Explosion
+	VerdantGasEmitter.DisplayName: Verdant Gas Emitter
+	GhastlyExplosionEmitter.DisplayName: Ghastly Explosion Emitter
+	HarmonicExplosion.DisplayName: Harmonic Explosion
+	LunarLightningEmitter.DisplayName: Lunar Lightning Emitter
+	ToxicFogEmitter.DisplayName: Toxic Fog Emitter
+	ToxicFog.DisplayName: Toxic Fog
+	NaniteMist.DisplayName: Nanite Mist
+	NaniteMistEmitter.DisplayName: Nanite Mist Emitter
+}
+
+Items: {
+	WoodenSlingshot: {
+		Tooltip: ""
+		DisplayName: Wooden Slingshot
+	}
+
+	ModifiedHandgun: {
+		Tooltip: ""
+		DisplayName: Modified Handgun
+	}
+
+	VolatileCanister: {
+		Tooltip:
+			'''
+			Detonates in a fiery explosion when launched
+			Fires a stream of gel that makes enemies vulnerable to fire when depleted
+			'''
+		DisplayName: Volatile Canister
+	}
+
+	VerdantCanister: {
+		Tooltip:
+			'''
+			Bursts into vines when launched
+			Fires a cloud of poison gas when depleted
+			'''
+		DisplayName: Verdant Canister
+	}
+
+	ToxicCanister: {
+		Tooltip:
+			'''
+			Leaks a toxic aura when launched
+			Fires smart-bouncing venomous barbs when depleted
+			'''
+		DisplayName: Toxic Canister
+	}
+
+	HarmonicCanister: {
+		Tooltip:
+			'''
+			Erupts with harmonic energy when launched
+			Fires a spiraling helix when depleted
+			'''
+		DisplayName: Harmonic Canister
+	}
+
+	GlisteningCanister: {
+		Tooltip:
+			'''
+			Explodes into 3 bouncing ichor balls when launched
+			Fires a splitting blobs of ichor when depleted
+			'''
+		DisplayName: Glistening Canister
+	}
+
+	EmptyCanister: {
+		Tooltip: Used to craft various types of ammo
+		DisplayName: Empty Canister
+	}
+
+	BlightedCanister: {
+		Tooltip:
+			'''
+			Releases a spiral of 5 cursed fireballs when launched
+			Fires a lightning bolt of cursed energy when depleted
+			'''
+		DisplayName: Blighted Canister
+	}
+
+	NaniteCanister: {
+		Tooltip:
+			'''
+			Explodes into a swarm of nanites when launched
+			Fires a blob of nanites when depleted
+			'''
+		DisplayName: Nanite Canister
+	}
+
+	GhastlyCanister: {
+		Tooltip:
+			'''
+			Explodes into a cluster bomb when launched
+			Fires a shotgun blast of quick spectral bolts when depleted
+			'''
+		DisplayName: Ghastly Canister
+	}
+
+	LunarCanister: {
+		Tooltip:
+			'''
+			Explodes, calling a burst of lightning when launched
+			Fires lunar bolts that pierce, explode and home in on enemies when depleted
+			'''
+		DisplayName: Lunar Canister
+	}
+
+	GraniteCannon: {
+		DisplayName: Granite Cannon
+		Tooltip: ""
+	}
+
+	AncientSprayer: {
+		Tooltip: ""
+		DisplayName: Ancient Sprayer
+	}
+
+	BarkBellower: {
+		DisplayName: Bark Bellower
+		Tooltip: Shots inflict Nature's Bane
+	}
+
+	LushSlinger: {
+		Tooltip: ""
+		DisplayName: Lush Slinger
+	}
+
+	TheColony: {
+		DisplayName: The Colony
+		Tooltip: ""
+	}
+
+	InfernalCannon: {
+		DisplayName: Infernal Cannon
+		Tooltip: Canisters are wreathed in Shadowflame
+	}
+
+	RepurposedSprayBottle: {
+		DisplayName: Repurposed Spray Bottle
+		Tooltip: ""
+	}
+
+	Icemire: {
+		DisplayName: Icemire
+		Tooltip: Fires a short burst of canisters coated in frostbite crystals
+	}
+
+	Resonance: {
+		DisplayName: Resonance
+		Tooltip: Fires two projectiles in harmony
+	}
+
+	Pneumaticannon: {
+		DisplayName: Pneumati-cannon
+		Tooltip: ""
+	}
+
+	SlimeySlinger: {
+		DisplayName: Slimey Slinger
+		Tooltip: ""
+	}
+
+	Splattergun: {
+		DisplayName: Splattergun
+		Tooltip: ""
+	}
+}
+
+Buffs: {
+	Devoured: {
+		Description: Nanite time
+		DisplayName: Devoured
+	}
+}
