@@ -71,6 +71,8 @@ public class SlimySlingerGlobalProjectile : ShotByWeaponGlobalProjectile<SlimeyS
 
         return false;
     }
+
+    // TODO: Some visuals as it depletes bounces?
 }
 
 // TODO: GlobalNPC to actually aquire it

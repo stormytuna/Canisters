@@ -33,6 +33,15 @@ Go through each canister and weapon, tweak visuals:
 - Possibly refactor `CanisterUsingWeapon` to not *require* canister using weapons to have `_Canister` and `_Base`
   sprites
 
+## Item stuff
+
+- Make sure recipes make sense
+- Make sure prices make sense
+- May have made some weapons with incorrect width/heights :3
+- Make sure using correct helper method - `Item.(buy|sell)Price` are NPC focused, should be using `Item.buyPrice` where an item is **not** bought
+- Come up with some way to say whether a weapon launches or depletes - probably just implement `ModifyTooltips` in `CanisterUsingWeapon`
+- Go through each items tooltip, make sure they make sense
+
 # Low priority
 
 ## Achievements
