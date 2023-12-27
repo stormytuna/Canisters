@@ -16,15 +16,14 @@ public class Splattergun : CanisterUsingWeapon
 
     public override void SetDefaults() {
         // Base stats
-        Item.width = 50;
-        Item.height = 22;
-        Item.value = Item.sellPrice(gold: 4);
+        Item.width = 30;
+        Item.height = 26;
+        Item.value = Item.buyPrice(gold: 2, silver: 50);
         Item.rare = ItemRarityID.LightRed;
 
         // Use stats
         Item.useStyle = ItemUseStyleID.Shoot;
-        Item.useTime = 8;
-        Item.useAnimation = 8;
+        Item.useTime = Item.useAnimation = 8;
         Item.autoReuse = true;
         Item.noMelee = true;
         Item.noUseGraphic = true;

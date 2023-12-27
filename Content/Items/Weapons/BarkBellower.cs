@@ -18,7 +18,7 @@ public class BarkBellower : CanisterUsingWeapon
 		// Base stats
 		Item.width = 44;
 		Item.height = 20;
-		Item.value = Item.buyPrice(gold: 15);
+		Item.value = Item.sellPrice(gold: 15);
 		Item.rare = ItemRarityID.Green;
 
 		// Use stats

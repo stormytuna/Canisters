@@ -21,7 +21,7 @@ public class AncientSprayer : CanisterUsingWeapon
 		// Base stats
 		Item.width = 60;
 		Item.height = 14;
-		Item.value = Item.sellPrice(silver: 40);
+		Item.value = Item.buyPrice(silver: 40);
 		Item.rare = ItemRarityID.Blue;
 
 		// Use stats

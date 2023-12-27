@@ -18,7 +18,7 @@ public class LushSlinger : CanisterUsingWeapon
 		// Base stats
 		Item.width = 20;
 		Item.height = 32;
-		Item.value = Item.sellPrice(silver: 60);
+		Item.value = Item.buyPrice(silver: 85);
 		Item.rare = ItemRarityID.Orange;
 
 		// Use stats

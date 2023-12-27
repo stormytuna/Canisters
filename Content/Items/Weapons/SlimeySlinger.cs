@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Canisters.Content.Projectiles.VolatileCanister;
+﻿using Canisters.Content.Projectiles.VolatileCanister;
 using Canisters.Helpers;
 using Canisters.Helpers.Abstracts;
 using Microsoft.Xna.Framework;
-using Terraria.ID;
 using Terraria;
+using Terraria.ID;
 using Terraria.ModLoader;
-using Terraria.DataStructures;
 
 namespace Canisters.Content.Items.Weapons;
 
@@ -18,13 +12,13 @@ public class SlimeySlinger : CanisterUsingWeapon
 {
     public override FiringType FiringType => FiringType.Launched;
 
-    public override Vector2 MuzzleOffset => new(0f, 0f);
+    public override Vector2 MuzzleOffset => new(12f, -10f);
 
     public override void SetDefaults() {
         // Base stats
-        Item.width = 50;
-        Item.height = 22;
-        Item.value = Item.sellPrice(gold: 4);
+        Item.width = 20;
+        Item.height = 32;
+        Item.value = Item.buyPrice(gold: 1);
         Item.rare = ItemRarityID.Pink;
 
         // Use stats
@@ -44,10 +38,10 @@ public class SlimeySlinger : CanisterUsingWeapon
         Item.useAmmo = ModContent.ItemType<Canisters.VolatileCanister>();
     }
 
-    public override Vector2? HoldoutOffset() => new Vector2(0f, 0f);
+    public override Vector2? HoldoutOffset() => new Vector2(2f, -2f);
 }
 
-public class SlimySlingerGlobalProjectile : ShotByWeaponGlobalProjectile<SlimeySlinger> 
+public class SlimySlingerGlobalProjectile : ShotByWeaponGlobalProjectile<SlimeySlinger>
 {
     private int numBounces = 3;
 

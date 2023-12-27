@@ -18,7 +18,7 @@ public class WoodenSlingshot : CanisterUsingWeapon
 		// Base stats
 		Item.width = 20;
 		Item.height = 32;
-		Item.value = Item.sellPrice(silver: 2);
+		Item.value = Item.buyPrice(silver: 2);
 		Item.rare = ItemRarityID.Blue;
 
 		// Use stats

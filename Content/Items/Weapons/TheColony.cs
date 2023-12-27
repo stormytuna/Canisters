@@ -18,7 +18,7 @@ public class TheColony : CanisterUsingWeapon
 		// Base stats
 		Item.width = 32;
 		Item.height = 24;
-		Item.value = Item.sellPrice(silver: 70);
+		Item.value = Item.buyPrice(silver: 70);
 		Item.rare = ItemRarityID.Orange;
 
 		// Use stats

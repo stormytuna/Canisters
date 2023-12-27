@@ -21,15 +21,14 @@ public class Pneumaticannon : CanisterUsingWeapon
 
     public override void SetDefaults() {
         // Base stats
-        Item.width = 50;
-        Item.height = 22;
-        Item.value = Item.sellPrice(gold: 4);
-        Item.rare = ItemRarityID.LightRed;
+        Item.width = 48;
+        Item.height = 14;
+        Item.value = Item.sellPrice(gold: 75);
+        Item.rare = ItemRarityID.Pink;
 
         // Use stats
         Item.useStyle = ItemUseStyleID.Shoot;
-        Item.useTime = 32;
-        Item.useAnimation = 32;
+        Item.useTime = Item.useAnimation = 32;
         Item.autoReuse = true;
         Item.noMelee = true;
         Item.noUseGraphic = true;

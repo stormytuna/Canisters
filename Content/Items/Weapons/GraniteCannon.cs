@@ -20,7 +20,7 @@ public class GraniteCannon : CanisterUsingWeapon
 		// Base stats
 		Item.width = 44;
 		Item.height = 16;
-		Item.value = Item.sellPrice(silver: 30);
+		Item.value = Item.buyPrice(silver: 30);
 		Item.rare = ItemRarityID.Blue;
 
 		// Use stats

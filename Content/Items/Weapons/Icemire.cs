@@ -17,10 +17,10 @@ public class Icemire : CanisterUsingWeapon
 
 	public override void SetDefaults() {
 		// Base stats
-		Item.width = 50;
+		Item.width = 74;
 		Item.height = 22;
-		Item.value = Item.sellPrice(gold: 4);
-		Item.rare = ItemRarityID.LightRed;
+		Item.value = Item.buyPrice(gold: 5);
+		Item.rare = ItemRarityID.Pink;
 
 		// Use stats
 		Item.useStyle = ItemUseStyleID.Shoot;

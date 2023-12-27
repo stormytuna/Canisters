@@ -18,7 +18,7 @@ public class InfernalCannon : CanisterUsingWeapon
 		// Base stats
 		Item.width = 54;
 		Item.height = 16;
-		Item.value = Item.sellPrice(silver: 60);
+		Item.value = Item.buyPrice(silver: 50);
 		Item.rare = ItemRarityID.Orange;
 
 		// Use stats

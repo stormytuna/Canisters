@@ -18,7 +18,7 @@ public class ModifiedHandgun : CanisterUsingWeapon
 		// Base stats
 		Item.width = 36;
 		Item.height = 18;
-		Item.value = Item.sellPrice(gold: 2);
+		Item.value = Item.buyPrice(silver: 5);
 		Item.rare = ItemRarityID.Blue;
 
 		// Use stats

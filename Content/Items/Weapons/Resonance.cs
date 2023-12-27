@@ -20,13 +20,12 @@ public class Resonance : CanisterUsingWeapon
 		// Base stats
 		Item.width = 60;
 		Item.height = 20;
-		Item.value = Item.sellPrice(gold: 5);
+		Item.value = Item.buyPrice(gold: 5);
 		Item.rare = ItemRarityID.LightRed;
 
 		// Use stats
 		Item.useStyle = ItemUseStyleID.Shoot;
-		Item.useTime = 8;
-		Item.useAnimation = 8;
+		Item.useTime = Item.useAnimation = 8;
 		Item.autoReuse = true;
 		Item.noMelee = true;
 		Item.noUseGraphic = true;
