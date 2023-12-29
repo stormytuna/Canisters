@@ -3,6 +3,7 @@ using Canisters.Helpers;
 using Canisters.Helpers.Abstracts;
 using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -69,4 +70,21 @@ public class SlimySlingerGlobalProjectile : ShotByWeaponGlobalProjectile<SlimeyS
     // TODO: Some visuals as it depletes bounces?
 }
 
-// TODO: GlobalNPC to actually aquire it
+public class SlimeySlingerGlobalNPC : GlobalNPC 
+{
+    public override bool AppliesToEntity(NPC entity, bool lateInstantiation) => entity.type == NPCID.QueenSlimeBoss;
+
+    public override void ModifyNPCLoot(NPC npc, NPCLoot npcLoot) {
+        LeadingConditionRule notExpertLeadingRule = new LeadingConditionRule(new Conditions.NotExpert());
+        notExpertLeadingRule.OnSuccess(ItemDropRule.Common(ModContent.ItemType<SlimeySlinger>(), 4));
+    }
+}
+
+public class SlimeySlingerGlobalItem : GlobalItem 
+{
+    public override bool AppliesToEntity(Item entity, bool lateInstantiation) => entity.type == ItemID.QueenSlimeBossBag;
+
+    public override void ModifyItemLoot(Item item, ItemLoot itemLoot) {
+        itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<SlimeySlinger>(), 4));
+    }
+}

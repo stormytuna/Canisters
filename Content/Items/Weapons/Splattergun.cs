@@ -37,7 +37,19 @@ public class Splattergun : CanisterUsingWeapon
         Item.useAmmo = ModContent.ItemType<Canisters.VolatileCanister>();
     }
 
-    // TODO: Recipe
+    public override void AddRecipes() {
+        CreateRecipe()
+            .AddIngredient(ItemID.PainterPaintballGun)
+            .AddIngredient(ItemID.OrichalcumBar, 12)
+            .AddTile(TileID.MythrilAnvil)
+            .Register();
+
+        CreateRecipe()
+            .AddIngredient(ItemID.PainterPaintballGun)
+            .AddIngredient(ItemID.MythrilBar, 12)
+            .AddTile(TileID.MythrilAnvil)
+            .Register();
+    }
 
     public override Vector2? HoldoutOffset() => new Vector2(0f, 0f);
 

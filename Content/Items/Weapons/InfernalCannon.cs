@@ -45,7 +45,7 @@ public class InfernalCannon : CanisterUsingWeapon
 
 	public override void AddRecipes() {
 		CreateRecipe()
-			.AddIngredient(ItemID.HellstoneBar)
+			.AddIngredient(ItemID.HellstoneBar, 16)
 			.AddTile(TileID.Hellforge)
 			.Register();
 	}

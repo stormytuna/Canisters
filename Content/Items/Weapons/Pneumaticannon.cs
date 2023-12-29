@@ -50,4 +50,11 @@ public class Pneumaticannon : CanisterUsingWeapon
     }
 }
 
-// TODO: Make it actually sold by the girl!!
+public class PneumaticannonGlobalNPC : GlobalNPC 
+{
+    public override bool AppliesToEntity(NPC entity, bool lateInstantiation) => entity.type == NPCID.Steampunker;
+
+    public override void ModifyShop(NPCShop shop) {
+        shop.Add<Pneumaticannon>();
+    }
+}

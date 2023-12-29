@@ -43,6 +43,7 @@ public class ModifiedHandgun : CanisterUsingWeapon
 		velocity = velocity.RotatedByRandom(0.22f);
 	}
 
+	// TODO: Wtf is this crafting recipe??
 	public override void AddRecipes() {
 		CreateRecipe()
 			.AddIngredient(ItemID.FlintlockPistol)

@@ -44,32 +44,32 @@ public class BarkBellower : CanisterUsingWeapon
 	}
 }
 
+public class BarkBellowerGlobalProjectile : ShotByWeaponGlobalProjectile<BarkBellower>
+{
+    public override void AI(Projectile projectile) {
+        if (!ShouldApply || projectile.hide || Main.rand.NextBool(4, 5)) {
+            return;
+        }
+
+        Dust dust = Dust.NewDustDirect(projectile.position, projectile.width, projectile.height, DustID.DryadsWard);
+        dust.noGravity = true;
+        dust.noLight = true;
+    }
+
+    public override void OnHitNPC(Projectile projectile, NPC target, NPC.HitInfo hit, int damageDone) {
+        if (!ShouldApply || Main.rand.NextBool(2, 3)) {
+            return;
+        }
+
+        target.AddBuff(BuffID.DryadsWardDebuff, 180);
+    }
+}
+
 public class BarkBellowerGlobalNPC : GlobalNPC
 {
 	public override bool AppliesToEntity(NPC entity, bool lateInstantiation) => entity.type == NPCID.Dryad;
 
 	public override void ModifyShop(NPCShop shop) {
 		shop.Add<BarkBellower>(Condition.DownedEowOrBoc);
-	}
-}
-
-public class BarkBellowerGlobalProjectile : ShotByWeaponGlobalProjectile<BarkBellower>
-{
-	public override void AI(Projectile projectile) {
-		if (!ShouldApply || projectile.hide || Main.rand.NextBool(4, 5)) {
-			return;
-		}
-
-		Dust dust = Dust.NewDustDirect(projectile.position, projectile.width, projectile.height, DustID.DryadsWard);
-		dust.noGravity = true;
-		dust.noLight = true;
-	}
-
-	public override void OnHitNPC(Projectile projectile, NPC target, NPC.HitInfo hit, int damageDone) {
-		if (!ShouldApply || Main.rand.NextBool(2, 3)) {
-			return;
-		}
-
-		target.AddBuff(BuffID.DryadsWardDebuff, 180);
 	}
 }
