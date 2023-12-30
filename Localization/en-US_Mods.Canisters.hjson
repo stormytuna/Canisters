@@ -195,6 +195,11 @@ Items: {
 		DisplayName: Reverence
 		Tooltip: ""
 	}
+
+	ChlorophyteSlugger: {
+		DisplayName: Chlorophyte Slugger
+		Tooltip: ""
+	}
 }
 
 Buffs: {
