@@ -46,23 +46,23 @@ public class BarkBellower : CanisterUsingWeapon
 
 public class BarkBellowerGlobalProjectile : ShotByWeaponGlobalProjectile<BarkBellower>
 {
-    public override void AI(Projectile projectile) {
-        if (!ShouldApply || projectile.hide || Main.rand.NextBool(4, 5)) {
-            return;
-        }
+	public override void AI(Projectile projectile) {
+		if (!ShouldApply || projectile.hide || Main.rand.NextBool(4, 5)) {
+			return;
+		}
 
-        Dust dust = Dust.NewDustDirect(projectile.position, projectile.width, projectile.height, DustID.DryadsWard);
-        dust.noGravity = true;
-        dust.noLight = true;
-    }
+		Dust dust = Dust.NewDustDirect(projectile.position, projectile.width, projectile.height, DustID.DryadsWard);
+		dust.noGravity = true;
+		dust.noLight = true;
+	}
 
-    public override void OnHitNPC(Projectile projectile, NPC target, NPC.HitInfo hit, int damageDone) {
-        if (!ShouldApply || Main.rand.NextBool(2, 3)) {
-            return;
-        }
+	public override void OnHitNPC(Projectile projectile, NPC target, NPC.HitInfo hit, int damageDone) {
+		if (!ShouldApply || Main.rand.NextBool(2, 3)) {
+			return;
+		}
 
-        target.AddBuff(BuffID.DryadsWardDebuff, 180);
-    }
+		target.AddBuff(BuffID.DryadsWardDebuff, 180);
+	}
 }
 
 public class BarkBellowerGlobalNPC : GlobalNPC
