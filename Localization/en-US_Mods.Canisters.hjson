@@ -190,6 +190,11 @@ Items: {
 		DisplayName: Splattergun
 		Tooltip: ""
 	}
+
+	Reverence: {
+		DisplayName: Reverence
+		Tooltip: ""
+	}
 }
 
 Buffs: {
