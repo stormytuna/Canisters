@@ -3,7 +3,6 @@ using Canisters.Helpers.Abstracts;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.DataStructures;
-using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace Canisters.Common.DrawLayers;
@@ -18,19 +17,18 @@ public class CanisterWeaponDrawLayer : PlayerDrawLayer
 	public override bool GetDefaultVisibility(PlayerDrawSet drawInfo) {
 		Player drawPlayer = drawInfo.drawPlayer;
 		Item heldItem = drawPlayer.HeldItem;
-		bool usingItem = drawPlayer.itemAnimation > 0 && heldItem.useStyle > ItemUseStyleID.None;
 
-		if (heldItem.ModItem is not CanisterUsingWeapon || !usingItem || drawPlayer.JustDroppedAnItem || drawInfo.shadow != 0f || drawPlayer.CCed || drawPlayer.dead) {
+		if (heldItem.ModItem is not CanisterUsingWeapon || !drawPlayer.ItemAnimationActive || drawPlayer.JustDroppedAnItem || drawInfo.shadow != 0f || drawPlayer.CCed || drawPlayer.dead) {
 			return false;
 		}
 
-		return drawPlayer.PickAmmo(heldItem, out _, out _, out _, out _, out _, true);
+		return drawPlayer.HasAmmo(heldItem);
 	}
 
 	protected override void Draw(ref PlayerDrawSet drawInfo) {
 		Player drawPlayer = drawInfo.drawPlayer;
 		Item heldItem = drawPlayer.HeldItem;
-		if (heldItem.ModItem is not CanisterUsingWeapon canisterWeapon || !drawPlayer.PickAmmo(heldItem, out _, out _, out _, out _, out int usedAmmoItemId, true)) {
+		if (heldItem.ModItem is not CanisterUsingWeapon canisterWeapon || !drawPlayer.TryGetWeaponAmmo(heldItem, out int usedAmmoItemId)) {
 			return;
 		}
 
@@ -50,7 +48,7 @@ public class CanisterWeaponDrawLayer : PlayerDrawLayer
 
 		DrawData canisterDrawData = baseDrawData with {
 			texture = canisterWeapon.CanisterTexture.Value,
-			color = CanisterHelpers.GetCanisterColor(usedAmmoItemId) * GeneralHelpers.GetBrightness(drawInfo.ItemLocation)
+			color = CanisterHelpers.GetCanisterColor(usedAmmoItemId) * TileHelpers.GetBrightness(drawInfo.ItemLocation)
 		};
 		drawInfo.DrawDataCache.Add(canisterDrawData);
 	}

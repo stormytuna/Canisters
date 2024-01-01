@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Canisters.Helpers.Enums;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using Terraria;
@@ -17,7 +18,7 @@ public abstract class CanisterUsingWeapon : ModItem
 	public virtual void ApplyShootStats(ref Vector2 velocity, ref Vector2 position, ref int damage, ref float knockBack, ref int amount, ref float spread) { }
 	public virtual void ShootProjectile(EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback, int owner) => Projectile.NewProjectile(source, position, velocity, type, damage, knockback, owner);
 
-	public abstract FiringType FiringType { get; }
+	public abstract CanisterFiringType CanisterFiringType { get; }
 
 	public virtual Vector2 MuzzleOffset => Vector2.Zero;
 
@@ -61,7 +62,7 @@ public abstract class CanisterUsingWeapon : ModItem
 
 		int amount = 1;
 		float spread = 0f;
-		canisterItem.ApplyAmmoStats(FiringType == FiringType.Launched, ref velocity, ref position, ref damage, ref knockback, ref amount, ref spread);
+		canisterItem.ApplyAmmoStats(CanisterFiringType == CanisterFiringType.Launched, ref velocity, ref position, ref damage, ref knockback, ref amount, ref spread);
 		ApplyShootStats(ref velocity, ref position, ref damage, ref knockback, ref amount, ref spread);
 
 		// Corrects our recoil simulation

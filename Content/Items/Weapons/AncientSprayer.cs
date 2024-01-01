@@ -1,6 +1,7 @@
 ﻿using Canisters.Content.Projectiles.VolatileCanister;
 using Canisters.Helpers;
 using Canisters.Helpers.Abstracts;
+using Canisters.Helpers.Enums;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
@@ -13,7 +14,7 @@ namespace Canisters.Content.Items.Weapons;
 
 public class AncientSprayer : CanisterUsingWeapon
 {
-	public override FiringType FiringType => FiringType.Depleted;
+	public override CanisterFiringType CanisterFiringType => CanisterFiringType.Depleted;
 
 	public override Vector2 MuzzleOffset => new(52f, 0f);
 

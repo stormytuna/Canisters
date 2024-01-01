@@ -15,7 +15,7 @@ public class HarmonicCanister : CanisterItem
 
 	public override void SafeSetDefaults() {
 		// Base stats
-		Item.value = Item.sellPrice(silver: 9);
+		Item.value = Item.buyPrice(silver: 9);
 		Item.rare = ItemRarityID.LightRed;
 
 		// Weapon stats

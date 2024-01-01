@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using Canisters.Content.Projectiles.VolatileCanister;
-using Canisters.Helpers;
 using Canisters.Helpers.Abstracts;
+using Canisters.Helpers.Enums;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.GameContent.ItemDropRules;
@@ -12,7 +12,7 @@ namespace Canisters.Content.Items.Weapons;
 
 public class GraniteCannon : CanisterUsingWeapon
 {
-	public override FiringType FiringType => FiringType.Launched;
+	public override CanisterFiringType CanisterFiringType => CanisterFiringType.Launched;
 
 	public override Vector2 MuzzleOffset => new(36f, 0f);
 

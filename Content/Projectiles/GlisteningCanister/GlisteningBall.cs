@@ -27,7 +27,6 @@ public class GlisteningBall : ModProjectile
 	private bool IsParent => Projectile.ai[0] == 0f;
 
 	public override void AI() {
-		// Dust
 		for (int i = 0; i < 3; i++) {
 			if (Main.rand.NextBool()) {
 				Dust d = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.IchorTorch, Alpha: Main.rand.Next(100, 200), Scale: Main.rand.NextFloat(1f, 1.2f));
@@ -44,7 +43,6 @@ public class GlisteningBall : ModProjectile
 			}
 		}
 
-		// Lighting
 		Lighting.AddLight(Projectile.Center, TorchID.Ichor);
 	}
 

@@ -15,7 +15,7 @@ public class GhastlyCanister : CanisterItem
 
 	public override void SafeSetDefaults() {
 		// Base stats
-		Item.value = Item.sellPrice(copper: 5);
+		Item.value = Item.buyPrice(copper: 5);
 		Item.rare = ItemRarityID.Yellow;
 
 		// Weapon stats

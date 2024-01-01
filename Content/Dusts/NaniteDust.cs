@@ -15,7 +15,7 @@ public class NaniteDust : ModDust
 		Lighting.AddLight(dust.position, 0.2f, 0f, 0f);
 		dust.rotation = Main.rand.NextRadian();
 
-		if (dust.customData is Projectile projectile && projectile.active) {
+		if (dust.customData is Projectile { active: true } projectile) {
 			dust.position = Main.rand.NextVector2Circular(projectile.width / 2, projectile.height / 2) + projectile.Center;
 			return false;
 		}

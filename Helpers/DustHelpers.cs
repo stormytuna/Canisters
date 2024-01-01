@@ -35,7 +35,7 @@ public static class DustHelpers
 	/// <param name="sway">How far away from the center line the zigzag offset is allowed to be</param>
 	/// <param name="jagednessNumerator">How strictly the sway is moved back towards the center, usually don't make this higher than 2</param>
 	public static void MakeLightningDust(Vector2 source, Vector2 dest, int dustId, float scale, float sway = 80f, float jagednessNumerator = 1f) {
-		List<Vector2> dustPoints = GeneralHelpers.CreateLightningBolt(source, dest, sway, jagednessNumerator);
+		List<Vector2> dustPoints = MathHelpers.CreateLightningBolt(source, dest, sway, jagednessNumerator);
 
 		for (int i = 1; i < dustPoints.Count; i++) {
 			Vector2 start = dustPoints[i - 1];
@@ -51,5 +51,11 @@ public static class DustHelpers
 				d.velocity = Main.rand.NextVector2Circular(0.3f, 0.3f);
 			}
 		}
+	}
+
+	public static void MakeDebugDust(Vector2 position, Color color) {
+		Dust d = Dust.NewDustPerfect(position, 303, newColor: color);
+		d.velocity = Vector2.Zero;
+		d.noGravity = true;
 	}
 }

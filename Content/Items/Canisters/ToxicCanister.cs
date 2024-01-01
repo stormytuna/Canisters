@@ -15,7 +15,7 @@ public class ToxicCanister : CanisterItem
 
 	public override void SafeSetDefaults() {
 		// Base stats
-		Item.value = Item.sellPrice(silver: 3);
+		Item.value = Item.buyPrice(silver: 3);
 		Item.rare = ItemRarityID.LightRed;
 
 		// Weapon stats

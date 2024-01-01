@@ -68,7 +68,7 @@ public class LunarShot : ModProjectile
 				return;
 			}
 
-			GeneralHelpers.SmoothHoming(Projectile, Target.Center, Acceleration, TopSpeed, bufferZone: false);
+			EntityHelpers.SmoothHoming(Projectile, Target.Center, Acceleration, TopSpeed, bufferZone: false);
 
 			return;
 		}

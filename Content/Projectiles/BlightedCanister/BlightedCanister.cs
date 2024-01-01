@@ -6,6 +6,7 @@ using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
+using static Microsoft.Xna.Framework.MathHelper;
 
 namespace Canisters.Content.Projectiles.BlightedCanister;
 
@@ -20,7 +21,7 @@ public class BlightedCanister : CanisterProjectile
 		float rotationOffset = Main.rand.NextRadian();
 		float sign = MathF.Sign(Main.rand.NextFloat(-1f, 1f));
 		for (int i = 0; i < 5; i++) {
-			float rot = i / 5f * MathHelper.TwoPi + rotationOffset;
+			float rot = i / 5f * TwoPi + rotationOffset;
 			Vector2 velocity = rot.ToRotationVector2() * 3f;
 			Vector2 positionOffset = velocity * 2f;
 			Vector2 position = Projectile.Center + positionOffset;

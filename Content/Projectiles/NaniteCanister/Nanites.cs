@@ -82,7 +82,7 @@ public class Nanites : ModProjectile
 			return;
 		}
 
-		GeneralHelpers.SmoothHoming(Projectile, Target.Center, Acceleration, TopSpeed, Target.velocity, false);
+		EntityHelpers.SmoothHoming(Projectile, Target.Center, Acceleration, TopSpeed, Target.velocity, false);
 
 		Projectile.timeLeft++;
 	}

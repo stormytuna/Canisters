@@ -1,6 +1,6 @@
 ﻿using Canisters.Content.Projectiles.VolatileCanister;
-using Canisters.Helpers;
 using Canisters.Helpers.Abstracts;
+using Canisters.Helpers.Enums;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
@@ -10,7 +10,7 @@ namespace Canisters.Content.Items.Weapons;
 
 public class WoodenSlingshot : CanisterUsingWeapon
 {
-	public override FiringType FiringType => FiringType.Launched;
+	public override CanisterFiringType CanisterFiringType => CanisterFiringType.Launched;
 
 	public override Vector2 MuzzleOffset => new(12f, -10f);
 

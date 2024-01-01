@@ -59,7 +59,7 @@ public class ToxicBarb : ModProjectile
 			Timer = 0f;
 
 			Vector2 oldVelocity = Projectile.velocity;
-			Projectile.velocity = GeneralHelpers.RotateTowards(Projectile.velocity, closestNpc.Center, Projectile.Center);
+			Projectile.velocity = MathHelpers.RotateTowards(Projectile.velocity, closestNpc.Center, Projectile.Center);
 
 			Vector2 bisection = (oldVelocity + Projectile.velocity).SafeNormalize(Vector2.Zero);
 			Vector2 dustDirection = bisection.RotatedBy(3 * PiOver2);

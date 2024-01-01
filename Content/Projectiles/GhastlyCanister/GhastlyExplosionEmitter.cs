@@ -32,8 +32,4 @@ public class GhastlyExplosionEmitter : ModProjectile
 
 		Timer++;
 	}
-
-	public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone) {
-		Main.NewText("guh");
-	}
 }

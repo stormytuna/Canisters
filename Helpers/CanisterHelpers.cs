@@ -19,7 +19,7 @@ public static class CanisterHelpers
 	}
 
 	public static Color GetCanisterColorForHeldItem(Player player) {
-		if (player.HeldItem.ModItem is CanisterUsingWeapon && player.PickAmmo(player.HeldItem, out _, out _, out _, out _, out int canisterItemId, true)) {
+		if (player.HeldItem.ModItem is CanisterUsingWeapon && player.TryGetWeaponAmmo(player.HeldItem, out int canisterItemId)) {
 			return GetCanisterColor(canisterItemId);
 		}
 

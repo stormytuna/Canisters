@@ -40,6 +40,7 @@ public abstract class CanisterProjectile : ModProjectile
 	}
 
 	protected void TryExplode() {
+		// TODO: Decouple this from projectile alpha, just use a bool field?
 		if (Projectile.owner != Main.myPlayer || Projectile.alpha == 255) {
 			return;
 		}

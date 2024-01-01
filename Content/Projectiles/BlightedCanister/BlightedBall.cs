@@ -34,17 +34,13 @@ public class BlightedBall : ModProjectile
 	}
 
 	public override void AI() {
-		// Dust
 		if (Main.rand.NextBool()) {
 			Dust d = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.CursedTorch, Scale: Main.rand.NextFloat(1f, 1.2f));
 			d.noGravity = true;
 			d.noLight = true;
 		}
 
-		// Rotate velocity so it spins around
 		Projectile.velocity = Projectile.velocity.RotatedBy(Projectile.ai[0] * 0.07f);
-
-		// Point where it's travelling
 		Projectile.rotation = Projectile.velocity.ToRotation() + MathHelper.PiOver2;
 	}
 
@@ -71,7 +67,7 @@ public class BlightedBall : ModProjectile
 		Main.instance.LoadProjectile(Type);
 		Texture2D texture = TextureAssets.Projectile[Type].Value;
 
-		// Draw our afterimages
+		// Draw afterimages
 		for (int i = 1; i < Projectile.oldPos.Length; i += 2) {
 			Vector2 position = Projectile.oldPos[i] - Main.screenPosition + new Vector2(Projectile.width / 2, Projectile.height / 2);
 			Rectangle sourceRect = new(0, 0, texture.Width, texture.Height);

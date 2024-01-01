@@ -1,6 +1,7 @@
 ﻿using Canisters.Content.Projectiles.VerdantCanister;
 using Canisters.Helpers.Abstracts;
 using Microsoft.Xna.Framework;
+using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -14,7 +15,7 @@ public class VerdantCanister : CanisterItem
 
 	public override void SafeSetDefaults() {
 		// Base stats
-		Item.value = 2;
+		Item.value = Item.buyPrice(copper: 75);
 		Item.rare = ItemRarityID.Green;
 
 		// Weapon stats

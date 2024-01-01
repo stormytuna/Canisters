@@ -1,6 +1,6 @@
 ﻿using Canisters.Content.Projectiles.VolatileCanister;
-using Canisters.Helpers;
 using Canisters.Helpers.Abstracts;
+using Canisters.Helpers.Enums;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.DataStructures;
@@ -11,7 +11,7 @@ namespace Canisters.Content.Items.Weapons;
 
 public class Pneumaticannon : CanisterUsingWeapon
 {
-	public override FiringType FiringType => FiringType.Launched;
+	public override CanisterFiringType CanisterFiringType => CanisterFiringType.Launched;
 
 	public override Vector2 MuzzleOffset => new(22f, -2f);
 

@@ -1,4 +1,5 @@
 ﻿using Canisters.Content.Items.Canisters;
+using Canisters.Helpers.Enums;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ModLoader;
@@ -46,7 +47,7 @@ public abstract class CanisterItem : ModItem
 			return;
 		}
 
-		type = canisterWeapon.FiringType == FiringType.Depleted ? DepletedProjectileType : LaunchedProjectileType;
+		type = canisterWeapon.CanisterFiringType == CanisterFiringType.Depleted ? DepletedProjectileType : LaunchedProjectileType;
 		SafePickAmmo(weapon, player, ref type, ref speed, ref damage, ref knockback);
 	}
 }
