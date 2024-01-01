@@ -1,4 +1,5 @@
-﻿using Canisters.Helpers;
+﻿using Canisters.Content.Dusts;
+using Canisters.Helpers;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.Audio;
@@ -22,6 +23,7 @@ public class GelBall : ModProjectile
 		Projectile.width = 10;
 		Projectile.height = 10;
 		Projectile.aiStyle = -1;
+		Projectile.alpha = 120;
 		Projectile.extraUpdates = 1;
 
 		// Weapon stats
@@ -43,11 +45,14 @@ public class GelBall : ModProjectile
 		AI_FrameCounter++;
 
 		// Make dust
-		for (int i = 0; i < 3; i++) {
-			// Our base dust properties
-			Dust dust = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.Water, Scale: Main.rand.NextFloat(1f, 1.2f));
-			dust.velocity *= 0.2f;
+		if (Main.rand.NextBool()) {
+			Dust dust = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, ModContent.DustType<VolatileCanisterDust>());
+			dust.velocity *= 0.4f;
+			//dust.noGravity = true;
 		}
+
+		// Spinny
+		Projectile.rotation += 0.08f;
 
 		// State 0 => Unaffected by gravity
 		if (AI_State == 0f) {
@@ -59,7 +64,7 @@ public class GelBall : ModProjectile
 		}
 
 		// State 1 => Affected by gravity
-		Projectile.velocity += Vector2.UnitY * 0.2f;
+		Projectile.velocity += Vector2.UnitY * 0.15f;
 	}
 
 	public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone) {
@@ -69,7 +74,9 @@ public class GelBall : ModProjectile
 	}
 
 	public override void Kill(int timeLeft) {
-		DustHelpers.MakeDustExplosion(Projectile.Center, 5f, DustID.Water, 5, 0f, 4f, 150, 200, 1f, 1.2f, true);
+		foreach (Dust dust in DustHelpers.MakeDustExplosion<VolatileCanisterDust>(Projectile.Center, 5f, 10)) {
+			dust.velocity *= Main.rand.NextFloat(1.5f);
+		}
 
 		// Tiny sound
 		SoundStyle soundStyle = SoundID.SplashWeak with {

@@ -1,16 +1,17 @@
 ﻿using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.ModLoader;
 
 namespace Canisters.Helpers;
 
 public static class DustHelpers
 {
-	public static void MakeDustExplosion(Vector2 position, float spawnRadius, int dustType, int amount, float speed = 1f, int alpha = 0, float scale = 1f, bool noGravity = false, bool noLight = false, bool noLightEmmittance = false) => MakeDustExplosion(position, spawnRadius, dustType, amount, speed, speed, alpha, alpha, scale, scale, noGravity, noLight, noLightEmmittance);
+	public static void MakeDustExplosion(Vector2 position, float spawnRadius, int dustType, int amount, float minSpeed, float maxSpeed, int alpha = 0, float scale = 1f, bool noGravity = false, bool noLight = false, bool noLightEmmittance = false)
+		=> MakeDustExplosion(position, spawnRadius, dustType, amount, minSpeed, maxSpeed, alpha, alpha, scale, scale, noGravity, noLight, noLightEmmittance);
 
-	public static void MakeDustExplosion(Vector2 position, float spawnRadius, int dustType, int amount, float minSpeed, float maxSpeed, int alpha = 0, float scale = 1f, bool noGravity = false, bool noLight = false, bool noLightEmmittance = false) => MakeDustExplosion(position, spawnRadius, dustType, amount, minSpeed, maxSpeed, alpha, alpha, scale, scale, noGravity, noLight, noLightEmmittance);
-
-	public static void MakeDustExplosion(Vector2 position, float spawnRadius, int dustType, int amount, float minSpeed, float maxSpeed, int minAlpha, int maxAlpha, float scale = 1f, bool noGravity = false, bool noLight = false, bool noLightEmmittance = false) => MakeDustExplosion(position, spawnRadius, dustType, amount, minSpeed, maxSpeed, minAlpha, maxAlpha, scale, scale, noGravity, noLight, noLightEmmittance);
+	public static void MakeDustExplosion(Vector2 position, float spawnRadius, int dustType, int amount, float minSpeed, float maxSpeed, int minAlpha, int maxAlpha, float scale = 1f, bool noGravity = false, bool noLight = false, bool noLightEmmittance = false)
+		=> MakeDustExplosion(position, spawnRadius, dustType, amount, minSpeed, maxSpeed, minAlpha, maxAlpha, scale, scale, noGravity, noLight, noLightEmmittance);
 
 	public static void MakeDustExplosion(Vector2 position, float spawnRadius, int dustType, int amount, float minSpeed, float maxSpeed, int minAlpha, int maxAlpha, float minScale, float maxScale, bool noGravity = false, bool noLight = false, bool noLightEmmittance = false) {
 		for (int i = 0; i < amount; i++) {
@@ -22,6 +23,17 @@ public static class DustHelpers
 			newDust.noGravity = noGravity;
 			newDust.noLight = noLight;
 			newDust.noLightEmittence = noLightEmmittance;
+		}
+	}
+
+	public static IEnumerable<Dust> MakeDustExplosion<TModDust>(Vector2 position, float spawnRadius, int amount) where TModDust : ModDust
+		=> MakeDustExplosion(position, spawnRadius, ModContent.DustType<TModDust>(), amount);
+
+	public static IEnumerable<Dust> MakeDustExplosion(Vector2 position, float spawnRadius, int dustType, int amount) {
+		for (int i = 0; i < amount; i++) {
+			Vector2 spawnPosition = position + Main.rand.NextVector2Circular(spawnRadius, spawnRadius);
+			Dust newDust = Dust.NewDustPerfect(spawnPosition, dustType);
+			yield return newDust;
 		}
 	}
 
