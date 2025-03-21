@@ -1,20 +1,21 @@
-﻿using Canisters.Content.Projectiles.VolatileCanister;
+﻿using Canisters.Content.Items.Canisters;
+using Canisters.Content.Projectiles.VolatileCanister;
 using Canisters.Helpers.Abstracts;
 using Canisters.Helpers.Enums;
-using Microsoft.Xna.Framework;
-using Terraria;
 using Terraria.DataStructures;
-using Terraria.ID;
-using Terraria.ModLoader;
 using static Microsoft.Xna.Framework.MathHelper;
 
 namespace Canisters.Content.Items.Weapons;
 
 public class Resonance : CanisterUsingWeapon
 {
-	public override CanisterFiringType CanisterFiringType => CanisterFiringType.Depleted;
+	public override CanisterFiringType CanisterFiringType {
+		get => CanisterFiringType.Depleted;
+	}
 
-	public override Vector2 MuzzleOffset => new(52f, -2f);
+	public override Vector2 MuzzleOffset {
+		get => new(52f, -2f);
+	}
 
 	public override void SetDefaults() {
 		// Base stats
@@ -31,12 +32,12 @@ public class Resonance : CanisterUsingWeapon
 		Item.noUseGraphic = true;
 
 		// Weapon stats
-		Item.shoot = ModContent.ProjectileType<VolatileCanister>();
+		Item.shoot = ModContent.ProjectileType<FiredVolatileCanister>();
 		Item.shootSpeed = 12f;
 		Item.damage = 16;
 		Item.knockBack = 3f;
 		Item.DamageType = DamageClass.Ranged;
-		Item.useAmmo = ModContent.ItemType<Canisters.VolatileCanister>();
+		Item.useAmmo = ModContent.ItemType<VolatileCanister>();
 	}
 
 	public override void AddRecipes() {
@@ -55,15 +56,19 @@ public class Resonance : CanisterUsingWeapon
 			.Register();
 	}
 
-	public override Vector2? HoldoutOffset() => new Vector2(-4f, 4f);
+	public override Vector2? HoldoutOffset() {
+		return new Vector2(-4f, 4f);
+	}
 
-	public override void SafeModifyShootStats(Player player, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback) {
+	public override void SafeModifyShootStats(Player player, ref Vector2 position, ref Vector2 velocity, ref int type,
+		ref int damage, ref float knockback) {
 		velocity = velocity.RotatedByRandom(0.08f);
 	}
 
-	public override void ShootProjectile(EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback, int owner) {
+	public override void ShootProjectile(EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity,
+		int type, int damage, float knockback, int owner) {
 		Vector2 normal = velocity.SafeNormalize(Vector2.Zero).RotatedBy(PiOver2) * Main.LocalPlayer.direction;
-		Projectile.NewProjectile(source, position + normal * 3f, velocity, type, damage, knockback, owner);
-		Projectile.NewProjectile(source, position - normal * 3f, velocity, type, damage, knockback, owner);
+		Projectile.NewProjectile(source, position + (normal * 3f), velocity, type, damage, knockback, owner);
+		Projectile.NewProjectile(source, position - (normal * 3f), velocity, type, damage, knockback, owner);
 	}
 }

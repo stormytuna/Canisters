@@ -1,18 +1,19 @@
-﻿using Canisters.Content.Projectiles.VolatileCanister;
+﻿using Canisters.Content.Items.Canisters;
+using Canisters.Content.Projectiles.VolatileCanister;
 using Canisters.Helpers.Abstracts;
 using Canisters.Helpers.Enums;
-using Microsoft.Xna.Framework;
-using Terraria;
-using Terraria.ID;
-using Terraria.ModLoader;
 
 namespace Canisters.Content.Items.Weapons;
 
 public class InfernalCannon : CanisterUsingWeapon
 {
-	public override CanisterFiringType CanisterFiringType => CanisterFiringType.Launched;
+	public override CanisterFiringType CanisterFiringType {
+		get => CanisterFiringType.Launched;
+	}
 
-	public override Vector2 MuzzleOffset => new(36f, 0f);
+	public override Vector2 MuzzleOffset {
+		get => new(36f, 0f);
+	}
 
 	public override void SetDefaults() {
 		// Base stats
@@ -29,17 +30,20 @@ public class InfernalCannon : CanisterUsingWeapon
 		Item.noUseGraphic = true;
 
 		// Weapon stats
-		Item.shoot = ModContent.ProjectileType<VolatileCanister>();
+		Item.shoot = ModContent.ProjectileType<FiredVolatileCanister>();
 		Item.shootSpeed = 13f;
 		Item.damage = 42;
 		Item.knockBack = 8f;
 		Item.DamageType = DamageClass.Ranged;
-		Item.useAmmo = ModContent.ItemType<Canisters.VolatileCanister>();
+		Item.useAmmo = ModContent.ItemType<VolatileCanister>();
 	}
 
-	public override Vector2? HoldoutOffset() => new Vector2(-8f, 0f);
+	public override Vector2? HoldoutOffset() {
+		return new Vector2(-8f, 0f);
+	}
 
-	public override void SafeModifyShootStats(Player player, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback) {
+	public override void SafeModifyShootStats(Player player, ref Vector2 position, ref Vector2 velocity, ref int type,
+		ref int damage, ref float knockback) {
 		velocity = velocity.RotatedByRandom(0.11f);
 	}
 
@@ -58,7 +62,7 @@ public class InfernalCannonGlobalProjectile : ShotByWeaponGlobalProjectile<Infer
 			return;
 		}
 
-		Dust dust = Dust.NewDustDirect(projectile.position, projectile.width, projectile.height, DustID.ShadowbeamStaff);
+		var dust = Dust.NewDustDirect(projectile.position, projectile.width, projectile.height, DustID.ShadowbeamStaff);
 		dust.scale = Main.rand.NextFloat(1.5f, 2f);
 		dust.noGravity = true;
 		dust.noLight = true;

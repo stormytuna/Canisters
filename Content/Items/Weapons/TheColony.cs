@@ -1,18 +1,19 @@
-﻿using Canisters.Content.Projectiles.VolatileCanister;
+﻿using Canisters.Content.Items.Canisters;
+using Canisters.Content.Projectiles.VolatileCanister;
 using Canisters.Helpers.Abstracts;
 using Canisters.Helpers.Enums;
-using Microsoft.Xna.Framework;
-using Terraria;
-using Terraria.ID;
-using Terraria.ModLoader;
 
 namespace Canisters.Content.Items.Weapons;
 
 public class TheColony : CanisterUsingWeapon
 {
-	public override CanisterFiringType CanisterFiringType => CanisterFiringType.Depleted;
+	public override CanisterFiringType CanisterFiringType {
+		get => CanisterFiringType.Depleted;
+	}
 
-	public override Vector2 MuzzleOffset => new(18f, -4f);
+	public override Vector2 MuzzleOffset {
+		get => new(18f, -4f);
+	}
 
 	public override void SetDefaults() {
 		// Base stats
@@ -29,23 +30,29 @@ public class TheColony : CanisterUsingWeapon
 		Item.noUseGraphic = true;
 
 		// Weapon stats
-		Item.shoot = ModContent.ProjectileType<VolatileCanister>();
+		Item.shoot = ModContent.ProjectileType<FiredVolatileCanister>();
 		Item.shootSpeed = 12f;
 		Item.damage = 36;
 		Item.knockBack = 3f;
 		Item.DamageType = DamageClass.Ranged;
-		Item.useAmmo = ModContent.ItemType<Canisters.VolatileCanister>();
+		Item.useAmmo = ModContent.ItemType<VolatileCanister>();
 	}
 
-	public override bool CanAccessoryBeEquippedWith(Item equippedItem, Item incomingItem, Player player) => base.CanAccessoryBeEquippedWith(equippedItem, incomingItem, player);
+	public override bool CanAccessoryBeEquippedWith(Item equippedItem, Item incomingItem, Player player) {
+		return base.CanAccessoryBeEquippedWith(equippedItem, incomingItem, player);
+	}
 
-	public override Vector2? HoldoutOffset() => new Vector2(-10f, 0f);
+	public override Vector2? HoldoutOffset() {
+		return new Vector2(-10f, 0f);
+	}
 
-	public override void SafeModifyShootStats(Player player, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback) {
+	public override void SafeModifyShootStats(Player player, ref Vector2 position, ref Vector2 velocity, ref int type,
+		ref int damage, ref float knockback) {
 		velocity = velocity.RotatedByRandom(0.22f);
 	}
 
-	public override void ApplyShootStats(ref Vector2 velocity, ref Vector2 position, ref int damage, ref float knockBack, ref int amount, ref float spread) {
+	public override void ApplyShootStats(ref Vector2 velocity, ref Vector2 position, ref int damage,
+		ref float knockBack, ref int amount, ref float spread) {
 		amount *= 4;
 		damage /= 4;
 		spread += 0.35f;

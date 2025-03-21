@@ -1,6 +1,4 @@
 ﻿using System;
-using Microsoft.Xna.Framework;
-using Terraria;
 
 namespace Canisters.Helpers;
 
@@ -8,7 +6,8 @@ public class EntityHelpers
 {
 	/// <summary>
 	///     Accelerates an entity toward a target in a smooth way
-	///     Returns a Vector2 with length 'acceleration' that points in the optimal direction to accelerate the NPC toward the target
+	///     Returns a Vector2 with length 'acceleration' that points in the optimal direction to accelerate the NPC toward the
+	///     target
 	///     If the target is moving, then it accounts for that
 	///     (No, unfortunately the optimal direction is not actually a straight line most of the time)
 	///     Accelerates until the NPC is moving fast enough that the acceleration can *just* slow it down in time, then does so
@@ -20,7 +19,8 @@ public class EntityHelpers
 	/// <param name="topSpeed">The max speed of the entity</param>
 	/// <param name="targetVelocity">The velocity of its target, defaults to 0</param>
 	/// <param name="bufferZone">Should it smoothly slow down on approach?</param>
-	public static void SmoothHoming(Entity actor, Vector2 target, float acceleration, float topSpeed, Vector2? targetVelocity = null, bool bufferZone = true, float bufferStrength = 0.1f) {
+	public static void SmoothHoming(Entity actor, Vector2 target, float acceleration, float topSpeed,
+		Vector2? targetVelocity = null, bool bufferZone = true, float bufferStrength = 0.1f) {
 		//If the target has a velocity then factor it in
 		Vector2 velTarget = Vector2.Zero;
 		if (targetVelocity != null) {
@@ -46,10 +46,12 @@ public class EntityHelpers
 		float velocity = Vector2.Dot(-vTarget, posDifference);
 
 		//Use the current velocity plus acceleration to calculate how long it will take to arrive using the formula for acceleration
-		float eta = -velocity / acceleration + (float)Math.Sqrt(velocity * velocity / (acceleration * acceleration) + 2 * distance / acceleration);
+		float eta = (-velocity / acceleration) +
+		            (float)Math.Sqrt((velocity * velocity / (acceleration * acceleration)) +
+		                             (2 * distance / acceleration));
 
 		//Use the velocity plus arrival time plus current target location to calculate the location the target will be at in the future
-		Vector2 impactPos = target + vTarget * eta;
+		Vector2 impactPos = target + (vTarget * eta);
 
 		//Generate a vector with length 'acceleration' pointing at that future location
 		Vector2 fixedAcceleration = MathHelpers.GenerateTargetingVector(actor.Center, impactPos, acceleration);

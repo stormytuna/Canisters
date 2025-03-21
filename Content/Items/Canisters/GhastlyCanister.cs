@@ -1,17 +1,21 @@
 ﻿using Canisters.Content.Projectiles.GhastlyCanister;
 using Canisters.Helpers.Abstracts;
-using Microsoft.Xna.Framework;
-using Terraria;
-using Terraria.ID;
-using Terraria.ModLoader;
 
 namespace Canisters.Content.Items.Canisters;
 
 public class GhastlyCanister : CanisterItem
 {
-	public override int LaunchedProjectileType => ModContent.ProjectileType<Projectiles.GhastlyCanister.GhastlyCanister>();
-	public override int DepletedProjectileType => ModContent.ProjectileType<GhastlyShot>();
-	public override Color CanisterColor => Color.Cyan;
+	public override int LaunchedProjectileType {
+		get => ModContent.ProjectileType<FiredGhastlyCanister>();
+	}
+
+	public override int DepletedProjectileType {
+		get => ModContent.ProjectileType<GhastlyShot>();
+	}
+
+	public override Color CanisterColor {
+		get => Color.Cyan;
+	}
 
 	public override void SafeSetDefaults() {
 		// Base stats

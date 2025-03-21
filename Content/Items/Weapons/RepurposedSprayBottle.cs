@@ -1,18 +1,19 @@
-﻿using Canisters.Content.Projectiles.VolatileCanister;
+﻿using Canisters.Content.Items.Canisters;
+using Canisters.Content.Projectiles.VolatileCanister;
 using Canisters.Helpers.Abstracts;
 using Canisters.Helpers.Enums;
-using Microsoft.Xna.Framework;
-using Terraria;
-using Terraria.ID;
-using Terraria.ModLoader;
 
 namespace Canisters.Content.Items.Weapons;
 
 public class RepurposedSprayBottle : CanisterUsingWeapon
 {
-	public override CanisterFiringType CanisterFiringType => CanisterFiringType.Depleted;
+	public override CanisterFiringType CanisterFiringType {
+		get => CanisterFiringType.Depleted;
+	}
 
-	public override Vector2 MuzzleOffset => new(10f, -4f);
+	public override Vector2 MuzzleOffset {
+		get => new(10f, -4f);
+	}
 
 	public override void SetDefaults() {
 		// Base stats
@@ -29,24 +30,29 @@ public class RepurposedSprayBottle : CanisterUsingWeapon
 		Item.noUseGraphic = true;
 
 		// Weapon stats
-		Item.shoot = ModContent.ProjectileType<VolatileCanister>();
+		Item.shoot = ModContent.ProjectileType<FiredVolatileCanister>();
 		Item.shootSpeed = 5f;
 		Item.damage = 36;
 		Item.knockBack = 2f;
 		Item.DamageType = DamageClass.Ranged;
-		Item.useAmmo = ModContent.ItemType<Canisters.VolatileCanister>();
+		Item.useAmmo = ModContent.ItemType<VolatileCanister>();
 	}
 
-	public override Vector2? HoldoutOffset() => new Vector2(2f, 2f);
+	public override Vector2? HoldoutOffset() {
+		return new Vector2(2f, 2f);
+	}
 
-	public override void SafeModifyShootStats(Player player, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback) {
+	public override void SafeModifyShootStats(Player player, ref Vector2 position, ref Vector2 velocity, ref int type,
+		ref int damage, ref float knockback) {
 		velocity = velocity.RotatedByRandom(0.22f);
 	}
 }
 
 public class RepurposedSprayBottleGlobalNPC : GlobalNPC
 {
-	public override bool AppliesToEntity(NPC entity, bool lateInstantiation) => entity.type == NPCID.Stylist;
+	public override bool AppliesToEntity(NPC entity, bool lateInstantiation) {
+		return entity.type == NPCID.Stylist;
+	}
 
 	public override void ModifyShop(NPCShop shop) {
 		shop.Add<RepurposedSprayBottle>();

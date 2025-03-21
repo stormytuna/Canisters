@@ -1,19 +1,20 @@
-﻿using Canisters.Content.Projectiles.VolatileCanister;
+﻿using Canisters.Content.Items.Canisters;
+using Canisters.Content.Projectiles.VolatileCanister;
 using Canisters.Helpers.Abstracts;
 using Canisters.Helpers.Enums;
-using Microsoft.Xna.Framework;
-using Terraria;
-using Terraria.ID;
-using Terraria.ModLoader;
 
 namespace Canisters.Content.Items.Weapons;
 
 // TODO: Sprite looks awful
 public class Reverence : CanisterUsingWeapon
 {
-	public override CanisterFiringType CanisterFiringType => CanisterFiringType.Launched;
+	public override CanisterFiringType CanisterFiringType {
+		get => CanisterFiringType.Launched;
+	}
 
-	public override Vector2 MuzzleOffset => new(22f, -2f);
+	public override Vector2 MuzzleOffset {
+		get => new(22f, -2f);
+	}
 
 	public override void SetDefaults() {
 		// Base stats
@@ -30,12 +31,12 @@ public class Reverence : CanisterUsingWeapon
 		Item.noUseGraphic = true;
 
 		// Weapon stats
-		Item.shoot = ModContent.ProjectileType<VolatileCanister>();
+		Item.shoot = ModContent.ProjectileType<FiredVolatileCanister>();
 		Item.shootSpeed = 10f;
 		Item.damage = 16;
 		Item.knockBack = 3f;
 		Item.DamageType = DamageClass.Ranged;
-		Item.useAmmo = ModContent.ItemType<Canisters.VolatileCanister>();
+		Item.useAmmo = ModContent.ItemType<VolatileCanister>();
 	}
 
 	public override void AddRecipes() {
@@ -46,5 +47,7 @@ public class Reverence : CanisterUsingWeapon
 			.Register();
 	}
 
-	public override Vector2? HoldoutOffset() => new Vector2(-6f, 0f);
+	public override Vector2? HoldoutOffset() {
+		return new Vector2(-6f, 0f);
+	}
 }

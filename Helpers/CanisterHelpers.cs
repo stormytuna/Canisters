@@ -1,13 +1,12 @@
 ﻿using Canisters.Helpers.Abstracts;
-using Microsoft.Xna.Framework;
-using Terraria;
-using Terraria.ModLoader;
 
 namespace Canisters.Helpers;
 
 public static class CanisterHelpers
 {
-	public static Color GetCanisterColor<TCanister>() where TCanister : CanisterItem => GetCanisterColor(ModContent.ItemType<TCanister>());
+	public static Color GetCanisterColor<TCanister>() where TCanister : CanisterItem {
+		return GetCanisterColor(ModContent.ItemType<TCanister>());
+	}
 
 	public static Color GetCanisterColor(int canisterItemId) {
 		ModItem modItem = ModContent.GetModItem(canisterItemId);
@@ -19,12 +18,15 @@ public static class CanisterHelpers
 	}
 
 	public static Color GetCanisterColorForHeldItem(Player player) {
-		if (player.HeldItem.ModItem is CanisterUsingWeapon && player.TryGetWeaponAmmo(player.HeldItem, out int canisterItemId)) {
+		if (player.HeldItem.ModItem is CanisterUsingWeapon &&
+		    player.TryGetWeaponAmmo(player.HeldItem, out int canisterItemId)) {
 			return GetCanisterColor(canisterItemId);
 		}
 
 		return Color.White;
 	}
 
-	public static string GetEmptyAssetString() => "Canisters/Assets/Empty";
+	public static string GetEmptyAssetString() {
+		return "Canisters/Assets/Empty";
+	}
 }

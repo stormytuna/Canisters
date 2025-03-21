@@ -1,17 +1,21 @@
 ﻿using Canisters.Content.Projectiles.NaniteCanister;
 using Canisters.Helpers.Abstracts;
-using Microsoft.Xna.Framework;
-using Terraria;
-using Terraria.ID;
-using Terraria.ModLoader;
 
 namespace Canisters.Content.Items.Canisters;
 
 public class NaniteCanister : CanisterItem
 {
-	public override int LaunchedProjectileType => ModContent.ProjectileType<Projectiles.NaniteCanister.NaniteCanister>();
-	public override int DepletedProjectileType => ModContent.ProjectileType<NaniteMistEmitter>();
-	public override Color CanisterColor => Color.LightCyan;
+	public override int LaunchedProjectileType {
+		get => ModContent.ProjectileType<FiredNaniteCanister>();
+	}
+
+	public override int DepletedProjectileType {
+		get => ModContent.ProjectileType<NaniteMistEmitter>();
+	}
+
+	public override Color CanisterColor {
+		get => Color.LightCyan;
+	}
 
 	public override void SafeSetDefaults() {
 		// Base stats

@@ -1,27 +1,25 @@
 ﻿using Canisters.Helpers;
 using Canisters.Helpers.Abstracts;
-using Microsoft.Xna.Framework;
-using Terraria;
 using Terraria.Audio;
-using Terraria.ID;
-using Terraria.ModLoader;
 
 namespace Canisters.Content.Projectiles.GhastlyCanister;
 
-public class GhastlyCanister : CanisterProjectile
+public class FiredGhastlyCanister : FiredCanisterProjectile
 {
-	private ref float Timer => ref Projectile.ai[0];
+	public override string Texture {
+		get => "Canisters/Content/Items/Canisters/GhastlyCanister";
+	}
 
-	public override string Texture => "Canisters/Content/Items/Canisters/GhastlyCanister";
-
-	public override void AI() {
+	public override void SafeAI() {
 		if (Timer >= 30f) {
 			TryExplode();
 		}
 	}
 
 	public override void OnExplode() {
-		Projectile emitterProj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<GhastlyExplosionEmitter>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
+		var emitterProj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center,
+			Vector2.Zero, ModContent.ProjectileType<GhastlyExplosionEmitter>(), Projectile.damage, Projectile.knockBack,
+			Projectile.owner);
 		emitterProj.originalDamage = Projectile.originalDamage;
 
 		DustHelpers.MakeDustExplosion(Projectile.Center, 8f, DustID.BlueFairy, 22, 0f, 8f, 50, 120, 1f, 1.5f, true);

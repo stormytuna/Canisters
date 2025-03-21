@@ -1,8 +1,4 @@
 ﻿using Canisters.Helpers;
-using Microsoft.Xna.Framework;
-using Terraria;
-using Terraria.ID;
-using Terraria.ModLoader;
 
 namespace Canisters.Content.Projectiles.GlisteningCanister;
 
@@ -31,13 +27,15 @@ public class GlisteningBlob : ModProjectile
 
 		// Dust
 		if (Main.rand.NextBool(3)) {
-			Dust d = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.IchorTorch, Alpha: Main.rand.Next(100, 200), Scale: Main.rand.NextFloat(1f, 1.2f));
+			var d = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.IchorTorch,
+				Alpha: Main.rand.Next(100, 200), Scale: Main.rand.NextFloat(1f, 1.2f));
 			d.noGravity = true;
 			d.noLight = true;
 		}
 
 		if (Main.rand.NextBool(3)) {
-			Dust d = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.Ichor, Alpha: Main.rand.Next(100, 200), Scale: Main.rand.NextFloat(1f, 1.2f));
+			var d = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.Ichor,
+				Alpha: Main.rand.Next(100, 200), Scale: Main.rand.NextFloat(1f, 1.2f));
 			d.noGravity = true;
 			d.noLight = true;
 		}
@@ -49,7 +47,9 @@ public class GlisteningBlob : ModProjectile
 		Projectile.rotation += 0.125f * Projectile.direction;
 	}
 
-	public override Color? GetAlpha(Color lightColor) => Color.White;
+	public override Color? GetAlpha(Color lightColor) {
+		return Color.White;
+	}
 
 	public override bool OnTileCollide(Vector2 oldVelocity) {
 		if (Projectile.velocity.X != oldVelocity.X) {
@@ -67,7 +67,8 @@ public class GlisteningBlob : ModProjectile
 		return false;
 	}
 
-	public override bool TileCollideStyle(ref int width, ref int height, ref bool fallThrough, ref Vector2 hitboxCenterFrac) {
+	public override bool TileCollideStyle(ref int width, ref int height, ref bool fallThrough,
+		ref Vector2 hitboxCenterFrac) {
 		width = 8;
 		height = 8;
 

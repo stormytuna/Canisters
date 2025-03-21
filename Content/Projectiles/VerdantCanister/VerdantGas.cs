@@ -1,8 +1,4 @@
-﻿using Microsoft.Xna.Framework;
-using Terraria;
-using Terraria.ModLoader;
-
-namespace Canisters.Content.Projectiles.VerdantCanister;
+﻿namespace Canisters.Content.Projectiles.VerdantCanister;
 
 /// <summary>
 ///     The actual gas that the depleted verdant canister shoots
@@ -53,9 +49,12 @@ public class VerdantGas : ModProjectile
 		}
 	}
 
-	public override bool OnTileCollide(Vector2 oldVelocity) => false;
+	public override bool OnTileCollide(Vector2 oldVelocity) {
+		return false;
+	}
 
-	public override bool TileCollideStyle(ref int width, ref int height, ref bool fallThrough, ref Vector2 hitboxCenterFrac) {
+	public override bool TileCollideStyle(ref int width, ref int height, ref bool fallThrough,
+		ref Vector2 hitboxCenterFrac) {
 		width = 20;
 		height = 20;
 

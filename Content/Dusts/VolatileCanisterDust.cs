@@ -1,8 +1,4 @@
-﻿using Microsoft.Xna.Framework;
-using Terraria;
-using Terraria.ModLoader;
-
-namespace Canisters.Content.Dusts;
+﻿namespace Canisters.Content.Dusts;
 
 public class VolatileCanisterDust : ModDust
 {

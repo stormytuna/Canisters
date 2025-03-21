@@ -1,18 +1,19 @@
-﻿using Canisters.Content.Projectiles.VolatileCanister;
+﻿using Canisters.Content.Items.Canisters;
+using Canisters.Content.Projectiles.VolatileCanister;
 using Canisters.Helpers.Abstracts;
 using Canisters.Helpers.Enums;
-using Microsoft.Xna.Framework;
-using Terraria;
-using Terraria.ID;
-using Terraria.ModLoader;
 
 namespace Canisters.Content.Items.Weapons;
 
 public class Splattergun : CanisterUsingWeapon
 {
-	public override CanisterFiringType CanisterFiringType => CanisterFiringType.Depleted;
+	public override CanisterFiringType CanisterFiringType {
+		get => CanisterFiringType.Depleted;
+	}
 
-	public override Vector2 MuzzleOffset => new(26f, -2f);
+	public override Vector2 MuzzleOffset {
+		get => new(26f, -2f);
+	}
 
 	public override void SetDefaults() {
 		// Base stats
@@ -29,12 +30,12 @@ public class Splattergun : CanisterUsingWeapon
 		Item.noUseGraphic = true;
 
 		// Weapon stats
-		Item.shoot = ModContent.ProjectileType<VolatileCanister>();
+		Item.shoot = ModContent.ProjectileType<FiredVolatileCanister>();
 		Item.shootSpeed = 10f;
 		Item.damage = 16;
 		Item.knockBack = 3f;
 		Item.DamageType = DamageClass.Ranged;
-		Item.useAmmo = ModContent.ItemType<Canisters.VolatileCanister>();
+		Item.useAmmo = ModContent.ItemType<VolatileCanister>();
 	}
 
 	public override void AddRecipes() {
@@ -51,9 +52,12 @@ public class Splattergun : CanisterUsingWeapon
 			.Register();
 	}
 
-	public override Vector2? HoldoutOffset() => new Vector2(0f, 0f);
+	public override Vector2? HoldoutOffset() {
+		return new Vector2(0f, 0f);
+	}
 
-	public override void ApplyShootStats(ref Vector2 velocity, ref Vector2 position, ref int damage, ref float knockBack, ref int amount, ref float spread) {
+	public override void ApplyShootStats(ref Vector2 velocity, ref Vector2 position, ref int damage,
+		ref float knockBack, ref int amount, ref float spread) {
 		velocity *= 1.5f;
 	}
 }

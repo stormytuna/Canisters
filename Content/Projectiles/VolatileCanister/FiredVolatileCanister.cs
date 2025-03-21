@@ -1,17 +1,18 @@
 using Canisters.Helpers;
 using Canisters.Helpers.Abstracts;
-using Terraria;
 using Terraria.Audio;
-using Terraria.ID;
 
 namespace Canisters.Content.Projectiles.VolatileCanister;
 
-/// <summary>
-///     Gel canister
-/// </summary>
-public class VolatileCanister : CanisterProjectile
+public class FiredVolatileCanister : FiredCanisterProjectile
 {
-	public override string Texture => "Canisters/Content/Items/Canisters/VolatileCanister";
+	public override int TimeBeforeGravityAffected {
+		get => 12;
+	}
+
+	public override string Texture {
+		get => "Canisters/Content/Items/Canisters/VolatileCanister";
+	}
 
 	public override void OnExplode() {
 		DustHelpers.MakeDustExplosion(Projectile.Center, 15f, DustID.Torch, Main.rand.Next(40, 55), 0f, 15f, 0, 0, 0.8f, 1.2f, true, true);

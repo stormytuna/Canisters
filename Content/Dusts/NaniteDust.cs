@@ -1,6 +1,4 @@
 ﻿using Canisters.Helpers;
-using Terraria;
-using Terraria.ModLoader;
 
 namespace Canisters.Content.Dusts;
 
@@ -16,7 +14,8 @@ public class NaniteDust : ModDust
 		dust.rotation = Main.rand.NextRadian();
 
 		if (dust.customData is Projectile { active: true } projectile) {
-			dust.position = Main.rand.NextVector2Circular(projectile.width / 2, projectile.height / 2) + projectile.Center;
+			dust.position = Main.rand.NextVector2Circular(projectile.width / 2, projectile.height / 2) +
+			                projectile.Center;
 			return false;
 		}
 

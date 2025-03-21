@@ -1,7 +1,4 @@
 ﻿using Canisters.Content.Buffs;
-using Microsoft.Xna.Framework;
-using Terraria;
-using Terraria.ModLoader;
 
 namespace Canisters.Content.Projectiles.NaniteCanister;
 
@@ -56,9 +53,12 @@ public class NaniteMist : ModProjectile
 		target.AddBuff(ModContent.BuffType<Devoured>(), 5 * 60);
 	}
 
-	public override bool OnTileCollide(Vector2 oldVelocity) => false;
+	public override bool OnTileCollide(Vector2 oldVelocity) {
+		return false;
+	}
 
-	public override bool TileCollideStyle(ref int width, ref int height, ref bool fallThrough, ref Vector2 hitboxCenterFrac) {
+	public override bool TileCollideStyle(ref int width, ref int height, ref bool fallThrough,
+		ref Vector2 hitboxCenterFrac) {
 		width = 20;
 		height = 20;
 

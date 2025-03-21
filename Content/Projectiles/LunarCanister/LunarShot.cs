@@ -1,12 +1,7 @@
 ﻿using System.Collections.Generic;
 using Canisters.Helpers;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using Terraria;
 using Terraria.DataStructures;
 using Terraria.GameContent;
-using Terraria.ID;
-using Terraria.ModLoader;
 
 namespace Canisters.Content.Projectiles.LunarCanister;
 
@@ -15,6 +10,21 @@ public class LunarShot : ModProjectile
 	private const float TargetingRange = 80f * 16f;
 	private const float Acceleration = 0.05f;
 	private const float TopSpeed = 4f;
+
+	private AIState State {
+		get => (AIState)Projectile.ai[0];
+		set => Projectile.ai[0] = (float)value;
+	}
+
+	private NPC Target {
+		get => Main.npc[(int)Projectile.ai[1]];
+		set => Projectile.ai[1] = value.whoAmI;
+	}
+
+	private NPC LastTarget {
+		get => Main.npc[(int)Projectile.ai[2]];
+		set => Projectile.ai[2] = value.whoAmI;
+	}
 
 	public override void SetStaticDefaults() {
 		ProjectileID.Sets.TrailingMode[Type] = 1;
@@ -34,21 +44,6 @@ public class LunarShot : ModProjectile
 		Projectile.DamageType = DamageClass.Ranged;
 	}
 
-	private AIState State {
-		get => (AIState)Projectile.ai[0];
-		set => Projectile.ai[0] = (float)value;
-	}
-
-	private NPC Target {
-		get => Main.npc[(int)Projectile.ai[1]];
-		set => Projectile.ai[1] = value.whoAmI;
-	}
-
-	private NPC LastTarget {
-		get => Main.npc[(int)Projectile.ai[2]];
-		set => Projectile.ai[2] = value.whoAmI;
-	}
-
 	public override void OnSpawn(IEntitySource source) {
 		Projectile.ai[1] = Main.maxNPCs;
 		Projectile.ai[2] = Main.maxNPCs;
@@ -56,7 +51,7 @@ public class LunarShot : ModProjectile
 
 	public override void AI() {
 		if (Main.rand.NextBool(4)) {
-			Dust dust = Dust.NewDustPerfect(Projectile.Center, DustID.Vortex);
+			var dust = Dust.NewDustPerfect(Projectile.Center, DustID.Vortex);
 			dust.noGravity = true;
 		}
 
@@ -79,9 +74,7 @@ public class LunarShot : ModProjectile
 		}
 
 		// Try find new target
-		List<int> excludedNPCs = new() {
-			LastTarget.whoAmI
-		};
+		List<int> excludedNPCs = new() { LastTarget.whoAmI };
 		NPC closestValidNPC = NPCHelpers.FindClosestNPC(TargetingRange, Projectile.Center, excludedNPCs: excludedNPCs);
 		if (closestValidNPC is not null) {
 			Target = closestValidNPC;
@@ -90,14 +83,17 @@ public class LunarShot : ModProjectile
 	}
 
 	public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone) {
-		Projectile.NewProjectile(Projectile.GetSource_FromThis(), target.Center, Vector2.Zero, ModContent.ProjectileType<LunarExplosion>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
+		Projectile.NewProjectile(Projectile.GetSource_FromThis(), target.Center, Vector2.Zero,
+			ModContent.ProjectileType<LunarExplosion>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
 	}
 
 	public override void Kill(int timeLeft) {
 		DustHelpers.MakeDustExplosion(Projectile.Center, 4f, DustID.Vortex, 8, 0f, 10f, noGravity: true);
 	}
 
-	public override Color? GetAlpha(Color lightColor) => CanisterHelpers.GetCanisterColor<Items.Canisters.LunarCanister>();
+	public override Color? GetAlpha(Color lightColor) {
+		return CanisterHelpers.GetCanisterColor<Items.Canisters.LunarCanister>();
+	}
 
 	public override bool PreDraw(ref Color lightColor) {
 		Main.instance.LoadProjectile(Type);
@@ -105,10 +101,13 @@ public class LunarShot : ModProjectile
 
 		Vector2 drawOrigin = new(texture.Width / 2f, texture.Height / 2f);
 		for (int i = 0; i < Projectile.oldPos.Length; i++) {
-			Vector2 drawPosition = Projectile.oldPos[i] - Main.screenPosition + drawOrigin + new Vector2(0f, Projectile.gfxOffY);
-			Color color = Projectile.GetAlpha(lightColor) * ((Projectile.oldPos.Length - i) / (float)Projectile.oldPos.Length);
+			Vector2 drawPosition = Projectile.oldPos[i] - Main.screenPosition + drawOrigin +
+			                       new Vector2(0f, Projectile.gfxOffY);
+			Color color = Projectile.GetAlpha(lightColor) *
+			              ((Projectile.oldPos.Length - i) / (float)Projectile.oldPos.Length);
 			float scale = (Projectile.oldPos.Length - i) / (float)Projectile.oldPos.Length;
-			Main.EntitySpriteDraw(texture, drawPosition, null, color, Projectile.rotation, drawOrigin, scale, SpriteEffects.None);
+			Main.EntitySpriteDraw(texture, drawPosition, null, color, Projectile.rotation, drawOrigin, scale,
+				SpriteEffects.None);
 		}
 
 		return true;

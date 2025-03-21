@@ -1,17 +1,21 @@
 ﻿using Canisters.Content.Projectiles.LunarCanister;
 using Canisters.Helpers.Abstracts;
-using Microsoft.Xna.Framework;
-using Terraria;
-using Terraria.ID;
-using Terraria.ModLoader;
 
 namespace Canisters.Content.Items.Canisters;
 
 public class LunarCanister : CanisterItem
 {
-	public override int LaunchedProjectileType => ModContent.ProjectileType<Projectiles.LunarCanister.LunarCanister>();
-	public override int DepletedProjectileType => ModContent.ProjectileType<LunarShot>();
-	public override Color CanisterColor => new(208, 253, 235);
+	public override int LaunchedProjectileType {
+		get => ModContent.ProjectileType<FiredLunarCanister>();
+	}
+
+	public override int DepletedProjectileType {
+		get => ModContent.ProjectileType<LunarShot>();
+	}
+
+	public override Color CanisterColor {
+		get => new(208, 253, 235);
+	}
 
 	public override void SafeSetDefaults() {
 		// Base stats

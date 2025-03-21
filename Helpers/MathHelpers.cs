@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using Microsoft.Xna.Framework;
-using Terraria;
 
 namespace Canisters.Helpers;
 
 public static class MathHelpers
 {
-	public static int Ceiling(float fl) => (int)MathF.Ceiling(fl);
+	public static int Ceiling(float fl) {
+		return (int)MathF.Ceiling(fl);
+	}
 
 	/// <summary>
 	///     Ease in interpolation between the start and end
@@ -34,7 +34,8 @@ public static class MathHelpers
 	/// <summary>
 	///     Returns a vector pointing from a source, to a target, with a speed.
 	///     Simplifies basic projectile, enemy dash, etc aiming calculations to a single call.
-	///     If "ballistic" is true it adjusts for gravity. Default is 0.1f, may be stronger or weaker for some projectiles though.
+	///     If "ballistic" is true it adjusts for gravity. Default is 0.1f, may be stronger or weaker for some projectiles
+	///     though.
 	/// </summary>
 	/// <param name="source">The start point of the vector</param>
 	/// <param name="target">The end point it is aiming towards</param>
@@ -53,15 +54,14 @@ public static class MathHelpers
 		return targetAngle.ToRotationVector2() * length;
 	}
 
-	public static List<Vector2> CreateLightningBolt(Vector2 source, Vector2 dest, float sway = 80f, float jaggednessNumerator = 1f) {
+	public static List<Vector2> CreateLightningBolt(Vector2 source, Vector2 dest, float sway = 80f,
+		float jaggednessNumerator = 1f) {
 		List<Vector2> results = new();
 		Vector2 tangent = dest - source;
 		Vector2 normal = Vector2.Normalize(new Vector2(tangent.Y, -tangent.X));
 		float length = tangent.Length();
 
-		List<float> positions = new() {
-			0
-		};
+		List<float> positions = new() { 0 };
 
 		for (int i = 0; i < length / 16f; i++) {
 			positions.Add(Main.rand.NextFloat());
@@ -86,7 +86,7 @@ public static class MathHelpers
 			displacement -= (displacement - prevDisplacement) * (1 - scale);
 			displacement *= envelope;
 
-			Vector2 point = source + pos * tangent + displacement * normal;
+			Vector2 point = source + (pos * tangent) + (displacement * normal);
 			results.Add(point);
 			prevPoint = point;
 			prevDisplacement = displacement;

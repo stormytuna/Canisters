@@ -1,19 +1,20 @@
-﻿using Canisters.Content.Projectiles.VolatileCanister;
+﻿using Canisters.Content.Items.Canisters;
+using Canisters.Content.Projectiles.VolatileCanister;
 using Canisters.Helpers.Abstracts;
 using Canisters.Helpers.Enums;
-using Microsoft.Xna.Framework;
-using Terraria;
 using Terraria.GameContent.ItemDropRules;
-using Terraria.ID;
-using Terraria.ModLoader;
 
 namespace Canisters.Content.Items.Weapons;
 
 public class Icemire : CanisterUsingWeapon
 {
-	public override CanisterFiringType CanisterFiringType => CanisterFiringType.Launched;
+	public override CanisterFiringType CanisterFiringType {
+		get => CanisterFiringType.Launched;
+	}
 
-	public override Vector2 MuzzleOffset => new(52f, 0f);
+	public override Vector2 MuzzleOffset {
+		get => new(52f, 0f);
+	}
 
 	public override void SetDefaults() {
 		// Base stats
@@ -32,18 +33,21 @@ public class Icemire : CanisterUsingWeapon
 		Item.noUseGraphic = true;
 
 		// Weapon stats
-		Item.shoot = ModContent.ProjectileType<VolatileCanister>();
+		Item.shoot = ModContent.ProjectileType<FiredVolatileCanister>();
 		Item.shootSpeed = 15f;
 		Item.damage = 16;
 		Item.knockBack = 3f;
 		Item.DamageType = DamageClass.Ranged;
-		Item.useAmmo = ModContent.ItemType<Canisters.VolatileCanister>();
+		Item.useAmmo = ModContent.ItemType<VolatileCanister>();
 		Item.consumeAmmoOnLastShotOnly = true;
 	}
 
-	public override Vector2? HoldoutOffset() => new Vector2(-10f, 0f);
+	public override Vector2? HoldoutOffset() {
+		return new Vector2(-10f, 0f);
+	}
 
-	public override void SafeModifyShootStats(Player player, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback) {
+	public override void SafeModifyShootStats(Player player, ref Vector2 position, ref Vector2 velocity, ref int type,
+		ref int damage, ref float knockback) {
 		velocity = velocity.RotatedByRandom(0.16f);
 	}
 }
@@ -55,7 +59,7 @@ public class IcemireGlobalProjectile : ShotByWeaponGlobalProjectile<Icemire>
 			return;
 		}
 
-		Dust dust = Dust.NewDustDirect(projectile.position, projectile.width, projectile.height, DustID.Frost);
+		var dust = Dust.NewDustDirect(projectile.position, projectile.width, projectile.height, DustID.Frost);
 		dust.noGravity = true;
 		dust.noLight = true;
 	}
@@ -71,7 +75,9 @@ public class IcemireGlobalProjectile : ShotByWeaponGlobalProjectile<Icemire>
 
 public class IcemireGlobalNPC : GlobalNPC
 {
-	public override bool AppliesToEntity(NPC entity, bool lateInstantiation) => entity.type == NPCID.ArmoredViking || entity.type == NPCID.IceTortoise;
+	public override bool AppliesToEntity(NPC entity, bool lateInstantiation) {
+		return entity.type == NPCID.ArmoredViking || entity.type == NPCID.IceTortoise;
+	}
 
 	public override void ModifyNPCLoot(NPC npc, NPCLoot npcLoot) {
 		npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<Icemire>(), 50));

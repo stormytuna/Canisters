@@ -1,17 +1,21 @@
 ﻿using Canisters.Content.Projectiles.VerdantCanister;
 using Canisters.Helpers.Abstracts;
-using Microsoft.Xna.Framework;
-using Terraria;
-using Terraria.ID;
-using Terraria.ModLoader;
 
 namespace Canisters.Content.Items.Canisters;
 
 public class VerdantCanister : CanisterItem
 {
-	public override int LaunchedProjectileType => ModContent.ProjectileType<Projectiles.VerdantCanister.VerdantCanister>();
-	public override int DepletedProjectileType => ModContent.ProjectileType<VerdantGasEmitter>();
-	public override Color CanisterColor => Color.Green;
+	public override int LaunchedProjectileType {
+		get => ModContent.ProjectileType<FiredVerdantCanister>();
+	}
+
+	public override int DepletedProjectileType {
+		get => ModContent.ProjectileType<VerdantGasEmitter>();
+	}
+
+	public override Color CanisterColor {
+		get => Color.Green;
+	}
 
 	public override void SafeSetDefaults() {
 		// Base stats

@@ -1,11 +1,7 @@
 ﻿using Canisters.Content.Buffs;
 using Canisters.Content.Dusts;
 using Canisters.Helpers;
-using Microsoft.Xna.Framework;
-using Terraria;
 using Terraria.DataStructures;
-using Terraria.ID;
-using Terraria.ModLoader;
 
 namespace Canisters.Content.Projectiles.NaniteCanister;
 
@@ -15,6 +11,21 @@ public class Nanites : ModProjectile
 	private const float RangeToKeepDetection = 50f * 16f;
 	private const float Acceleration = 0.3f;
 	private const float TopSpeed = 12f;
+
+	private bool firstFrame = true;
+
+	private AIState State {
+		get => (AIState)Projectile.ai[0];
+		set => Projectile.ai[0] = (float)value;
+	}
+
+	private NPC Target {
+		get {
+			int index = (int)Projectile.ai[1];
+			return Main.npc.IndexInRange(index) ? Main.npc[index] : Main.npc[Main.maxNPCs];
+		}
+		set => Projectile.ai[1] = value.whoAmI;
+	}
 
 	public override void SetStaticDefaults() {
 		ProjectileID.Sets.CultistIsResistantTo[Type] = true;
@@ -33,31 +44,17 @@ public class Nanites : ModProjectile
 		Projectile.DamageType = DamageClass.Ranged;
 	}
 
-	private AIState State {
-		get => (AIState)Projectile.ai[0];
-		set => Projectile.ai[0] = (float)value;
-	}
-
-	private NPC Target {
-		get {
-			int index = (int)Projectile.ai[1];
-			return Main.npc.IndexInRange(index) ? Main.npc[index] : Main.npc[Main.maxNPCs];
-		}
-		set => Projectile.ai[1] = value.whoAmI;
-	}
-
 	public override void OnSpawn(IEntitySource source) {
 		State = AIState.Idle;
 	}
-
-	private bool firstFrame = true;
 
 	public override void AI() {
 		if (firstFrame) {
 			firstFrame = false;
 			int numDust = Main.rand.Next(8, 12);
 			for (int i = 0; i < numDust; i++) {
-				Dust dust = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, ModContent.DustType<NaniteDust>());
+				var dust = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height,
+					ModContent.DustType<NaniteDust>());
 				dust.customData = Projectile;
 			}
 		}
@@ -108,7 +105,8 @@ public class Nanites : ModProjectile
 	public override void Kill(int timeLeft) {
 		int numDust = Main.rand.Next(2, 6);
 		for (int i = 0; i < numDust; i++) {
-			Dust dust = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.Clentaminator_Cyan);
+			var dust = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height,
+				DustID.Clentaminator_Cyan);
 			dust.noGravity = true;
 			dust.velocity *= 2f;
 		}

@@ -1,14 +1,16 @@
 ﻿using Canisters.Helpers;
-using Microsoft.Xna.Framework;
-using Terraria;
-using Terraria.ID;
-using Terraria.ModLoader;
 
 namespace Canisters.Content.Projectiles.ToxicCanister;
 
 public class ToxicFogEmitter : ModProjectile
 {
-	public override string Texture => CanisterHelpers.GetEmptyAssetString();
+	public override string Texture {
+		get => CanisterHelpers.GetEmptyAssetString();
+	}
+
+	private ref float Timer {
+		get => ref Projectile.ai[0];
+	}
 
 	public override void SetDefaults() {
 		// Base stats
@@ -19,20 +21,19 @@ public class ToxicFogEmitter : ModProjectile
 		Projectile.penetrate = -1;
 	}
 
-	private ref float Timer => ref Projectile.ai[0];
-
 	public override void AI() {
 		if (Timer % 10 == 0 && Timer <= 140f && Projectile.owner == Main.myPlayer) {
 			Vector2 offset = Main.rand.NextVector2Circular(50f, 50f);
 			Vector2 spawnPosition = Projectile.Center + offset;
 			Vector2 spawnVelocity = Main.rand.NextVector2Circular(0.5f, 0.5f);
-			Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), spawnPosition, spawnVelocity, ModContent.ProjectileType<ToxicFog>(), 0, 0f, Projectile.owner);
+			Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), spawnPosition, spawnVelocity,
+				ModContent.ProjectileType<ToxicFog>(), 0, 0f, Projectile.owner);
 		}
 
 		for (int i = 0; i < 2; i++) {
 			Vector2 offset = Main.rand.NextVector2Circular(50f, 50f);
 			Vector2 spawnPosition = Projectile.Center + offset;
-			Dust d = Dust.NewDustPerfect(spawnPosition, DustID.DemonTorch);
+			var d = Dust.NewDustPerfect(spawnPosition, DustID.DemonTorch);
 			d.noGravity = true;
 			d.noLight = true;
 			d.noLightEmittence = true;

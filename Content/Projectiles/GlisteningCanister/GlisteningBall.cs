@@ -1,9 +1,5 @@
 ﻿using Canisters.Helpers;
-using Microsoft.Xna.Framework;
-using Terraria;
 using Terraria.Audio;
-using Terraria.ID;
-using Terraria.ModLoader;
 
 namespace Canisters.Content.Projectiles.GlisteningCanister;
 
@@ -12,6 +8,10 @@ namespace Canisters.Content.Projectiles.GlisteningCanister;
 /// </summary>
 public class GlisteningBall : ModProjectile
 {
+	private bool IsParent {
+		get => Projectile.ai[0] == 0f;
+	}
+
 	public override void SetDefaults() {
 		// Base stats
 		Projectile.width = 8;
@@ -24,19 +24,19 @@ public class GlisteningBall : ModProjectile
 		Projectile.DamageType = DamageClass.Ranged;
 	}
 
-	private bool IsParent => Projectile.ai[0] == 0f;
-
 	public override void AI() {
 		for (int i = 0; i < 3; i++) {
 			if (Main.rand.NextBool()) {
-				Dust d = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.IchorTorch, Alpha: Main.rand.Next(100, 200), Scale: Main.rand.NextFloat(1f, 1.2f));
+				var d = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.IchorTorch,
+					Alpha: Main.rand.Next(100, 200), Scale: Main.rand.NextFloat(1f, 1.2f));
 				d.velocity *= 0.3f;
 				d.noGravity = true;
 				d.noLight = true;
 			}
 
 			if (Main.rand.NextBool()) {
-				Dust d = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.Ichor, Alpha: Main.rand.Next(100, 200), Scale: Main.rand.NextFloat(1f, 1.2f));
+				var d = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.Ichor,
+					Alpha: Main.rand.Next(100, 200), Scale: Main.rand.NextFloat(1f, 1.2f));
 				d.velocity *= 0.3f;
 				d.noGravity = true;
 				d.noLight = true;
@@ -54,12 +54,14 @@ public class GlisteningBall : ModProjectile
 			Vector2 velocity = Main.rand.NextVector2CircularEdge(5f, 5f);
 
 			Vector2 offset = velocity * -10f;
-			Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center + offset, velocity, Type, Projectile.damage / 3, 0f, Projectile.owner, 1f);
+			var proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center + offset,
+				velocity, Type, Projectile.damage / 3, 0f, Projectile.owner, 1f);
 			proj.timeLeft = 10;
 			proj.extraUpdates = 1;
 			proj.tileCollide = false;
 
-			proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center - offset, -velocity, Type, Projectile.damage / 3, 0f, Projectile.owner, 1f);
+			proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center - offset,
+				-velocity, Type, Projectile.damage / 3, 0f, Projectile.owner, 1f);
 			proj.timeLeft = 10;
 			proj.extraUpdates = 1;
 			proj.tileCollide = false;
@@ -67,10 +69,7 @@ public class GlisteningBall : ModProjectile
 
 		// Le epic sound
 		if (IsParent) {
-			SoundStyle soundStyle = SoundID.Item154 with {
-				Volume = 0.5f,
-				PitchRange = (-0.8f, -0.6f)
-			};
+			SoundStyle soundStyle = SoundID.Item154 with { Volume = 0.5f, PitchRange = (-0.8f, -0.6f) };
 			SoundEngine.PlaySound(soundStyle, Projectile.Center);
 		}
 	}

@@ -1,14 +1,16 @@
 ﻿using Canisters.Helpers;
-using Microsoft.Xna.Framework;
-using Terraria;
-using Terraria.ID;
-using Terraria.ModLoader;
 
 namespace Canisters.Content.Projectiles.GhastlyCanister;
 
 public class GhastlyExplosion : ModProjectile
 {
 	private const float LifeTime = 35;
+
+	private bool firstFrame = true;
+
+	private ref float Timer {
+		get => ref Projectile.ai[0];
+	}
 
 	public override void SetStaticDefaults() {
 		Main.projFrames[Type] = 7;
@@ -25,10 +27,6 @@ public class GhastlyExplosion : ModProjectile
 		Projectile.penetrate = -1;
 		Projectile.DamageType = DamageClass.Ranged;
 	}
-
-	private ref float Timer => ref Projectile.ai[0];
-
-	private bool firstFrame = true;
 
 	public override void AI() {
 		if (firstFrame) {

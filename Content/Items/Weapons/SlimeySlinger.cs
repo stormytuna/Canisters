@@ -1,19 +1,20 @@
-﻿using Canisters.Content.Projectiles.VolatileCanister;
+﻿using Canisters.Content.Items.Canisters;
+using Canisters.Content.Projectiles.VolatileCanister;
 using Canisters.Helpers.Abstracts;
 using Canisters.Helpers.Enums;
-using Microsoft.Xna.Framework;
-using Terraria;
 using Terraria.GameContent.ItemDropRules;
-using Terraria.ID;
-using Terraria.ModLoader;
 
 namespace Canisters.Content.Items.Weapons;
 
 public class SlimeySlinger : CanisterUsingWeapon
 {
-	public override CanisterFiringType CanisterFiringType => CanisterFiringType.Launched;
+	public override CanisterFiringType CanisterFiringType {
+		get => CanisterFiringType.Launched;
+	}
 
-	public override Vector2 MuzzleOffset => new(12f, -10f);
+	public override Vector2 MuzzleOffset {
+		get => new(12f, -10f);
+	}
 
 	public override void SetDefaults() {
 		// Base stats
@@ -31,15 +32,17 @@ public class SlimeySlinger : CanisterUsingWeapon
 		Item.noUseGraphic = true;
 
 		// Weapon stats
-		Item.shoot = ModContent.ProjectileType<VolatileCanister>();
+		Item.shoot = ModContent.ProjectileType<FiredVolatileCanister>();
 		Item.shootSpeed = 15f;
 		Item.damage = 16;
 		Item.knockBack = 3f;
 		Item.DamageType = DamageClass.Ranged;
-		Item.useAmmo = ModContent.ItemType<Canisters.VolatileCanister>();
+		Item.useAmmo = ModContent.ItemType<VolatileCanister>();
 	}
 
-	public override Vector2? HoldoutOffset() => new Vector2(2f, -2f);
+	public override Vector2? HoldoutOffset() {
+		return new Vector2(2f, -2f);
+	}
 }
 
 public class SlimySlingerGlobalProjectile : ShotByWeaponGlobalProjectile<SlimeySlinger>
@@ -72,7 +75,9 @@ public class SlimySlingerGlobalProjectile : ShotByWeaponGlobalProjectile<SlimeyS
 
 public class SlimeySlingerGlobalNPC : GlobalNPC
 {
-	public override bool AppliesToEntity(NPC entity, bool lateInstantiation) => entity.type == NPCID.QueenSlimeBoss;
+	public override bool AppliesToEntity(NPC entity, bool lateInstantiation) {
+		return entity.type == NPCID.QueenSlimeBoss;
+	}
 
 	public override void ModifyNPCLoot(NPC npc, NPCLoot npcLoot) {
 		LeadingConditionRule notExpertLeadingRule = new(new Conditions.NotExpert());
@@ -82,7 +87,9 @@ public class SlimeySlingerGlobalNPC : GlobalNPC
 
 public class SlimeySlingerGlobalItem : GlobalItem
 {
-	public override bool AppliesToEntity(Item entity, bool lateInstantiation) => entity.type == ItemID.QueenSlimeBossBag;
+	public override bool AppliesToEntity(Item entity, bool lateInstantiation) {
+		return entity.type == ItemID.QueenSlimeBossBag;
+	}
 
 	public override void ModifyItemLoot(Item item, ItemLoot itemLoot) {
 		itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<SlimeySlinger>(), 4));

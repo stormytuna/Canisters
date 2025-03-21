@@ -32,6 +32,19 @@ Projectiles: {
 	ToxicFog.DisplayName: Toxic Fog
 	NaniteMist.DisplayName: Nanite Mist
 	NaniteMistEmitter.DisplayName: Nanite Mist Emitter
+	AetherBlob.DisplayName: Aether Blob
+	AetherianCanister.DisplayName: Aetherian Canister
+	FiredAetherianCanister.DisplayName: Fired Aetherian Canister
+	FiredBlightedCanister.DisplayName: Fired Blighted Canister
+	FiredGhastlyCanister.DisplayName: Fired Ghastly Canister
+	FiredGlisteningCanister.DisplayName: Fired Glistening Canister
+	FiredHarmonicCanister.DisplayName: Fired Harmonic Canister
+	FiredLunarCanister.DisplayName: Fired Lunar Canister
+	FiredNaniteCanister.DisplayName: Fired Nanite Canister
+	FiredToxicCanister.DisplayName: Fired Toxic Canister
+	FiredVerdantCanister.DisplayName: Fired Verdant Canister
+	DepletedVolatileCanister.DisplayName: Depleted Volatile Canister
+	FiredVolatileCanister.DisplayName: Fired Volatile Canister
 }
 
 Items: {
@@ -199,6 +212,11 @@ Items: {
 	ChlorophyteSlugger: {
 		DisplayName: Chlorophyte Slugger
 		Tooltip: ""
+	}
+
+	AetherianCanister: {
+		Tooltip: ""
+		DisplayName: Aetherian Canister
 	}
 }
 

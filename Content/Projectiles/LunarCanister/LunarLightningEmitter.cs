@@ -1,16 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using Canisters.Helpers;
-using Microsoft.Xna.Framework;
-using Terraria;
-using Terraria.ID;
-using Terraria.ModLoader;
 
 namespace Canisters.Content.Projectiles.LunarCanister;
 
 public class LunarLightningEmitter : ModProjectile
 {
-	private ref float Timer => ref Projectile.ai[0];
+	private ref float Timer {
+		get => ref Projectile.ai[0];
+	}
+
+	public override string Texture {
+		get => CanisterHelpers.GetEmptyAssetString();
+	}
 
 	public override void SetDefaults() {
 		// Base stats
@@ -21,8 +23,6 @@ public class LunarLightningEmitter : ModProjectile
 		Projectile.timeLeft = 41;
 		Projectile.penetrate = -1;
 	}
-
-	public override string Texture => CanisterHelpers.GetEmptyAssetString();
 
 	public override void AI() {
 		if (Timer % 8 == 0) {

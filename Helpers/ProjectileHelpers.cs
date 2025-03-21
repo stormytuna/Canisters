@@ -1,11 +1,10 @@
-﻿using Terraria;
-
-namespace Canisters.Helpers;
+﻿namespace Canisters.Helpers;
 
 public static class ProjectileHelpers
 {
 	/// <summary>
-	///     Creates an explosion using the projectile. Calls <see cref="Projectile.Damage" />, then <see cref="Projectile.Kill" />.
+	///     Creates an explosion using the projectile. Calls <see cref="Projectile.Damage" />, then
+	///     <see cref="Projectile.Kill" />.
 	/// </summary>
 	/// <param name="proj">The projectile</param>
 	/// <param name="width">The width of the explosion</param>

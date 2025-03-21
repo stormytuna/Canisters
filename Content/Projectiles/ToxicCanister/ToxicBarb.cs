@@ -1,9 +1,5 @@
 ﻿using System;
 using Canisters.Helpers;
-using Microsoft.Xna.Framework;
-using Terraria;
-using Terraria.ID;
-using Terraria.ModLoader;
 using static Microsoft.Xna.Framework.MathHelper;
 
 namespace Canisters.Content.Projectiles.ToxicCanister;
@@ -12,7 +8,9 @@ public class ToxicBarb : ModProjectile
 {
 	private const float TimeToBounce = 25f;
 
-	private ref float Timer => ref Projectile.ai[0];
+	private ref float Timer {
+		get => ref Projectile.ai[0];
+	}
 
 	public override void SetDefaults() {
 		// Base stats
@@ -26,7 +24,7 @@ public class ToxicBarb : ModProjectile
 	}
 
 	private Dust MakeDust(Vector2 position, int width, int height) {
-		Dust dust = Dust.NewDustDirect(position, width, height, DustID.DemonTorch);
+		var dust = Dust.NewDustDirect(position, width, height, DustID.DemonTorch);
 		dust.scale = Main.rand.NextFloat(1f, 1.5f);
 		dust.noGravity = true;
 		dust.noLight = true;
@@ -52,7 +50,7 @@ public class ToxicBarb : ModProjectile
 		}
 
 		float timeUntilBounce = TimeToBounce - Timer;
-		Vector2 bouncePosition = Projectile.Center + Projectile.velocity * timeUntilBounce;
+		Vector2 bouncePosition = Projectile.Center + (Projectile.velocity * timeUntilBounce);
 		MakeDust(bouncePosition, 0, 0);
 
 		if (Timer >= TimeToBounce) {
