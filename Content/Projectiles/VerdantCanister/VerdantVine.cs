@@ -7,19 +7,16 @@ public class VerdantVine : ModProjectile
 	private bool firstFrame = true;
 	private int timer;
 
-	/// <summary>
-	///     The number of vine projectiles to create after this one. If this is 0, the texture will be replaced with the tip
-	///     texture
-	/// </summary>
 	private ref float NumVines {
 		get => ref Projectile.ai[0];
 	}
 
-	/// <summary>
-	///     The amount of radians to rotate the next vine projectile
-	/// </summary>
-	private ref float NextVineRotation {
+	private ref float StartRotation {
 		get => ref Projectile.ai[1];
+	}
+
+	private ref float AddedRotation {
+		get => ref Projectile.ai[2];
 	}
 
 	public override string Texture {
@@ -42,6 +39,7 @@ public class VerdantVine : ModProjectile
 		if (firstFrame) {
 			firstFrame = false;
 			Projectile.spriteDirection = Main.rand.NextBool().ToDirectionInt();
+			Projectile.rotation = StartRotation;
 		}
 
 		Projectile.alpha += 15;
@@ -52,9 +50,7 @@ public class VerdantVine : ModProjectile
 		if (timer == 3 && Projectile.owner == Main.myPlayer && NumVines > 0) {
 			Vector2 offset = Vector2.UnitY.RotatedBy(Projectile.rotation) * -20f;
 			Vector2 position = Projectile.Center + offset;
-			var nextVine = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), position, Vector2.Zero, Type, Projectile.damage, Projectile.knockBack, Projectile.owner, NumVines - 1, NextVineRotation);
-			nextVine.originalDamage = Projectile.originalDamage;
-			nextVine.rotation = Projectile.rotation + NextVineRotation;
+			var nextVine = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), position, Vector2.Zero, Type, Projectile.damage, Projectile.knockBack, Projectile.owner, NumVines - 1, StartRotation + AddedRotation, AddedRotation);
 		}
 
 		if (Main.rand.NextBool(4)) {
@@ -65,7 +61,7 @@ public class VerdantVine : ModProjectile
 		timer++;
 	}
 
-	public override void Kill(int timeLeft) {
+	public override void OnKill(int timeLeft) {
 		DustHelpers.MakeDustExplosion(Projectile.Center, 5f, DustID.Grass, Main.rand.Next(2, 4), 0f, 1f, 100, 150, 0.8f, 1.2f, true);
 	}
 }
