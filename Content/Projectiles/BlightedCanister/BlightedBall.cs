@@ -1,11 +1,9 @@
-﻿using Canisters.Helpers;
+﻿using Canisters.Content.Dusts;
+using Canisters.Helpers;
 using Terraria.GameContent;
 
 namespace Canisters.Content.Projectiles.BlightedCanister;
 
-/// <summary>
-///     Balls that the blighted canister releases when it explodes
-/// </summary>
 public class BlightedBall : ModProjectile
 {
 	public override void SetStaticDefaults() {
@@ -14,7 +12,6 @@ public class BlightedBall : ModProjectile
 	}
 
 	public override void SetDefaults() {
-		// Base stats
 		Projectile.width = 20;
 		Projectile.height = 20;
 		Projectile.aiStyle = -1;
@@ -22,7 +19,6 @@ public class BlightedBall : ModProjectile
 		Projectile.tileCollide = false;
 		Projectile.timeLeft = 90;
 
-		// Weapon stats
 		Projectile.friendly = true;
 		Projectile.penetrate = -1;
 		Projectile.DamageType = DamageClass.Ranged;
@@ -30,10 +26,9 @@ public class BlightedBall : ModProjectile
 
 	public override void AI() {
 		if (Main.rand.NextBool()) {
-			var d = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.CursedTorch,
-				Scale: Main.rand.NextFloat(1f, 1.2f));
-			d.noGravity = true;
-			d.noLight = true;
+			var dust = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, ModContent.DustType<BlightedDust>(), Scale: Main.rand.NextFloat(1f, 1.2f));
+			dust.noGravity = true;
+			dust.noLight = true;
 		}
 
 		Projectile.velocity = Projectile.velocity.RotatedBy(Projectile.ai[0] * 0.07f);
@@ -44,8 +39,7 @@ public class BlightedBall : ModProjectile
 		return Color.White;
 	}
 
-	public override bool TileCollideStyle(ref int width, ref int height, ref bool fallThrough,
-		ref Vector2 hitboxCenterFrac) {
+	public override bool TileCollideStyle(ref int width, ref int height, ref bool fallThrough, ref Vector2 hitboxCenterFrac) {
 		width = 8;
 		height = 8;
 
@@ -53,32 +47,24 @@ public class BlightedBall : ModProjectile
 	}
 
 	public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone) {
-		target.AddBuff(BuffID.CursedInferno, 600);
+		target.AddBuff(BuffID.CursedInferno, 7 * 60);
 	}
 
 	public override void Kill(int timeLeft) {
-		DustHelpers.MakeDustExplosion(Projectile.Center, 8f, DustID.CursedTorch, Main.rand.Next(12, 15), 0f, 15f, 100,
-			150, 1f, 1.3f, true);
-		DustHelpers.MakeDustExplosion(Projectile.Center, 8f, DustID.CursedTorch, Main.rand.Next(3, 6), 0f, 10f, 100,
-			150, 1.3f, 1.6f, true);
-		DustHelpers.MakeDustExplosion(Projectile.Center, 8f, DustID.CursedTorch, Main.rand.Next(3, 6), 0f, 3f, 100, 150,
-			1f, 1.3f);
+		DustHelpers.MakeDustExplosion(Projectile.Center, 8f, ModContent.DustType<BlightedDust>(), 5, 0f, 15f, 100, 150, 1f, 1.3f, true, true, true);
+		DustHelpers.MakeDustExplosion(Projectile.Center, 8f, ModContent.DustType<BlightedDust>(), 3, 0f, 10f, 100, 150, 1.3f, 1.6f, true, true, true);
+		DustHelpers.MakeDustExplosion(Projectile.Center, 8f, ModContent.DustType<BlightedDust>(), 2, 0f, 3f, 100, 150, 1f, 1.3f, true, true);
 	}
 
 	public override bool PreDraw(ref Color lightColor) {
-		Main.instance.LoadProjectile(Type);
 		Texture2D texture = TextureAssets.Projectile[Type].Value;
 
-		// Draw afterimages
-		for (int i = 1; i < Projectile.oldPos.Length; i += 2) {
-			Vector2 position = Projectile.oldPos[i] - Main.screenPosition +
-			                   new Vector2(Projectile.width / 2, Projectile.height / 2);
+		for (int i = Projectile.oldPos.Length - 1; i >= 1; i -= 2) {
+			Vector2 position = Projectile.oldPos[i] - Main.screenPosition +new Vector2(Projectile.width / 2, Projectile.height / 2);
 			Rectangle sourceRect = new(0, 0, texture.Width, texture.Height);
-			Color color = Projectile.GetAlpha(lightColor) *
-			              ((Projectile.oldPos.Length - (float)i) / Projectile.oldPos.Length);
+			Color color = Projectile.GetAlpha(lightColor) * ((Projectile.oldPos.Length - (float)i) / Projectile.oldPos.Length);
 			Vector2 origin = texture.Size() / 2f;
-			Main.EntitySpriteDraw(texture, position, sourceRect, color, Projectile.rotation, origin, Projectile.scale,
-				SpriteEffects.None);
+			Main.EntitySpriteDraw(texture, position, sourceRect, color, Projectile.rotation, origin, Projectile.scale,SpriteEffects.None);
 		}
 
 		return true;

@@ -7,7 +7,6 @@ public class EmptyCanister : ModItem
 	}
 
 	public override void SetDefaults() {
-		// Base stats
 		Item.width = 22;
 		Item.height = 22;
 		Item.maxStack = 999;

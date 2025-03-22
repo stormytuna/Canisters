@@ -1,5 +1,6 @@
 ﻿using Canisters.Content.Projectiles.BlightedCanister;
 using Canisters.Helpers.Abstracts;
+using Terraria.DataStructures;
 
 namespace Canisters.Content.Items.Canisters;
 
@@ -18,11 +19,9 @@ public class BlightedCanister : CanisterItem
 	}
 
 	public override void SafeSetDefaults() {
-		// Base stats
 		Item.value = Item.buyPrice(silver: 9);
 		Item.rare = ItemRarityID.LightRed;
 
-		// Weapon stats
 		Item.shootSpeed = 2f;
 		Item.damage = 12;
 		Item.knockBack = 4f;
