@@ -7,6 +7,10 @@ namespace Canisters.Content.Projectiles.VerdantCanister;
 
 public class FiredVerdantCanister : FiredCanisterProjectile
 {
+	public override int TimeBeforeGravityAffected {
+		get => 15;
+	}
+
 	public override string Texture {
 		get => "Canisters/Content/Items/Canisters/VerdantCanister";
 	}

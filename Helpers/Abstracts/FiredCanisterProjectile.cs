@@ -4,6 +4,10 @@ namespace Canisters.Helpers.Abstracts;
 
 public abstract class FiredCanisterProjectile : ModProjectile
 {
+	/// <summary>
+	/// Amount of time in frames this projectile will fly straight before being gravity affected.
+	/// Defaults to 20.
+	/// </summary>
 	public virtual int TimeBeforeGravityAffected {
 		get => 20;
 	}
