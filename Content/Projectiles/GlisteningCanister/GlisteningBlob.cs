@@ -1,50 +1,44 @@
 ﻿using Canisters.Helpers;
+using Terraria.DataStructures;
 
 namespace Canisters.Content.Projectiles.GlisteningCanister;
 
-// TODO: Change this effect, kinda don't like it
-/// <summary>
-///     Bouncy balls that the glistening canister explodes into
-/// </summary>
 public class GlisteningBlob : ModProjectile
 {
+	private bool firstFrame = true;
+	
+	public override void SetStaticDefaults() {
+		Main.projFrames[Type] = 4;
+	}
+
 	public override void SetDefaults() {
-		// Base stats
 		Projectile.width = 16;
 		Projectile.height = 16;
 		Projectile.aiStyle = -1;
 		Projectile.extraUpdates = 1;
 
-		// Weapon stats
 		Projectile.friendly = true;
 		Projectile.penetrate = 3;
 		Projectile.DamageType = DamageClass.Ranged;
 	}
 
 	public override void AI() {
-		// Gravity
+		if (firstFrame) {
+			firstFrame = false;
+			Projectile.frame = Main.rand.Next(Main.projFrames[Type]);
+			Projectile.direction = Main.rand.NextBool().ToDirectionInt();
+		}
+		
 		Projectile.velocity.Y += 0.1f;
-
-		// Dust
-		if (Main.rand.NextBool(3)) {
-			var d = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.IchorTorch,
-				Alpha: Main.rand.Next(100, 200), Scale: Main.rand.NextFloat(1f, 1.2f));
-			d.noGravity = true;
-			d.noLight = true;
-		}
-
-		if (Main.rand.NextBool(3)) {
-			var d = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.Ichor,
-				Alpha: Main.rand.Next(100, 200), Scale: Main.rand.NextFloat(1f, 1.2f));
-			d.noGravity = true;
-			d.noLight = true;
-		}
-
-		// Lighting
-		Lighting.AddLight(Projectile.Center, TorchID.Ichor);
-
-		// Rotation
 		Projectile.rotation += 0.125f * Projectile.direction;
+
+		if (Main.rand.NextBool(3)) {
+			var dust = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.Ichor, Alpha: Main.rand.Next(100, 200), Scale: Main.rand.NextFloat(1f, 1.2f));
+			dust.noGravity = true;
+			dust.noLight = true;
+		}
+
+		Lighting.AddLight(Projectile.Center, TorchID.Ichor);
 	}
 
 	public override Color? GetAlpha(Color lightColor) {
@@ -57,18 +51,19 @@ public class GlisteningBlob : ModProjectile
 		}
 
 		if (Projectile.velocity.Y != oldVelocity.Y) {
-			Projectile.velocity.Y = -3f;
+			Projectile.velocity.Y = -oldVelocity.Y;
 		}
 
+		Projectile.velocity *= 0.8f;
+		
 		Projectile.penetrate--;
 
-		DustHelpers.MakeDustExplosion(Projectile.Center, 8f, DustID.IchorTorch, 10, 0f, 8f, 100, 150, 1f, 1.2f, true);
+		DustHelpers.MakeDustExplosion(Projectile.Center, 8f, DustID.IchorTorch, 4, 0f, 4f, 80, 120, 0.8f, 1.2f, true);
 
 		return false;
 	}
 
-	public override bool TileCollideStyle(ref int width, ref int height, ref bool fallThrough,
-		ref Vector2 hitboxCenterFrac) {
+	public override bool TileCollideStyle(ref int width, ref int height, ref bool fallThrough, ref Vector2 hitboxCenterFrac) {
 		width = 8;
 		height = 8;
 

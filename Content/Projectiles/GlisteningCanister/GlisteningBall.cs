@@ -3,74 +3,66 @@ using Terraria.Audio;
 
 namespace Canisters.Content.Projectiles.GlisteningCanister;
 
-/// <summary>
-///     Splitting balls that the depleted glistening canister fires
-/// </summary>
 public class GlisteningBall : ModProjectile
 {
+	private bool firstFrame = true;
+	
+	public override string Texture {
+		get => $"{nameof(Canisters)}/Assets/Empty";
+	}
+
 	private bool IsParent {
 		get => Projectile.ai[0] == 0f;
 	}
 
 	public override void SetDefaults() {
-		// Base stats
 		Projectile.width = 8;
 		Projectile.height = 8;
 		Projectile.aiStyle = -1;
 
-		// Weapon stats
 		Projectile.friendly = true;
-		Projectile.penetrate = 1;
 		Projectile.DamageType = DamageClass.Ranged;
 	}
 
 	public override void AI() {
-		for (int i = 0; i < 3; i++) {
-			if (Main.rand.NextBool()) {
-				var d = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.IchorTorch,
-					Alpha: Main.rand.Next(100, 200), Scale: Main.rand.NextFloat(1f, 1.2f));
-				d.velocity *= 0.3f;
-				d.noGravity = true;
-				d.noLight = true;
+		if (firstFrame) {
+			firstFrame = false;
+			if (!IsParent) {
+				Projectile.timeLeft = 15;
+				Projectile.extraUpdates = 1;
+				Projectile.tileCollide = false;
 			}
-
-			if (Main.rand.NextBool()) {
-				var d = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.Ichor,
-					Alpha: Main.rand.Next(100, 200), Scale: Main.rand.NextFloat(1f, 1.2f));
-				d.velocity *= 0.3f;
-				d.noGravity = true;
-				d.noLight = true;
-			}
-		}
+		}	
+		
+		var dust = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.IchorTorch, Alpha: Main.rand.Next(100, 200), Scale: Main.rand.NextFloat(1f, 1.2f));
+		dust.velocity *= 0.3f;
+		dust.noGravity = true;
+		dust.noLight = true;
+		
+		dust = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.Ichor, Alpha: Main.rand.Next(100, 200), Scale: Main.rand.NextFloat(1f, 1.2f));
+		dust.velocity *= 0.3f;
+		dust.noGravity = true;
+		dust.noLight = true;
 
 		Lighting.AddLight(Projectile.Center, TorchID.Ichor);
 	}
 
 	public override void Kill(int timeLeft) {
-		DustHelpers.MakeDustExplosion(Projectile.Center, 4f, DustID.IchorTorch, 10, 0f, 8f, 100, 150, 1f, 1.2f, true);
+		DustHelpers.MakeDustExplosion(Projectile.Center, 4f, DustID.IchorTorch, 5, 0f, 8f, 100, 150, 1f, 1.2f, true);
 
-		// Create our two children
-		if (IsParent && Main.myPlayer == Projectile.owner) {
+		if (!IsParent) {
+			return;
+		}
+		
+		SoundStyle soundStyle = SoundID.Item154 with { MaxInstances = 0, Volume = 0.5f, PitchRange = (-0.8f, -0.6f) };
+		SoundEngine.PlaySound(soundStyle, Projectile.Center);
+
+		if (Main.myPlayer == Projectile.owner) {
 			Vector2 velocity = Main.rand.NextVector2CircularEdge(5f, 5f);
 
-			Vector2 offset = velocity * -10f;
-			var proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center + offset,
-				velocity, Type, Projectile.damage / 3, 0f, Projectile.owner, 1f);
-			proj.timeLeft = 10;
-			proj.extraUpdates = 1;
-			proj.tileCollide = false;
-
-			proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center - offset,
-				-velocity, Type, Projectile.damage / 3, 0f, Projectile.owner, 1f);
-			proj.timeLeft = 10;
-			proj.extraUpdates = 1;
-			proj.tileCollide = false;
-		}
-
-		// Le epic sound
-		if (IsParent) {
-			SoundStyle soundStyle = SoundID.Item154 with { Volume = 0.5f, PitchRange = (-0.8f, -0.6f) };
-			SoundEngine.PlaySound(soundStyle, Projectile.Center);
+			Vector2 offset = velocity * -15f;
+			Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center + offset, velocity, Type, Projectile.damage / 3, 0f, Projectile.owner, 1f);
+			Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center - offset, -velocity, Type, Projectile.damage / 3, 0f, Projectile.owner, 1f);
 		}
 	}
 
