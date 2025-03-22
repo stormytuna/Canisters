@@ -15,7 +15,7 @@ public class FiredVolatileCanister : FiredCanisterProjectile
 	}
 
 	public override void OnExplode() {
-		Projectile.CreateExplosion(96, 96);
+		Projectile.CreateExplosionLegacy(96, 96);
 	}
 
 	public override void ExplosionVisuals(Vector2 position, Vector2 velocity) {

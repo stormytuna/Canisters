@@ -27,6 +27,6 @@ public static class CanisterHelpers
 	}
 
 	public static string GetEmptyAssetString() {
-		return "Canisters/Assets/Empty";
+		return $"{nameof(Canisters)}/Assets/Empty";
 	}
 }

@@ -1,4 +1,5 @@
-﻿using Canisters.Content.Projectiles.GhastlyCanister;
+﻿using System;
+using Canisters.Content.Projectiles.GhastlyCanister;
 using Canisters.Helpers.Abstracts;
 
 namespace Canisters.Content.Items.Canisters;
@@ -28,7 +29,7 @@ public class GhastlyCanister : CanisterItem
 		Item.knockBack = 3f;
 	}
 
-	public override void ApplyAmmoStats(bool isLaunched, ref Vector2 velocity, ref Vector2 position, ref int damage, ref float knockBack, ref int amount, ref float spread) {
+	public override void ApplyAmmoStats(bool isLaunched, ref Vector2 velocity, ref Vector2 position, ref int damage, ref float knockBack, ref int amount, ref float spread, ref Func<int, float[]> getAiCallback) {
 		if (isLaunched) {
 			return;
 		}

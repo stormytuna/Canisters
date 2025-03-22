@@ -25,7 +25,7 @@ public class FiredVerdantCanister : FiredCanisterProjectile
 			Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center + offset, Vector2.Zero, ModContent.ProjectileType<VerdantVine>(), Projectile.damage, Projectile.knockBack / 3f, Projectile.owner, numVines, startRot, vineRot);
 		}
 
-		Projectile.CreateExplosion(96, 96);
+		Projectile.CreateExplosionLegacy(96, 96);
 	}
 
 	public override void ExplosionVisuals(Vector2 position, Vector2 velocity) {

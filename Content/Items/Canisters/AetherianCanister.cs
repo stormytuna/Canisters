@@ -1,3 +1,4 @@
+using System;
 using Canisters.Content.Projectiles.AetherianCanister;
 using Canisters.Helpers.Abstracts;
 
@@ -34,7 +35,7 @@ public class AetherianCanister : CanisterItem
 
 	public override void ApplyAmmoStats(bool isLaunched, ref Vector2 velocity, ref Vector2 position, ref int damage,
 		ref float knockBack,
-		ref int amount, ref float spread) {
+		ref int amount, ref float spread, ref Func<int, float[]> getAiCallback) {
 		if (isLaunched) {
 			return;
 		}

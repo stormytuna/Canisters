@@ -11,7 +11,7 @@ public class BlightedBolt : ModProjectile
 	private Vector2 startLocation;
 
 	public override string Texture {
-		get => $"{nameof(Canisters)}/Assets/Empty";
+		get => CanisterHelpers.GetEmptyAssetString();
 	}
 
 	public override void SetDefaults() {

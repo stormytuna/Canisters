@@ -29,7 +29,7 @@ public class FiredBlightedCanister : FiredCanisterProjectile
 			Projectile.NewProjectile(Projectile.GetSource_FromThis(), position, velocity, ModContent.ProjectileType<BlightedBall>(), Projectile.damage / 3, Projectile.knockBack / 3f, Projectile.owner, sign);
 		}
 
-		Projectile.CreateExplosion(96, 96);
+		Projectile.CreateExplosionLegacy(96, 96);
 	}
 
 	public override void ExplosionVisuals(Vector2 position, Vector2 velocity) {

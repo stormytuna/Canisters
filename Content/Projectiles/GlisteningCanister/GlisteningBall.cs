@@ -8,7 +8,7 @@ public class GlisteningBall : ModProjectile
 	private bool firstFrame = true;
 	
 	public override string Texture {
-		get => $"{nameof(Canisters)}/Assets/Empty";
+		get => CanisterHelpers.GetEmptyAssetString();
 	}
 
 	private bool IsParent {

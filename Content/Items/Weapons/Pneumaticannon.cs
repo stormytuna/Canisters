@@ -44,7 +44,7 @@ public class Pneumaticannon : CanisterUsingWeapon
 	}
 
 	public override void ShootProjectile(EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity,
-		int type, int damage, float knockback, int owner) {
+		int type, int damage, float knockback, int owner, float ai0, float ai1, float ai2) {
 		var canister = Projectile.NewProjectileDirect(source, position, velocity, type, damage, knockback, owner);
 		canister.extraUpdates = 2; // TODO: Wont work in MP!!
 	}

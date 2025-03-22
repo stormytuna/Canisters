@@ -1,4 +1,5 @@
-﻿using Canisters.Content.Items.Canisters;
+﻿using System;
+using Canisters.Content.Items.Canisters;
 using Canisters.Content.Projectiles.VolatileCanister;
 using Canisters.Helpers.Enums;
 
@@ -20,9 +21,7 @@ public abstract class CanisterItem : ModItem
 		ref float knockback) {
 	}
 
-	public virtual void ApplyAmmoStats(bool isLaunched, ref Vector2 velocity, ref Vector2 position, ref int damage,
-		ref float knockBack, ref int amount, ref float spread) {
-	}
+	public virtual void ApplyAmmoStats(bool isLaunched, ref Vector2 velocity, ref Vector2 position, ref int damage, ref float knockBack, ref int amount, ref float spread, ref Func<int, float[]> getAiCallback) { }
 
 	public sealed override void SetStaticDefaults() {
 		SafeSetStaticDefaults();

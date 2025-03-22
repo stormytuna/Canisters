@@ -22,6 +22,6 @@ public class FiredNaniteCanister : FiredCanisterProjectile
 
 		SoundEngine.PlaySound(SoundID.DD2_GoblinBomb, Projectile.Center);
 
-		Projectile.CreateExplosion(96, 96);
+		Projectile.CreateExplosionLegacy(96, 96);
 	}
 }

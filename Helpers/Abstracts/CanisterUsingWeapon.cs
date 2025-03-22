@@ -1,4 +1,6 @@
-﻿using Canisters.Helpers.Enums;
+﻿using System;
+using System.Linq;
+using Canisters.Helpers.Enums;
 using ReLogic.Content;
 using Terraria.DataStructures;
 using static Microsoft.Xna.Framework.MathHelper;
@@ -32,17 +34,14 @@ public abstract class CanisterUsingWeapon : ModItem
 		ref int damage, ref float knockback) {
 	}
 
-	public virtual void ApplyShootStats(ref Vector2 velocity, ref Vector2 position, ref int damage, ref float knockBack,
-		ref int amount, ref float spread) {
+	public virtual void ApplyShootStats(ref Vector2 velocity, ref Vector2 position, ref int damage, ref float knockBack, ref int amount, ref float spread) {
 	}
 
-	public virtual void ShootProjectile(EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity,
-		int type, int damage, float knockback, int owner) {
-		Projectile.NewProjectile(source, position, velocity, type, damage, knockback, owner);
+	public virtual void ShootProjectile(EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback, int owner, float ai0, float ai1, float ai2) {
+		Projectile.NewProjectile(source, position, velocity, type, damage, knockback, owner, ai0, ai1, ai2);
 	}
 
-	public sealed override bool PreDrawInInventory(SpriteBatch spriteBatch, Vector2 position, Rectangle frame,
-		Color drawColor, Color itemColor, Vector2 origin, float scale) {
+	public sealed override bool PreDrawInInventory(SpriteBatch spriteBatch, Vector2 position, Rectangle frame, Color drawColor, Color itemColor, Vector2 origin, float scale) {
 		// Check if we have any canisters
 		Player player = Main.LocalPlayer;
 		if (!player.PickAmmo(Item, out _, out _, out _, out _, out int usedAmmoItemId, true)) {
@@ -54,8 +53,7 @@ public abstract class CanisterUsingWeapon : ModItem
 
 		// Draw the canister
 		Color canisterColor = CanisterHelpers.GetCanisterColor(usedAmmoItemId);
-		spriteBatch.Draw(CanisterTexture.Value, position, frame, canisterColor, 0f, origin, scale, SpriteEffects.None,
-			0);
+		spriteBatch.Draw(CanisterTexture.Value, position, frame, canisterColor, 0f, origin, scale, SpriteEffects.None, 0);
 
 		return false;
 	}
@@ -71,25 +69,24 @@ public abstract class CanisterUsingWeapon : ModItem
 		}
 	}
 
-	public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity,
-		int type, int damage, float knockback) {
+	public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback) {
 		if (ItemLoader.GetItem(source.AmmoItemIdUsed) is not CanisterItem canisterItem) {
 			return true;
 		}
 
 		int amount = 1;
 		float spread = 0f;
-		canisterItem.ApplyAmmoStats(CanisterFiringType == CanisterFiringType.Launched, ref velocity, ref position,
-			ref damage, ref knockback, ref amount, ref spread);
+		Func<int, float[]> getAiCallback = null;
+		canisterItem.ApplyAmmoStats(CanisterFiringType == CanisterFiringType.Launched, ref velocity, ref position, ref damage, ref knockback, ref amount, ref spread, ref getAiCallback);
 		ApplyShootStats(ref velocity, ref position, ref damage, ref knockback, ref amount, ref spread);
 
 		// Corrects our recoil simulation
 		velocity = player.RotatedRelativePoint(player.MountedCenter).DirectionTo(Main.MouseWorld) * velocity.Length();
 
 		for (int i = 0; i < amount; i++) {
-			Vector2 perturbedVelocity =
-				i == 0 ? velocity : velocity.RotatedByRandom(spread); // Forces one projectile to go towards the cursor
-			ShootProjectile(source, position, perturbedVelocity, type, damage, knockback, player.whoAmI);
+			Vector2 perturbedVelocity = i == 0 ? velocity : velocity.RotatedByRandom(spread); // Forces one projectile to go towards the cursor
+			float[] ai = getAiCallback?.Invoke(i) ?? [0f, 0f, 0f];
+			ShootProjectile(source, position, perturbedVelocity, type, damage, knockback, player.whoAmI, ai[0], ai[1], ai[2]);
 		}
 
 		return false;

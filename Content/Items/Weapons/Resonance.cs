@@ -66,7 +66,7 @@ public class Resonance : CanisterUsingWeapon
 	}
 
 	public override void ShootProjectile(EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity,
-		int type, int damage, float knockback, int owner) {
+		int type, int damage, float knockback, int owner, float ai0, float ai1, float ai2) {
 		Vector2 normal = velocity.SafeNormalize(Vector2.Zero).RotatedBy(PiOver2) * Main.LocalPlayer.direction;
 		Projectile.NewProjectile(source, position + (normal * 3f), velocity, type, damage, knockback, owner);
 		Projectile.NewProjectile(source, position - (normal * 3f), velocity, type, damage, knockback, owner);

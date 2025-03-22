@@ -24,6 +24,6 @@ public class FiredToxicCanister : FiredCanisterProjectile
 
 		SoundEngine.PlaySound(SoundID.DD2_GoblinBomb, Projectile.Center);
 
-		Projectile.CreateExplosion(200, 200);
+		Projectile.CreateExplosionLegacy(200, 200);
 	}
 }

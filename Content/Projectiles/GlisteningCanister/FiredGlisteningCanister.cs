@@ -21,7 +21,7 @@ public class FiredGlisteningCanister : FiredCanisterProjectile
 			Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, velocity, ModContent.ProjectileType<GlisteningBlob>(), Projectile.damage / 3, Projectile.knockBack / 3f, Projectile.owner);
 		}
 
-		Projectile.CreateExplosion(96, 96);
+		Projectile.CreateExplosionLegacy(96, 96);
 	}
 
 	public override void ExplosionVisuals(Vector2 position, Vector2 velocity) {

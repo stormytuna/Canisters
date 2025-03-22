@@ -1,4 +1,5 @@
-﻿using Canisters.Content.Items.Canisters;
+﻿using System;
+using Canisters.Content.Items.Canisters;
 using Canisters.Content.Projectiles.VolatileCanister;
 using Canisters.Helpers.Abstracts;
 using Canisters.Helpers.Enums;

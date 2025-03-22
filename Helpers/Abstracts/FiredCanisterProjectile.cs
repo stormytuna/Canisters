@@ -12,7 +12,7 @@ public abstract class FiredCanisterProjectile : ModProjectile
 		get => 20;
 	}
 
-	private bool HasGravity {
+	public bool HasGravity {
 		get => Projectile.ai[1] == 1f;
 		set => Projectile.ai[1] = value ? 1f : 0f;
 	}
@@ -33,13 +33,16 @@ public abstract class FiredCanisterProjectile : ModProjectile
 	/// </summary>
 	public virtual void ExplosionVisuals(Vector2 position, Vector2 velocity) { }
 
+	public virtual void SafeSetDefaults() { }
 	public virtual void SafeAI() { }
 
 	public virtual bool SafeOnTileCollide(Vector2 oldVelocity) {
 		return false;
 	}
 
-	public sealed override void SetDefaults() {
+	public sealed override void SetDefaults() { 
+		SafeSetDefaults();
+		
 		Projectile.width = 22;
 		Projectile.height = 22;
 		Projectile.aiStyle = -1;
