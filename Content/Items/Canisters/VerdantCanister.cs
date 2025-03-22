@@ -18,11 +18,9 @@ public class VerdantCanister : CanisterItem
 	}
 
 	public override void SafeSetDefaults() {
-		// Base stats
 		Item.value = Item.buyPrice(copper: 75);
 		Item.rare = ItemRarityID.Green;
 
-		// Weapon stats
 		Item.shootSpeed = 2f;
 		Item.damage = 8;
 		Item.knockBack = 2f;
