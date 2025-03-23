@@ -1,5 +1,5 @@
 ﻿using Canisters.Content.Projectiles.BlightedCanister;
-using Canisters.Helpers.Abstracts;
+using Canisters.Helpers._Legacy.Abstracts;
 using Terraria.DataStructures;
 
 namespace Canisters.Content.Items.Canisters;

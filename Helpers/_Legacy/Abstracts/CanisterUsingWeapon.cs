@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Linq;
 using Canisters.Helpers.Enums;
 using ReLogic.Content;
 using Terraria.DataStructures;
 using static Microsoft.Xna.Framework.MathHelper;
 
-namespace Canisters.Helpers.Abstracts;
+namespace Canisters.Helpers._Legacy.Abstracts;
 
 /// <summary>
 ///     Handles weapons that use canisters
@@ -52,7 +51,7 @@ public abstract class CanisterUsingWeapon : ModItem
 		spriteBatch.Draw(BaseTexture.Value, position, frame, drawColor, 0f, origin, scale, SpriteEffects.None, 0);
 
 		// Draw the canister
-		Color canisterColor = CanisterHelpers.GetCanisterColor(usedAmmoItemId);
+		Color canisterColor = CanisterHelpers.GetCanisterColorLegacy(usedAmmoItemId);
 		spriteBatch.Draw(CanisterTexture.Value, position, frame, canisterColor, 0f, origin, scale, SpriteEffects.None, 0);
 
 		return false;

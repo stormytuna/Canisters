@@ -1,7 +1,7 @@
 using System;
 using Canisters.Content.Dusts;
 using Canisters.Helpers;
-using Canisters.Helpers.Abstracts;
+using Canisters.Helpers._Legacy.Abstracts;
 using Terraria.Audio;
 using static Microsoft.Xna.Framework.MathHelper;
 

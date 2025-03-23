@@ -1,12 +1,10 @@
-﻿using Canisters.Helpers;
-using Canisters.Helpers.Abstracts;
+﻿using Canisters.Content.Items.Weapons;
+using Canisters.Helpers;
+using Canisters.Helpers._Legacy.Abstracts;
 using Terraria.DataStructures;
 
-namespace Canisters.Common.DrawLayers;
+namespace Canisters.Common;
 
-/// <summary>
-///     Allows canisters to have custom drawing without being held projectiles.
-/// </summary>
 public class CanisterWeaponDrawLayer : PlayerDrawLayer
 {
 	public override Position GetDefaultPosition() {
@@ -17,7 +15,7 @@ public class CanisterWeaponDrawLayer : PlayerDrawLayer
 		Player drawPlayer = drawInfo.drawPlayer;
 		Item heldItem = drawPlayer.HeldItem;
 
-		if (heldItem.ModItem is not CanisterUsingWeapon || !drawPlayer.ItemAnimationActive ||
+		if (heldItem.ModItem is not BaseCanisterUsingWeapon || !drawPlayer.ItemAnimationActive ||
 		    drawPlayer.JustDroppedAnItem || drawInfo.shadow != 0f || drawPlayer.CCed || drawPlayer.dead) {
 			return false;
 		}
@@ -28,8 +26,7 @@ public class CanisterWeaponDrawLayer : PlayerDrawLayer
 	protected override void Draw(ref PlayerDrawSet drawInfo) {
 		Player drawPlayer = drawInfo.drawPlayer;
 		Item heldItem = drawPlayer.HeldItem;
-		if (heldItem.ModItem is not CanisterUsingWeapon canisterWeapon ||
-		    !drawPlayer.TryGetWeaponAmmo(heldItem, out int usedAmmoItemId)) {
+		if (heldItem.ModItem is not BaseCanisterUsingWeapon canisterWeapon || !drawPlayer.TryGetWeaponAmmo(heldItem, out int usedAmmoItemId)) {
 			return;
 		}
 

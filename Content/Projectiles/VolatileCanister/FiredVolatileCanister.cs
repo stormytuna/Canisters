@@ -1,10 +1,10 @@
 using Canisters.Helpers;
-using Canisters.Helpers.Abstracts;
+using Canisters.Helpers._Legacy.Abstracts;
 using Terraria.Audio;
 
 namespace Canisters.Content.Projectiles.VolatileCanister;
 
-public class FiredVolatileCanister : FiredCanisterProjectile
+public class FiredVolatileCanister : BaseFiredCanisterProjectile
 {
 	public override int TimeBeforeGravityAffected {
 		get => 12;
@@ -14,11 +14,11 @@ public class FiredVolatileCanister : FiredCanisterProjectile
 		get => "Canisters/Content/Items/Canisters/VolatileCanister";
 	}
 
-	public override void OnExplode() {
-		Projectile.CreateExplosionLegacy(96, 96);
-	}
-
-	public override void ExplosionVisuals(Vector2 position, Vector2 velocity) {
+	public override void Explode(Vector2 position) {
+		if (Main.myPlayer == Projectile.owner) {
+			Projectile.Explode(100, 100);
+		}
+		
 		DustHelpers.MakeDustExplosion(position, 15f, DustID.Torch, Main.rand.Next(40, 55), 0f, 15f, 0, 0, 0.8f, 1.2f, true, true);
 		DustHelpers.MakeDustExplosion(position, 13f, DustID.Torch, Main.rand.Next(10, 15), 0f, 10f, 0, 0, 1.2f, 1.5f, true, true);
 		DustHelpers.MakeDustExplosion(position, 10f, DustID.Torch, Main.rand.Next(8, 12), 0f, 7f, 0, 0, 1.8f, 2.5f, true, true);

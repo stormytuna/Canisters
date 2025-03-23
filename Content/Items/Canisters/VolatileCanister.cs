@@ -1,9 +1,12 @@
 ﻿using Canisters.Content.Projectiles.VolatileCanister;
-using Canisters.Helpers.Abstracts;
+using Canisters.Helpers;
+using Canisters.Helpers._Legacy.Abstracts;
+using Terraria.Enums;
+using Terraria.GameContent.Creative;
 
 namespace Canisters.Content.Items.Canisters;
 
-public class VolatileCanister : CanisterItem
+public class VolatileCanister : BaseCanisterItem
 {
 	public override int LaunchedProjectileType {
 		get => ModContent.ProjectileType<FiredVolatileCanister>();
@@ -17,15 +20,9 @@ public class VolatileCanister : CanisterItem
 		get => new(45, 144, 255, 255);
 	}
 
-	public override void SafeSetDefaults() {
-		// Base stats
-		Item.value = Item.buyPrice(copper: 75);
-		Item.rare = ItemRarityID.Blue;
-
-		// Ammo stats
-		Item.shootSpeed = 2f;
-		Item.damage = 6;
-		Item.knockBack = 3f;
+	public override void SetDefaults() {
+		Item.DefaultToCanister();
+		Item.SetShopValues(ItemRarityColor.Blue1, Item.buyPrice(copper: 75));
 	}
 
 	public override void AddRecipes() {

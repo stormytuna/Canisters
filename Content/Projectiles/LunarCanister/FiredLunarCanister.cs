@@ -1,5 +1,5 @@
 ﻿using Canisters.Helpers;
-using Canisters.Helpers.Abstracts;
+using Canisters.Helpers._Legacy.Abstracts;
 using Terraria.Audio;
 
 namespace Canisters.Content.Projectiles.LunarCanister;

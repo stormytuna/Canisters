@@ -25,6 +25,10 @@ public static class ProjectileHelpers
 	}
 
 	public static void Explode(this Projectile projectile, int width, int height, int? damage = null, float? knockback = null) {
+		if (Main.myPlayer != projectile.owner) {
+			return;
+		}
+		
 		var hitbox = projectile.Hitbox;
 		hitbox.Inflate(width - projectile.width, height - projectile.height);
 		
@@ -34,5 +38,14 @@ public static class ProjectileHelpers
 				npc.SimpleStrikeNPC(damage ?? projectile.damage, direction, false, knockback ?? projectile.knockBack, DamageClass.Ranged, true, Main.LocalPlayer.luck);
 			}
 		}	
+	}
+
+	public static void DefaultToFiredCanister(this Projectile projectile) {
+		projectile.width = 22;
+		projectile.height = 22;
+		projectile.aiStyle = -1;
+    
+		projectile.friendly = true;
+		projectile.DamageType = DamageClass.Ranged;
 	}
 }

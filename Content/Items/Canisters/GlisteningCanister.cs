@@ -1,5 +1,5 @@
 ﻿using Canisters.Content.Projectiles.GlisteningCanister;
-using Canisters.Helpers.Abstracts;
+using Canisters.Helpers._Legacy.Abstracts;
 
 namespace Canisters.Content.Items.Canisters;
 

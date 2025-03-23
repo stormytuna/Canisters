@@ -1,6 +1,7 @@
-﻿using Terraria.DataStructures;
+﻿using Canisters.Helpers._Legacy.Abstracts;
+using Terraria.DataStructures;
 
-namespace Canisters.Helpers.Abstracts;
+namespace Canisters.Common;
 
 public abstract class ShotByWeaponGlobalProjectile<TWeapon> : GlobalProjectile
 	where TWeapon : CanisterUsingWeapon

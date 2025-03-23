@@ -3,7 +3,7 @@ using Canisters.Content.Items.Canisters;
 using Canisters.Content.Projectiles.VolatileCanister;
 using Canisters.Helpers.Enums;
 
-namespace Canisters.Helpers.Abstracts;
+namespace Canisters.Helpers._Legacy.Abstracts;
 
 /// <summary>
 ///     This is an abstract class that sets common values we use on all Canisters

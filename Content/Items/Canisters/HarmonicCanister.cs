@@ -1,6 +1,6 @@
 ﻿using System;
 using Canisters.Content.Projectiles.HarmonicCanister;
-using Canisters.Helpers.Abstracts;
+using Canisters.Helpers._Legacy.Abstracts;
 
 namespace Canisters.Content.Items.Canisters;
 

@@ -1,6 +1,6 @@
 using System;
 using Canisters.Content.Projectiles.AetherianCanister;
-using Canisters.Helpers.Abstracts;
+using Canisters.Helpers._Legacy.Abstracts;
 
 namespace Canisters.Content.Items.Canisters;
 

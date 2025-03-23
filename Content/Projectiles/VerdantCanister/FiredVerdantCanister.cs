@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using Canisters.Helpers;
-using Canisters.Helpers.Abstracts;
+using Canisters.Helpers._Legacy.Abstracts;
 using Terraria.Audio;
 
 namespace Canisters.Content.Projectiles.VerdantCanister;

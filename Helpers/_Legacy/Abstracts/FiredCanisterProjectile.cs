@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Canisters.Helpers.Abstracts;
+namespace Canisters.Helpers._Legacy.Abstracts;
 
 public abstract class FiredCanisterProjectile : ModProjectile
 {
