@@ -48,15 +48,15 @@ public class SlimeySlinger : CanisterUsingWeapon
 
 public class SlimySlingerGlobalProjectile : ShotByWeaponGlobalProjectile<SlimeySlinger>
 {
-	private int numBounces = 3;
+	private int _numBounces = 3;
 
 	public override bool OnTileCollide(Projectile projectile, Vector2 oldVelocity) {
 		if (!ShouldApply) {
 			return true;
 		}
 
-		numBounces--;
-		if (numBounces <= 0) {
+		_numBounces--;
+		if (_numBounces <= 0) {
 			return true;
 		}
 
@@ -74,7 +74,7 @@ public class SlimySlingerGlobalProjectile : ShotByWeaponGlobalProjectile<SlimeyS
 	// TODO: Some visuals as it depletes bounces?
 }
 
-public class SlimeySlingerGlobalNPC : GlobalNPC
+public class SlimeySlingerGlobalNpc : GlobalNPC
 {
 	public override bool AppliesToEntity(NPC entity, bool lateInstantiation) {
 		return entity.type == NPCID.QueenSlimeBoss;

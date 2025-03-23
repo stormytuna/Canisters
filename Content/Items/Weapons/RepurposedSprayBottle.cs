@@ -48,7 +48,7 @@ public class RepurposedSprayBottle : CanisterUsingWeapon
 	}
 }
 
-public class RepurposedSprayBottleGlobalNPC : GlobalNPC
+public class RepurposedSprayBottleGlobalNpc : GlobalNPC
 {
 	public override bool AppliesToEntity(NPC entity, bool lateInstantiation) {
 		return entity.type == NPCID.Stylist;

@@ -6,16 +6,17 @@ namespace Canisters.Content.Projectiles.HarmonicCanister;
 
 public class HelixBolt : ModProjectile
 {
-	private bool firstFrame = true;
-	private float speed;
-	private float startVelocityRotation;
+	private bool _firstFrame = true;
+	private float _speed;
+	private float _startVelocityRotation;
 
 	private ref float Timer {
 		get => ref Projectile.ai[0];
 	}
 
-	private bool IsLight {
+	public bool IsLight {
 		get => Projectile.ai[1] == 0f;
+		set => Projectile.ai[1] = value ? 0f : 1f;
 	}
 
 	public override string Texture {
@@ -36,16 +37,16 @@ public class HelixBolt : ModProjectile
 	}
 
 	public override void AI() {
-		if (firstFrame) {
-			firstFrame = false;
-			startVelocityRotation = Projectile.velocity.ToRotation();
-			speed = Projectile.velocity.Length();
+		if (_firstFrame) {
+			_firstFrame = false;
+			_startVelocityRotation = Projectile.velocity.ToRotation();
+			_speed = Projectile.velocity.Length();
 		}
-		
+
 		float radians = Timer / 40f * MathHelper.TwoPi;
 		float offset = MathF.Cos(radians) * IsLight.ToDirectionInt() * 0.2f;
-		float newRotation = offset + startVelocityRotation;
-		Projectile.velocity = newRotation.ToRotationVector2() * speed;
+		float newRotation = offset + _startVelocityRotation;
+		Projectile.velocity = newRotation.ToRotationVector2() * _speed;
 
 		var dust = Dust.NewDustPerfect(Projectile.Center, DustType);
 		dust.scale = Main.rand.NextFloat(1f, 1.3f);

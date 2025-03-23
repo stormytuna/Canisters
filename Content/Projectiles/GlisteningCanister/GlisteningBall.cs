@@ -5,7 +5,7 @@ namespace Canisters.Content.Projectiles.GlisteningCanister;
 
 public class GlisteningBall : ModProjectile
 {
-	private bool firstFrame = true;
+	private bool _firstFrame = true;
 	
 	public override string Texture {
 		get => CanisterHelpers.GetEmptyAssetString();
@@ -25,8 +25,8 @@ public class GlisteningBall : ModProjectile
 	}
 
 	public override void AI() {
-		if (firstFrame) {
-			firstFrame = false;
+		if (_firstFrame) {
+			_firstFrame = false;
 			if (!IsParent) {
 				Projectile.timeLeft = 15;
 				Projectile.extraUpdates = 1;

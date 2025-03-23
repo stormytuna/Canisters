@@ -74,7 +74,7 @@ public class IcemireGlobalProjectile : ShotByWeaponGlobalProjectile<Icemire>
 	}
 }
 
-public class IcemireGlobalNPC : GlobalNPC
+public class IcemireGlobalNpc : GlobalNPC
 {
 	public override bool AppliesToEntity(NPC entity, bool lateInstantiation) {
 		return entity.type == NPCID.ArmoredViking || entity.type == NPCID.IceTortoise;

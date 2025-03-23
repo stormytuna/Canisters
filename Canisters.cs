@@ -1,40 +1,54 @@
-using System;
 using System.IO;
-using Canisters.Helpers._Legacy.Abstracts;
+using System.Linq;
+using Canisters.Content.Projectiles;
+using Canisters.Content.Projectiles.BlightedCanister;
 
 namespace Canisters;
 
 public class Canisters : Mod
 {
-	internal enum MessageType : byte
-	{
-		CanisterExplosionVisuals,
-	}
-
 	public override void HandlePacket(BinaryReader reader, int whoAmI) {
-		MessageType message = (MessageType)reader.ReadByte();
+		var message = (MessageType)reader.ReadByte();
 
 		switch (message) {
 			case MessageType.CanisterExplosionVisuals:
-				int canisterProjectileType = reader.Read7BitEncodedInt();
-				if (ProjectileLoader.GetProjectile(canisterProjectileType) is not FiredCanisterProjectile canister) {
-					Logger.Error($"Received type is not a canister projectile: {canisterProjectileType}");
+				int identity = reader.ReadInt32();
+				Logger.Info($"Received identity: {identity}");
+				Projectile projectile = Main.projectile.FirstOrDefault(x => x.ModProjectile is BaseFiredCanisterProjectile && x.identity == identity);
+				if (projectile is null) {
+					Logger.Error($"Couldn't find projectile with identity: {identity}");
 					return;
 				}
-				
-				Vector2 position = reader.ReadVector2();
-				Vector2 velocity = reader.ReadVector2();
-				
+
+				var canister = projectile.ModProjectile as BaseFiredCanisterProjectile;
+
 				if (Main.netMode == NetmodeID.MultiplayerClient) {
-					canister.ReceiveExplosionSync(position, velocity);
+					canister!.ReceiveExplosionSync();
 					break;
 				}
-				
-				canister.BroadcastExplosionSync(-1, whoAmI, canisterProjectileType, position, velocity);
+
+				canister!.BroadcastExplosionSync(-1, whoAmI, identity);
+				break;
+			case MessageType.BlightedBoltLightningBolt:
+				Vector2 start = reader.ReadVector2();
+				Vector2 end = reader.ReadVector2();
+
+				if (Main.netMode == NetmodeID.Server) {
+					BlightedBolt.BroadcastLightningBoltSync(-1, whoAmI, start, end);
+					break;
+				}
+
+				BlightedBolt.MakeDustLightningBolt(start, end);
 				break;
 			default:
 				Logger.Error($"Unknown message type: {message}");
 				return;
 		}
+	}
+
+	internal enum MessageType : byte
+	{
+		CanisterExplosionVisuals,
+		BlightedBoltLightningBolt
 	}
 }

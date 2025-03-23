@@ -34,7 +34,7 @@ public abstract class FiredCanisterProjectile : ModProjectile
 	public virtual void ExplosionVisuals(Vector2 position, Vector2 velocity) { }
 
 	public virtual void SafeSetDefaults() { }
-	public virtual void SafeAI() { }
+	public virtual void SafeAi() { }
 
 	public virtual bool SafeOnTileCollide(Vector2 oldVelocity) {
 		return false;
@@ -52,7 +52,7 @@ public abstract class FiredCanisterProjectile : ModProjectile
 	}
 
 	public sealed override void AI() {
-		SafeAI();
+		SafeAi();
 
 		Timer++;
 

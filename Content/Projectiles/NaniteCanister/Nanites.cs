@@ -7,15 +7,15 @@ namespace Canisters.Content.Projectiles.NaniteCanister;
 
 public class Nanites : ModProjectile
 {
-	private const float DetectionRange = 25f * 16f;
-	private const float RangeToKeepDetection = 50f * 16f;
-	private const float Acceleration = 0.3f;
-	private const float TopSpeed = 12f;
+	private const float _detectionRange = 25f * 16f;
+	private const float _rangeToKeepDetection = 50f * 16f;
+	private const float _acceleration = 0.3f;
+	private const float _topSpeed = 12f;
 
-	private bool firstFrame = true;
+	private bool _firstFrame = true;
 
-	private AIState State {
-		get => (AIState)Projectile.ai[0];
+	private AiState State {
+		get => (AiState)Projectile.ai[0];
 		set => Projectile.ai[0] = (float)value;
 	}
 
@@ -45,12 +45,12 @@ public class Nanites : ModProjectile
 	}
 
 	public override void OnSpawn(IEntitySource source) {
-		State = AIState.Idle;
+		State = AiState.Idle;
 	}
 
 	public override void AI() {
-		if (firstFrame) {
-			firstFrame = false;
+		if (_firstFrame) {
+			_firstFrame = false;
 			int numDust = Main.rand.Next(8, 12);
 			for (int i = 0; i < numDust; i++) {
 				var dust = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height,
@@ -60,12 +60,12 @@ public class Nanites : ModProjectile
 		}
 
 		// Movement
-		if (State == AIState.Idle) {
+		if (State == AiState.Idle) {
 			// Try find target
-			NPC closestNPC = NPCHelpers.FindClosestNPC(DetectionRange, Projectile.Center);
-			if (closestNPC is not null) {
-				State = AIState.Homing;
-				Target = closestNPC;
+			NPC closestNpc = NpcHelpers.FindClosestNpc(_detectionRange, Projectile.Center);
+			if (closestNpc is not null) {
+				State = AiState.Homing;
+				Target = closestNpc;
 			}
 
 			// Otherwise, just slow down
@@ -74,19 +74,19 @@ public class Nanites : ModProjectile
 			return;
 		}
 
-		if (!Target.CanBeChasedBy() || !Target.WithinRange(Projectile.Center, RangeToKeepDetection)) {
-			State = AIState.Idle;
+		if (!Target.CanBeChasedBy() || !Target.WithinRange(Projectile.Center, _rangeToKeepDetection)) {
+			State = AiState.Idle;
 			return;
 		}
 
-		EntityHelpers.SmoothHoming(Projectile, Target.Center, Acceleration, TopSpeed, Target.velocity, false);
+		EntityHelpers.SmoothHoming(Projectile, Target.Center, _acceleration, _topSpeed, Target.velocity, false);
 
 		Projectile.timeLeft++;
 	}
 
 	public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone) {
 		target.AddBuff(ModContent.BuffType<Devoured>(), 5 * 60);
-		target.GetGlobalNPC<DevouredGlobalNPC>().Devoured = true; // Hack because buff won't update if we one shot it
+		target.GetGlobalNPC<DevouredGlobalNpc>().Devoured = true; // Hack because buff won't update if we one shot it
 		// TODO: Won't work in multiplayer
 	}
 
@@ -112,7 +112,7 @@ public class Nanites : ModProjectile
 		}
 	}
 
-	private enum AIState
+	private enum AiState
 	{
 		Homing,
 		Idle

@@ -17,11 +17,6 @@ public class DepletedVolatileCanister : ModProjectile
 		get => ref Projectile.ai[1];
 	}
 
-	public override void OnSpawn(IEntitySource source) {
-		// TODO: Check if this works in mp?
-		Projectile.rotation = Main.rand.NextRadian();
-	}
-
 	public override void SetDefaults() {
 		Projectile.width = 10;
 		Projectile.height = 10;
@@ -59,7 +54,7 @@ public class DepletedVolatileCanister : ModProjectile
 		}
 	}
 
-	public override void Kill(int timeLeft) {
+	public override void OnKill(int timeLeft) {
 		foreach (Dust dust in DustHelpers.MakeDustExplosion<VolatileCanisterDust>(Projectile.Center, 5f, 10)) {
 			dust.velocity *= Main.rand.NextFloat(1.5f);
 		}

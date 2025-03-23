@@ -1,9 +1,10 @@
 ﻿using Canisters.Content.Projectiles.GlisteningCanister;
-using Canisters.Helpers._Legacy.Abstracts;
+using Canisters.Helpers;
+using Terraria.Enums;
 
 namespace Canisters.Content.Items.Canisters;
 
-public class GlisteningCanister : CanisterItem
+public class GlisteningCanister : BaseCanisterItem
 {
 	public override int LaunchedProjectileType {
 		get => ModContent.ProjectileType<FiredGlisteningCanister>();
@@ -17,13 +18,9 @@ public class GlisteningCanister : CanisterItem
 		get => Color.Yellow;
 	}
 
-	public override void SafeSetDefaults() {
-		Item.value = Item.buyPrice(silver: 9);
-		Item.rare = ItemRarityID.LightRed;
-
-		Item.shootSpeed = 2f;
-		Item.damage = 12;
-		Item.knockBack = 4f;
+	public override void SetDefaults() {
+		Item.DefaultToCanister(12, 2f, 4f);
+		Item.SetShopValues(ItemRarityColor.LightRed4, Item.buyPrice(silver: 9));
 	}
 
 	public override void AddRecipes() {

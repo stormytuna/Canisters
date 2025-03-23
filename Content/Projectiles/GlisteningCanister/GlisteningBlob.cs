@@ -5,7 +5,7 @@ namespace Canisters.Content.Projectiles.GlisteningCanister;
 
 public class GlisteningBlob : ModProjectile
 {
-	private bool firstFrame = true;
+	private bool _firstFrame = true;
 	
 	public override void SetStaticDefaults() {
 		Main.projFrames[Type] = 4;
@@ -23,8 +23,8 @@ public class GlisteningBlob : ModProjectile
 	}
 
 	public override void AI() {
-		if (firstFrame) {
-			firstFrame = false;
+		if (_firstFrame) {
+			_firstFrame = false;
 			Projectile.frame = Main.rand.Next(Main.projFrames[Type]);
 			Projectile.direction = Main.rand.NextBool().ToDirectionInt();
 		}

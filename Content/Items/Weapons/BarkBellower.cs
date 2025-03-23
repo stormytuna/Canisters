@@ -70,7 +70,7 @@ public class BarkBellowerGlobalProjectile : ShotByWeaponGlobalProjectile<BarkBel
 	}
 }
 
-public class BarkBellowerGlobalNPC : GlobalNPC
+public class BarkBellowerGlobalNpc : GlobalNPC
 {
 	public override bool AppliesToEntity(NPC entity, bool lateInstantiation) {
 		return entity.type == NPCID.Dryad;

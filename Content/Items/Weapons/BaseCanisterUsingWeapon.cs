@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Mime;
 using Canisters.Content.Items.Canisters;
 using Canisters.DataStructures;
 using Canisters.Helpers;
@@ -15,7 +14,7 @@ public abstract class BaseCanisterUsingWeapon : ModItem
 {
 	private Asset<Texture2D> _baseTexture;
 	private Asset<Texture2D> _canisterTexture;
-	
+
 	public Asset<Texture2D> BaseTexture {
 		get => _baseTexture ??= ModContent.Request<Texture2D>(Texture + "_Base");
 	}
@@ -23,18 +22,18 @@ public abstract class BaseCanisterUsingWeapon : ModItem
 	public Asset<Texture2D> CanisterTexture {
 		get => _canisterTexture ??= ModContent.Request<Texture2D>(Texture + "_Canister");
 	}
-	
+
 	public abstract CanisterFiringType CanisterFiringType { get; }
-	
+
 	public virtual Vector2 MuzzleOffset {
 		get => Vector2.Zero;
 	}
-	
+
 	public virtual void ApplyWeaponStats(ref CanisterShootStats stats) { }
 
 	public virtual IEnumerable<Projectile> ShootProjectiles(IEntitySource source, CanisterShootStats stats) {
 		for (int i = 0; i < stats.ProjectileCount; i++) {
-			Vector2 perturbedVelocity = i == 0 
+			Vector2 perturbedVelocity = i == 0
 				? stats.Velocity // Forces one projectile to go towards cursor
 				: stats.Velocity.RotatedByRandom(stats.TotalSpread);
 			yield return Projectile.NewProjectileDirect(source, stats.Position, perturbedVelocity, stats.ProjectileType, stats.Damage, stats.Knockback, Main.myPlayer);
@@ -62,16 +61,20 @@ public abstract class BaseCanisterUsingWeapon : ModItem
 			Knockback = knockback,
 			ProjectileCount = 1,
 			ProjectileType = type,
-			TotalSpread = 0f,
+			TotalSpread = 0f
 		};
 		canister.ApplyAmmoStats(ref stats);
 		ApplyWeaponStats(ref stats);
-		
-		var projectiles = ShootProjectiles(source, stats).ToArray();
+
+		Projectile[] projectiles = ShootProjectiles(source, stats).ToArray();
 		for (int i = 0; i < projectiles.Length; i++) {
-			canister.ModifyProjectile(projectiles[i], i);
-		}	
-			
+			Projectile projectile = projectiles[i];
+			canister.ModifyProjectile(projectile, i);
+			if (Main.netMode != NetmodeID.SinglePlayer) {
+				NetMessage.SendData(MessageID.SyncProjectile, ignoreClient: Main.myPlayer, number: projectile.whoAmI);
+			}
+		}
+
 		return false;
 	}
 

@@ -2,7 +2,7 @@
 
 public class VerdantGas : ModProjectile
 {
-	private bool firstFrame = true;
+	private bool _firstFrame = true;
 
 	public override void SetStaticDefaults() {
 		Main.projFrames[Type] = 3;
@@ -20,8 +20,8 @@ public class VerdantGas : ModProjectile
 	}
 
 	public override void AI() {
-		if (firstFrame) {
-			firstFrame = false;
+		if (_firstFrame) {
+			_firstFrame = false;
 			Projectile.scale = 0.5f; // Terraria resizes projectiles if they set scale in SetDefaults
 			Projectile.frame = Main.rand.Next(Main.projFrames[Type]);
 		}

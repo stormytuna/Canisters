@@ -7,12 +7,12 @@ namespace Canisters.Content.Projectiles.LunarCanister;
 
 public class LunarShot : ModProjectile
 {
-	private const float TargetingRange = 80f * 16f;
-	private const float Acceleration = 0.05f;
-	private const float TopSpeed = 4f;
+	private const float _targetingRange = 80f * 16f;
+	private const float _acceleration = 0.05f;
+	private const float _topSpeed = 4f;
 
-	private AIState State {
-		get => (AIState)Projectile.ai[0];
+	private AiState State {
+		get => (AiState)Projectile.ai[0];
 		set => Projectile.ai[0] = (float)value;
 	}
 
@@ -55,30 +55,30 @@ public class LunarShot : ModProjectile
 			dust.noGravity = true;
 		}
 
-		if (State == AIState.Homing) {
+		if (State == AiState.Homing) {
 			// Validate our target
 			if (!Target.CanBeChasedBy()) {
-				State = AIState.Idle;
+				State = AiState.Idle;
 
 				return;
 			}
 
-			EntityHelpers.SmoothHoming(Projectile, Target.Center, Acceleration, TopSpeed, bufferZone: false);
+			EntityHelpers.SmoothHoming(Projectile, Target.Center, _acceleration, _topSpeed, bufferZone: false);
 
 			return;
 		}
 
 		// Clamp velocity
-		if (Projectile.velocity.Length() > TopSpeed) {
-			Projectile.velocity = Projectile.velocity.SafeNormalize(Vector2.Zero) * TopSpeed;
+		if (Projectile.velocity.Length() > _topSpeed) {
+			Projectile.velocity = Projectile.velocity.SafeNormalize(Vector2.Zero) * _topSpeed;
 		}
 
 		// Try find new target
-		List<int> excludedNPCs = new() { LastTarget.whoAmI };
-		NPC closestValidNPC = NPCHelpers.FindClosestNPC(TargetingRange, Projectile.Center, excludedNPCs: excludedNPCs);
-		if (closestValidNPC is not null) {
-			Target = closestValidNPC;
-			State = AIState.Homing;
+		List<int> excludedNpCs = new() { LastTarget.whoAmI };
+		NPC closestValidNpc = NpcHelpers.FindClosestNpc(_targetingRange, Projectile.Center, excludedNpCs: excludedNpCs);
+		if (closestValidNpc is not null) {
+			Target = closestValidNpc;
+			State = AiState.Homing;
 		}
 	}
 
@@ -113,7 +113,7 @@ public class LunarShot : ModProjectile
 		return true;
 	}
 
-	private enum AIState
+	private enum AiState
 	{
 		Homing,
 		Idle

@@ -1,10 +1,9 @@
 using Canisters.Helpers;
-using Canisters.Helpers._Legacy.Abstracts;
 using Terraria.Audio;
 
 namespace Canisters.Content.Projectiles.HarmonicCanister;
 
-public class FiredHarmonicCanister : FiredCanisterProjectile
+public class FiredHarmonicCanister : BaseFiredCanisterProjectile
 {
 	public override int TimeBeforeGravityAffected {
 		get => 35;
@@ -14,29 +13,33 @@ public class FiredHarmonicCanister : FiredCanisterProjectile
 		get => "Canisters/Content/Items/Canisters/HarmonicCanister";
 	}
 
-	public override void SafeSetDefaults() {
+	public override void SetDefaults() {
+		Projectile.DefaultToFiredCanister();
 		Projectile.penetrate = -1;
 	}
 
-	public override void OnExplode() {
-		Projectile.Explode(100, 100);
-	}
-
-	public override void SafeAI() {
-		if (HasGravity && Main.myPlayer == Projectile.owner) {
-			TryExplode();
-			Projectile.Kill();
+	public override void Explode() {
+		if (Main.myPlayer == Projectile.owner) {
+			Projectile.Explode(100, 100);
 		}
-	}
 
-	public override bool SafeOnTileCollide(Vector2 oldVelocity) {
-		return true;
-	}
-
-	public override void ExplosionVisuals(Vector2 position, Vector2 velocity) {
 		DustHelpers.MakeDustExplosion(Projectile.Center, 16f, DustID.PinkTorch, 15, 8f, 16f, noGravity: true);
 		DustHelpers.MakeDustExplosion(Projectile.Center, 16f, DustID.PurpleTorch, 15, 8f, 16f, noGravity: true);
 
 		SoundEngine.PlaySound(SoundID.DD2_GoblinBomb, Projectile.Center);
+	}
+
+	public override void PostAI() {
+		if (HasGravity && Main.myPlayer == Projectile.owner) {
+			Projectile.Kill();
+		}
+	}
+
+	public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone) {
+		Explode();
+		if (Main.netMode == NetmodeID.MultiplayerClient) {
+			Main.NewText(Projectile.identity);
+			BroadcastExplosionSync(-1, Main.myPlayer, Projectile.identity);
+		}
 	}
 }

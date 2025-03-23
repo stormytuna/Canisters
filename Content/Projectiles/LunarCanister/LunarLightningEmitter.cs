@@ -33,8 +33,8 @@ public class LunarLightningEmitter : ModProjectile
 			DustHelpers.MakeDustExplosion(destination, 4f, DustID.Vortex, 8, 0f, 10f, noGravity: true);
 
 			if (Projectile.owner == Main.myPlayer) {
-				IEnumerable<NPC> nearbyNPCs = NPCHelpers.FindNearbyNPCs(96f, Projectile.Center);
-				foreach (NPC npc in nearbyNPCs) {
+				IEnumerable<NPC> nearbyNpCs = NpcHelpers.FindNearbyNpCs(96f, Projectile.Center);
+				foreach (NPC npc in nearbyNpCs) {
 					NPC.HitInfo hitInfo = new() {
 						Damage = Projectile.damage / 3,
 						Knockback = Projectile.knockBack / 2f,
@@ -43,7 +43,7 @@ public class LunarLightningEmitter : ModProjectile
 						HitDirection = Math.Sign(Projectile.DirectionTo(npc.Center).X)
 					};
 
-					NPCHelpers.StrikeNPC(npc, hitInfo);
+					NpcHelpers.StrikeNpc(npc, hitInfo);
 				}
 			}
 		}

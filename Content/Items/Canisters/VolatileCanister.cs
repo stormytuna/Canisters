@@ -1,8 +1,6 @@
 ﻿using Canisters.Content.Projectiles.VolatileCanister;
 using Canisters.Helpers;
-using Canisters.Helpers._Legacy.Abstracts;
 using Terraria.Enums;
-using Terraria.GameContent.Creative;
 
 namespace Canisters.Content.Items.Canisters;
 
@@ -21,7 +19,7 @@ public class VolatileCanister : BaseCanisterItem
 	}
 
 	public override void SetDefaults() {
-		Item.DefaultToCanister();
+		Item.DefaultToCanister(6, 2f, 3f);
 		Item.SetShopValues(ItemRarityColor.Blue1, Item.buyPrice(copper: 75));
 	}
 

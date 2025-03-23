@@ -50,12 +50,12 @@ public class GraniteCannon : CanisterUsingWeapon
 	}
 }
 
-public class GraniteCannonGlobalNPC : GlobalNPC
+public class GraniteCannonGlobalNpc : GlobalNPC
 {
-	private static readonly int[] GraniteEnemies = { NPCID.GraniteFlyer, NPCID.GraniteGolem };
+	private static readonly int[] _graniteEnemies = { NPCID.GraniteFlyer, NPCID.GraniteGolem };
 
 	public override bool AppliesToEntity(NPC entity, bool lateInstantiation) {
-		return GraniteEnemies.Contains(entity.type);
+		return _graniteEnemies.Contains(entity.type);
 	}
 
 	public override void ModifyNPCLoot(NPC npc, NPCLoot npcLoot) {

@@ -1,10 +1,11 @@
-﻿using System;
-using Canisters.Content.Projectiles.HarmonicCanister;
-using Canisters.Helpers._Legacy.Abstracts;
+﻿using Canisters.Content.Projectiles.HarmonicCanister;
+using Canisters.DataStructures;
+using Canisters.Helpers;
+using Terraria.Enums;
 
 namespace Canisters.Content.Items.Canisters;
 
-public class HarmonicCanister : CanisterItem
+public class HarmonicCanister : BaseCanisterItem
 {
 	public override int LaunchedProjectileType {
 		get => ModContent.ProjectileType<FiredHarmonicCanister>();
@@ -18,19 +19,20 @@ public class HarmonicCanister : CanisterItem
 		get => Color.Purple;
 	}
 
-	public override void SafeSetDefaults() {
-		Item.value = Item.buyPrice(silver: 9);
-		Item.rare = ItemRarityID.LightRed;
-
-		Item.shootSpeed = 2.5f;
-		Item.damage = 11;
-		Item.knockBack = 4f;
+	public override void SetDefaults() {
+		Item.DefaultToCanister(11, 2.5f, 4f);
+		Item.SetShopValues(ItemRarityColor.LightRed4, Item.buyPrice(silver: 9));
 	}
 
-	public override void ApplyAmmoStats(bool isLaunched, ref Vector2 velocity, ref Vector2 position, ref int damage, ref float knockBack, ref int amount, ref float spread, ref Func<int, float[]> getAiCallback) {
-		if (!isLaunched) {
-			amount = 2;
-			getAiCallback = (amount) => [0f, amount == 0 ? 0f : 1f, 0f];
+	public override void ApplyAmmoStats(ref CanisterShootStats stats) {
+		if (stats.IsDepleted) {
+			stats.ProjectileCount = 2;
+		}
+	}
+
+	public override void ModifyProjectile(Projectile projectile, int numInTotalAmount) {
+		if (projectile.ModProjectile is HelixBolt bolt) {
+			bolt.IsLight = numInTotalAmount % 2 == 0;
 		}
 	}
 

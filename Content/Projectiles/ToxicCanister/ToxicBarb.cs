@@ -6,7 +6,7 @@ namespace Canisters.Content.Projectiles.ToxicCanister;
 
 public class ToxicBarb : ModProjectile
 {
-	private const float TimeToBounce = 25f;
+	private const float _timeToBounce = 25f;
 
 	private ref float Timer {
 		get => ref Projectile.ai[0];
@@ -44,16 +44,16 @@ public class ToxicBarb : ModProjectile
 	public override void AI() {
 		Visuals();
 
-		NPC closestNpc = NPCHelpers.FindClosestNPC(50f * 16f, Projectile.Center);
+		NPC closestNpc = NpcHelpers.FindClosestNpc(50f * 16f, Projectile.Center);
 		if (closestNpc is null) {
 			return;
 		}
 
-		float timeUntilBounce = TimeToBounce - Timer;
+		float timeUntilBounce = _timeToBounce - Timer;
 		Vector2 bouncePosition = Projectile.Center + (Projectile.velocity * timeUntilBounce);
 		MakeDust(bouncePosition, 0, 0);
 
-		if (Timer >= TimeToBounce) {
+		if (Timer >= _timeToBounce) {
 			Timer = 0f;
 
 			Vector2 oldVelocity = Projectile.velocity;

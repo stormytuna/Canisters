@@ -28,23 +28,31 @@ public static class ProjectileHelpers
 		if (Main.myPlayer != projectile.owner) {
 			return;
 		}
-		
-		var hitbox = projectile.Hitbox;
-		hitbox.Inflate(width - projectile.width, height - projectile.height);
-		
-		foreach (var npc in Main.ActiveNPCs) {
-			if (hitbox.Intersects(npc.Hitbox)) {
-				int direction = float.Sign(projectile.DirectionTo(npc.Center).X);
-				npc.SimpleStrikeNPC(damage ?? projectile.damage, direction, false, knockback ?? projectile.knockBack, DamageClass.Ranged, true, Main.LocalPlayer.luck);
-			}
-		}	
+
+		int oldPenetrate = projectile.penetrate;
+		bool oldTileCollide = projectile.tileCollide;
+		int oldDamage = projectile.damage;
+		float oldKnockback = projectile.knockBack;
+		var oldSize = projectile.Size.ToPoint();
+
+		projectile.penetrate = -1;
+		projectile.tileCollide = false;
+		projectile.damage = damage ?? projectile.damage;
+		projectile.knockBack = knockback ?? projectile.knockBack;
+		projectile.Resize(width, height);
+
+		projectile.penetrate = oldPenetrate;
+		projectile.tileCollide = oldTileCollide;
+		projectile.damage = oldDamage;
+		projectile.knockBack = oldKnockback;
+		projectile.Resize(oldSize.X, oldSize.Y);
 	}
 
 	public static void DefaultToFiredCanister(this Projectile projectile) {
 		projectile.width = 22;
 		projectile.height = 22;
 		projectile.aiStyle = -1;
-    
+
 		projectile.friendly = true;
 		projectile.DamageType = DamageClass.Ranged;
 	}

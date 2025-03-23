@@ -50,7 +50,7 @@ public class Pneumaticannon : CanisterUsingWeapon
 	}
 }
 
-public class PneumaticannonGlobalNPC : GlobalNPC
+public class PneumaticannonGlobalNpc : GlobalNPC
 {
 	public override bool AppliesToEntity(NPC entity, bool lateInstantiation) {
 		return entity.type == NPCID.Steampunker;

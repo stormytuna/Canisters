@@ -10,7 +10,7 @@ public class FiredGhastlyCanister : FiredCanisterProjectile
 		get => "Canisters/Content/Items/Canisters/GhastlyCanister";
 	}
 
-	public override void SafeAI() {
+	public override void SafeAi() {
 		if (Timer >= 30f) {
 			TryExplode();
 		}

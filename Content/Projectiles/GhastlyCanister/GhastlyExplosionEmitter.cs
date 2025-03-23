@@ -4,7 +4,7 @@ namespace Canisters.Content.Projectiles.GhastlyCanister;
 
 public class GhastlyExplosionEmitter : ModProjectile
 {
-	private const float ExplosionEmissionRange = 100f;
+	private const float _explosionEmissionRange = 100f;
 
 	private ref float Timer {
 		get => ref Projectile.ai[0];
@@ -26,7 +26,7 @@ public class GhastlyExplosionEmitter : ModProjectile
 
 	public override void AI() {
 		if (Projectile.owner == Main.myPlayer && Timer % 6 == 0) {
-			Vector2 position = Main.rand.NextVector2Circular(ExplosionEmissionRange, ExplosionEmissionRange) +
+			Vector2 position = Main.rand.NextVector2Circular(_explosionEmissionRange, _explosionEmissionRange) +
 			                   Projectile.Center;
 			var explosionProj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), position, Vector2.Zero,
 				ModContent.ProjectileType<GhastlyExplosion>(), Projectile.damage, Projectile.knockBack,

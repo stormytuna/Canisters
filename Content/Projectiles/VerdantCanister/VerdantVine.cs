@@ -4,8 +4,8 @@ namespace Canisters.Content.Projectiles.VerdantCanister;
 
 public class VerdantVine : ModProjectile
 {
-	private bool firstFrame = true;
-	private int timer;
+	private bool _firstFrame = true;
+	private int _timer;
 
 	private ref float NumVines {
 		get => ref Projectile.ai[0];
@@ -36,8 +36,8 @@ public class VerdantVine : ModProjectile
 	}
 
 	public override void AI() {
-		if (firstFrame) {
-			firstFrame = false;
+		if (_firstFrame) {
+			_firstFrame = false;
 			Projectile.spriteDirection = Main.rand.NextBool().ToDirectionInt();
 			Projectile.rotation = StartRotation;
 		}
@@ -47,7 +47,7 @@ public class VerdantVine : ModProjectile
 			Projectile.Kill();
 		}
 
-		if (timer == 3 && Projectile.owner == Main.myPlayer && NumVines > 0) {
+		if (_timer == 3 && Projectile.owner == Main.myPlayer && NumVines > 0) {
 			Vector2 offset = Vector2.UnitY.RotatedBy(Projectile.rotation) * -20f;
 			Vector2 position = Projectile.Center + offset;
 			var nextVine = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), position, Vector2.Zero, Type, Projectile.damage, Projectile.knockBack, Projectile.owner, NumVines - 1, StartRotation + AddedRotation, AddedRotation);
@@ -58,7 +58,7 @@ public class VerdantVine : ModProjectile
 			dust.noGravity = true;
 		}
 
-		timer++;
+		_timer++;
 	}
 
 	public override void OnKill(int timeLeft) {

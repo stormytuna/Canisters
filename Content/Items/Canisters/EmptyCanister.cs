@@ -22,7 +22,7 @@ public class EmptyCanister : ModItem
 	}
 }
 
-public class EmptyCanisterGlobalNPC : GlobalNPC
+public class EmptyCanisterGlobalNpc : GlobalNPC
 {
 	public override bool AppliesToEntity(NPC entity, bool lateInstantiation) {
 		return entity.type == NPCID.Demolitionist;

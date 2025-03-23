@@ -6,15 +6,15 @@ namespace Canisters.Content.Buffs;
 public class Devoured : ModBuff
 {
 	public override void Update(NPC npc, ref int buffIndex) {
-		npc.GetGlobalNPC<DevouredGlobalNPC>().Devoured = true;
+		npc.GetGlobalNPC<DevouredGlobalNpc>().Devoured = true;
 	}
 }
 
-public class DevouredGlobalNPC : GlobalNPC
+public class DevouredGlobalNpc : GlobalNPC
 {
-	private const int NaniteBaseDamage = 50;
+	private const int _naniteBaseDamage = 50;
 
-	private float naniteBonusDamage;
+	private float _naniteBonusDamage;
 
 	public bool Devoured { get; set; }
 
@@ -41,7 +41,7 @@ public class DevouredGlobalNPC : GlobalNPC
 			damage = 5;
 		}
 
-		naniteBonusDamage += 0.1f;
+		_naniteBonusDamage += 0.1f;
 	}
 
 	public override void OnKill(NPC npc) {
@@ -50,7 +50,7 @@ public class DevouredGlobalNPC : GlobalNPC
 		}
 
 		Vector2 velocity = Main.rand.NextVector2CircularEdge(5f, 5f) * Main.rand.NextFloat(0.5f, 1f);
-		int damage = NaniteBaseDamage + MathHelpers.Ceiling(naniteBonusDamage);
+		int damage = _naniteBaseDamage + MathHelpers.Ceiling(_naniteBonusDamage);
 		Projectile.NewProjectile(npc.GetSource_Death(), npc.Center, velocity, ModContent.ProjectileType<Nanites>(),
 			damage, 2f, npc.lastInteraction);
 	}
