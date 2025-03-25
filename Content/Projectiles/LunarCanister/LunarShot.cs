@@ -92,7 +92,7 @@ public class LunarShot : ModProjectile
 	}
 
 	public override Color? GetAlpha(Color lightColor) {
-		return CanisterHelpers.GetCanisterColor<Items.Canisters.LunarCanister>();
+		return CanisterHelpers.GetCanisterColorLegacy<Items.Canisters.LunarCanister>();
 	}
 
 	public override bool PreDraw(ref Color lightColor) {

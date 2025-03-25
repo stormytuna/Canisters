@@ -5,7 +5,7 @@ namespace Canisters.Helpers;
 
 public static class CanisterHelpers
 {
-	public static Color GetCanisterColor<TCanister>() where TCanister : CanisterItem {
+	public static Color GetCanisterColorLegacy<TCanister>() where TCanister : CanisterItem {
 		return GetCanisterColorLegacy(ModContent.ItemType<TCanister>());
 	}
 
@@ -27,9 +27,8 @@ public static class CanisterHelpers
 		return Color.White;
 	}
 
-	public static Color GetCanisterColorForHeldItem(Player player) {
-		if (player.HeldItem.ModItem is CanisterUsingWeapon &&
-		    player.TryGetWeaponAmmo(player.HeldItem, out int canisterItemId)) {
+	public static Color GetCanisterColorForHeldItemLegacy(Player player) {
+		if (player.HeldItem.ModItem is CanisterUsingWeapon && player.TryGetWeaponAmmo(player.HeldItem, out int canisterItemId)) {
 			return GetCanisterColorLegacy(canisterItemId);
 		}
 

@@ -97,7 +97,7 @@ public class AncientSprayerDrawLayer : PlayerDrawLayer
 			drawPlayer.bodyRotation, origin, 1f, drawInfo.playerEffect);
 		drawInfo.DrawDataCache.Add(drawData);
 
-		Color canisterColor = CanisterHelpers.GetCanisterColorForHeldItem(drawPlayer);
+		Color canisterColor = CanisterHelpers.GetCanisterColorForHeldItemLegacy(drawPlayer);
 		drawInfo.DrawDataCache.Add(drawData with { texture = CanisterTexture.Value, color = canisterColor });
 	}
 }
