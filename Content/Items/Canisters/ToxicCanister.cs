@@ -1,9 +1,11 @@
 ﻿using Canisters.Content.Projectiles.ToxicCanister;
+using Canisters.Helpers;
 using Canisters.Helpers._Legacy.Abstracts;
+using Terraria.Enums;
 
 namespace Canisters.Content.Items.Canisters;
 
-public class ToxicCanister : CanisterItem
+public class ToxicCanister : BaseCanisterItem
 {
 	public override int LaunchedProjectileType {
 		get => ModContent.ProjectileType<FiredToxicCanister>();
@@ -17,15 +19,9 @@ public class ToxicCanister : CanisterItem
 		get => Color.MediumPurple;
 	}
 
-	public override void SafeSetDefaults() {
-		// Base stats
-		Item.value = Item.buyPrice(silver: 3);
-		Item.rare = ItemRarityID.LightRed;
-
-		// Weapon stats
-		Item.shootSpeed = 3f;
-		Item.damage = 12;
-		Item.knockBack = 4f;
+	public override void SetDefaults() {
+		Item.DefaultToCanister(12, 3f, 4f);
+		Item.SetShopValues(ItemRarityColor.LightRed4, Item.buyPrice(silver: 3));
 	}
 
 	public override void AddRecipes() {

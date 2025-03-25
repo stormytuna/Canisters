@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using Terraria.GameContent;
+using Terraria.ModLoader.Assets;
 
 namespace Canisters.Helpers;
 
@@ -33,17 +35,20 @@ public static class DustHelpers
 		}
 	}
 
-	public static IEnumerable<Dust> MakeDustExplosion<TModDust>(Vector2 position, float spawnRadius, int amount)
+	public static List<Dust> MakeDustExplosion<TModDust>(Vector2 position, float spawnRadius, int amount)
 		where TModDust : ModDust {
 		return MakeDustExplosion(position, spawnRadius, ModContent.DustType<TModDust>(), amount);
 	}
 
-	public static IEnumerable<Dust> MakeDustExplosion(Vector2 position, float spawnRadius, int dustType, int amount) {
+	public static List<Dust> MakeDustExplosion(Vector2 position, float spawnRadius, int dustType, int amount) {
+		List<Dust> dusts = new(amount);
+		
 		for (int i = 0; i < amount; i++) {
 			Vector2 spawnPosition = position + Main.rand.NextVector2Circular(spawnRadius, spawnRadius);
-			var newDust = Dust.NewDustPerfect(spawnPosition, dustType);
-			yield return newDust;
+			dusts.Add(Dust.NewDustPerfect(spawnPosition, dustType));
 		}
+		
+		return dusts;
 	}
 
 	/// <summary>
@@ -76,6 +81,12 @@ public static class DustHelpers
 				d.velocity = Main.rand.NextVector2Circular(0.3f, 0.3f);
 			}
 		}
+	}
+
+	public static Rectangle FrameVanillaDust(int vanillaDustType) {
+		int frameX = (vanillaDustType * 10) % 1000;
+		int frameY = (vanillaDustType * 10) / 1000 * 30 + Main.rand.Next(3) * 10;
+		return new Rectangle(frameX, frameY, 8, 8);
 	}
 
 	public static void MakeDebugDust(Vector2 position, Color color) {
