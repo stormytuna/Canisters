@@ -80,7 +80,7 @@ public abstract class BaseCanisterUsingWeapon : ModItem
 
 	public sealed override bool PreDrawInInventory(SpriteBatch spriteBatch, Vector2 position, Rectangle frame, Color drawColor, Color itemColor, Vector2 origin, float scale) {
 		Player player = Main.LocalPlayer;
-		if (!player.PickAmmo(Item, out _, out _, out _, out _, out int usedAmmoItemId, true)) {
+		if (!player.TryGetWeaponAmmo(Item, out int usedAmmoItemId)) {
 			return true;
 		}
 
