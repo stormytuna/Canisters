@@ -18,4 +18,19 @@ public static class ItemHelpers
 		item.DamageType = DamageClass.Ranged;
 		item.ammo = ModContent.ItemType<VolatileCanister>();
 	}
+
+	public static void DefaultToCanisterUsingWeapon(this Item item, int useTime, int useAnim, float shootSpeed, int damage, float knockback) {
+		item.useStyle = ItemUseStyleID.Shoot;
+		item.useTime = useTime;
+		item.useAnimation = useAnim;
+		item.autoReuse = true;
+		item.noMelee = true;
+		item.noUseGraphic = true;
+		item.shoot = ModContent.ProjectileType<FiredVolatileCanister>();
+		item.shootSpeed = shootSpeed;
+		item.damage = damage;
+		item.knockBack = knockback;
+		item.DamageType = DamageClass.Ranged;
+		item.useAmmo = ModContent.ItemType<VolatileCanister>();
+	}
 }

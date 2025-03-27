@@ -1,13 +1,15 @@
 ﻿using System.Linq;
 using Canisters.Content.Items.Canisters;
 using Canisters.Content.Projectiles.VolatileCanister;
+using Canisters.Helpers;
 using Canisters.Helpers._Legacy.Abstracts;
 using Canisters.Helpers.Enums;
+using Terraria.Enums;
 using Terraria.GameContent.ItemDropRules;
 
 namespace Canisters.Content.Items.Weapons;
 
-public class GraniteCannon : CanisterUsingWeapon
+public class GraniteCannon : BaseCanisterUsingWeapon
 {
 	public override CanisterFiringType CanisterFiringType {
 		get => CanisterFiringType.Launched;
@@ -17,36 +19,15 @@ public class GraniteCannon : CanisterUsingWeapon
 		get => new(36f, 0f);
 	}
 
-	public override void SetDefaults() {
-		// Base stats
-		Item.width = 44;
-		Item.height = 16;
-		Item.value = Item.buyPrice(silver: 30);
-		Item.rare = ItemRarityID.Blue;
-
-		// Use stats
-		Item.useStyle = ItemUseStyleID.Shoot;
-		Item.useTime = Item.useAnimation = 42;
-		Item.autoReuse = true;
-		Item.noMelee = true;
-		Item.noUseGraphic = true;
-
-		// Weapon stats
-		Item.shoot = ModContent.ProjectileType<FiredVolatileCanister>();
-		Item.shootSpeed = 15f;
-		Item.damage = 16;
-		Item.knockBack = 3f;
-		Item.DamageType = DamageClass.Ranged;
-		Item.useAmmo = ModContent.ItemType<VolatileCanister>();
-	}
-
 	public override Vector2? HoldoutOffset() {
 		return new Vector2(-2f, 0f);
 	}
 
-	public override void SafeModifyShootStats(Player player, ref Vector2 position, ref Vector2 velocity, ref int type,
-		ref int damage, ref float knockback) {
-		velocity = velocity.RotatedByRandom(0.16f);
+	public override void SetDefaults() {
+		Item.DefaultToCanisterUsingWeapon(42, 42, 15f, 16, 3f);
+		Item.width = 44;
+		Item.height = 16;
+		Item.SetShopValues(ItemRarityColor.Blue1, Item.buyPrice(silver: 30));
 	}
 }
 

@@ -13,7 +13,6 @@ public class Canisters : Mod
 		switch (message) {
 			case MessageType.CanisterExplosionVisuals:
 				int identity = reader.ReadInt32();
-				Logger.Info($"Received identity: {identity}");
 				Projectile projectile = Main.projectile.FirstOrDefault(x => x.ModProjectile is BaseFiredCanisterProjectile && x.identity == identity);
 				if (projectile is null) {
 					Logger.Error($"Couldn't find projectile with identity: {identity}");

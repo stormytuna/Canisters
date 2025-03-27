@@ -1,4 +1,5 @@
 ﻿using Canisters.Content.Items.Canisters;
+using Canisters.Content.Items.Weapons;
 using Canisters.Helpers._Legacy.Abstracts;
 
 namespace Canisters.Helpers;
@@ -27,9 +28,13 @@ public static class CanisterHelpers
 		return Color.White;
 	}
 
-	public static Color GetCanisterColorForHeldItemLegacy(Player player) {
-		if (player.HeldItem.ModItem is CanisterUsingWeapon && player.TryGetWeaponAmmo(player.HeldItem, out int canisterItemId)) {
-			return GetCanisterColorLegacy(canisterItemId);
+	public static Color GetCanisterColor(Item item) {
+		return GetCanisterColor(item.type);
+	}
+	
+	public static Color GetCanisterColorForHeldWeapon(Player player) {
+		if (player.HeldItem.ModItem is BaseCanisterUsingWeapon && player.TryGetWeaponAmmo(player.HeldItem, out int canisterItemId)) {
+			return GetCanisterColor(canisterItemId);
 		}
 
 		return Color.White;
