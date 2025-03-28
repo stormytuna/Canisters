@@ -6,7 +6,7 @@ namespace Canisters.Content.Projectiles.GlisteningCanister;
 public class GlisteningBall : ModProjectile
 {
 	private bool _firstFrame = true;
-	
+
 	public override string Texture {
 		get => CanisterHelpers.GetEmptyAssetString();
 	}
@@ -32,13 +32,13 @@ public class GlisteningBall : ModProjectile
 				Projectile.extraUpdates = 1;
 				Projectile.tileCollide = false;
 			}
-		}	
-		
+		}
+
 		var dust = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.IchorTorch, Alpha: Main.rand.Next(100, 200), Scale: Main.rand.NextFloat(1f, 1.2f));
 		dust.velocity *= 0.3f;
 		dust.noGravity = true;
 		dust.noLight = true;
-		
+
 		dust = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.Ichor, Alpha: Main.rand.Next(100, 200), Scale: Main.rand.NextFloat(1f, 1.2f));
 		dust.velocity *= 0.3f;
 		dust.noGravity = true;
@@ -53,7 +53,7 @@ public class GlisteningBall : ModProjectile
 		if (!IsParent) {
 			return;
 		}
-		
+
 		SoundStyle soundStyle = SoundID.Item154 with { MaxInstances = 0, Volume = 0.5f, PitchRange = (-0.8f, -0.6f) };
 		SoundEngine.PlaySound(soundStyle, Projectile.Center);
 

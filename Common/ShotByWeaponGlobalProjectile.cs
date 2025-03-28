@@ -1,10 +1,7 @@
 ﻿using System.IO;
 using Canisters.Content.Items.Weapons;
-using Canisters.Helpers._Legacy.Abstracts;
 using Terraria.DataStructures;
-using Terraria.Graphics.Shaders;
 using Terraria.ModLoader.IO;
-using Terraria.WorldBuilding;
 
 namespace Canisters.Common;
 

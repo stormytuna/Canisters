@@ -1,6 +1,5 @@
 ﻿using Canisters.Content.Projectiles.NaniteCanister;
 using Canisters.Helpers;
-using Mono.Cecil;
 
 namespace Canisters.Content.Buffs;
 

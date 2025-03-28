@@ -1,6 +1,4 @@
 ﻿using System.Collections.Generic;
-using Terraria.GameContent;
-using Terraria.ModLoader.Assets;
 
 namespace Canisters.Helpers;
 
@@ -42,12 +40,12 @@ public static class DustHelpers
 
 	public static List<Dust> MakeDustExplosion(Vector2 position, float spawnRadius, int dustType, int amount) {
 		List<Dust> dusts = new(amount);
-		
+
 		for (int i = 0; i < amount; i++) {
 			Vector2 spawnPosition = position + Main.rand.NextVector2Circular(spawnRadius, spawnRadius);
 			dusts.Add(Dust.NewDustPerfect(spawnPosition, dustType));
 		}
-		
+
 		return dusts;
 	}
 
@@ -84,8 +82,8 @@ public static class DustHelpers
 	}
 
 	public static Rectangle FrameVanillaDust(int vanillaDustType) {
-		int frameX = (vanillaDustType * 10) % 1000;
-		int frameY = (vanillaDustType * 10) / 1000 * 30 + Main.rand.Next(3) * 10;
+		int frameX = vanillaDustType * 10 % 1000;
+		int frameY = (vanillaDustType * 10 / 1000 * 30) + (Main.rand.Next(3) * 10);
 		return new Rectangle(frameX, frameY, 8, 8);
 	}
 

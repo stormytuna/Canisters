@@ -24,14 +24,14 @@ public static class CanisterHelpers
 		if (modItem is BaseCanisterItem canisterItem) {
 			return canisterItem.CanisterColor;
 		}
-		
+
 		return Color.White;
 	}
 
 	public static Color GetCanisterColor(Item item) {
 		return GetCanisterColor(item.type);
 	}
-	
+
 	public static Color GetCanisterColorForHeldWeapon(Player player) {
 		if (player.HeldItem.ModItem is BaseCanisterUsingWeapon && player.TryGetWeaponAmmo(player.HeldItem, out int canisterItemId)) {
 			return GetCanisterColor(canisterItemId);

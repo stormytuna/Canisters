@@ -48,16 +48,15 @@ public class Nanites : ModProjectile
 	public override void AI() {
 		if (_firstFrame) {
 			_firstFrame = false;
-			
+
 			int numDust = Main.rand.Next(8, 12);
 			for (int i = 0; i < numDust; i++) {
 				var naniteDust = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, ModContent.DustType<NaniteDust>());
 				naniteDust.customData = Projectile;
 			}
 		}
-		
-		if (Main.rand.NextBool(5)) 
-		{
+
+		if (Main.rand.NextBool(5)) {
 			var dust = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.Clentaminator_Cyan);
 			dust.noGravity = true;
 		}

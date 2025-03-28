@@ -1,6 +1,5 @@
 ﻿using Canisters.Content.Projectiles.ToxicCanister;
 using Canisters.Helpers;
-using Canisters.Helpers._Legacy.Abstracts;
 using Terraria.Enums;
 
 namespace Canisters.Content.Items.Canisters;

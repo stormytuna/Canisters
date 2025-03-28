@@ -1,9 +1,7 @@
 ﻿using System;
 using Canisters.Content.Dusts;
 using Canisters.Helpers;
-using Microsoft.CodeAnalysis;
 using Terraria.Audio;
-using Terraria.DataStructures;
 using Terraria.GameContent;
 
 namespace Canisters.Content.Projectiles.VolatileCanister;
@@ -62,18 +60,18 @@ public class GelBall : ModProjectile
 	}
 
 	public override bool PreDraw(ref Color lightColor) {
-		var texture = TextureAssets.Projectile[Type].Value;
-		var sourceRect = texture.Frame();
+		Texture2D texture = TextureAssets.Projectile[Type].Value;
+		Rectangle sourceRect = texture.Frame();
 		Vector2 origin = sourceRect.Size() / 2f;
-		
+
 		for (int i = Projectile.oldPos.Length - 1; i >= 0; i--) {
 			Vector2 position = Projectile.oldPos[i] - Main.screenPosition + origin;
 			float t = (Projectile.oldPos.Length - i) / (float)Projectile.oldPos.Length;
 			Color color = Projectile.GetAlpha(lightColor) * MathHelper.Lerp(0.5f, 1f, t * t);
 			float scale = MathHelper.Lerp(0.5f, 1f, t * t);
-			Main.EntitySpriteDraw(texture, position, sourceRect, color, Projectile.rotation, origin, scale, SpriteEffects.None, 0);
+			Main.EntitySpriteDraw(texture, position, sourceRect, color, Projectile.rotation, origin, scale, SpriteEffects.None);
 		}
-		
+
 		return true;
 	}
 

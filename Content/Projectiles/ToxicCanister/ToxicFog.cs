@@ -1,15 +1,14 @@
 ﻿using Canisters.Content.Dusts;
-using Canisters.Helpers;
 
 namespace Canisters.Content.Projectiles.ToxicCanister;
 
 public class ToxicFog : ModProjectile
 {
 	private const int MaxLifeTime = 2 * 60;
-	
-	private bool firstFrame = true;
 	private int animationSpeed = 12;
-	
+
+	private bool firstFrame = true;
+
 	public override void SetStaticDefaults() {
 		Main.projFrames[Type] = 3;
 	}
@@ -20,7 +19,7 @@ public class ToxicFog : ModProjectile
 		Projectile.aiStyle = -1;
 		Projectile.alpha = 200;
 		Projectile.timeLeft = MaxLifeTime;
-		
+
 		Projectile.friendly = true;
 		Projectile.DamageType = DamageClass.Ranged;
 		Projectile.penetrate = -1;

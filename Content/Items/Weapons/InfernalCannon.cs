@@ -1,8 +1,5 @@
 ﻿using Canisters.Common;
-using Canisters.Content.Items.Canisters;
-using Canisters.Content.Projectiles.VolatileCanister;
 using Canisters.Helpers;
-using Canisters.Helpers._Legacy.Abstracts;
 using Canisters.Helpers.Enums;
 using Terraria.Enums;
 
@@ -28,7 +25,7 @@ public class InfernalCannon : BaseCanisterUsingWeapon
 		Item.height = 16;
 		Item.SetShopValues(ItemRarityColor.Orange3, Item.buyPrice(silver: 50));
 	}
-	
+
 	public override void AddRecipes() {
 		CreateRecipe()
 			.AddIngredient(ItemID.HellstoneBar, 16)

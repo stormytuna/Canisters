@@ -1,7 +1,4 @@
-﻿using Canisters.Content.Items.Canisters;
-using Canisters.Content.Projectiles.VolatileCanister;
-using Canisters.Helpers;
-using Canisters.Helpers._Legacy.Abstracts;
+﻿using Canisters.Helpers;
 using Canisters.Helpers.Enums;
 using Terraria.Enums;
 
@@ -16,7 +13,7 @@ public class LushSlinger : BaseCanisterUsingWeapon
 	public override Vector2 MuzzleOffset {
 		get => new(12f, -10f);
 	}
-	
+
 	public override Vector2? HoldoutOffset() {
 		return new Vector2(2f, -2f);
 	}

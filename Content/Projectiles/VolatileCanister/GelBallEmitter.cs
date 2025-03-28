@@ -12,7 +12,7 @@ public class GelBallEmitter : ModProjectile
 	private int _numFired;
 	private Vector2 _ownerOffset;
 	private Vector2 _startVelocity;
-	
+
 	private Player Owner {
 		get => Main.player[Projectile.owner];
 	}
@@ -31,12 +31,12 @@ public class GelBallEmitter : ModProjectile
 		Projectile.aiStyle = -1;
 		Projectile.tileCollide = false;
 	}
-	
+
 	public override void OnSpawn(IEntitySource source) {
 		Projectile.timeLeft = CombinedHooks.TotalUseTime(Owner.HeldItem.useTime, Owner, Owner.HeldItem);
 		_maxFireCounter = Projectile.timeLeft / 5;
 	}
-	
+
 	public override void AI() {
 		if (_firstFrame) {
 			_firstFrame = false;

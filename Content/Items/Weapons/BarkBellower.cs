@@ -1,11 +1,7 @@
 ﻿using Canisters.Common;
-using Canisters.Content.Items.Canisters;
-using Canisters.Content.Projectiles.VolatileCanister;
 using Canisters.Helpers;
-using Canisters.Helpers._Legacy.Abstracts;
 using Canisters.Helpers.Enums;
 using Terraria.Enums;
-using Terraria.GameContent;
 
 namespace Canisters.Content.Items.Weapons;
 
@@ -22,7 +18,7 @@ public class BarkBellower : BaseCanisterUsingWeapon
 	public override Vector2? HoldoutOffset() {
 		return new Vector2(-2f, 0f);
 	}
-	
+
 	public override void SetDefaults() {
 		Item.DefaultToCanisterUsingWeapon(16, 16, 11f, 21, 3f);
 		Item.width = 44;

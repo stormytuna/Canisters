@@ -1,9 +1,6 @@
 ﻿using System.IO;
 using Canisters.Common;
-using Canisters.Content.Items.Canisters;
-using Canisters.Content.Projectiles.VolatileCanister;
 using Canisters.Helpers;
-using Canisters.Helpers._Legacy.Abstracts;
 using Canisters.Helpers.Enums;
 using Terraria.DataStructures;
 using Terraria.Enums;

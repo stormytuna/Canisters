@@ -1,12 +1,11 @@
 ﻿using Canisters.Helpers;
-using Terraria.DataStructures;
 
 namespace Canisters.Content.Projectiles.GlisteningCanister;
 
 public class GlisteningBlob : ModProjectile
 {
 	private bool _firstFrame = true;
-	
+
 	public override void SetStaticDefaults() {
 		Main.projFrames[Type] = 4;
 	}
@@ -28,7 +27,7 @@ public class GlisteningBlob : ModProjectile
 			Projectile.frame = Main.rand.Next(Main.projFrames[Type]);
 			Projectile.direction = Main.rand.NextBool().ToDirectionInt();
 		}
-		
+
 		Projectile.velocity.Y += 0.1f;
 		Projectile.rotation += 0.125f * Projectile.direction;
 
@@ -55,7 +54,7 @@ public class GlisteningBlob : ModProjectile
 		}
 
 		Projectile.velocity *= 0.8f;
-		
+
 		Projectile.penetrate--;
 
 		DustHelpers.MakeDustExplosion(Projectile.Center, 8f, DustID.IchorTorch, 4, 0f, 4f, 80, 120, 0.8f, 1.2f, true);

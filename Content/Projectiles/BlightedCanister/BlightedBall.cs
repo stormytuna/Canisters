@@ -60,11 +60,11 @@ public class BlightedBall : ModProjectile
 		Texture2D texture = TextureAssets.Projectile[Type].Value;
 
 		for (int i = Projectile.oldPos.Length - 1; i >= 1; i -= 2) {
-			Vector2 position = Projectile.oldPos[i] - Main.screenPosition +new Vector2(Projectile.width / 2, Projectile.height / 2);
+			Vector2 position = Projectile.oldPos[i] - Main.screenPosition + new Vector2(Projectile.width / 2, Projectile.height / 2);
 			Rectangle sourceRect = new(0, 0, texture.Width, texture.Height);
 			Color color = Projectile.GetAlpha(lightColor) * ((Projectile.oldPos.Length - (float)i) / Projectile.oldPos.Length);
 			Vector2 origin = texture.Size() / 2f;
-			Main.EntitySpriteDraw(texture, position, sourceRect, color, Projectile.rotation, origin, Projectile.scale,SpriteEffects.None);
+			Main.EntitySpriteDraw(texture, position, sourceRect, color, Projectile.rotation, origin, Projectile.scale, SpriteEffects.None);
 		}
 
 		return true;

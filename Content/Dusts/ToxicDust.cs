@@ -1,4 +1,3 @@
-using System;
 using Canisters.Helpers;
 using static Microsoft.Xna.Framework.MathHelper;
 
@@ -13,7 +12,7 @@ public class ToxicDust : ModDust
 	public override void OnSpawn(Dust dust) {
 		dust.noGravity = true;
 		dust.frame = DustHelpers.FrameVanillaDust(DustID.Venom);
-		
+
 		dust.velocity = Main.rand.NextVector2Circular(1f, 1f) * Main.rand.NextFloat(2f, 4f);
 		dust.scale = Main.rand.NextFloat(0.8f, 1.5f);
 		dust.alpha = Main.rand.Next(50, 100);
@@ -25,14 +24,14 @@ public class ToxicDust : ModDust
 			dust.firstFrame = false;
 			dust.customData = dust.scale;
 		}
-		
+
 		dust.position += dust.velocity;
 		dust.velocity *= 0.98f;
 		dust.rotation += dust.velocity.Length() * 0.07f;
 
 		if (dust.customData is float originalScale) {
-			float time = ((float)Main.timeForVisualEffects * 0.02f) % 1;
-			float scaleVariance = MathHelper.Lerp(0.7f, 1f, float.Sin(time * TwoPi));
+			float time = (float)Main.timeForVisualEffects * 0.02f % 1;
+			float scaleVariance = Lerp(0.7f, 1f, float.Sin(time * TwoPi));
 			dust.scale = originalScale + scaleVariance;
 		}
 

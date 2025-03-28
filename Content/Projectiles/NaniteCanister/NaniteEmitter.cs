@@ -49,13 +49,13 @@ public class NaniteMistEmitter : ModProjectile
 			Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, velocity, ModContent.ProjectileType<Nanites>(), Projectile.damage / 3, Projectile.knockBack, Projectile.owner);
 			ShootTimer = _maxFireCounter;
 			_numFired++;
-			
+
 			Rectangle dustSpawnBox = Projectile.Hitbox;
 			dustSpawnBox.Inflate(4, 4);
 			var dust = Dust.NewDustDirect(dustSpawnBox.TopLeft(), dustSpawnBox.Width, dustSpawnBox.Height, ModContent.DustType<NaniteDust>(), Alpha: Main.rand.Next(0, 50), Scale: Main.rand.NextFloat(0.6f, 1f));
 			dust.velocity = _startVelocity.RotatedByRandom(0.4f) * Main.rand.NextFloat(0.01f, 0.8f);
 		}
-		
+
 		if (Main.rand.NextBool(2)) {
 			var dust = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, ModContent.DustType<NaniteDust>(), Alpha: Main.rand.Next(0, 50), Scale: Main.rand.NextFloat(0.6f, 0.8f));
 			dust.velocity = _startVelocity.RotatedByRandom(0.4f) * Main.rand.NextFloat(0.01f, 0.8f);

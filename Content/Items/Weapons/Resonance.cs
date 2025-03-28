@@ -1,11 +1,7 @@
 ﻿using System.Collections.Generic;
-using Canisters.Content.Items.Canisters;
-using Canisters.Content.Projectiles.VolatileCanister;
 using Canisters.DataStructures;
 using Canisters.Helpers;
-using Canisters.Helpers._Legacy.Abstracts;
 using Canisters.Helpers.Enums;
-using Stubble.Core;
 using Terraria.DataStructures;
 using Terraria.Enums;
 using static Microsoft.Xna.Framework.MathHelper;

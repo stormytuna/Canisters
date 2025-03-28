@@ -1,7 +1,4 @@
-﻿using Canisters.Content.Items.Canisters;
-using Canisters.Content.Projectiles.VolatileCanister;
-using Canisters.Helpers;
-using Canisters.Helpers._Legacy.Abstracts;
+﻿using Canisters.Helpers;
 using Canisters.Helpers.Enums;
 using Terraria.Enums;
 
@@ -36,6 +33,6 @@ public class ModifiedHangunGlobalNPC : GlobalNPC
 	}
 
 	public override void ModifyShop(NPCShop shop) {
-		shop.InsertAfter(ItemID.Sickle, ModContent.ItemType<ModifiedHandgun>());	
+		shop.InsertAfter(ItemID.Sickle, ModContent.ItemType<ModifiedHandgun>());
 	}
 }

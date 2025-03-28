@@ -1,7 +1,5 @@
 ﻿using Canisters.Content.Projectiles.NaniteCanister;
 using Canisters.Helpers;
-using Canisters.Helpers._Legacy.Abstracts;
-using MonoMod.RuntimeDetour;
 using Terraria.Enums;
 
 namespace Canisters.Content.Items.Canisters;

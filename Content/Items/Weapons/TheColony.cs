@@ -1,9 +1,5 @@
-﻿using System;
-using Canisters.Content.Items.Canisters;
-using Canisters.Content.Projectiles.VolatileCanister;
-using Canisters.DataStructures;
+﻿using Canisters.DataStructures;
 using Canisters.Helpers;
-using Canisters.Helpers._Legacy.Abstracts;
 using Canisters.Helpers.Enums;
 using Terraria.Enums;
 
@@ -22,7 +18,7 @@ public class TheColony : BaseCanisterUsingWeapon
 	public override Vector2? HoldoutOffset() {
 		return new Vector2(-10f, 0f);
 	}
-	
+
 	public override void SetDefaults() {
 		Item.DefaultToCanisterUsingWeapon(25, 25, 12f, 36, 3f);
 		Item.width = 32;
