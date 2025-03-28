@@ -1,4 +1,6 @@
 ﻿using System.IO;
+using System.Net.Mime;
+using Canisters.Helpers;
 using Terraria.DataStructures;
 
 namespace Canisters.Content.Projectiles.VerdantCanister;
@@ -17,6 +19,10 @@ public class VerdantGasEmitter : ModProjectile
 
 	private ref float ShootTimer {
 		get => ref Projectile.ai[0];
+	}
+
+	public override string Texture {
+		get => CanisterHelpers.GetEmptyAssetString();
 	}
 
 	public override void SetDefaults() {

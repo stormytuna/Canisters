@@ -11,7 +11,7 @@ public class VolatileCanister : BaseCanisterItem
 	}
 
 	public override int DepletedProjectileType {
-		get => ModContent.ProjectileType<DepletedVolatileCanister>();
+		get => ModContent.ProjectileType<GelBallEmitter>();
 	}
 
 	public override Color CanisterColor {

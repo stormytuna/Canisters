@@ -1,10 +1,12 @@
-﻿using System;
+using System;
+using Canisters.Helpers;
+using Canisters.Helpers._Legacy.Abstracts;
 using Canisters.Helpers.Enums;
 using ReLogic.Content;
 using Terraria.DataStructures;
 using static Microsoft.Xna.Framework.MathHelper;
 
-namespace Canisters.Helpers._Legacy.Abstracts;
+namespace Canisters.Content.Items.Weapons;
 
 /// <summary>
 ///     Handles weapons that use canisters

@@ -45,6 +45,7 @@ Projectiles: {
 	FiredVerdantCanister.DisplayName: Fired Verdant Canister
 	DepletedVolatileCanister.DisplayName: Depleted Volatile Canister
 	FiredVolatileCanister.DisplayName: Fired Volatile Canister
+	GelBallEmitter.DisplayName: Gel Ball Emitter
 }
 
 Items: {
