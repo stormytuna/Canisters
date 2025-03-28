@@ -1,13 +1,18 @@
-﻿using Canisters.Content.Items.Canisters;
+﻿using System.Collections.Generic;
+using Canisters.Content.Items.Canisters;
 using Canisters.Content.Projectiles.VolatileCanister;
+using Canisters.DataStructures;
+using Canisters.Helpers;
 using Canisters.Helpers._Legacy.Abstracts;
 using Canisters.Helpers.Enums;
+using Stubble.Core;
 using Terraria.DataStructures;
+using Terraria.Enums;
 using static Microsoft.Xna.Framework.MathHelper;
 
 namespace Canisters.Content.Items.Weapons;
 
-public class Resonance : CanisterUsingWeapon
+public class Resonance : BaseCanisterUsingWeapon
 {
 	public override CanisterFiringType CanisterFiringType {
 		get => CanisterFiringType.Depleted;
@@ -17,27 +22,21 @@ public class Resonance : CanisterUsingWeapon
 		get => new(52f, -2f);
 	}
 
+	public override Vector2? HoldoutOffset() {
+		return new Vector2(-4f, 4f);
+	}
+
 	public override void SetDefaults() {
-		// Base stats
+		Item.DefaultToCanisterUsingWeapon(8, 8, 12f, 16, 3f);
 		Item.width = 60;
 		Item.height = 20;
-		Item.value = Item.buyPrice(gold: 5);
-		Item.rare = ItemRarityID.LightRed;
+		Item.SetShopValues(ItemRarityColor.LightRed4, Item.buyPrice(gold: 5));
+	}
 
-		// Use stats
-		Item.useStyle = ItemUseStyleID.Shoot;
-		Item.useTime = Item.useAnimation = 8;
-		Item.autoReuse = true;
-		Item.noMelee = true;
-		Item.noUseGraphic = true;
-
-		// Weapon stats
-		Item.shoot = ModContent.ProjectileType<FiredVolatileCanister>();
-		Item.shootSpeed = 12f;
-		Item.damage = 16;
-		Item.knockBack = 3f;
-		Item.DamageType = DamageClass.Ranged;
-		Item.useAmmo = ModContent.ItemType<VolatileCanister>();
+	public override IEnumerable<Projectile> ShootProjectiles(IEntitySource source, CanisterShootStats stats) {
+		Vector2 normal = stats.Velocity.SafeNormalize(Vector2.Zero).RotatedBy(PiOver2) * Main.LocalPlayer.direction;
+		yield return Projectile.NewProjectileDirect(source, stats.Position + (normal * 3f), stats.Velocity, stats.ProjectileType, stats.Damage, stats.Knockback, Main.myPlayer);
+		yield return Projectile.NewProjectileDirect(source, stats.Position - (normal * 3f), stats.Velocity, stats.ProjectileType, stats.Damage, stats.Knockback, Main.myPlayer);
 	}
 
 	public override void AddRecipes() {
@@ -54,21 +53,5 @@ public class Resonance : CanisterUsingWeapon
 			.AddIngredient(ItemID.PalladiumBar, 16)
 			.AddTile(TileID.MythrilAnvil)
 			.Register();
-	}
-
-	public override Vector2? HoldoutOffset() {
-		return new Vector2(-4f, 4f);
-	}
-
-	public override void SafeModifyShootStats(Player player, ref Vector2 position, ref Vector2 velocity, ref int type,
-		ref int damage, ref float knockback) {
-		velocity = velocity.RotatedByRandom(0.08f);
-	}
-
-	public override void ShootProjectile(EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity,
-		int type, int damage, float knockback, int owner, float ai0, float ai1, float ai2) {
-		Vector2 normal = velocity.SafeNormalize(Vector2.Zero).RotatedBy(PiOver2) * Main.LocalPlayer.direction;
-		Projectile.NewProjectile(source, position + (normal * 3f), velocity, type, damage, knockback, owner);
-		Projectile.NewProjectile(source, position - (normal * 3f), velocity, type, damage, knockback, owner);
 	}
 }

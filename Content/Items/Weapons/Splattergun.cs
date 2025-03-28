@@ -1,12 +1,15 @@
 ﻿using System;
 using Canisters.Content.Items.Canisters;
 using Canisters.Content.Projectiles.VolatileCanister;
+using Canisters.DataStructures;
+using Canisters.Helpers;
 using Canisters.Helpers._Legacy.Abstracts;
 using Canisters.Helpers.Enums;
+using Terraria.Enums;
 
 namespace Canisters.Content.Items.Weapons;
 
-public class Splattergun : CanisterUsingWeapon
+public class Splattergun : BaseCanisterUsingWeapon
 {
 	public override CanisterFiringType CanisterFiringType {
 		get => CanisterFiringType.Depleted;
@@ -16,27 +19,19 @@ public class Splattergun : CanisterUsingWeapon
 		get => new(26f, -2f);
 	}
 
+	public override Vector2? HoldoutOffset() {
+		return new Vector2(0f, 0f);
+	}
+
 	public override void SetDefaults() {
-		// Base stats
+		Item.DefaultToCanisterUsingWeapon(8, 8, 10f, 16, 3f);
 		Item.width = 30;
 		Item.height = 26;
-		Item.value = Item.buyPrice(gold: 2, silver: 50);
-		Item.rare = ItemRarityID.LightRed;
+		Item.SetShopValues(ItemRarityColor.LightRed4, Item.buyPrice(gold: 2, silver: 50));
+	}
 
-		// Use stats
-		Item.useStyle = ItemUseStyleID.Shoot;
-		Item.useTime = Item.useAnimation = 8;
-		Item.autoReuse = true;
-		Item.noMelee = true;
-		Item.noUseGraphic = true;
-
-		// Weapon stats
-		Item.shoot = ModContent.ProjectileType<FiredVolatileCanister>();
-		Item.shootSpeed = 10f;
-		Item.damage = 16;
-		Item.knockBack = 3f;
-		Item.DamageType = DamageClass.Ranged;
-		Item.useAmmo = ModContent.ItemType<VolatileCanister>();
+	public override void ApplyWeaponStats(ref CanisterShootStats stats) {
+		stats.Velocity *= 1.5f;
 	}
 
 	public override void AddRecipes() {
@@ -51,14 +46,5 @@ public class Splattergun : CanisterUsingWeapon
 			.AddIngredient(ItemID.MythrilBar, 12)
 			.AddTile(TileID.MythrilAnvil)
 			.Register();
-	}
-
-	public override Vector2? HoldoutOffset() {
-		return new Vector2(0f, 0f);
-	}
-
-	public override void ApplyShootStats(ref Vector2 velocity, ref Vector2 position, ref int damage,
-		ref float knockBack, ref int amount, ref float spread) {
-		velocity *= 1.5f;
 	}
 }

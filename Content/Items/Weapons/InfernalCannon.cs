@@ -1,12 +1,14 @@
 ﻿using Canisters.Common;
 using Canisters.Content.Items.Canisters;
 using Canisters.Content.Projectiles.VolatileCanister;
+using Canisters.Helpers;
 using Canisters.Helpers._Legacy.Abstracts;
 using Canisters.Helpers.Enums;
+using Terraria.Enums;
 
 namespace Canisters.Content.Items.Weapons;
 
-public class InfernalCannon : CanisterUsingWeapon
+public class InfernalCannon : BaseCanisterUsingWeapon
 {
 	public override CanisterFiringType CanisterFiringType {
 		get => CanisterFiringType.Launched;
@@ -16,38 +18,17 @@ public class InfernalCannon : CanisterUsingWeapon
 		get => new(36f, 0f);
 	}
 
-	public override void SetDefaults() {
-		// Base stats
-		Item.width = 54;
-		Item.height = 16;
-		Item.value = Item.buyPrice(silver: 50);
-		Item.rare = ItemRarityID.Orange;
-
-		// Use stats
-		Item.useStyle = ItemUseStyleID.Shoot;
-		Item.useTime = Item.useAnimation = 36;
-		Item.autoReuse = true;
-		Item.noMelee = true;
-		Item.noUseGraphic = true;
-
-		// Weapon stats
-		Item.shoot = ModContent.ProjectileType<FiredVolatileCanister>();
-		Item.shootSpeed = 13f;
-		Item.damage = 42;
-		Item.knockBack = 8f;
-		Item.DamageType = DamageClass.Ranged;
-		Item.useAmmo = ModContent.ItemType<VolatileCanister>();
-	}
-
 	public override Vector2? HoldoutOffset() {
 		return new Vector2(-8f, 0f);
 	}
 
-	public override void SafeModifyShootStats(Player player, ref Vector2 position, ref Vector2 velocity, ref int type,
-		ref int damage, ref float knockback) {
-		velocity = velocity.RotatedByRandom(0.11f);
+	public override void SetDefaults() {
+		Item.DefaultToCanisterUsingWeapon(36, 36, 13f, 42, 8f);
+		Item.width = 54;
+		Item.height = 16;
+		Item.SetShopValues(ItemRarityColor.Orange3, Item.buyPrice(silver: 50));
 	}
-
+	
 	public override void AddRecipes() {
 		CreateRecipe()
 			.AddIngredient(ItemID.HellstoneBar, 16)
@@ -56,10 +37,10 @@ public class InfernalCannon : CanisterUsingWeapon
 	}
 }
 
-public class InfernalCannonGlobalProjectileLegacy : ShotByWeaponGlobalProjectileLegacy<InfernalCannon>
+public class InfernalCannonGlobalProjectile : ShotByWeaponGlobalProjectile<InfernalCannon>
 {
 	public override void AI(Projectile projectile) {
-		if (!ShouldApply || projectile.hide || Main.rand.NextBool(4, 5)) {
+		if (!IsActive || projectile.hide || Main.rand.NextBool(4, 5)) {
 			return;
 		}
 
@@ -70,7 +51,7 @@ public class InfernalCannonGlobalProjectileLegacy : ShotByWeaponGlobalProjectile
 	}
 
 	public override void OnHitNPC(Projectile projectile, NPC target, NPC.HitInfo hit, int damageDone) {
-		if (!ShouldApply || Main.rand.NextBool(2, 3)) {
+		if (!IsActive || Main.rand.NextBool(2, 3)) {
 			return;
 		}
 

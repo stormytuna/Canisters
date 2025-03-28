@@ -1,12 +1,17 @@
-﻿using Canisters.Content.Items.Canisters;
+﻿using System.IO;
+using Canisters.Common;
+using Canisters.Content.Items.Canisters;
 using Canisters.Content.Projectiles.VolatileCanister;
+using Canisters.Helpers;
 using Canisters.Helpers._Legacy.Abstracts;
 using Canisters.Helpers.Enums;
 using Terraria.DataStructures;
+using Terraria.Enums;
+using Terraria.ModLoader.IO;
 
 namespace Canisters.Content.Items.Weapons;
 
-public class Pneumaticannon : CanisterUsingWeapon
+public class Pneumaticannon : BaseCanisterUsingWeapon
 {
 	public override CanisterFiringType CanisterFiringType {
 		get => CanisterFiringType.Launched;
@@ -16,37 +21,32 @@ public class Pneumaticannon : CanisterUsingWeapon
 		get => new(22f, -2f);
 	}
 
-	public override void SetDefaults() {
-		// Base stats
-		Item.width = 48;
-		Item.height = 14;
-		Item.value = Item.sellPrice(gold: 75);
-		Item.rare = ItemRarityID.Pink;
-
-		// Use stats
-		Item.useStyle = ItemUseStyleID.Shoot;
-		Item.useTime = Item.useAnimation = 32;
-		Item.autoReuse = true;
-		Item.noMelee = true;
-		Item.noUseGraphic = true;
-
-		// Weapon stats
-		Item.shoot = ModContent.ProjectileType<FiredVolatileCanister>();
-		Item.shootSpeed = 10f;
-		Item.damage = 16;
-		Item.knockBack = 3f;
-		Item.DamageType = DamageClass.Ranged;
-		Item.useAmmo = ModContent.ItemType<VolatileCanister>();
-	}
-
 	public override Vector2? HoldoutOffset() {
 		return new Vector2(-6f, 0f);
 	}
 
-	public override void ShootProjectile(EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity,
-		int type, int damage, float knockback, int owner, float ai0, float ai1, float ai2) {
-		var canister = Projectile.NewProjectileDirect(source, position, velocity, type, damage, knockback, owner);
-		canister.extraUpdates = 2; // TODO: Wont work in MP!!
+	public override void SetDefaults() {
+		Item.DefaultToCanisterUsingWeapon(32, 32, 10f, 16, 3f);
+		Item.width = 48;
+		Item.height = 14;
+		Item.SetShopValues(ItemRarityColor.Pink5, Item.sellPrice(gold: 75));
+	}
+}
+
+public class PneumaticannonGlobalItem : ShotByWeaponGlobalProjectile<Pneumaticannon>
+{
+	public override void SafeOnSpawn(Projectile projectile, IEntitySource source) {
+		if (IsActive) {
+			projectile.extraUpdates = 2;
+		}
+	}
+
+	public override void SendExtraAI(Projectile projectile, BitWriter bitWriter, BinaryWriter binaryWriter) {
+		binaryWriter.Write7BitEncodedInt(projectile.extraUpdates);
+	}
+
+	public override void ReceiveExtraAI(Projectile projectile, BitReader bitReader, BinaryReader binaryReader) {
+		projectile.extraUpdates = binaryReader.Read7BitEncodedInt();
 	}
 }
 
