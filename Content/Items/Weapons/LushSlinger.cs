@@ -1,11 +1,13 @@
 ﻿using Canisters.Content.Items.Canisters;
 using Canisters.Content.Projectiles.VolatileCanister;
+using Canisters.Helpers;
 using Canisters.Helpers._Legacy.Abstracts;
 using Canisters.Helpers.Enums;
+using Terraria.Enums;
 
 namespace Canisters.Content.Items.Weapons;
 
-public class LushSlinger : CanisterUsingWeapon
+public class LushSlinger : BaseCanisterUsingWeapon
 {
 	public override CanisterFiringType CanisterFiringType {
 		get => CanisterFiringType.Launched;
@@ -14,37 +16,16 @@ public class LushSlinger : CanisterUsingWeapon
 	public override Vector2 MuzzleOffset {
 		get => new(12f, -10f);
 	}
-
-	public override void SetDefaults() {
-		// Base stats
-		Item.width = 20;
-		Item.height = 32;
-		Item.value = Item.buyPrice(silver: 85);
-		Item.rare = ItemRarityID.Orange;
-
-		// Use stats
-		Item.useStyle = ItemUseStyleID.Shoot;
-		Item.useTime = Item.useAnimation = 20;
-		Item.autoReuse = true;
-		Item.noMelee = true;
-		Item.noUseGraphic = true;
-
-		// Weapon stats
-		Item.shoot = ModContent.ProjectileType<FiredVolatileCanister>();
-		Item.shootSpeed = 10f;
-		Item.damage = 31;
-		Item.knockBack = 2f;
-		Item.DamageType = DamageClass.Ranged;
-		Item.useAmmo = ModContent.ItemType<VolatileCanister>();
-	}
-
+	
 	public override Vector2? HoldoutOffset() {
 		return new Vector2(2f, -2f);
 	}
 
-	public override void SafeModifyShootStats(Player player, ref Vector2 position, ref Vector2 velocity, ref int type,
-		ref int damage, ref float knockback) {
-		velocity = velocity.RotatedByRandom(0.25f);
+	public override void SetDefaults() {
+		Item.DefaultToCanisterUsingWeapon(20, 20, 10f, 31, 2f);
+		Item.width = 20;
+		Item.height = 32;
+		Item.SetShopValues(ItemRarityColor.Orange3, Item.buyPrice(silver: 85));
 	}
 
 	public override void AddRecipes() {
