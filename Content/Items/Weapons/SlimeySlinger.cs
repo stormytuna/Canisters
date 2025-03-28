@@ -46,7 +46,7 @@ public class SlimeySlinger : CanisterUsingWeapon
 	}
 }
 
-public class SlimySlingerGlobalProjectile : ShotByWeaponGlobalProjectile<SlimeySlinger>
+public class SlimySlingerGlobalProjectileLegacy : ShotByWeaponGlobalProjectileLegacy<SlimeySlinger>
 {
 	private int _numBounces = 3;
 

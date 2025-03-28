@@ -56,7 +56,7 @@ public class InfernalCannon : CanisterUsingWeapon
 	}
 }
 
-public class InfernalCannonGlobalProjectile : ShotByWeaponGlobalProjectile<InfernalCannon>
+public class InfernalCannonGlobalProjectileLegacy : ShotByWeaponGlobalProjectileLegacy<InfernalCannon>
 {
 	public override void AI(Projectile projectile) {
 		if (!ShouldApply || projectile.hide || Main.rand.NextBool(4, 5)) {

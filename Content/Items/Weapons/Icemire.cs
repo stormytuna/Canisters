@@ -53,7 +53,7 @@ public class Icemire : CanisterUsingWeapon
 	}
 }
 
-public class IcemireGlobalProjectile : ShotByWeaponGlobalProjectile<Icemire>
+public class IcemireGlobalProjectileLegacy : ShotByWeaponGlobalProjectileLegacy<Icemire>
 {
 	public override void AI(Projectile projectile) {
 		if (!ShouldApply || projectile.hide || Main.rand.NextBool(4, 5)) {
