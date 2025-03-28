@@ -219,6 +219,11 @@ Items: {
 		Tooltip: ""
 		DisplayName: Aetherian Canister
 	}
+
+	FungalFury: {
+		DisplayName: Fungal Fury
+		Tooltip: ""
+	}
 }
 
 Buffs: {
