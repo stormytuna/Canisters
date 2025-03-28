@@ -6,11 +6,11 @@ public class NaniteDust : ModDust
 {
 	public override void OnSpawn(Dust dust) {
 		dust.noGravity = true;
-		dust.alpha = 50;
+		dust.alpha = 200;
 	}
 
 	public override bool Update(Dust dust) {
-		Lighting.AddLight(dust.position, 0.2f, 0f, 0f);
+		Lighting.AddLight(dust.position, 0.0f, 0f, 0.2f);
 		dust.rotation = Main.rand.NextRadian();
 
 		if (dust.customData is Projectile { active: true } projectile) {

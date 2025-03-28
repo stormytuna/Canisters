@@ -7,10 +7,10 @@ namespace Canisters.Content.Projectiles.NaniteCanister;
 
 public class Nanites : ModProjectile
 {
-	private const float _detectionRange = 25f * 16f;
-	private const float _rangeToKeepDetection = 50f * 16f;
-	private const float _acceleration = 0.3f;
-	private const float _topSpeed = 12f;
+	private const float DetectionRange = 25f * 16f;
+	private const float RangeToKeepDetection = 50f * 16f;
+	private const float Acceleration = 0.3f;
+	private const float TopSpeed = 12f;
 
 	private bool _firstFrame = true;
 
@@ -32,15 +32,12 @@ public class Nanites : ModProjectile
 	}
 
 	public override void SetDefaults() {
-		// Base stats
 		Projectile.width = 18;
 		Projectile.height = 18;
 		Projectile.aiStyle = -1;
 		Projectile.timeLeft = 3 * 60;
 
-		// Weapon stats
 		Projectile.friendly = true;
-		Projectile.penetrate = 1;
 		Projectile.DamageType = DamageClass.Ranged;
 	}
 
@@ -51,43 +48,50 @@ public class Nanites : ModProjectile
 	public override void AI() {
 		if (_firstFrame) {
 			_firstFrame = false;
+			
 			int numDust = Main.rand.Next(8, 12);
 			for (int i = 0; i < numDust; i++) {
-				var dust = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height,
-					ModContent.DustType<NaniteDust>());
-				dust.customData = Projectile;
+				var naniteDust = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, ModContent.DustType<NaniteDust>());
+				naniteDust.customData = Projectile;
 			}
 		}
+		
+		if (Main.rand.NextBool(5)) 
+		{
+			var dust = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.Clentaminator_Cyan);
+			dust.noGravity = true;
+		}
 
-		// Movement
 		if (State == AiState.Idle) {
-			// Try find target
-			NPC closestNpc = NpcHelpers.FindClosestNpc(_detectionRange, Projectile.Center);
+			NPC closestNpc = NpcHelpers.FindClosestNpc(DetectionRange, Projectile.Center);
 			if (closestNpc is not null) {
 				State = AiState.Homing;
 				Target = closestNpc;
+				return;
 			}
 
-			// Otherwise, just slow down
 			Projectile.velocity *= 0.98f;
 
 			return;
 		}
 
-		if (!Target.CanBeChasedBy() || !Target.WithinRange(Projectile.Center, _rangeToKeepDetection)) {
+		if (!Target.CanBeChasedBy() || !Target.WithinRange(Projectile.Center, RangeToKeepDetection)) {
 			State = AiState.Idle;
 			return;
 		}
 
-		EntityHelpers.SmoothHoming(Projectile, Target.Center, _acceleration, _topSpeed, Target.velocity, false);
+		EntityHelpers.SmoothHoming(Projectile, Target.Center, Acceleration, TopSpeed, Target.velocity, false);
 
 		Projectile.timeLeft++;
 	}
 
 	public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone) {
-		target.AddBuff(ModContent.BuffType<Devoured>(), 5 * 60);
-		target.GetGlobalNPC<DevouredGlobalNpc>().Devoured = true; // Hack because buff won't update if we one shot it
-		// TODO: Won't work in multiplayer
+		target.AddBuff(ModContent.BuffType<Devoured>(), 15 * 60);
+
+		// If we kill the npc with this projectile it won't get a chance to update buffs
+		if (!target.active) {
+			target.GetGlobalNPC<DevouredGlobalNpc>().SpawnNanite(target);
+		}
 	}
 
 	public override bool OnTileCollide(Vector2 oldVelocity) {
@@ -105,8 +109,7 @@ public class Nanites : ModProjectile
 	public override void Kill(int timeLeft) {
 		int numDust = Main.rand.Next(2, 6);
 		for (int i = 0; i < numDust; i++) {
-			var dust = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height,
-				DustID.Clentaminator_Cyan);
+			var dust = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.Clentaminator_Cyan);
 			dust.noGravity = true;
 			dust.velocity *= 2f;
 		}

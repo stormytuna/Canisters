@@ -1,9 +1,12 @@
 ﻿using Canisters.Content.Projectiles.NaniteCanister;
+using Canisters.Helpers;
 using Canisters.Helpers._Legacy.Abstracts;
+using MonoMod.RuntimeDetour;
+using Terraria.Enums;
 
 namespace Canisters.Content.Items.Canisters;
 
-public class NaniteCanister : CanisterItem
+public class NaniteCanister : BaseCanisterItem
 {
 	public override int LaunchedProjectileType {
 		get => ModContent.ProjectileType<FiredNaniteCanister>();
@@ -17,15 +20,9 @@ public class NaniteCanister : CanisterItem
 		get => Color.LightCyan;
 	}
 
-	public override void SafeSetDefaults() {
-		// Base stats
-		Item.value = Item.buyPrice(silver: 3);
-		Item.rare = ItemRarityID.Yellow;
-
-		// Weapon stats
-		Item.shootSpeed = 4f;
-		Item.damage = 16;
-		Item.knockBack = 2f;
+	public override void SetDefaults() {
+		Item.DefaultToCanister(16, 4f, 2f);
+		Item.SetShopValues(ItemRarityColor.Yellow8, Item.buyPrice(silver: 3));
 	}
 
 	public override void AddRecipes() {

@@ -1,5 +1,6 @@
 ﻿using Canisters.Content.Projectiles.NaniteCanister;
 using Canisters.Helpers;
+using Mono.Cecil;
 
 namespace Canisters.Content.Buffs;
 
@@ -20,6 +21,12 @@ public class DevouredGlobalNpc : GlobalNPC
 
 	public override bool InstancePerEntity {
 		get => true;
+	}
+
+	public void SpawnNanite(NPC npc) {
+		Vector2 velocity = Main.rand.NextVector2CircularEdge(5f, 5f) * Main.rand.NextFloat(0.5f, 1f);
+		int damage = _naniteBaseDamage + MathHelpers.Ceiling(_naniteBonusDamage);
+		Projectile.NewProjectile(npc.GetSource_Death(), npc.Center, velocity, ModContent.ProjectileType<Nanites>(), damage, 2f, Main.myPlayer);
 	}
 
 	public override void ResetEffects(NPC npc) {
@@ -49,10 +56,7 @@ public class DevouredGlobalNpc : GlobalNPC
 			return;
 		}
 
-		Vector2 velocity = Main.rand.NextVector2CircularEdge(5f, 5f) * Main.rand.NextFloat(0.5f, 1f);
-		int damage = _naniteBaseDamage + MathHelpers.Ceiling(_naniteBonusDamage);
-		Projectile.NewProjectile(npc.GetSource_Death(), npc.Center, velocity, ModContent.ProjectileType<Nanites>(),
-			damage, 2f, npc.lastInteraction);
+		SpawnNanite(npc);
 	}
 
 	public override void DrawEffects(NPC npc, ref Color drawColor) {
