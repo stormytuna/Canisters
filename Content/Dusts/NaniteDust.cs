@@ -6,7 +6,7 @@ public class NaniteDust : ModDust
 {
 	public override void OnSpawn(Dust dust) {
 		dust.noGravity = true;
-		dust.alpha = 200;
+		dust.alpha = 50;
 	}
 
 	public override bool Update(Dust dust) {
