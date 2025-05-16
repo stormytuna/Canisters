@@ -37,7 +37,9 @@ public class BlightedBolt : ModProjectile
 	}
 
 	public static void MakeDustLightningBolt(Vector2 start, Vector2 end) {
-		DustHelpers.MakeLightningDust(start, end, ModContent.DustType<BlightedDust>(), 1.4f, 30f, 0.4f);
+		DustHelpers.MakeLightningDust(start, end, ModContent.DustType<BlightedDust>(), 1.2f, 30f, 0.4f);
+		DustHelpers.MakeLightningDust(start, end, ModContent.DustType<BlightedDust>(), 0.9f, 45f, 0.4f);
+		DustHelpers.MakeLightningDust(start, end, ModContent.DustType<BlightedDust>(), 1.5f, 15f, 0.4f);
 		DustHelpers.MakeDustExplosion(end, 2f, ModContent.DustType<BlightedDust>(), 5, 0f, 8f, 100, 150, 1f, 1.2f, true, true, true);
 	}
 

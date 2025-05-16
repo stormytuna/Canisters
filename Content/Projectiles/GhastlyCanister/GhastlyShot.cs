@@ -17,16 +17,16 @@ public class GhastlyShot : ModProjectile
 	}
 
 	public override void AI() {
-		if (Main.rand.NextBool()) {
+		for (int i = 0; i < 2; i++) {
 			var dust = Dust.NewDustPerfect(Projectile.Center, DustID.DungeonSpirit);
+			dust.velocity += Projectile.velocity;
+			dust.velocity *= 0.4f;
 			dust.noGravity = true;
 			dust.alpha = Main.rand.Next(120, 200);
-			dust.velocity *= 0.4f;
 		}
 	}
 
-	public override void Kill(int timeLeft) {
-		DustHelpers.MakeDustExplosion(Projectile.Center, 4f, DustID.DungeonSpirit, 5, 0f, 1f, 120, 200,
-			noGravity: true);
+	public override void OnKill(int timeLeft) {
+		DustHelpers.MakeDustExplosion(Projectile.Center, 4f, DustID.DungeonSpirit, 5, 0f, 1f, 120, 200, noGravity: true);
 	}
 }

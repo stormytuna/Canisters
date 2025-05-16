@@ -89,7 +89,7 @@ Items: {
 	HarmonicCanister: {
 		Tooltip:
 			'''
-			Erupts with harmonic energy when launched
+			Shoots a piercing canister when launched
 			Fires a spiraling helix when depleted
 			'''
 		DisplayName: Harmonic Canister
@@ -98,8 +98,8 @@ Items: {
 	GlisteningCanister: {
 		Tooltip:
 			'''
-			Explodes into 3 bouncing ichor balls when launched
-			Fires a splitting blobs of ichor when depleted
+			Explodes into bouncing ichor balls when launched
+			Fires splitting blobs of ichor when depleted
 			'''
 		DisplayName: Glistening Canister
 	}
@@ -112,8 +112,8 @@ Items: {
 	BlightedCanister: {
 		Tooltip:
 			'''
-			Releases a spiral of 5 cursed fireballs when launched
-			Fires a lightning bolt of cursed energy when depleted
+			Releases a spiral of cursed fireballs when launched
+			Fires bolts of cursed energy when depleted
 			'''
 		DisplayName: Blighted Canister
 	}

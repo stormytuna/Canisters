@@ -105,7 +105,7 @@ public class Nanites : ModProjectile
 		return false;
 	}
 
-	public override void Kill(int timeLeft) {
+	public override void OnKill(int timeLeft) {
 		int numDust = Main.rand.Next(2, 6);
 		for (int i = 0; i < numDust; i++) {
 			var dust = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.Clentaminator_Cyan);

@@ -50,7 +50,8 @@ public class HelixBolt : ModProjectile
 
 		var dust = Dust.NewDustPerfect(Projectile.Center, DustType);
 		dust.scale = Main.rand.NextFloat(1f, 1.3f);
-		dust.velocity *= 2f;
+		dust.velocity += Projectile.velocity;
+		dust.velocity *= 0.6f;
 		dust.noGravity = true;
 
 		Timer++;

@@ -1,10 +1,13 @@
 ﻿using System;
 using Canisters.Content.Projectiles.GhastlyCanister;
+using Canisters.DataStructures;
+using Canisters.Helpers;
 using Canisters.Helpers._Legacy.Abstracts;
+using Terraria.Enums;
 
 namespace Canisters.Content.Items.Canisters;
 
-public class GhastlyCanister : CanisterItem
+public class GhastlyCanister : BaseCanisterItem
 {
 	public override int LaunchedProjectileType {
 		get => ModContent.ProjectileType<FiredGhastlyCanister>();
@@ -18,25 +21,20 @@ public class GhastlyCanister : CanisterItem
 		get => Color.Cyan;
 	}
 
-	public override void SafeSetDefaults() {
-		// Base stats
-		Item.value = Item.buyPrice(copper: 5);
-		Item.rare = ItemRarityID.Yellow;
-
-		// Weapon stats
-		Item.shootSpeed = 6f;
-		Item.damage = 16;
-		Item.knockBack = 3f;
+	public override void SetDefaults() {
+		Item.DefaultToCanister(16, 6f, 3f);
+		Item.SetShopValues(ItemRarityColor.Yellow8, Item.buyPrice(copper: 5));
 	}
 
-	public override void ApplyAmmoStats(bool isLaunched, ref Vector2 velocity, ref Vector2 position, ref int damage, ref float knockBack, ref int amount, ref float spread, ref Func<int, float[]> getAiCallback) {
-		if (isLaunched) {
+	public override void ApplyAmmoStats(ref CanisterShootStats stats) {
+		if (stats.IsLaunched) {
 			return;
 		}
-
-		damage /= 6;
-		amount *= 6;
-		spread += 0.25f;
+		
+		stats.Damage /= 6;
+		stats.Knockback /= 6f;
+		stats.ProjectileCount *= 6;
+		stats.TotalSpread += 0.15f;
 	}
 
 	public override void AddRecipes() {
