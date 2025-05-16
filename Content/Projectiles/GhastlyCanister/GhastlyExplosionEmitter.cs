@@ -27,7 +27,7 @@ public class GhastlyExplosionEmitter : ModProjectile
 	public override void AI() {
 		if (Projectile.owner == Main.myPlayer && Timer % 6 == 0) {
 			Vector2 position = Main.rand.NextVector2Circular(_explosionEmissionRange, _explosionEmissionRange) +
-			                   Projectile.Center;
+							   Projectile.Center;
 			var explosionProj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), position, Vector2.Zero,
 				ModContent.ProjectileType<GhastlyExplosion>(), Projectile.damage, Projectile.knockBack,
 				Projectile.owner);

@@ -15,7 +15,7 @@ public class CanisterWeaponDrawLayer : PlayerDrawLayer
 		Item heldItem = drawPlayer.HeldItem;
 
 		if (heldItem.ModItem is not BaseCanisterUsingWeapon || !drawPlayer.ItemAnimationActive ||
-		    drawPlayer.JustDroppedAnItem || drawInfo.shadow != 0f || drawPlayer.CCed || drawPlayer.dead) {
+			drawPlayer.JustDroppedAnItem || drawInfo.shadow != 0f || drawPlayer.CCed || drawPlayer.dead) {
 			return false;
 		}
 

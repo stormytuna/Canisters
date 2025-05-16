@@ -1,5 +1,4 @@
 using Canisters.Helpers;
-using Canisters.Helpers._Legacy.Abstracts;
 
 namespace Canisters.Content.Projectiles.AetherianCanister;
 

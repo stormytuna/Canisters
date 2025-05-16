@@ -102,9 +102,9 @@ public class LunarShot : ModProjectile
 		Vector2 drawOrigin = new(texture.Width / 2f, texture.Height / 2f);
 		for (int i = 0; i < Projectile.oldPos.Length; i++) {
 			Vector2 drawPosition = Projectile.oldPos[i] - Main.screenPosition + drawOrigin +
-			                       new Vector2(0f, Projectile.gfxOffY);
+								   new Vector2(0f, Projectile.gfxOffY);
 			Color color = Projectile.GetAlpha(lightColor) *
-			              ((Projectile.oldPos.Length - i) / (float)Projectile.oldPos.Length);
+						  ((Projectile.oldPos.Length - i) / (float)Projectile.oldPos.Length);
 			float scale = (Projectile.oldPos.Length - i) / (float)Projectile.oldPos.Length;
 			Main.EntitySpriteDraw(texture, drawPosition, null, color, Projectile.rotation, drawOrigin, scale,
 				SpriteEffects.None);

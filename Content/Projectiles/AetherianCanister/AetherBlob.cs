@@ -1,4 +1,3 @@
-using System.Reflection;
 using Canisters.Helpers;
 using Terraria.GameContent;
 
@@ -47,7 +46,7 @@ public class AetherBlob : ModProjectile
 	public override bool TileCollideStyle(ref int width, ref int height, ref bool fallThrough, ref Vector2 hitboxCenterFrac) {
 		width = 4;
 		height = 4;
-		
+
 		return base.TileCollideStyle(ref width, ref height, ref fallThrough, ref hitboxCenterFrac);
 	}
 
@@ -55,11 +54,11 @@ public class AetherBlob : ModProjectile
 		if (Projectile.velocity.X != oldVelocity.X) {
 			Projectile.velocity.X = oldVelocity.X * -0.6f;
 		}
-		
+
 		if (Projectile.velocity.Y != oldVelocity.Y) {
 			Projectile.velocity.Y = oldVelocity.Y * -0.95f;
 		}
-		
+
 		return false;
 	}
 
@@ -75,7 +74,7 @@ public class AetherBlob : ModProjectile
 			// TODO: sync colour to canister?
 			Main.spriteBatch.Draw(texture, drawPos, null, Color.Pink with { A = 0 } * opacity, 0f, origin, scale, SpriteEffects.None, 0);
 		}
-		
+
 		return false;
 	}
 }

@@ -9,7 +9,7 @@ namespace Canisters.Content.Projectiles.VerdantCanister;
 public class FiredVerdantCanister : BaseFiredCanisterProjectile
 {
 	private bool _buffFromLushSlingshot = false;
-	
+
 	public override int TimeBeforeGravityAffected {
 		get => 15;
 	}
@@ -19,7 +19,7 @@ public class FiredVerdantCanister : BaseFiredCanisterProjectile
 	}
 
 	public override void OnSpawn(IEntitySource source) {
-		if (source is EntitySource_ItemUse { Item.ModItem: LushSlinger }) { 
+		if (source is EntitySource_ItemUse { Item.ModItem: LushSlinger }) {
 			_buffFromLushSlingshot = true;
 		}
 	}

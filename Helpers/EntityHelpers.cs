@@ -47,8 +47,8 @@ public class EntityHelpers
 
 		//Use the current velocity plus acceleration to calculate how long it will take to arrive using the formula for acceleration
 		float eta = (-velocity / acceleration) +
-		            (float)Math.Sqrt((velocity * velocity / (acceleration * acceleration)) +
-		                             (2 * distance / acceleration));
+					(float)Math.Sqrt((velocity * velocity / (acceleration * acceleration)) +
+									 (2 * distance / acceleration));
 
 		//Use the velocity plus arrival time plus current target location to calculate the location the target will be at in the future
 		Vector2 impactPos = target + (vTarget * eta);

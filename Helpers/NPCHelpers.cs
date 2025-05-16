@@ -21,7 +21,7 @@ public static class NpcHelpers
 		foreach (NPC npc in Main.npc.SkipLast(1)) {
 			float distance = Vector2.Distance(npc.Center, worldPos);
 			if (!npc.CanBeChasedBy() || distance > range || distance > closestNpcDistance ||
-			    excludedNpCs.Contains(npc.whoAmI)) {
+				excludedNpCs.Contains(npc.whoAmI)) {
 				continue;
 			}
 
