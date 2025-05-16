@@ -28,7 +28,7 @@ public abstract class BaseFiredCanisterProjectile : ModProjectile
 	public virtual void Explode() { }
 
 	/// <summary>
-	///     Use for explosion visuals. Use the provided position and velocity for any calculations
+	///     Use for explosion visuals.
 	/// </summary>
 	public virtual void ExplosionVisuals() {
 	}

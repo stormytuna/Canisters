@@ -216,7 +216,11 @@ Items: {
 	}
 
 	AetherianCanister: {
-		Tooltip: ""
+		Tooltip:
+			'''
+			Becomes a spread of bouncy aether blobs when launched
+			Releases an exploding aether canister when depleted
+			'''
 		DisplayName: Aetherian Canister
 	}
 
