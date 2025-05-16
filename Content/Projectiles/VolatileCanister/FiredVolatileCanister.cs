@@ -13,6 +13,10 @@ public class FiredVolatileCanister : BaseFiredCanisterProjectile
 		get => "Canisters/Content/Items/Canisters/VolatileCanister";
 	}
 
+	public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone) {
+		target.AddBuff(BuffID.OnFire, 3 * 60);
+	}
+
 	public override void Explode() {
 		if (Main.myPlayer == Projectile.owner) {
 			Projectile.Explode(100, 100);

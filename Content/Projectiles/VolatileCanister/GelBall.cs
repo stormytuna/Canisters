@@ -26,7 +26,7 @@ public class GelBall : ModProjectile
 		Projectile.width = 10;
 		Projectile.height = 10;
 		Projectile.aiStyle = -1;
-		Projectile.alpha = 120;
+		Projectile.Opacity = 0.5f;
 
 		Projectile.friendly = true;
 		Projectile.DamageType = DamageClass.Ranged;
