@@ -1,4 +1,6 @@
-﻿namespace Canisters.Helpers;
+﻿using Canisters.Common;
+
+namespace Canisters.Helpers;
 
 public static class ProjectileHelpers
 {
@@ -6,6 +8,11 @@ public static class ProjectileHelpers
 		if (Main.myPlayer != projectile.owner) {
 			return;
 		}
+
+		Player owner = Main.LocalPlayer;
+		float sizeMult = owner.GetModPlayer<CanisterModifiersPlayer>().CanisterLaunchedExplosionRadiusMult;
+		width = (int)(width * sizeMult);
+		height = (int)(height * sizeMult);
 
 		int oldPenetrate = projectile.penetrate;
 		bool oldTileCollide = projectile.tileCollide;
@@ -18,6 +25,8 @@ public static class ProjectileHelpers
 		projectile.damage = damage ?? projectile.damage;
 		projectile.knockBack = knockback ?? projectile.knockBack;
 		projectile.Resize(width, height);
+		
+		projectile.Damage();
 
 		projectile.penetrate = oldPenetrate;
 		projectile.tileCollide = oldTileCollide;

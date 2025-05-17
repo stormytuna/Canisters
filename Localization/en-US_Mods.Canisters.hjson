@@ -233,6 +233,15 @@ Items: {
 		DisplayName: Fungal Fury
 		Tooltip: ""
 	}
+
+	PneumaticPump: {
+		DisplayName: Pneumatic Pump
+		Tooltip:
+			'''
+			Increases launched projectile blast radius by 50%
+			Increases depleted projectile firerate by 15%
+			'''
+	}
 }
 
 Buffs: {
