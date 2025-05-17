@@ -1,7 +1,6 @@
 using Canisters.Content.Items.Weapons;
 using Canisters.DataStructures;
 using Canisters.Helpers.Enums;
-using Terraria.DataStructures;
 
 namespace Canisters.Content.Items.Canisters;
 
@@ -29,12 +28,5 @@ public abstract class BaseCanisterItem : ModItem
 			CanisterFiringType.Launched => LaunchedProjectileType,
 			_ => 0
 		};
-	}
-}
-
-public class CanisterItemApplyAmmoStats : GlobalProjectile
-{
-	// Hooking in here since calling ApplyAmmoStats immediately after Projectile.NewProjectile causes them not to be synced
-	public override void OnSpawn(Projectile projectile, IEntitySource source) {
 	}
 }

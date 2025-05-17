@@ -27,12 +27,6 @@ public abstract class BaseFiredCanisterProjectile : ModProjectile
 	/// </summary>
 	public virtual void Explode() { }
 
-	/// <summary>
-	///     Use for explosion visuals.
-	/// </summary>
-	public virtual void ExplosionVisuals() {
-	}
-
 	public override void SetDefaults() {
 		Projectile.DefaultToFiredCanister();
 	}

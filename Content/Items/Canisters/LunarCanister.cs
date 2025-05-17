@@ -1,9 +1,10 @@
 ﻿using Canisters.Content.Projectiles.LunarCanister;
-using Canisters.Helpers._Legacy.Abstracts;
+using Canisters.Helpers;
+using Terraria.Enums;
 
 namespace Canisters.Content.Items.Canisters;
 
-public class LunarCanister : CanisterItem
+public class LunarCanister : BaseCanisterItem
 {
 	public override int LaunchedProjectileType {
 		get => ModContent.ProjectileType<FiredLunarCanister>();
@@ -17,15 +18,9 @@ public class LunarCanister : CanisterItem
 		get => new(208, 253, 235);
 	}
 
-	public override void SafeSetDefaults() {
-		// Base stats
-		Item.value = Item.buyPrice(silver: 9);
-		Item.rare = ItemRarityID.Cyan;
-
-		// Weapon stats
-		Item.shootSpeed = 4f;
-		Item.damage = 22;
-		Item.knockBack = 4f;
+	public override void SetDefaults() {
+		Item.DefaultToCanister(22, 4f, 4f);
+		Item.SetShopValues(ItemRarityColor.Cyan9, Item.buyPrice(silver: 9));
 	}
 
 	public override void AddRecipes() {

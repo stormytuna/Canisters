@@ -1,23 +1,18 @@
-﻿using Canisters.Helpers;
-using Canisters.Helpers._Legacy.Abstracts;
-using Terraria.Audio;
+﻿using Terraria.Audio;
 
 namespace Canisters.Content.Projectiles.LunarCanister;
 
-public class FiredLunarCanister : FiredCanisterProjectile
+public class FiredLunarCanister : BaseFiredCanisterProjectile
 {
 	public override string Texture {
 		get => "Canisters/Content/Items/Canisters/LunarCanister";
 	}
 
-	public override void OnExplode() {
-		var emitterProj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center,
-			Vector2.Zero, ModContent.ProjectileType<LunarLightningEmitter>(), Projectile.damage, Projectile.knockBack,
-			Projectile.owner);
-		emitterProj.originalDamage = Projectile.originalDamage;
+	public override void Explode() {
+		if (Projectile.owner == Main.myPlayer) {
+			Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<LunarLightningEmitter>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
+		}
 
 		SoundEngine.PlaySound(SoundID.DD2_GoblinBomb, Projectile.Center);
-
-		Projectile.CreateExplosionLegacy(96, 96);
 	}
 }
