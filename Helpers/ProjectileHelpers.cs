@@ -25,7 +25,7 @@ public static class ProjectileHelpers
 		projectile.damage = damage ?? projectile.damage;
 		projectile.knockBack = knockback ?? projectile.knockBack;
 		projectile.Resize(width, height);
-		
+
 		projectile.Damage();
 
 		projectile.penetrate = oldPenetrate;
