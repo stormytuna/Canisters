@@ -12,11 +12,11 @@ public class TheColony : BaseCanisterUsingWeapon
 	}
 
 	public override Vector2 MuzzleOffset {
-		get => new(18f, -4f);
+		get => new(18f, -10f);
 	}
 
 	public override Vector2? HoldoutOffset() {
-		return new Vector2(-10f, 0f);
+		return new Vector2(-6f, 0f);
 	}
 
 	public override void SetDefaults() {

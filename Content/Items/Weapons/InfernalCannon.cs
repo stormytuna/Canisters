@@ -16,7 +16,7 @@ public class InfernalCannon : BaseCanisterUsingWeapon
 	}
 
 	public override Vector2? HoldoutOffset() {
-		return new Vector2(-8f, 0f);
+		return new Vector2(-4f, 0f);
 	}
 
 	public override void SetDefaults() {

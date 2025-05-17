@@ -46,6 +46,7 @@ Projectiles: {
 	DepletedVolatileCanister.DisplayName: Depleted Volatile Canister
 	FiredVolatileCanister.DisplayName: Fired Volatile Canister
 	GelBallEmitter.DisplayName: Gel Ball Emitter
+	LunarMark.DisplayName: Lunar Mark
 }
 
 Items: {
@@ -147,7 +148,7 @@ Items: {
 
 	GraniteCannon: {
 		DisplayName: Granite Cannon
-		Tooltip: ""
+		Tooltip: Launches canisters
 	}
 
 	AncientSprayer: {
@@ -161,13 +162,13 @@ Items: {
 	}
 
 	LushSlinger: {
-		Tooltip: ""
 		DisplayName: Lush Slinger
+		Tooltip: Launched Verdant Canisters create more aggressive vines
 	}
 
 	TheColony: {
 		DisplayName: The Colony
-		Tooltip: ""
+		Tooltip: Fires a spread of projectiles
 	}
 
 	InfernalCannon: {
@@ -177,7 +178,7 @@ Items: {
 
 	RepurposedSprayBottle: {
 		DisplayName: Repurposed Spray Bottle
-		Tooltip: ""
+		Tooltip: Depletes canisters with pathetic range, but tremendous firing speed
 	}
 
 	Icemire: {
@@ -192,27 +193,31 @@ Items: {
 
 	Pneumaticannon: {
 		DisplayName: Pneumati-cannon
-		Tooltip: ""
+		Tooltip: Launches canisters with tremendous speed
 	}
 
 	SlimeySlinger: {
 		DisplayName: Slimey Slinger
-		Tooltip: ""
+		Tooltip: Coates fired canisters with bouncy slime
 	}
 
 	Splattergun: {
 		DisplayName: Splattergun
-		Tooltip: ""
+		Tooltip: Firing speed accelerates the longer you are shooting
 	}
 
 	Reverence: {
 		DisplayName: Reverence
-		Tooltip: ""
+		Tooltip:
+			'''
+			Left click launches canisters
+			Right click depletes canisters
+			'''
 	}
 
 	ChlorophyteSlugger: {
 		DisplayName: Chlorophyte Slugger
-		Tooltip: ""
+		Tooltip: Firing speed accelerates tremendously the longer you are shooting
 	}
 
 	AetherianCanister: {

@@ -14,7 +14,7 @@ public class AncientSprayer : BaseCanisterUsingWeapon
 	}
 
 	public override Vector2 MuzzleOffset {
-		get => new(52f, 0f);
+		get => new(48f, -2f);
 	}
 
 	public override Vector2? HoldoutOffset() {

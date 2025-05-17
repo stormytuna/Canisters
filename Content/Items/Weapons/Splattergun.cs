@@ -20,7 +20,7 @@ public class Splattergun : BaseCanisterUsingWeapon
 	}
 
 	public override void SetDefaults() {
-		Item.DefaultToCanisterUsingWeapon(8, 8, 10f, 16, 3f);
+		Item.DefaultToCanisterUsingWeapon(14, 14, 10f, 16, 3f);
 		Item.width = 30;
 		Item.height = 26;
 		Item.SetShopValues(ItemRarityColor.LightRed4, Item.buyPrice(gold: 2, silver: 50));
@@ -28,6 +28,11 @@ public class Splattergun : BaseCanisterUsingWeapon
 
 	public override void ApplyWeaponStats(ref CanisterShootStats stats) {
 		stats.Velocity *= 1.5f;
+	}
+
+	public override bool? UseItem(Player player) {
+		player.GetModPlayer<SplatterGunPlayer>().UseItem();
+		return base.UseItem(player);
 	}
 
 	public override void AddRecipes() {
@@ -42,5 +47,38 @@ public class Splattergun : BaseCanisterUsingWeapon
 			.AddIngredient(ItemID.MythrilBar, 12)
 			.AddTile(TileID.MythrilAnvil)
 			.Register();
+	}
+}
+
+public class SplatterGunPlayer : ModPlayer
+{
+	private const int MaxRampUp = 25;
+	private const int MaxRampDownDelayInitial = 30;
+	private const int MaxRampDownDelay = 8;
+	private const float RampUpStrength = 0.5f;
+	
+	private int _rampUp = 0; 
+	private int _rampDownDelayTimer = 0;
+
+	public void UseItem() {
+		_rampUp = int.Clamp(_rampUp + 1, 0, MaxRampUp);
+		_rampDownDelayTimer = MaxRampDownDelayInitial;
+	}
+	
+	public override void PostUpdateMiscEffects() {
+		_rampDownDelayTimer -= 1;
+		if (_rampDownDelayTimer <= 0) {
+			_rampUp = int.Clamp(_rampUp - 1, 0, MaxRampUp);
+			_rampDownDelayTimer = MaxRampDownDelay;
+		}	
+	}
+
+	public override float UseTimeMultiplier(Item item) {
+		if (item.ModItem is not Splattergun) {
+			return base.UseTimeMultiplier(item);
+		}
+		
+		float rampUpProgress = _rampUp / (float)MaxRampUp;
+		return 1f - (rampUpProgress * RampUpStrength);
 	}
 }

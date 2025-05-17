@@ -1,14 +1,12 @@
-﻿using Canisters.Helpers;
-using Terraria.DataStructures;
+﻿using Terraria.DataStructures;
 using static Microsoft.Xna.Framework.MathHelper;
-using Terraria.ID;
 
 namespace Canisters.Content.Projectiles.GhastlyCanister;
 
 public class GhastlyExplosionEmitter : ModProjectile
 {
 	private const float ExplosionEmissionRange = 100f;
-	
+
 	private ref float Timer {
 		get => ref Projectile.ai[0];
 	}
@@ -44,11 +42,11 @@ public class GhastlyExplosionEmitter : ModProjectile
 				Projectile.owner);
 			explosionProj.originalDamage = Projectile.originalDamage;
 		}
-		
+
 		Projectile.frameCounter++;
 		Projectile.spriteDirection = ((Projectile.frameCounter / 8) % 2 == 0).ToDirectionInt();
 		Projectile.rotation = Projectile.velocity.ToRotation() - PiOver2;
-		
+
 		var dust = Dust.NewDustDirect(Projectile.position + Projectile.velocity, Projectile.width, Projectile.height, DustID.DungeonSpirit);
 		dust.noGravity = true;
 		dust.velocity *= 3f;

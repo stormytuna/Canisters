@@ -1,4 +1,5 @@
 ﻿using Canisters.Common;
+using Canisters.Content.Projectiles;
 using Canisters.Helpers;
 using Canisters.Helpers.Enums;
 using Terraria.Enums;
@@ -30,7 +31,7 @@ public class SlimeySlinger : BaseCanisterUsingWeapon
 
 public class SlimySlingerGlobalProjectile : ShotByWeaponGlobalProjectile<SlimeySlinger>
 {
-	private int _numBounces = 3;
+	private int _numBounces = 1;
 
 	public override bool OnTileCollide(Projectile projectile, Vector2 oldVelocity) {
 		if (!IsActive) {
@@ -42,6 +43,10 @@ public class SlimySlingerGlobalProjectile : ShotByWeaponGlobalProjectile<SlimeyS
 			return true;
 		}
 
+		if (projectile.ModProjectile is BaseFiredCanisterProjectile canisterProjectile) {
+			canisterProjectile.Explode();
+		}
+
 		if (projectile.velocity.X != oldVelocity.X) {
 			projectile.velocity.X = oldVelocity.X * -0.99f;
 		}
@@ -51,6 +56,24 @@ public class SlimySlingerGlobalProjectile : ShotByWeaponGlobalProjectile<SlimeyS
 		}
 
 		return false;
+	}
+
+	public override void OnHitNPC(Projectile projectile, NPC target, NPC.HitInfo hit, int damageDone) {
+		if (!IsActive) {
+			return;
+		}
+		
+		_numBounces--;
+		if (_numBounces < 0) {
+			return;
+		}
+
+		if (projectile.ModProjectile is BaseFiredCanisterProjectile canisterProjectile) {
+			canisterProjectile.Explode();		
+		}
+		
+		projectile.penetrate++;
+		projectile.velocity = projectile.DirectionFrom(target.Center) * projectile.velocity.Length();
 	}
 
 	// TODO: Some visuals as it depletes bounces?

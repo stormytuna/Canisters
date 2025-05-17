@@ -1,8 +1,6 @@
-﻿using System;
-using Canisters.Content.Projectiles.GhastlyCanister;
+﻿using Canisters.Content.Projectiles.GhastlyCanister;
 using Canisters.DataStructures;
 using Canisters.Helpers;
-using Canisters.Helpers._Legacy.Abstracts;
 using Terraria.Enums;
 
 namespace Canisters.Content.Items.Canisters;
@@ -30,7 +28,7 @@ public class GhastlyCanister : BaseCanisterItem
 		if (stats.IsLaunched) {
 			return;
 		}
-		
+
 		stats.Damage /= 6;
 		stats.Knockback /= 6f;
 		stats.ProjectileCount *= 6;

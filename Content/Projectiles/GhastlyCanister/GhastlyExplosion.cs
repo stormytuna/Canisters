@@ -25,7 +25,7 @@ public class GhastlyExplosion : ModProjectile
 		Projectile.penetrate = -1;
 		Projectile.DamageType = DamageClass.Ranged;
 	}
-	
+
 	public override Color? GetAlpha(Color lightColor) {
 		return Color.Lerp(Color.White, lightColor, 0.5f);
 	}
