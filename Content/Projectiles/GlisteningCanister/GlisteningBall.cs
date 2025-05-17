@@ -47,7 +47,7 @@ public class GlisteningBall : ModProjectile
 		Lighting.AddLight(Projectile.Center, TorchID.Ichor);
 	}
 
-	public override void Kill(int timeLeft) {
+	public override void OnKill(int timeLeft) {
 		DustHelpers.MakeDustExplosion(Projectile.Center, 4f, DustID.IchorTorch, 5, 0f, 8f, 100, 150, 1f, 1.2f, true);
 
 		if (!IsParent) {

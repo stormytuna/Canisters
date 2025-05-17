@@ -50,7 +50,7 @@ public class BlightedBall : ModProjectile
 		target.AddBuff(BuffID.CursedInferno, 7 * 60);
 	}
 
-	public override void Kill(int timeLeft) {
+	public override void OnKill(int timeLeft) {
 		DustHelpers.MakeDustExplosion(Projectile.Center, 8f, ModContent.DustType<BlightedDust>(), 5, 0f, 15f, 100, 150, 1f, 1.3f, true, true, true);
 		DustHelpers.MakeDustExplosion(Projectile.Center, 8f, ModContent.DustType<BlightedDust>(), 3, 0f, 10f, 100, 150, 1.3f, 1.6f, true, true, true);
 		DustHelpers.MakeDustExplosion(Projectile.Center, 8f, ModContent.DustType<BlightedDust>(), 2, 0f, 3f, 100, 150, 1f, 1.3f, true, true);

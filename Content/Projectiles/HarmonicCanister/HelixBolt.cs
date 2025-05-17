@@ -57,7 +57,7 @@ public class HelixBolt : ModProjectile
 		Timer++;
 	}
 
-	public override void Kill(int timeLeft) {
+	public override void OnKill(int timeLeft) {
 		DustHelpers.MakeDustExplosion(Projectile.Center, 4f, DustType, 5, 0f, 5f, 0, 0, 1f, 1.3f, true);
 
 		SoundStyle soundStyle = SoundID.Item30 with { MaxInstances = 0, Volume = 0.2f, PitchRange = (-0.4f, -0.1f) };

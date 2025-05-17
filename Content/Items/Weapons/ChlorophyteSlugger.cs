@@ -37,28 +37,28 @@ public class ChlorophyteSluggerPlayer : ModPlayer
 	private const int MaxRampDownDelayInitial = 25;
 	private const int MaxRampDownDelay = 6;
 	private const float RampUpStrength = 0.6f;
-	
-	private int _rampUp = 0; 
+
+	private int _rampUp = 0;
 	private int _rampDownDelayTimer = 0;
 
 	public void UseItem() {
 		_rampUp = int.Clamp(_rampUp + 1, 0, MaxRampUp);
 		_rampDownDelayTimer = MaxRampDownDelayInitial;
 	}
-	
+
 	public override void PostUpdateMiscEffects() {
 		_rampDownDelayTimer -= 1;
 		if (_rampDownDelayTimer <= 0) {
 			_rampUp = int.Clamp(_rampUp - 1, 0, MaxRampUp);
 			_rampDownDelayTimer = MaxRampDownDelay;
-		}	
+		}
 	}
 
 	public override float UseTimeMultiplier(Item item) {
 		if (item.ModItem is not ChlorophyteSlugger) {
 			return base.UseTimeMultiplier(item);
 		}
-		
+
 		float rampUpProgress = _rampUp / (float)MaxRampUp;
 		return 1f - (rampUpProgress * RampUpStrength);
 	}

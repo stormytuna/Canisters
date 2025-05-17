@@ -50,7 +50,7 @@ public class VerdantVine : ModProjectile
 		if (_timer == 3 && Projectile.owner == Main.myPlayer && NumVines > 0) {
 			Vector2 offset = Vector2.UnitY.RotatedBy(Projectile.rotation) * -20f;
 			Vector2 position = Projectile.Center + offset;
-			var nextVine = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), position, Vector2.Zero, Type, Projectile.damage, Projectile.knockBack, Projectile.owner, NumVines - 1, StartRotation + AddedRotation, AddedRotation);
+			Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), position, Vector2.Zero, Type, Projectile.damage, Projectile.knockBack, Projectile.owner, NumVines - 1, StartRotation + AddedRotation, AddedRotation);
 		}
 
 		if (Main.rand.NextBool(4)) {

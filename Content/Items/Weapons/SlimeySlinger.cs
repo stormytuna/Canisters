@@ -62,16 +62,16 @@ public class SlimySlingerGlobalProjectile : ShotByWeaponGlobalProjectile<SlimeyS
 		if (!IsActive) {
 			return;
 		}
-		
+
 		_numBounces--;
 		if (_numBounces < 0) {
 			return;
 		}
 
 		if (projectile.ModProjectile is BaseFiredCanisterProjectile canisterProjectile) {
-			canisterProjectile.Explode();		
+			canisterProjectile.Explode();
 		}
-		
+
 		projectile.penetrate++;
 		projectile.velocity = projectile.DirectionFrom(target.Center) * projectile.velocity.Length();
 	}

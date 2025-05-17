@@ -7,8 +7,8 @@ namespace Canisters.Content.Items.Weapons;
 public class Reverence : BaseCanisterUsingWeapon
 {
 	public override CanisterFiringType CanisterFiringType {
-		get => Main.LocalPlayer.altFunctionUse == 2 
-			? CanisterFiringType.Depleted 
+		get => Main.LocalPlayer.altFunctionUse == 2
+			? CanisterFiringType.Depleted
 			: CanisterFiringType.Launched;
 	}
 

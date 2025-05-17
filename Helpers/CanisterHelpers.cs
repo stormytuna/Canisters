@@ -1,24 +1,10 @@
 ﻿using Canisters.Content.Items.Canisters;
 using Canisters.Content.Items.Weapons;
-using Canisters.Helpers._Legacy.Abstracts;
 
 namespace Canisters.Helpers;
 
 public static class CanisterHelpers
 {
-	public static Color GetCanisterColorLegacy<TCanister>() where TCanister : CanisterItem {
-		return GetCanisterColorLegacy(ModContent.ItemType<TCanister>());
-	}
-
-	public static Color GetCanisterColorLegacy(int canisterItemId) {
-		ModItem modItem = ModContent.GetModItem(canisterItemId);
-		if (modItem is CanisterItem canisterItem) {
-			return canisterItem.CanisterColor;
-		}
-
-		return Color.White;
-	}
-
 	public static Color GetCanisterColor(int canisterItemId) {
 		ModItem modItem = ModContent.GetModItem(canisterItemId);
 		if (modItem is BaseCanisterItem canisterItem) {
