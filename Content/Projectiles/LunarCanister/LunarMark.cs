@@ -7,6 +7,8 @@ namespace Canisters.Content.Projectiles.LunarCanister;
 public class LunarMark : ModProjectile
 {
 	private float _timer = 0f;
+	private bool _firstFrame = true;
+	private int _totalTimeLeft;
 
 	public override void SetDefaults() {
 		Projectile.width = 200;
@@ -22,24 +24,29 @@ public class LunarMark : ModProjectile
 	}
 
 	public override void AI() {
+		if (_firstFrame) {
+			_firstFrame = false;
+			_totalTimeLeft = Projectile.timeLeft;
+		}
+
 		Lighting.AddLight(Projectile.Center, CanisterHelpers.GetCanisterColor<Items.Canisters.LunarCanister>().ToVector3());
 
 		Projectile.rotation += 0.05f;
-		
+
 		if (Projectile.timeLeft < 10) {
 			Projectile.scale = float.Lerp(0f, 1f, (Projectile.timeLeft) / 10f);
 			return;
 		}
 
-		if (Projectile.timeLeft > 140) {
-			Projectile.scale = float.Lerp(1f, 0f, (Projectile.timeLeft - 140) / 10f);
+		if (Projectile.timeLeft > _totalTimeLeft - 10) {
+			Projectile.scale = float.Lerp(1f, 0f, (Projectile.timeLeft - (_totalTimeLeft - 10)) / 10f);
 			return;
 		}
 
 		_timer += 0.1f;
 		float scaleOffset = float.Sin(_timer % TwoPi) * 0.1f;
 		Projectile.scale = 1f + scaleOffset;
-		
+
 		Vector2 offset = Main.rand.NextVector2CircularEdge(120f, 120f);
 		Vector2 position = Projectile.Center + offset;
 		var dust = Dust.NewDustPerfect(position, DustID.Vortex);

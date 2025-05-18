@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 
 namespace Canisters.Helpers;
 
@@ -8,15 +7,15 @@ public static class NpcHelpers
 	public static List<NPC> FindNearbyNPCs(float range, Vector2 worldPos, bool careAboutCollision = false, List<int> ignoredNPCs = null) {
 		List<NPC> npcs = new(50);
 		ignoredNPCs ??= [];
-		
+
 		foreach (var npc in Main.ActiveNPCs) {
 			if (npc.WithinRange(worldPos, range) && !ignoredNPCs.Contains(npc.whoAmI) && npc.CanBeChasedBy()) {
 				if (!careAboutCollision || CollisionHelpers.CanHit(npc, worldPos)) {
 					npcs.Add(npc);
 				}
-			}	
+			}
 		}
-		
+
 		return npcs;
 	}
 

@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using Canisters.Helpers;
-using Terraria.GameContent;
 using static Microsoft.Xna.Framework.MathHelper;
 
 namespace Canisters.Content.Projectiles.LunarCanister;
@@ -9,7 +7,7 @@ namespace Canisters.Content.Projectiles.LunarCanister;
 public class LunarShot : ModProjectile
 {
 	private List<int> _hitNpcs = new();
-	
+
 	public override void SetStaticDefaults() {
 		ProjectileID.Sets.TrailingMode[Type] = 1;
 		ProjectileID.Sets.TrailCacheLength[Type] = 5;
@@ -28,7 +26,7 @@ public class LunarShot : ModProjectile
 
 	public override void AI() {
 		Lighting.AddLight(Projectile.Center, CanisterHelpers.GetCanisterColor<Items.Canisters.LunarCanister>().ToVector3());
-		
+
 		Projectile.rotation = Projectile.velocity.ToRotation() + PiOver2;
 
 		for (int i = 0; i < 2; i++) {
@@ -48,6 +46,7 @@ public class LunarShot : ModProjectile
 		if (nearbyNPCs.Count > 0) {
 			var nextTarget = Main.rand.Next(nearbyNPCs);
 			Projectile.velocity = Projectile.DirectionTo(nextTarget.Center) * Projectile.velocity.Length();
+			Projectile.netUpdate = true;
 		}
 	}
 

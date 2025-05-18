@@ -1,25 +1,40 @@
-﻿using System;
-using System.Collections.Generic;
-using Canisters.Common;
+﻿using Canisters.Common;
 using Canisters.Helpers;
 using ReLogic.Content;
 using Terraria.DataStructures;
 using Terraria.GameContent;
-using Terraria.Graphics.Shaders;
 
 namespace Canisters.Content.Projectiles.LunarCanister;
 
 public class LunarLightningEmitter : ModProjectile
 {
-	private ref float Timer {
+	private ref float TimerForAttack {
 		get => ref Projectile.ai[0];
 	}
 
-	/*
-	public override string Texture {
-		get => CanisterHelpers.GetEmptyAssetString();
+	private static Asset<Texture2D> _maskTexture;
+	private static Asset<Texture2D> _maskBackgroundTexture;
+	private static Asset<Effect> _maskEffect;
+
+	private static RenderTarget2D _maskRenderTarget;
+
+	private bool _firstFrame = true;
+	private int _totalTimeLeft;
+
+	public override void Load() {
+		if (Main.dedServ) {
+			return;
+		}
+
+		_maskTexture = Mod.Assets.Request<Texture2D>("Content/Projectiles/LunarCanister/LunarLightningEmitter_Mask");
+		_maskBackgroundTexture = Mod.Assets.Request<Texture2D>("Content/Projectiles/LunarCanister/LunarLightningEmitter_MaskBackground");
+		_maskEffect = Mod.Assets.Request<Effect>("Assets/Effects/MaskEffect");
+
+		Main.QueueMainThreadAction(() => ResizeRenderTarget(Main.ScreenSize));
+
+		Main.OnResolutionChanged += resolution => { ResizeRenderTarget(resolution.ToPoint()); };
+		On_Main.CheckMonoliths += PrepareRenderTarget;
 	}
-	*/
 
 	public override void SetDefaults() {
 		Projectile.width = 60;
@@ -33,45 +48,55 @@ public class LunarLightningEmitter : ModProjectile
 		Projectile.velocity = Projectile.velocity.SafeNormalize(Vector2.Zero) * 3f;
 	}
 
-	private bool _firstFrame = true;
+	public static void MakeDustLightningBolt(Vector2 start, Vector2 end) {
+		DustHelpers.MakeLightningDust(start, end, DustID.Vortex, 0.8f);
+		DustHelpers.MakeDustExplosion(end, 4f, DustID.Vortex, 5, 0.5f, 2f, noGravity: true);
+	}
 
 	public override void AI() {
 		if (_firstFrame) {
 			_firstFrame = false;
+
+			_totalTimeLeft = Projectile.timeLeft;
 			Projectile.rotation = Main.rand.NextRadian();
 			DustHelpers.MakeDustExplosion(Projectile.Center, 10f, DustID.Vortex, 10, 1f, 3f, noGravity: true);
 		}
-		
-		Timer++;
-		
+
+		TimerForAttack++;
+
 		Projectile.rotation += 0.05f;
-		
-		// TODO: make this and the lunar mark not rely on timeleft when starting
+
 		if (Projectile.timeLeft < 10) {
 			Projectile.scale = float.Lerp(0.1f, 1f, (Projectile.timeLeft) / 10f);
 			return;
 		}
 
-		if (Projectile.timeLeft > 110) {
-			Projectile.scale = float.Lerp(1f, 0.1f, (Projectile.timeLeft - 110) / 10f);
+		if (Projectile.timeLeft > (_totalTimeLeft - 10)) {
+			Projectile.scale = float.Lerp(1f, 0.1f, (Projectile.timeLeft - (_totalTimeLeft - 10)) / 10f);
 			return;
 		}
 
-		// TODO: MP compat
-		if (Timer >= 15) {
-			var closeNPCs = NpcHelpers.FindNearbyNPCs(30f * 16f * Main.LocalPlayer.GetModPlayer<CanisterModifiersPlayer>().CanisterLaunchedExplosionRadiusMult, Projectile.Center, true);
+		if (TimerForAttack >= 15 && Main.myPlayer == Projectile.owner) {
+			float radiusMult = Main.LocalPlayer.GetModPlayer<CanisterModifiersPlayer>().CanisterLaunchedExplosionRadiusMult;
+			var closeNPCs = NpcHelpers.FindNearbyNPCs(30f * 16f * radiusMult, Projectile.Center, true);
 			if (closeNPCs.Count > 0) {
-				Timer = 0f;
-				
+				TimerForAttack = 0f;
+
 				var nextTarget = Main.rand.Next(closeNPCs);
-				nextTarget.StrikeNPC(new NPC.HitInfo {
+				var hitInfo = new NPC.HitInfo {
 					Damage = Projectile.damage,
 					Knockback = Projectile.knockBack,
 					DamageType = DamageClass.Ranged,
 					HitDirection = (nextTarget.Center.X > Projectile.Center.X).ToDirectionInt(),
-				});
-				
-				DustHelpers.MakeLightningDust(Projectile.Center, nextTarget.Center, DustID.Vortex, 0.8f);
+				};
+				nextTarget.StrikeNPC(hitInfo);
+
+				MakeDustLightningBolt(Projectile.Center, nextTarget.Center);
+
+				if (Main.netMode != NetmodeID.SinglePlayer) {
+					NetMessage.SendStrikeNPC(nextTarget, in hitInfo, Main.myPlayer);
+					BroadcastLightningBoltSync(-1, Main.myPlayer, Projectile.Center, nextTarget.Center);
+				}
 			}
 		}
 
@@ -94,60 +119,56 @@ public class LunarLightningEmitter : ModProjectile
 		}
 	}
 
+	public static void BroadcastLightningBoltSync(int toWho, int fromWho, Vector2 start, Vector2 end) {
+		ModPacket packet = ModContent.GetInstance<Canisters>().GetPacket();
+		packet.Write((byte)Canisters.MessageType.LunarLightningEmitterLightningBolt);
+		packet.WriteVector2(start);
+		packet.WriteVector2(end);
+		packet.Send(toWho, fromWho);
+
+	}
+
 	public override void OnKill(int timeLeft) {
 		DustHelpers.MakeDustExplosion(Projectile.Center, 10f, DustID.Vortex, 10, 1f, 3f, noGravity: true);
 	}
 
-	private static Asset<Texture2D> MaskTexture;
-	private static Asset<Texture2D> MaskBackgroundTexture;
-	private static Asset<Effect> MaskEffect;
-	private static RenderTarget2D MaskRenderTarget;
+	private void ResizeRenderTarget(Point screenRes) {
+		_maskRenderTarget?.Dispose();
+		_maskRenderTarget = new RenderTarget2D(Main.graphics.GraphicsDevice, screenRes.X, screenRes.Y);
+	}
 
-	public override void Load() {
-		MaskTexture = Mod.Assets.Request<Texture2D>("Content/Projectiles/LunarCanister/LunarLightningEmitter_Mask");
-		MaskBackgroundTexture = Mod.Assets.Request<Texture2D>("Content/Projectiles/LunarCanister/LunarLightningEmitter_MaskBackground");
-		MaskEffect = Mod.Assets.Request<Effect>("Assets/Effects/Effect");
-		
-		Main.QueueMainThreadAction(() => MaskRenderTarget = new RenderTarget2D(Main.graphics.GraphicsDevice, Main.screenWidth, Main.screenHeight));
-		Main.OnResolutionChanged += resolution => {
-			MaskRenderTarget.Dispose();
-			MaskRenderTarget = new RenderTarget2D(Main.graphics.GraphicsDevice, (int)resolution.X
-				, (int)resolution.Y, false, SurfaceFormat.Color, DepthFormat.None, 0, RenderTargetUsage.PreserveContents);
-		};
-		
-		On_Main.CheckMonoliths += static orig => {
-			orig();
+	private static void PrepareRenderTarget(On_Main.orig_CheckMonoliths orig) {
+		orig();
 
-			if (Main.dedServ) {
-				return;
+		if (Main.dedServ || Main.gameMenu) {
+			return;
+		}
+
+		var bindings = Main.graphics.GraphicsDevice.GetRenderTargets();
+		Main.graphics.GraphicsDevice.SetRenderTarget(_maskRenderTarget);
+		Main.graphics.GraphicsDevice.Clear(Color.Transparent);
+
+		Main.spriteBatch.Begin(default, default, Main.DefaultSamplerState, default, RasterizerState.CullNone, default);
+
+		foreach (var projectile in Main.ActiveProjectiles) {
+			if (projectile.ModProjectile is not LunarLightningEmitter) {
+				continue;
 			}
-			
-			var bindings = Main.graphics.GraphicsDevice.GetRenderTargets();
-			Main.graphics.GraphicsDevice.SetRenderTarget(MaskRenderTarget);
-			Main.graphics.GraphicsDevice.Clear(Color.Transparent);
-			
-			Main.spriteBatch.Begin(default, default, Main.DefaultSamplerState, default, RasterizerState.CullNone, default);
 
-			foreach (var projectile in Main.ActiveProjectiles) {
-				if (projectile.ModProjectile is not LunarLightningEmitter) {
-					continue;
-				}
-				
-				var drawData = new DrawData {
-					texture = MaskTexture.Value,
-					position = (projectile.Center - Main.screenPosition).Floor(),
-					sourceRect = MaskTexture.Frame(),
-					color = Color.White,
-					rotation = projectile.rotation,
-					scale = new Vector2(projectile.scale),
-					origin = MaskTexture.Size() / 2f,
-				};
-				drawData.Draw(Main.spriteBatch);
-			}
-			
-			Main.spriteBatch.End();
-			Main.graphics.GraphicsDevice.SetRenderTargets(bindings);
-		};
+			var drawData = new DrawData {
+				texture = _maskTexture.Value,
+				position = (projectile.Center - Main.screenPosition).Floor(),
+				sourceRect = _maskTexture.Frame(),
+				color = Color.White,
+				rotation = projectile.rotation,
+				scale = new Vector2(projectile.scale),
+				origin = _maskTexture.Size() / 2f,
+			};
+			drawData.Draw(Main.spriteBatch);
+		}
+
+		Main.spriteBatch.End();
+		Main.graphics.GraphicsDevice.SetRenderTargets(bindings);
 	}
 
 	public override bool PreDraw(ref Color lightColor) {
@@ -163,20 +184,20 @@ public class LunarLightningEmitter : ModProjectile
 			origin = texture.Size() / 2f,
 		};
 		drawData.Draw(Main.spriteBatch);
-		
-		Main.spriteBatch.End();
-		Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, DepthStencilState.None, RasterizerState.CullNone, MaskEffect.Value, Main.GameViewMatrix.TransformationMatrix);
 
-		Main.graphics.GraphicsDevice.Textures[1] = MaskBackgroundTexture.Value;
+		Main.spriteBatch.End();
+		Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, DepthStencilState.None, RasterizerState.CullNone, _maskEffect.Value, Main.GameViewMatrix.TransformationMatrix);
+
+		Main.graphics.GraphicsDevice.Textures[1] = _maskBackgroundTexture.Value;
 		Vector2 positionOnScreen = (Projectile.Center - Main.screenPosition) / Main.ScreenSize.ToVector2();
-		MaskEffect.Value.Parameters["position"].SetValue(positionOnScreen);
-		MaskEffect.Value.Parameters["screenResolution"].SetValue(new Vector2((float)Main.screenWidth / (Main.screenWidth + Main.screenHeight), (float)Main.screenHeight / (Main.screenWidth + Main.screenHeight)));
-		
-		Main.spriteBatch.Draw(MaskRenderTarget, new Rectangle(0, 0, Main.screenWidth, Main.screenHeight), Color.White);
-		
+		_maskEffect.Value.Parameters["position"].SetValue(positionOnScreen);
+		_maskEffect.Value.Parameters["screenResolution"].SetValue(new Vector2((float)Main.screenWidth / (Main.screenWidth + Main.screenHeight), (float)Main.screenHeight / (Main.screenWidth + Main.screenHeight)));
+
+		Main.spriteBatch.Draw(_maskRenderTarget, new Rectangle(0, 0, Main.screenWidth, Main.screenHeight), Color.White);
+
 		Main.spriteBatch.End();
 		Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, DepthStencilState.None, RasterizerState.CullNone, null, Main.GameViewMatrix.TransformationMatrix);
-		
+
 		return false;
 	}
 }

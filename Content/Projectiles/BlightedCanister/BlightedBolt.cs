@@ -36,7 +36,7 @@ public class BlightedBolt : ModProjectile
 		return false;
 	}
 
-	public static void MakeDustLightningBolt(Vector2 start, Vector2 end) {
+	public static void MakeDustLightningBolts(Vector2 start, Vector2 end) {
 		DustHelpers.MakeLightningDust(start, end, ModContent.DustType<BlightedDust>(), 1.2f, 30f, 0.4f);
 		DustHelpers.MakeLightningDust(start, end, ModContent.DustType<BlightedDust>(), 0.9f, 45f, 0.4f);
 		DustHelpers.MakeLightningDust(start, end, ModContent.DustType<BlightedDust>(), 1.5f, 15f, 0.4f);
@@ -48,7 +48,7 @@ public class BlightedBolt : ModProjectile
 			return;
 		}
 
-		MakeDustLightningBolt(_startLocation, Projectile.Center);
+		MakeDustLightningBolts(_startLocation, Projectile.Center);
 		if (Main.netMode == NetmodeID.MultiplayerClient) {
 			BroadcastLightningBoltSync(-1, Main.myPlayer, _startLocation, Projectile.Center);
 		}

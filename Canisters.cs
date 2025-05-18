@@ -2,6 +2,7 @@ using System.IO;
 using System.Linq;
 using Canisters.Content.Projectiles;
 using Canisters.Content.Projectiles.BlightedCanister;
+using Canisters.Content.Projectiles.LunarCanister;
 
 namespace Canisters;
 
@@ -28,6 +29,7 @@ public class Canisters : Mod
 
 				canister!.BroadcastExplosionSync(-1, whoAmI, identity);
 				break;
+
 			case MessageType.BlightedBoltLightningBolt:
 				Vector2 start = reader.ReadVector2();
 				Vector2 end = reader.ReadVector2();
@@ -37,8 +39,22 @@ public class Canisters : Mod
 					break;
 				}
 
-				BlightedBolt.MakeDustLightningBolt(start, end);
+				BlightedBolt.MakeDustLightningBolts(start, end);
 				break;
+
+			case MessageType.LunarLightningEmitterLightningBolt:
+				Vector2 start2 = reader.ReadVector2();
+				Vector2 end2 = reader.ReadVector2();
+
+				if (Main.netMode == NetmodeID.Server) {
+					LunarLightningEmitter.BroadcastLightningBoltSync(-1, whoAmI, start2, end2);
+					break;
+				}
+
+				LunarLightningEmitter.MakeDustLightningBolt(start2, end2);
+
+				return;
+
 			default:
 				Logger.Error($"Unknown message type: {message}");
 				return;
@@ -48,6 +64,7 @@ public class Canisters : Mod
 	internal enum MessageType : byte
 	{
 		CanisterExplosionVisuals,
-		BlightedBoltLightningBolt
+		BlightedBoltLightningBolt,
+		LunarLightningEmitterLightningBolt,
 	}
 }
