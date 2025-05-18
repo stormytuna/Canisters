@@ -43,7 +43,7 @@ public class ToxicBarb : ModProjectile
 		Projectile.velocity = Projectile.velocity.SafeNormalize(Vector2.Zero) * 2f;
 		Projectile.rotation = Projectile.velocity.ToRotation() + PiOver2;
 
-		NPC closestNpc = NpcHelpers.FindClosestNpc(50f * 16f, Projectile.Center);
+		NPC closestNpc = NpcHelpers.FindClosestNPC(50f * 16f, Projectile.Center);
 		if (closestNpc is null) {
 			return;
 		}

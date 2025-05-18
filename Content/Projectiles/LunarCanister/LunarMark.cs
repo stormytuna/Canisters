@@ -12,7 +12,7 @@ public class LunarMark : ModProjectile
 		Projectile.width = 200;
 		Projectile.height = 200;
 		Projectile.aiStyle = -1;
-		Projectile.timeLeft = 180;
+		Projectile.timeLeft = 150;
 
 		Projectile.friendly = true;
 		Projectile.usesIDStaticNPCImmunity = true;
@@ -24,24 +24,29 @@ public class LunarMark : ModProjectile
 	public override void AI() {
 		Lighting.AddLight(Projectile.Center, CanisterHelpers.GetCanisterColor<Items.Canisters.LunarCanister>().ToVector3());
 
+		Projectile.rotation += 0.05f;
+		
+		if (Projectile.timeLeft < 10) {
+			Projectile.scale = float.Lerp(0f, 1f, (Projectile.timeLeft) / 10f);
+			return;
+		}
+
+		if (Projectile.timeLeft > 140) {
+			Projectile.scale = float.Lerp(1f, 0f, (Projectile.timeLeft - 140) / 10f);
+			return;
+		}
+
 		_timer += 0.1f;
-
-		float rotationOffset = float.Sin(_timer % TwoPi) * 0.01f;
-		Projectile.rotation += 0.05f + rotationOffset;
-
 		float scaleOffset = float.Sin(_timer % TwoPi) * 0.1f;
 		Projectile.scale = 1f + scaleOffset;
-
-		for (int i = 0; i < 3; i++) {
-			Vector2 offset = Main.rand.NextVector2CircularEdge(100f, 100f);
-			Vector2 position = Projectile.Center + offset;
-			var dust = Dust.NewDustPerfect(position, DustID.Vortex);
-			dust.noGravity = true;
-			dust.velocity *= 0.1f;
-
-			if (Main.rand.NextBool()) {
-				dust.velocity = position.DirectionTo(Projectile.Center) * Main.rand.NextFloat(2f, 5f);
-			}
+		
+		Vector2 offset = Main.rand.NextVector2CircularEdge(120f, 120f);
+		Vector2 position = Projectile.Center + offset;
+		var dust = Dust.NewDustPerfect(position, DustID.Vortex);
+		dust.noGravity = true;
+		dust.velocity *= 0.1f;
+		if (Main.rand.NextBool()) {
+			dust.velocity = position.DirectionTo(Projectile.Center) * Main.rand.NextFloat(2f, 5f);
 		}
 	}
 

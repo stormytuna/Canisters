@@ -5,20 +5,27 @@ namespace Canisters.Helpers;
 
 public static class NpcHelpers
 {
-	public static IEnumerable<NPC> FindNearbyNpCs(float range, Vector2 worldPos, List<int> ignoredNpCs = null) {
-		ignoredNpCs ??= new List<int>();
-		return Main.npc.SkipLast(1).Where(npc =>
-			npc.DistanceSQ(worldPos) < range * range && npc.active && !npc.CountsAsACritter && !npc.friendly &&
-			!npc.dontTakeDamage && !npc.immortal && !ignoredNpCs.Contains(npc.type));
+	public static List<NPC> FindNearbyNPCs(float range, Vector2 worldPos, bool careAboutCollision = false, List<int> ignoredNPCs = null) {
+		List<NPC> npcs = new(50);
+		ignoredNPCs ??= [];
+		
+		foreach (var npc in Main.ActiveNPCs) {
+			if (npc.WithinRange(worldPos, range) && !ignoredNPCs.Contains(npc.whoAmI) && npc.CanBeChasedBy()) {
+				if (!careAboutCollision || CollisionHelpers.CanHit(npc, worldPos)) {
+					npcs.Add(npc);
+				}
+			}	
+		}
+		
+		return npcs;
 	}
 
-	public static NPC FindClosestNpc(float range, Vector2 worldPos, bool checkCollision = true,
-		List<int> excludedNpCs = null) {
-		excludedNpCs ??= new List<int>();
+	public static NPC FindClosestNPC(float range, Vector2 worldPos, bool checkCollision = true, List<int> excludedNpCs = null) {
+		excludedNpCs ??= [];
 		NPC closestNpc = null;
 		float closestNpcDistance = float.PositiveInfinity;
 
-		foreach (NPC npc in Main.npc.SkipLast(1)) {
+		foreach (NPC npc in Main.ActiveNPCs) {
 			float distance = Vector2.Distance(npc.Center, worldPos);
 			if (!npc.CanBeChasedBy() || distance > range || distance > closestNpcDistance ||
 				excludedNpCs.Contains(npc.whoAmI)) {
@@ -36,7 +43,7 @@ public static class NpcHelpers
 		return closestNpc;
 	}
 
-	public static void StrikeNpc(NPC npc, NPC.HitInfo hitInfo) {
+	public static void StrikeNPC(NPC npc, NPC.HitInfo hitInfo) {
 		if (Main.netMode == NetmodeID.SinglePlayer) {
 			npc.StrikeNPC(hitInfo);
 			return;
