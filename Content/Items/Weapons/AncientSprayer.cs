@@ -26,6 +26,7 @@ public class AncientSprayer : BaseCanisterUsingWeapon
 		Item.width = 60;
 		Item.height = 14;
 		Item.SetShopValues(ItemRarityColor.Blue1, Item.buyPrice(silver: 40));
+		Item.UseSound = SoundID.Item13 with { PitchVariance = 0.1f };
 	}
 
 	public override void ApplyWeaponStats(ref CanisterShootStats stats) {

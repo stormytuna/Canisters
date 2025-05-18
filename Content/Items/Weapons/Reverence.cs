@@ -29,10 +29,22 @@ public class Reverence : BaseCanisterUsingWeapon
 		Item.width = 48;
 		Item.height = 16;
 		Item.SetShopValues(ItemRarityColor.Pink5, Item.buyPrice(gold: 4));
+		Item.UseSound = SoundID.Item10 with { PitchRange = (-0.6f, -0.4f) };
 	}
 
 	public override bool AltFunctionUse(Player player) {
 		return true;
+	}
+
+	public override bool CanUseItem(Player player) {
+		if (player.altFunctionUse == 2) {
+			Item.UseSound = SoundID.Item10 with { PitchRange = (0.6f, 0.9f) };
+		}
+		else {
+			Item.UseSound = SoundID.Item10 with { PitchRange = (-0.6f, -0.4f) };
+		}
+
+		return base.CanUseItem(player);
 	}
 
 	public override void AddRecipes() {

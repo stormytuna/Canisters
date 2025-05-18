@@ -35,6 +35,6 @@ public class FiredBlightedCanister : BaseFiredCanisterProjectile
 		DustHelpers.MakeDustExplosion(Projectile.Center, 10f, ModContent.DustType<BlightedDust>(), 10, 0f, 10f, 100, 150, 1.3f, 1.6f, true);
 		DustHelpers.MakeDustExplosion(Projectile.Center, 10f, ModContent.DustType<BlightedDust>(), 8, 0f, 3f, 100, 150, 1f, 1.3f);
 
-		SoundEngine.PlaySound(SoundID.DD2_GoblinBomb, Projectile.Center);
+		SoundEngine.PlaySound(SoundID.DD2_GoblinBomb with { PitchRange = (-0.8f, -0.4f) }, Projectile.Center);
 	}
 }

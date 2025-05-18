@@ -70,11 +70,11 @@ public abstract class BaseFiredCanisterProjectile : ModProjectile
 			return;
 		}
 
-		var canisterGore1 = Mod.Find<ModGore>("BrokenCanister_01");
-		var canisterGore2 = Mod.Find<ModGore>("BrokenCanister_02");
+		ModGore canisterGore1 = Mod.Find<ModGore>("BrokenCanister_01");
+		ModGore canisterGore2 = Mod.Find<ModGore>("BrokenCanister_02");
 		Vector2 canisterVelocity = Main.rand.NextVector2Circular(3f, 3f);
 
-		var gore = Gore.NewGoreDirect(Projectile.GetSource_FromThis(), Projectile.Center, canisterVelocity + (Projectile.velocity * 0.5f), canisterGore1.Type);
+		Gore gore = Gore.NewGoreDirect(Projectile.GetSource_FromThis(), Projectile.Center, canisterVelocity + (Projectile.velocity * 0.5f), canisterGore1.Type);
 		gore.timeLeft = 120;
 		gore = Gore.NewGoreDirect(Projectile.GetSource_FromThis(), Projectile.Center, -canisterVelocity + (Projectile.velocity * 0.5f), canisterGore2.Type);
 		gore.timeLeft = 120;

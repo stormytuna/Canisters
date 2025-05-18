@@ -27,6 +27,6 @@ public class FiredToxicCanister : BaseFiredCanisterProjectile
 
 		DustHelpers.MakeDustExplosion<ToxicDust>(Projectile.position, 10f, 10);
 
-		SoundEngine.PlaySound(SoundID.DD2_GoblinBomb, Projectile.Center);
+		SoundEngine.PlaySound(SoundID.DD2_GoblinBomb with { PitchRange = (0.4f, 0.6f) }, Projectile.Center);
 	}
 }

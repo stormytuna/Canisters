@@ -51,13 +51,13 @@ public class Nanites : ModProjectile
 
 			int numDust = Main.rand.Next(8, 12);
 			for (int i = 0; i < numDust; i++) {
-				var naniteDust = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, ModContent.DustType<NaniteDust>());
+				Dust naniteDust = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, ModContent.DustType<NaniteDust>());
 				naniteDust.customData = Projectile;
 			}
 		}
 
 		if (Main.rand.NextBool(5)) {
-			var dust = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.Clentaminator_Cyan);
+			Dust dust = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.Clentaminator_Cyan);
 			dust.noGravity = true;
 		}
 
@@ -108,7 +108,7 @@ public class Nanites : ModProjectile
 	public override void OnKill(int timeLeft) {
 		int numDust = Main.rand.Next(2, 6);
 		for (int i = 0; i < numDust; i++) {
-			var dust = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.Clentaminator_Cyan);
+			Dust dust = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.Clentaminator_Cyan);
 			dust.noGravity = true;
 			dust.velocity *= 2f;
 		}

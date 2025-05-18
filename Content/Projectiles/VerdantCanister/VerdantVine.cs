@@ -1,4 +1,5 @@
 using Canisters.Helpers;
+using Terraria.Audio;
 
 namespace Canisters.Content.Projectiles.VerdantCanister;
 
@@ -40,6 +41,7 @@ public class VerdantVine : ModProjectile
 			_firstFrame = false;
 			Projectile.spriteDirection = Main.rand.NextBool().ToDirectionInt();
 			Projectile.rotation = StartRotation;
+			SoundEngine.PlaySound(SoundID.Grass with { Volume = 0.3f, Pitch = 0.8f - (NumVines * 0.2f), PitchVariance = 0.4f, MaxInstances = 0 }, Projectile.Center);
 		}
 
 		Projectile.alpha += 15;
@@ -54,7 +56,7 @@ public class VerdantVine : ModProjectile
 		}
 
 		if (Main.rand.NextBool(4)) {
-			var dust = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.Grass, Alpha: Main.rand.Next(100, 150), Scale: Main.rand.NextFloat(0.8f, 1.2f));
+			Dust dust = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.Grass, Alpha: Main.rand.Next(100, 150), Scale: Main.rand.NextFloat(0.8f, 1.2f));
 			dust.noGravity = true;
 		}
 

@@ -1,5 +1,6 @@
 ﻿using Canisters.Content.Dusts;
 using Canisters.Helpers;
+using Terraria.Audio;
 
 namespace Canisters.Content.Projectiles.BlightedCanister;
 
@@ -36,11 +37,13 @@ public class BlightedBolt : ModProjectile
 		return false;
 	}
 
-	public static void MakeDustLightningBolts(Vector2 start, Vector2 end) {
+	public static void LightningBoltEffects(Vector2 start, Vector2 end) {
 		DustHelpers.MakeLightningDust(start, end, ModContent.DustType<BlightedDust>(), 1.2f, 30f, 0.4f);
 		DustHelpers.MakeLightningDust(start, end, ModContent.DustType<BlightedDust>(), 0.9f, 45f, 0.4f);
 		DustHelpers.MakeLightningDust(start, end, ModContent.DustType<BlightedDust>(), 1.5f, 15f, 0.4f);
 		DustHelpers.MakeDustExplosion(end, 2f, ModContent.DustType<BlightedDust>(), 5, 0f, 8f, 100, 150, 1f, 1.2f, true, true, true);
+		SoundEngine.PlaySound(SoundID.DD2_LightningAuraZap with { Volume = 0.8f, PitchRange = (0.5f, 0.8f), MaxInstances = 0 }, start);
+		SoundEngine.PlaySound(SoundID.DD2_LightningAuraZap with { Volume = 0.8f, PitchRange = (0.1f, 0.4f), MaxInstances = 0 }, start);
 	}
 
 	public override void OnKill(int timeLeft) {
@@ -48,7 +51,7 @@ public class BlightedBolt : ModProjectile
 			return;
 		}
 
-		MakeDustLightningBolts(_startLocation, Projectile.Center);
+		LightningBoltEffects(_startLocation, Projectile.Center);
 		if (Main.netMode == NetmodeID.MultiplayerClient) {
 			BroadcastLightningBoltSync(-1, Main.myPlayer, _startLocation, Projectile.Center);
 		}

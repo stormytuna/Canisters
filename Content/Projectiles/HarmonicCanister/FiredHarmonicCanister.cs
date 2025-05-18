@@ -26,7 +26,7 @@ public class FiredHarmonicCanister : BaseFiredCanisterProjectile
 		DustHelpers.MakeDustExplosion(Projectile.Center, 16f, DustID.PinkTorch, 15, 8f, 16f, noGravity: true);
 		DustHelpers.MakeDustExplosion(Projectile.Center, 16f, DustID.PurpleTorch, 15, 8f, 16f, noGravity: true);
 
-		SoundEngine.PlaySound(SoundID.DD2_GoblinBomb, Projectile.Center);
+		SoundEngine.PlaySound(SoundID.Zombie103 with { Volume = 0.4f, PitchRange = (-0.4f, -0.1f), MaxInstances = 2, SoundLimitBehavior = SoundLimitBehavior.ReplaceOldest }, Projectile.Center);
 	}
 
 	public override void PostAI() {
@@ -38,7 +38,6 @@ public class FiredHarmonicCanister : BaseFiredCanisterProjectile
 	public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone) {
 		Explode();
 		if (Main.netMode == NetmodeID.MultiplayerClient) {
-			Main.NewText(Projectile.identity);
 			BroadcastExplosionSync(-1, Main.myPlayer, Projectile.identity);
 		}
 	}

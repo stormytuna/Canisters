@@ -44,6 +44,6 @@ public class FiredVerdantCanister : BaseFiredCanisterProjectile
 		DustHelpers.MakeDustExplosion(Projectile.Center, 10f, DustID.Grass, Main.rand.Next(10, 15), 0f, 3f, 100, 150, 1f, 1.3f);
 		DustHelpers.MakeDustExplosion(Projectile.Center, 10f, DustID.GreenFairy, Main.rand.Next(3, 5), 0f, 4f, 0, 50, 1.3f);
 
-		SoundEngine.PlaySound(SoundID.DD2_GoblinBomb, Projectile.Center);
+		SoundEngine.PlaySound(SoundID.DD2_GoblinBomb with { Volume = 0.6f, PitchRange = (0.6f, 0.8f) }, Projectile.Center);
 	}
 }

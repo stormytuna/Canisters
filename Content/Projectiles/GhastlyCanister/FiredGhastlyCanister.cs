@@ -25,6 +25,6 @@ public class FiredGhastlyCanister : BaseFiredCanisterProjectile
 		DustHelpers.MakeDustExplosion(Projectile.Center, 8f, DustID.DungeonSpirit, 22, 0f, 8f, 50, 120, 1f, 1.5f, true);
 		DustHelpers.MakeDustExplosion(Projectile.Center, 8f, DustID.DungeonSpirit, 15, 4f, 14f, 70, 120, 1f, 1.3f, true);
 
-		SoundEngine.PlaySound(SoundID.DD2_GoblinBomb, Projectile.Center);
+		SoundEngine.PlaySound(SoundID.DD2_GoblinBomb with { PitchRange = (0.6f, 1f) }, Projectile.Center);
 	}
 }

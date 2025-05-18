@@ -1,6 +1,7 @@
 using System.IO;
 using Canisters.Content.Dusts;
 using Canisters.Helpers;
+using Terraria.Audio;
 using Terraria.DataStructures;
 
 namespace Canisters.Content.Projectiles.VolatileCanister;
@@ -59,12 +60,19 @@ public class GelBallEmitter : ModProjectile
 
 			Rectangle dustSpawnBox = Projectile.Hitbox;
 			dustSpawnBox.Inflate(4, 4);
-			var dust = Dust.NewDustDirect(dustSpawnBox.TopLeft(), dustSpawnBox.Width, dustSpawnBox.Height, ModContent.DustType<VolatileCanisterDust>(), Alpha: Main.rand.Next(0, 50), Scale: Main.rand.NextFloat(0.6f, 1f));
+			Dust dust = Dust.NewDustDirect(dustSpawnBox.TopLeft(), dustSpawnBox.Width, dustSpawnBox.Height, ModContent.DustType<VolatileCanisterDust>(), Alpha: Main.rand.Next(0, 50), Scale: Main.rand.NextFloat(0.6f, 1f));
 			dust.velocity = _startVelocity.RotatedByRandom(0.4f) * Main.rand.NextFloat(0.01f, 0.8f);
+
+			if (_numFired > 1) {
+				// Play sounds each time we shoot visually, except first time as weapon will play its sound for us
+				SoundStyle sound = Owner.HeldItem.UseSound!.Value;
+				sound.Volume *= 0.7f;
+				SoundEngine.PlaySound(sound, Projectile.Center);
+			}
 		}
 
 		if (Main.rand.NextBool(2)) {
-			var dust = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, ModContent.DustType<VolatileCanisterDust>(), Alpha: Main.rand.Next(0, 50), Scale: Main.rand.NextFloat(0.6f, 0.8f));
+			Dust dust = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, ModContent.DustType<VolatileCanisterDust>(), Alpha: Main.rand.Next(0, 50), Scale: Main.rand.NextFloat(0.6f, 0.8f));
 			dust.velocity = _startVelocity.RotatedByRandom(0.4f) * Main.rand.NextFloat(0.01f, 0.8f);
 		}
 

@@ -23,6 +23,7 @@ public class ChlorophyteSlugger : BaseCanisterUsingWeapon
 		Item.width = 50;
 		Item.height = 24;
 		Item.SetShopValues(ItemRarityColor.Lime7, Item.buyPrice(gold: 5, silver: 50));
+		Item.UseSound = SoundID.Item10 with { PitchRange = (0.8f, 1f), MaxInstances = 0 };
 	}
 
 	public override bool? UseItem(Player player) {

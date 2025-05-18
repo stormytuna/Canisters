@@ -23,6 +23,7 @@ public class WoodenSlingshot : BaseCanisterUsingWeapon
 		Item.width = 20;
 		Item.height = 32;
 		Item.SetShopValues(ItemRarityColor.Blue1, Item.buyPrice(silver: 2));
+		Item.UseSound = SoundID.Item5 with { Pitch = 0.5f, PitchVariance = 0.08f };
 	}
 
 	public override void AddRecipes() {

@@ -25,12 +25,13 @@ public class GraniteCannon : BaseCanisterUsingWeapon
 		Item.width = 44;
 		Item.height = 16;
 		Item.SetShopValues(ItemRarityColor.Blue1, Item.buyPrice(silver: 30));
+		Item.UseSound = SoundID.Item10 with { PitchRange = (-0.6f, -0.4f) };
 	}
 }
 
 public class GraniteCannonGlobalNpc : GlobalNPC
 {
-	private static readonly int[] _graniteEnemies = { NPCID.GraniteFlyer, NPCID.GraniteGolem };
+	private static readonly int[] _graniteEnemies = [NPCID.GraniteFlyer, NPCID.GraniteGolem];
 
 	public override bool AppliesToEntity(NPC entity, bool lateInstantiation) {
 		return _graniteEnemies.Contains(entity.type);

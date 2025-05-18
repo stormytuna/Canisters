@@ -1,6 +1,7 @@
 ﻿using Canisters.Common;
 using Canisters.Helpers;
 using ReLogic.Content;
+using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.GameContent;
 
@@ -48,9 +49,12 @@ public class LunarLightningEmitter : ModProjectile
 		Projectile.velocity = Projectile.velocity.SafeNormalize(Vector2.Zero) * 3f;
 	}
 
-	public static void MakeDustLightningBolt(Vector2 start, Vector2 end) {
-		DustHelpers.MakeLightningDust(start, end, DustID.Vortex, 0.8f);
+	public static void LightningBoltEffects(Vector2 start, Vector2 end) {
+		Vector2 offset = start.DirectionTo(end) * 24f;
+		DustHelpers.MakeLightningDust(start + offset, end, DustID.Vortex, 0.8f);
 		DustHelpers.MakeDustExplosion(end, 4f, DustID.Vortex, 5, 0.5f, 2f, noGravity: true);
+		SoundEngine.PlaySound(SoundID.DD2_LightningAuraZap with { Volume = 0.3f, PitchRange = (0.5f, 0.8f), MaxInstances = 5, SoundLimitBehavior = SoundLimitBehavior.ReplaceOldest }, start);
+		SoundEngine.PlaySound(SoundID.DD2_LightningAuraZap with { Volume = 0.3f, PitchRange = (-0.2f, 0.3f), MaxInstances = 5, SoundLimitBehavior = SoundLimitBehavior.ReplaceOldest }, start);
 	}
 
 	public override void AI() {
@@ -78,12 +82,12 @@ public class LunarLightningEmitter : ModProjectile
 
 		if (TimerForAttack >= 15 && Main.myPlayer == Projectile.owner) {
 			float radiusMult = Main.LocalPlayer.GetModPlayer<CanisterModifiersPlayer>().CanisterLaunchedExplosionRadiusMult;
-			var closeNPCs = NpcHelpers.FindNearbyNPCs(30f * 16f * radiusMult, Projectile.Center, true);
+			System.Collections.Generic.List<NPC> closeNPCs = NpcHelpers.FindNearbyNPCs(30f * 16f * radiusMult, Projectile.Center, true);
 			if (closeNPCs.Count > 0) {
 				TimerForAttack = 0f;
 
-				var nextTarget = Main.rand.Next(closeNPCs);
-				var hitInfo = new NPC.HitInfo {
+				NPC nextTarget = Main.rand.Next(closeNPCs);
+				NPC.HitInfo hitInfo = new() {
 					Damage = Projectile.damage,
 					Knockback = Projectile.knockBack,
 					DamageType = DamageClass.Ranged,
@@ -91,7 +95,7 @@ public class LunarLightningEmitter : ModProjectile
 				};
 				nextTarget.StrikeNPC(hitInfo);
 
-				MakeDustLightningBolt(Projectile.Center, nextTarget.Center);
+				LightningBoltEffects(Projectile.Center, nextTarget.Center);
 
 				if (Main.netMode != NetmodeID.SinglePlayer) {
 					NetMessage.SendStrikeNPC(nextTarget, in hitInfo, Main.myPlayer);
@@ -103,7 +107,7 @@ public class LunarLightningEmitter : ModProjectile
 		for (int i = 0; i < 3; i++) {
 			float distance = Main.rand.NextFloat(32f, 38f);
 			Vector2 offset = Main.rand.NextVector2CircularEdge(distance, distance);
-			var dust = Dust.NewDustPerfect(Projectile.Center + offset, ModContent.DustType<LunarLightningEmitterDust>());
+			Dust dust = Dust.NewDustPerfect(Projectile.Center + offset, ModContent.DustType<LunarLightningEmitterDust>());
 			dust.customData = Projectile;
 			if (Main.rand.NextBool(2, 3)) {
 				dust.velocity = offset.SafeNormalize(Vector2.Zero) * Main.rand.NextFloat(0.5f, 2f);
@@ -116,6 +120,7 @@ public class LunarLightningEmitter : ModProjectile
 		if (Main.rand.NextBool(18)) {
 			Vector2 offset = Main.rand.NextVector2Unit() * Main.rand.NextFloat(80f, 120f);
 			DustHelpers.MakeLightningDust(Projectile.Center + (offset * 0.2f), Projectile.Center + offset, DustID.Vortex, Main.rand.NextFloat(0.5f, 0.8f), 20f, 1.2f);
+			SoundEngine.PlaySound(SoundID.DD2_LightningAuraZap with { Volume = 0.2f, PitchRange = (0.5f, 1f), MaxInstances = 0 }, Projectile.Center);
 		}
 	}
 
@@ -132,7 +137,7 @@ public class LunarLightningEmitter : ModProjectile
 		DustHelpers.MakeDustExplosion(Projectile.Center, 10f, DustID.Vortex, 10, 1f, 3f, noGravity: true);
 	}
 
-	private void ResizeRenderTarget(Point screenRes) {
+	private static void ResizeRenderTarget(Point screenRes) {
 		_maskRenderTarget?.Dispose();
 		_maskRenderTarget = new RenderTarget2D(Main.graphics.GraphicsDevice, screenRes.X, screenRes.Y);
 	}
@@ -144,18 +149,18 @@ public class LunarLightningEmitter : ModProjectile
 			return;
 		}
 
-		var bindings = Main.graphics.GraphicsDevice.GetRenderTargets();
+		RenderTargetBinding[] bindings = Main.graphics.GraphicsDevice.GetRenderTargets();
 		Main.graphics.GraphicsDevice.SetRenderTarget(_maskRenderTarget);
 		Main.graphics.GraphicsDevice.Clear(Color.Transparent);
 
 		Main.spriteBatch.Begin(default, default, Main.DefaultSamplerState, default, RasterizerState.CullNone, default);
 
-		foreach (var projectile in Main.ActiveProjectiles) {
+		foreach (Projectile projectile in Main.ActiveProjectiles) {
 			if (projectile.ModProjectile is not LunarLightningEmitter) {
 				continue;
 			}
 
-			var drawData = new DrawData {
+			DrawData drawData = new() {
 				texture = _maskTexture.Value,
 				position = (projectile.Center - Main.screenPosition).Floor(),
 				sourceRect = _maskTexture.Frame(),
@@ -172,9 +177,9 @@ public class LunarLightningEmitter : ModProjectile
 	}
 
 	public override bool PreDraw(ref Color lightColor) {
-		var texture = TextureAssets.Projectile[Type].Value;
+		Texture2D texture = TextureAssets.Projectile[Type].Value;
 
-		var drawData = new DrawData {
+		DrawData drawData = new() {
 			texture = texture,
 			position = (Projectile.Center - Main.screenPosition).Floor(),
 			sourceRect = texture.Frame(),

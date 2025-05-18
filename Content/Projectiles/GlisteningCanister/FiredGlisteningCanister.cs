@@ -28,6 +28,6 @@ public class FiredGlisteningCanister : BaseFiredCanisterProjectile
 		DustHelpers.MakeDustExplosion(Projectile.Center, 8f, DustID.IchorTorch, Main.rand.Next(50, 65), 0f, 15f, 100, 150, 0.8f, 1.2f, true);
 		DustHelpers.MakeDustExplosion(Projectile.Center, 8f, DustID.IchorTorch, Main.rand.Next(13, 21), 0f, 10f, 100, 150, 1f, 1.4f, true);
 
-		SoundEngine.PlaySound(SoundID.DD2_GoblinBomb, Projectile.Center);
+		SoundEngine.PlaySound(SoundID.DD2_GoblinBomb with { PitchRange = (-0.4f, 0f) }, Projectile.Center);
 	}
 }

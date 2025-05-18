@@ -25,6 +25,8 @@ public class Icemire : BaseCanisterUsingWeapon
 		Item.width = 74;
 		Item.height = 22;
 		Item.SetShopValues(ItemRarityColor.Pink5, Item.buyPrice(gold: 5));
+		Item.UseSound = SoundID.Item10 with { PitchRange = (0.1f, 0.4f), MaxInstances = 0 };
+
 		Item.reuseDelay = 40;
 		Item.consumeAmmoOnLastShotOnly = true;
 	}
@@ -37,7 +39,7 @@ public class IcemireGlobalProjectile : ShotByWeaponGlobalProjectile<Icemire>
 			return;
 		}
 
-		var dust = Dust.NewDustDirect(projectile.position, projectile.width, projectile.height, DustID.Frost);
+		Dust dust = Dust.NewDustDirect(projectile.position, projectile.width, projectile.height, DustID.Frost);
 		dust.noGravity = true;
 		dust.noLight = true;
 	}

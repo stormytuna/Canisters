@@ -23,7 +23,7 @@ public static class DustHelpers
 		bool noLight = false, bool noLightEmmittance = false) {
 		for (int i = 0; i < amount; i++) {
 			Vector2 spawnPosition = position + Main.rand.NextVector2Circular(spawnRadius, spawnRadius);
-			var newDust = Dust.NewDustPerfect(spawnPosition, dustType);
+			Dust newDust = Dust.NewDustPerfect(spawnPosition, dustType);
 			newDust.velocity = Main.rand.NextVector2Unit() * Main.rand.NextFloat(minSpeed, maxSpeed);
 			newDust.alpha = Main.rand.Next(minAlpha, maxAlpha);
 			newDust.scale = Main.rand.NextFloat(minScale, maxScale);
@@ -74,7 +74,7 @@ public static class DustHelpers
 				float lerp = j / numDust;
 				Vector2 dustPosition = Vector2.Lerp(start, end, lerp);
 
-				var d = Dust.NewDustPerfect(dustPosition, dustId, Scale: scale);
+				Dust d = Dust.NewDustPerfect(dustPosition, dustId, Scale: scale);
 				d.noGravity = true;
 				d.velocity = Main.rand.NextVector2Circular(0.3f, 0.3f);
 			}
@@ -88,7 +88,7 @@ public static class DustHelpers
 	}
 
 	public static void MakeDebugDust(Vector2 position, Color color) {
-		var d = Dust.NewDustPerfect(position, 303, newColor: color);
+		Dust d = Dust.NewDustPerfect(position, 303, newColor: color);
 		d.velocity = Vector2.Zero;
 		d.noGravity = true;
 	}

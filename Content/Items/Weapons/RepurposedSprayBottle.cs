@@ -1,6 +1,7 @@
 ﻿using Canisters.DataStructures;
 using Canisters.Helpers;
 using Canisters.Helpers.Enums;
+using Terraria.Audio;
 using Terraria.Enums;
 
 namespace Canisters.Content.Items.Weapons;
@@ -24,6 +25,9 @@ public class RepurposedSprayBottle : BaseCanisterUsingWeapon
 		Item.width = 14;
 		Item.height = 22;
 		Item.SetShopValues(ItemRarityColor.LightRed4, Item.buyPrice(gold: 25));
+
+		SoundStyle sound = new($"{nameof(Canisters)}/Assets/Sounds/SprayBottle");
+		Item.UseSound = sound with { Volume = 0.8f, PitchRange = (0.3f, 0.5f), MaxInstances = 5 };
 	}
 
 	public override void ApplyWeaponStats(ref CanisterShootStats stats) {

@@ -23,6 +23,7 @@ public class LushSlinger : BaseCanisterUsingWeapon
 		Item.width = 20;
 		Item.height = 32;
 		Item.SetShopValues(ItemRarityColor.Orange3, Item.buyPrice(silver: 85));
+		Item.UseSound = SoundID.Item5 with { Pitch = 0.5f, PitchVariance = 0.08f };
 	}
 
 	public override void AddRecipes() {

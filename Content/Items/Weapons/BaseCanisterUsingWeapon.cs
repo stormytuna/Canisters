@@ -31,6 +31,7 @@ public abstract class BaseCanisterUsingWeapon : ModItem
 
 	public virtual void ApplyWeaponStats(ref CanisterShootStats stats) { }
 
+
 	public virtual IEnumerable<Projectile> ShootProjectiles(IEntitySource source, CanisterShootStats stats) {
 		for (int i = 0; i < stats.ProjectileCount; i++) {
 			Vector2 perturbedVelocity = i == 0
@@ -53,7 +54,7 @@ public abstract class BaseCanisterUsingWeapon : ModItem
 			return true;
 		}
 
-		var stats = new CanisterShootStats {
+		CanisterShootStats stats = new() {
 			FiringType = CanisterFiringType,
 			Velocity = velocity,
 			Position = position,
@@ -61,7 +62,7 @@ public abstract class BaseCanisterUsingWeapon : ModItem
 			Knockback = knockback,
 			ProjectileCount = 1,
 			ProjectileType = type,
-			TotalSpread = 0f
+			TotalSpread = 0f,
 		};
 		canister.ApplyAmmoStats(ref stats);
 		ApplyWeaponStats(ref stats);
@@ -90,5 +91,30 @@ public abstract class BaseCanisterUsingWeapon : ModItem
 		spriteBatch.Draw(CanisterTexture.Value, position, frame, canisterColor, 0f, origin, scale, SpriteEffects.None, 0);
 
 		return false;
+	}
+}
+
+public class HookItemUseSoundSuppression : ILoadable
+{
+	public void Load(Mod mod) {
+		On_Player.ItemCheck_StartActualUse += static (orig, self, item) => {
+			bool oldUseSound = ItemID.Sets.SkipsInitialUseSound[item.type];
+
+			if (item.ModItem is BaseCanisterUsingWeapon weapon) {
+				self.TryGetWeaponAmmo(item, out int canisterType);
+				if (ItemLoader.GetItem(canisterType) is BaseCanisterItem canister) {
+					if (canister.SuppressWeaponUseSound(weapon)) {
+						ItemID.Sets.SkipsInitialUseSound[item.type] = true;
+					}
+				}
+			}
+
+			orig(self, item);
+
+			ItemID.Sets.SkipsInitialUseSound[item.type] = oldUseSound;
+		};
+	}
+
+	public void Unload() {
 	}
 }

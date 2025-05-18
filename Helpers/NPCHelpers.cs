@@ -8,7 +8,7 @@ public static class NpcHelpers
 		List<NPC> npcs = new(50);
 		ignoredNPCs ??= [];
 
-		foreach (var npc in Main.ActiveNPCs) {
+		foreach (NPC npc in Main.ActiveNPCs) {
 			if (npc.WithinRange(worldPos, range) && !ignoredNPCs.Contains(npc.whoAmI) && npc.CanBeChasedBy()) {
 				if (!careAboutCollision || CollisionHelpers.CanHit(npc, worldPos)) {
 					npcs.Add(npc);

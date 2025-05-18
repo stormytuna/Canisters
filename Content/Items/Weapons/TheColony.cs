@@ -24,6 +24,7 @@ public class TheColony : BaseCanisterUsingWeapon
 		Item.width = 32;
 		Item.height = 24;
 		Item.SetShopValues(ItemRarityColor.Orange3, Item.buyPrice(silver: 70));
+		Item.UseSound = SoundID.Item97 with { Volume = 0.7f, PitchRange = (-0.4f, 0f) };
 	}
 
 	public override void ApplyWeaponStats(ref CanisterShootStats stats) {

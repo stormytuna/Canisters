@@ -42,7 +42,7 @@ public class ToxicFog : ModProjectile
 		Projectile.velocity *= 0.95f;
 
 		if (Main.rand.NextBool(10)) {
-			var dust = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, ModContent.DustType<ToxicDust>());
+			Dust dust = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, ModContent.DustType<ToxicDust>());
 			dust.alpha = Main.rand.Next(Projectile.alpha - 20, Projectile.alpha + 20);
 			dust.velocity *= Projectile.Opacity;
 		}

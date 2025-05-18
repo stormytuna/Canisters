@@ -24,6 +24,7 @@ public class BarkBellower : BaseCanisterUsingWeapon
 		Item.width = 44;
 		Item.height = 20;
 		Item.SetShopValues(ItemRarityColor.Green2, Item.sellPrice(gold: 15));
+		Item.UseSound = SoundID.Item5 with { PitchRange = (0.7f, 1.1f), MaxInstances = 0, Volume = 0.6f };
 	}
 }
 
@@ -34,7 +35,7 @@ public class BarkBellowerGlobalProjectile : ShotByWeaponGlobalProjectile<BarkBel
 			return;
 		}
 
-		var dust = Dust.NewDustDirect(projectile.position, projectile.width, projectile.height, DustID.DryadsWard);
+		Dust dust = Dust.NewDustDirect(projectile.position, projectile.width, projectile.height, DustID.DryadsWard);
 		dust.noGravity = true;
 		dust.noLight = true;
 	}

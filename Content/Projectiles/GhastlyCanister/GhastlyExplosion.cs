@@ -1,4 +1,5 @@
 ﻿using Canisters.Helpers;
+using Terraria.Audio;
 
 namespace Canisters.Content.Projectiles.GhastlyCanister;
 
@@ -35,6 +36,7 @@ public class GhastlyExplosion : ModProjectile
 			_firstFrame = false;
 			DustHelpers.MakeDustExplosion(Projectile.Center, 8f, DustID.DungeonSpirit, 14, 0f, 8f, 50, 120, 1f, 1.5f, true);
 			DustHelpers.MakeDustExplosion(Projectile.Center, 8f, DustID.DungeonSpirit, 8, 4f, 14f, 70, 120, 1f, 1.3f, true);
+			SoundEngine.PlaySound(SoundID.Item14 with { Volume = 0.2f, PitchRange = (0.7f, 0.9f), MaxInstances = 3, SoundLimitBehavior = SoundLimitBehavior.ReplaceOldest });
 		}
 
 		Projectile.frame = (int)(Main.projFrames[Type] * Timer / _lifeTime);

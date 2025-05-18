@@ -17,6 +17,10 @@ public class ToxicBarb : ModProjectile
 		get => ref Projectile.ai[0];
 	}
 
+	private ref float LastAngleChange {
+		get => ref Projectile.ai[1];
+	}
+
 	public override void SetStaticDefaults() {
 		ProjectileID.Sets.TrailCacheLength[Type] = 20;
 		ProjectileID.Sets.TrailingMode[Type] = 0;
@@ -48,6 +52,20 @@ public class ToxicBarb : ModProjectile
 			return;
 		}
 
+		if (Timer == 0f) {
+			SoundEngine.PlaySound(SoundID.Zombie53 with { Volume = 0.1f + (LastAngleChange / 20f), PitchRange = (0.6f, 1f), MaxInstances = 5, SoundLimitBehavior = SoundLimitBehavior.ReplaceOldest }, Projectile.Center);
+
+			for (int i = 0; i < 3; i++) {
+				Dust dust = Dust.NewDustPerfect(Projectile.Center, DustID.GolfPaticle);
+				dust.color = Color.Lerp(Color.HotPink, Color.Purple, Main.rand.NextFloat());
+				dust.velocity = Projectile.velocity.SafeNormalize(Vector2.Zero).RotatedBy(PiOver2) * Main.rand.NextFloat(-2f, 2f);
+				dust.velocity += Projectile.velocity;
+				dust.noGravity = true;
+			}
+		}
+
+		Timer++;
+
 		if (Timer >= _bounceTime && Main.myPlayer == Projectile.owner) {
 			Timer = 0f;
 			_bounceTime = Main.rand.NextFloat(-_bounceTimeVariance, _bounceTimeVariance) + _bounceTimeBase;
@@ -56,16 +74,17 @@ public class ToxicBarb : ModProjectile
 			float newAngle = Projectile.velocity.ToRotation().AngleTowards(toTarget, 1.1f);
 			Projectile.velocity = newAngle.ToRotationVector2().RotateRandom(_bounceSpread) * 2f;
 
+			// Jank, but lets sounds play properly on other clients without custom packet
+			LastAngleChange = float.Abs(toTarget - newAngle);
+
 			Projectile.netUpdate = true;
 		}
-
-		Timer++;
 	}
 
 	public override void OnKill(int timeLeft) {
 		for (int i = 0; i < Projectile.oldPos.Length; i++) {
 			Vector2 position = Projectile.oldPos[i];
-			var dust = Dust.NewDustPerfect(position, DustID.GolfPaticle);
+			Dust dust = Dust.NewDustPerfect(position, DustID.GolfPaticle);
 			dust.color = Color.Lerp(Color.HotPink, Color.Purple, i / (float)Projectile.oldPos.Length);
 			dust.velocity = Projectile.velocity.SafeNormalize(Vector2.Zero).RotatedBy(PiOver2) * Main.rand.NextFloat(-2f, 2f);
 			dust.velocity += Projectile.velocity;

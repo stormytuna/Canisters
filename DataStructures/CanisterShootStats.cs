@@ -13,11 +13,11 @@ public record struct CanisterShootStats
 	public float TotalSpread;
 	public Vector2 Velocity;
 
-	public bool IsDepleted {
+	public readonly bool IsDepleted {
 		get => FiringType == CanisterFiringType.Depleted;
 	}
 
-	public bool IsLaunched {
+	public readonly bool IsLaunched {
 		get => FiringType == CanisterFiringType.Launched;
 	}
 }

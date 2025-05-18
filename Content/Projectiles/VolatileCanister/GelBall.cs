@@ -36,7 +36,7 @@ public class GelBall : ModProjectile
 		Timer++;
 
 		if (Main.rand.NextBool()) {
-			var dust = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, ModContent.DustType<VolatileCanisterDust>());
+			Dust dust = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, ModContent.DustType<VolatileCanisterDust>());
 			dust.velocity *= 0.4f;
 		}
 
@@ -80,7 +80,7 @@ public class GelBall : ModProjectile
 			dust.velocity *= Main.rand.NextFloat(1.5f);
 		}
 
-		SoundStyle soundStyle = SoundID.SplashWeak with { MaxInstances = 0, Volume = 0.5f, PitchRange = (0.9f, 1f) };
+		SoundStyle soundStyle = SoundID.SplashWeak with { MaxInstances = 0, Volume = 0.5f, PitchRange = (0.5f, 0.9f) };
 		SoundEngine.PlaySound(soundStyle, Projectile.Center);
 	}
 }

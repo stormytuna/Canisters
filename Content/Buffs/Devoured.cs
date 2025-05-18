@@ -64,7 +64,7 @@ public class DevouredGlobalNpc : GlobalNPC
 		}
 
 		if (Main.rand.NextBool(3)) {
-			var dust = Dust.NewDustDirect(npc.position, npc.width, npc.height, DustID.Clentaminator_Cyan);
+			Dust dust = Dust.NewDustDirect(npc.position, npc.width, npc.height, DustID.Clentaminator_Cyan);
 			dust.noGravity = true;
 			dust.velocity *= 1f;
 		}

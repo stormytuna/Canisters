@@ -26,6 +26,7 @@ public class SlimeySlinger : BaseCanisterUsingWeapon
 		Item.width = 20;
 		Item.height = 32;
 		Item.SetShopValues(ItemRarityColor.Pink5, Item.buyPrice(gold: 1));
+		Item.UseSound = SoundID.Item5 with { Pitch = 0.7f, PitchVariance = 0.1f };
 	}
 }
 
@@ -39,7 +40,7 @@ public class SlimySlingerGlobalProjectile : ShotByWeaponGlobalProjectile<SlimeyS
 		}
 
 		_numBounces--;
-		if (_numBounces <= 0) {
+		if (_numBounces < 0) {
 			return true;
 		}
 

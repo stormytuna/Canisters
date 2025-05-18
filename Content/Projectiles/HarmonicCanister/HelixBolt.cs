@@ -48,7 +48,7 @@ public class HelixBolt : ModProjectile
 		float newRotation = offset + _startVelocityRotation;
 		Projectile.velocity = newRotation.ToRotationVector2() * _speed;
 
-		var dust = Dust.NewDustPerfect(Projectile.Center, DustType);
+		Dust dust = Dust.NewDustPerfect(Projectile.Center, DustType);
 		dust.scale = Main.rand.NextFloat(1f, 1.3f);
 		dust.velocity += Projectile.velocity;
 		dust.velocity *= 0.6f;

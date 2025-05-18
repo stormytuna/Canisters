@@ -27,6 +27,7 @@ public class Resonance : BaseCanisterUsingWeapon
 		Item.width = 60;
 		Item.height = 20;
 		Item.SetShopValues(ItemRarityColor.LightRed4, Item.buyPrice(gold: 5));
+		Item.UseSound = SoundID.Item42 with { PitchRange = (0.1f, 0.4f) };
 	}
 
 	public override IEnumerable<Projectile> ShootProjectiles(IEntitySource source, CanisterShootStats stats) {

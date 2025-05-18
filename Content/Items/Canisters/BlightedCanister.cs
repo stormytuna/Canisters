@@ -1,5 +1,7 @@
-﻿using Canisters.Content.Projectiles.BlightedCanister;
+﻿using Canisters.Content.Items.Weapons;
+using Canisters.Content.Projectiles.BlightedCanister;
 using Canisters.Helpers;
+using Canisters.Helpers.Enums;
 using Terraria.Enums;
 
 namespace Canisters.Content.Items.Canisters;
@@ -16,6 +18,10 @@ public class BlightedCanister : BaseCanisterItem
 
 	public override Color CanisterColor {
 		get => Color.Lime;
+	}
+
+	public override bool SuppressWeaponUseSound(BaseCanisterUsingWeapon weapon) {
+		return weapon.CanisterFiringType == CanisterFiringType.Depleted;
 	}
 
 	public override void SetDefaults() {

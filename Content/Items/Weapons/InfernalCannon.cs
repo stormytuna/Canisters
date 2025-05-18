@@ -24,6 +24,7 @@ public class InfernalCannon : BaseCanisterUsingWeapon
 		Item.width = 54;
 		Item.height = 16;
 		Item.SetShopValues(ItemRarityColor.Orange3, Item.buyPrice(silver: 50));
+		Item.UseSound = SoundID.Item10 with { PitchRange = (-1f, -0.8f) };
 	}
 
 	public override void AddRecipes() {
@@ -41,7 +42,7 @@ public class InfernalCannonGlobalProjectile : ShotByWeaponGlobalProjectile<Infer
 			return;
 		}
 
-		var dust = Dust.NewDustDirect(projectile.position, projectile.width, projectile.height, DustID.ShadowbeamStaff);
+		Dust dust = Dust.NewDustDirect(projectile.position, projectile.width, projectile.height, DustID.ShadowbeamStaff);
 		dust.scale = Main.rand.NextFloat(1.5f, 2f);
 		dust.noGravity = true;
 		dust.noLight = true;

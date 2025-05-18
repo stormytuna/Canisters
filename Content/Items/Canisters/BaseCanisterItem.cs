@@ -14,6 +14,10 @@ public abstract class BaseCanisterItem : ModItem
 
 	public virtual void ApplyAmmoStats(ref CanisterShootStats stats) { }
 
+	public virtual bool SuppressWeaponUseSound(BaseCanisterUsingWeapon weapon) {
+		return false;
+	}
+
 	public override void SetStaticDefaults() {
 		Item.ResearchUnlockCount = 99;
 	}

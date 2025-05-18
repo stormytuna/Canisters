@@ -9,7 +9,7 @@ namespace Canisters;
 public class Canisters : Mod
 {
 	public override void HandlePacket(BinaryReader reader, int whoAmI) {
-		var message = (MessageType)reader.ReadByte();
+		MessageType message = (MessageType)reader.ReadByte();
 
 		switch (message) {
 			case MessageType.CanisterExplosionVisuals:
@@ -20,7 +20,7 @@ public class Canisters : Mod
 					return;
 				}
 
-				var canister = projectile.ModProjectile as BaseFiredCanisterProjectile;
+				BaseFiredCanisterProjectile canister = projectile.ModProjectile as BaseFiredCanisterProjectile;
 
 				if (Main.netMode == NetmodeID.MultiplayerClient) {
 					canister!.ReceiveExplosionSync();
@@ -39,7 +39,7 @@ public class Canisters : Mod
 					break;
 				}
 
-				BlightedBolt.MakeDustLightningBolts(start, end);
+				BlightedBolt.LightningBoltEffects(start, end);
 				break;
 
 			case MessageType.LunarLightningEmitterLightningBolt:
@@ -51,7 +51,7 @@ public class Canisters : Mod
 					break;
 				}
 
-				LunarLightningEmitter.MakeDustLightningBolt(start2, end2);
+				LunarLightningEmitter.LightningBoltEffects(start2, end2);
 
 				return;
 

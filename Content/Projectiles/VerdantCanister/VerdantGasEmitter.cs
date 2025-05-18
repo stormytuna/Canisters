@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using Canisters.Helpers;
+using Terraria.Audio;
 using Terraria.DataStructures;
 
 namespace Canisters.Content.Projectiles.VerdantCanister;
@@ -58,12 +59,14 @@ public class VerdantGasEmitter : ModProjectile
 
 			Rectangle dustSpawnBox = Projectile.Hitbox;
 			dustSpawnBox.Inflate(4, 4);
-			var dust = Dust.NewDustDirect(dustSpawnBox.TopLeft(), dustSpawnBox.Width, dustSpawnBox.Height, DustID.GreenFairy, Alpha: Main.rand.Next(0, 50), Scale: Main.rand.NextFloat(0.6f, 1f));
+			Dust dust = Dust.NewDustDirect(dustSpawnBox.TopLeft(), dustSpawnBox.Width, dustSpawnBox.Height, DustID.GreenFairy, Alpha: Main.rand.Next(0, 50), Scale: Main.rand.NextFloat(0.6f, 1f));
 			dust.velocity = _startVelocity.RotatedByRandom(0.4f) * Main.rand.NextFloat(0.01f, 0.8f);
+
+			SoundEngine.PlaySound(SoundID.Item13 with { Volume = 0.5f, Pitch = 0.9f }, Projectile.Center);
 		}
 
 		if (Main.rand.NextBool(2)) {
-			var dust = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.GreenFairy, Alpha: Main.rand.Next(0, 50), Scale: Main.rand.NextFloat(0.6f, 0.8f));
+			Dust dust = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.GreenFairy, Alpha: Main.rand.Next(0, 50), Scale: Main.rand.NextFloat(0.6f, 0.8f));
 			dust.velocity = _startVelocity.RotatedByRandom(0.4f) * Main.rand.NextFloat(0.01f, 0.8f);
 		}
 

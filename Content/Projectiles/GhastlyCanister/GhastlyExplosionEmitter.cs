@@ -1,4 +1,5 @@
-﻿using Terraria.DataStructures;
+﻿using Terraria.Audio;
+using Terraria.DataStructures;
 using static Microsoft.Xna.Framework.MathHelper;
 
 namespace Canisters.Content.Projectiles.GhastlyCanister;
@@ -6,6 +7,8 @@ namespace Canisters.Content.Projectiles.GhastlyCanister;
 public class GhastlyExplosionEmitter : ModProjectile
 {
 	private const float ExplosionEmissionRange = 100f;
+
+	private bool _firstFrame = true;
 
 	private ref float Timer {
 		get => ref Projectile.ai[0];
@@ -35,9 +38,15 @@ public class GhastlyExplosionEmitter : ModProjectile
 	}
 
 	public override void AI() {
+		if (_firstFrame) {
+			_firstFrame = false;
+			SoundStyle sound = Main.rand.NextBool() ? SoundID.NPCDeath39 : SoundID.NPCHit36;
+			SoundEngine.PlaySound(sound with { Volume = 0.3f, PitchRange = (0.4f, 0.6f) }, Projectile.Center);
+		}
+
 		if (Projectile.owner == Main.myPlayer && Timer % 6 == 0) {
 			Vector2 position = Main.rand.NextVector2Circular(ExplosionEmissionRange, ExplosionEmissionRange) + Projectile.Center;
-			var explosionProj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), position, Vector2.Zero,
+			Projectile explosionProj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), position, Vector2.Zero,
 				ModContent.ProjectileType<GhastlyExplosion>(), Projectile.damage, Projectile.knockBack,
 				Projectile.owner);
 			explosionProj.originalDamage = Projectile.originalDamage;
@@ -47,7 +56,7 @@ public class GhastlyExplosionEmitter : ModProjectile
 		Projectile.spriteDirection = ((Projectile.frameCounter / 8) % 2 == 0).ToDirectionInt();
 		Projectile.rotation = Projectile.velocity.ToRotation() - PiOver2;
 
-		var dust = Dust.NewDustDirect(Projectile.position + Projectile.velocity, Projectile.width, Projectile.height, DustID.DungeonSpirit);
+		Dust dust = Dust.NewDustDirect(Projectile.position + Projectile.velocity, Projectile.width, Projectile.height, DustID.DungeonSpirit);
 		dust.noGravity = true;
 		dust.velocity *= 3f;
 

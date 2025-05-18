@@ -1,5 +1,7 @@
-﻿using Canisters.Content.Projectiles.VerdantCanister;
+﻿using Canisters.Content.Items.Weapons;
+using Canisters.Content.Projectiles.VerdantCanister;
 using Canisters.Helpers;
+using Canisters.Helpers.Enums;
 using Terraria.Enums;
 
 namespace Canisters.Content.Items.Canisters;
@@ -16,6 +18,10 @@ public class VerdantCanister : BaseCanisterItem
 
 	public override Color CanisterColor {
 		get => Color.Green;
+	}
+
+	public override bool SuppressWeaponUseSound(BaseCanisterUsingWeapon weapon) {
+		return weapon.CanisterFiringType == CanisterFiringType.Depleted;
 	}
 
 	public override void SetDefaults() {

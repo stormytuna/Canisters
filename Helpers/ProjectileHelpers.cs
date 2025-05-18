@@ -18,7 +18,7 @@ public static class ProjectileHelpers
 		bool oldTileCollide = projectile.tileCollide;
 		int oldDamage = projectile.damage;
 		float oldKnockback = projectile.knockBack;
-		var oldSize = projectile.Size.ToPoint();
+		Point oldSize = projectile.Size.ToPoint();
 
 		projectile.penetrate = -1;
 		projectile.tileCollide = false;

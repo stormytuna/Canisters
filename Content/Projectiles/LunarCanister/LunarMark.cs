@@ -49,7 +49,7 @@ public class LunarMark : ModProjectile
 
 		Vector2 offset = Main.rand.NextVector2CircularEdge(120f, 120f);
 		Vector2 position = Projectile.Center + offset;
-		var dust = Dust.NewDustPerfect(position, DustID.Vortex);
+		Dust dust = Dust.NewDustPerfect(position, DustID.Vortex);
 		dust.noGravity = true;
 		dust.velocity *= 0.1f;
 		if (Main.rand.NextBool()) {
@@ -58,9 +58,9 @@ public class LunarMark : ModProjectile
 	}
 
 	public override bool PreDraw(ref Color lightColor) {
-		var texture = TextureAssets.Projectile[Type].Value;
-		var position = (Projectile.Center - Main.screenPosition).Floor();
-		var origin = texture.Size() / 2f;
+		Texture2D texture = TextureAssets.Projectile[Type].Value;
+		Vector2 position = (Projectile.Center - Main.screenPosition).Floor();
+		Vector2 origin = texture.Size() / 2f;
 
 		Main.EntitySpriteDraw(texture, position, null, Projectile.GetAlpha(lightColor), Projectile.rotation, origin, Projectile.scale, SpriteEffects.None);
 

@@ -1,4 +1,5 @@
 ﻿using Canisters.Helpers;
+using Terraria.Audio;
 
 namespace Canisters.Content.Projectiles.GlisteningCanister;
 
@@ -32,7 +33,7 @@ public class GlisteningBlob : ModProjectile
 		Projectile.rotation += 0.125f * Projectile.direction;
 
 		if (Main.rand.NextBool(3)) {
-			var dust = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.Ichor, Alpha: Main.rand.Next(100, 200), Scale: Main.rand.NextFloat(1f, 1.2f));
+			Dust dust = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.Ichor, Alpha: Main.rand.Next(100, 200), Scale: Main.rand.NextFloat(1f, 1.2f));
 			dust.noGravity = true;
 			dust.noLight = true;
 		}
@@ -58,6 +59,7 @@ public class GlisteningBlob : ModProjectile
 		Projectile.penetrate--;
 
 		DustHelpers.MakeDustExplosion(Projectile.Center, 8f, DustID.IchorTorch, 4, 0f, 4f, 80, 120, 0.8f, 1.2f, true);
+		SoundEngine.PlaySound(SoundID.Item85 with { Volume = 0.5f, PitchRange = (0f, 0.4f), MaxInstances = 3, SoundLimitBehavior = SoundLimitBehavior.IgnoreNew }, Projectile.Center);
 
 		return false;
 	}

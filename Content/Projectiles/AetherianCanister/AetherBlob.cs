@@ -1,5 +1,6 @@
 using Canisters.Helpers;
-using Terraria.GameContent;
+using Terraria.Audio;
+using static Microsoft.Xna.Framework.MathHelper;
 
 namespace Canisters.Content.Projectiles.AetherianCanister;
 
@@ -9,18 +10,9 @@ public class AetherBlob : ModProjectile
 		get => ref Projectile.ai[0];
 	}
 
-	public override void SetStaticDefaults() {
-		ProjectileID.Sets.TrailingMode[Type] = 5;
-		ProjectileID.Sets.TrailCacheLength[Type] = 7;
-	}
-
-	public override string Texture {
-		get => CanisterHelpers.GetEmptyAssetString();
-	}
-
 	public override void SetDefaults() {
-		Projectile.width = 6;
-		Projectile.height = 6;
+		Projectile.width = 10;
+		Projectile.height = 10;
 		Projectile.aiStyle = -1;
 		Projectile.timeLeft = 90;
 
@@ -35,9 +27,11 @@ public class AetherBlob : ModProjectile
 			Projectile.velocity *= 0.98f;
 		}
 
-		for (int i = 0; i < 5; i++) {
-			var dust = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.PinkTorch);
-			dust.velocity += Projectile.velocity;
+		Projectile.rotation = Projectile.velocity.ToRotation() + PiOver2;
+
+		for (int i = 0; i < 3; i++) {
+			Dust dust = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.PinkTorch);
+			dust.velocity += Projectile.velocity * 0.6f;
 			dust.velocity *= 0.6f;
 			dust.noGravity = true;
 		}
@@ -59,22 +53,17 @@ public class AetherBlob : ModProjectile
 			Projectile.velocity.Y = oldVelocity.Y * -0.95f;
 		}
 
+		SoundEngine.PlaySound(SoundID.Item56 with { Volume = 0.3f, PitchRange = (0.6f, 1.2f), MaxInstances = 3, SoundLimitBehavior = SoundLimitBehavior.IgnoreNew }, Projectile.Center);
+
 		return false;
 	}
 
-	public override bool PreDraw(ref Color lightColor) {
-		var texture = TextureAssets.Projectile[Type].Value;
-		Vector2 origin = texture.Size() / 2f;
+	public override void OnKill(int timeLeft) {
+		DustHelpers.MakeDustExplosion(Projectile.Center, 5f, DustID.PinkTorch, 5, 0.5f, 2f, noGravity: true);
+		SoundEngine.PlaySound(SoundID.DoubleJump with { Volume = 0.3f, PitchRange = (0.5f, 1f) }, Projectile.Center);
+	}
 
-		for (int i = Projectile.oldPos.Length - 1; i >= 0; i--) {
-			float progress = (Projectile.oldPos.Length - i) / (float)Projectile.oldPos.Length;
-			Vector2 drawPos = (Projectile.oldPos[i] + origin - Main.screenPosition).Floor();
-			float scale = float.Lerp(0.2f, 1f, progress * progress);
-			float opacity = float.Lerp(0.5f, 1f, progress * progress);
-			// TODO: sync colour to canister?
-			Main.spriteBatch.Draw(texture, drawPos, null, Color.Pink with { A = 0 } * opacity, 0f, origin, scale, SpriteEffects.None, 0);
-		}
-
-		return false;
+	public override Color? GetAlpha(Color lightColor) {
+		return Color.White * 0.6f;
 	}
 }
