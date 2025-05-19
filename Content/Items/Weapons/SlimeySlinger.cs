@@ -22,7 +22,7 @@ public class SlimeySlinger : BaseCanisterUsingWeapon
 	}
 
 	public override void SetDefaults() {
-		Item.DefaultToCanisterUsingWeapon(22, 22, 15f, 16, 3f);
+		Item.DefaultToCanisterUsingWeapon(32, 32, 15f, 22, 6f);
 		Item.width = 20;
 		Item.height = 32;
 		Item.SetShopValues(ItemRarityColor.Pink5, Item.buyPrice(gold: 1));
@@ -73,8 +73,13 @@ public class SlimySlingerGlobalProjectile : ShotByWeaponGlobalProjectile<SlimeyS
 			canisterProjectile.Explode();
 		}
 
-		projectile.penetrate++;
+		// Would instantly kill infinite pierce projectiles otherwise
+		if (projectile.penetrate >= 0) {
+			projectile.penetrate++;
+		}
+
 		projectile.velocity = projectile.DirectionFrom(target.Center) * projectile.velocity.Length();
+		projectile.netUpdate = true;
 	}
 
 	// TODO: Some visuals as it depletes bounces?

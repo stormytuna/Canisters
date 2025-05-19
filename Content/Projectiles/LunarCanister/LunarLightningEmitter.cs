@@ -21,6 +21,7 @@ public class LunarLightningEmitter : ModProjectile
 
 	private bool _firstFrame = true;
 	private int _totalTimeLeft;
+	private Vector2 _wibbleOffset;
 
 	public override void Load() {
 		if (Main.dedServ) {
@@ -70,6 +71,8 @@ public class LunarLightningEmitter : ModProjectile
 
 		Projectile.rotation += 0.05f;
 
+		_wibbleOffset = Main.rand.NextVector2Unit(8f, 8f);
+
 		if (Projectile.timeLeft < 10) {
 			Projectile.scale = float.Lerp(0.1f, 1f, (Projectile.timeLeft) / 10f);
 			return;
@@ -80,6 +83,8 @@ public class LunarLightningEmitter : ModProjectile
 			return;
 		}
 
+		Projectile.scale = 1f + Main.rand.NextFloat(0.05f);
+
 		if (TimerForAttack >= 15 && Main.myPlayer == Projectile.owner) {
 			float radiusMult = Main.LocalPlayer.GetModPlayer<CanisterModifiersPlayer>().CanisterLaunchedExplosionRadiusMult;
 			System.Collections.Generic.List<NPC> closeNPCs = NpcHelpers.FindNearbyNPCs(30f * 16f * radiusMult, Projectile.Center, true);
@@ -88,8 +93,8 @@ public class LunarLightningEmitter : ModProjectile
 
 				NPC nextTarget = Main.rand.Next(closeNPCs);
 				NPC.HitInfo hitInfo = new() {
-					Damage = Projectile.damage,
-					Knockback = Projectile.knockBack,
+					Damage = Projectile.damage / 2,
+					Knockback = 0f,
 					DamageType = DamageClass.Ranged,
 					HitDirection = (nextTarget.Center.X > Projectile.Center.X).ToDirectionInt(),
 				};
@@ -156,13 +161,13 @@ public class LunarLightningEmitter : ModProjectile
 		Main.spriteBatch.Begin(default, default, Main.DefaultSamplerState, default, RasterizerState.CullNone, default);
 
 		foreach (Projectile projectile in Main.ActiveProjectiles) {
-			if (projectile.ModProjectile is not LunarLightningEmitter) {
+			if (projectile.ModProjectile is not LunarLightningEmitter modProj) {
 				continue;
 			}
 
 			DrawData drawData = new() {
 				texture = _maskTexture.Value,
-				position = (projectile.Center - Main.screenPosition).Floor(),
+				position = (projectile.Center + modProj._wibbleOffset - Main.screenPosition).Floor(),
 				sourceRect = _maskTexture.Frame(),
 				color = Color.White,
 				rotation = projectile.rotation,
@@ -181,7 +186,7 @@ public class LunarLightningEmitter : ModProjectile
 
 		DrawData drawData = new() {
 			texture = texture,
-			position = (Projectile.Center - Main.screenPosition).Floor(),
+			position = (Projectile.Center + _wibbleOffset - Main.screenPosition).Floor(),
 			sourceRect = texture.Frame(),
 			color = Color.White,
 			rotation = Projectile.rotation,

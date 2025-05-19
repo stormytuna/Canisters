@@ -15,6 +15,7 @@ public class LunarMark : ModProjectile
 		Projectile.height = 200;
 		Projectile.aiStyle = -1;
 		Projectile.timeLeft = 150;
+		Projectile.tileCollide = false;
 
 		Projectile.friendly = true;
 		Projectile.usesIDStaticNPCImmunity = true;
@@ -47,13 +48,15 @@ public class LunarMark : ModProjectile
 		float scaleOffset = float.Sin(_timer % TwoPi) * 0.1f;
 		Projectile.scale = 1f + scaleOffset;
 
-		Vector2 offset = Main.rand.NextVector2CircularEdge(120f, 120f);
-		Vector2 position = Projectile.Center + offset;
-		Dust dust = Dust.NewDustPerfect(position, DustID.Vortex);
-		dust.noGravity = true;
-		dust.velocity *= 0.1f;
 		if (Main.rand.NextBool()) {
-			dust.velocity = position.DirectionTo(Projectile.Center) * Main.rand.NextFloat(2f, 5f);
+			Vector2 offset = Main.rand.NextVector2CircularEdge(120f, 120f);
+			Vector2 position = Projectile.Center + offset;
+			Dust dust = Dust.NewDustPerfect(position, DustID.Vortex);
+			dust.noGravity = true;
+			dust.velocity *= 0.1f;
+			if (Main.rand.NextBool()) {
+				dust.velocity = position.DirectionTo(Projectile.Center) * Main.rand.NextFloat(2f, 5f);
+			}
 		}
 	}
 
@@ -62,7 +65,7 @@ public class LunarMark : ModProjectile
 		Vector2 position = (Projectile.Center - Main.screenPosition).Floor();
 		Vector2 origin = texture.Size() / 2f;
 
-		Main.EntitySpriteDraw(texture, position, null, Projectile.GetAlpha(lightColor), Projectile.rotation, origin, Projectile.scale, SpriteEffects.None);
+		Main.EntitySpriteDraw(texture, position, null, lightColor, Projectile.rotation, origin, Projectile.scale, SpriteEffects.None);
 
 		return false;
 	}

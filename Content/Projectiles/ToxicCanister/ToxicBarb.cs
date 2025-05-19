@@ -31,6 +31,7 @@ public class ToxicBarb : ModProjectile
 		Projectile.height = 16;
 		Projectile.aiStyle = -1;
 		Projectile.extraUpdates = 5;
+		Projectile.timeLeft = 1200;
 
 		Projectile.friendly = true;
 		Projectile.DamageType = DamageClass.Ranged;
@@ -79,6 +80,18 @@ public class ToxicBarb : ModProjectile
 
 			Projectile.netUpdate = true;
 		}
+	}
+
+	public override bool OnTileCollide(Vector2 oldVelocity) {
+		if (Projectile.velocity.X != oldVelocity.X) {
+			Projectile.velocity.X = -oldVelocity.X;
+		}
+
+		if (Projectile.velocity.Y != oldVelocity.Y) {
+			Projectile.velocity.Y = -oldVelocity.Y;
+		}
+
+		return false;
 	}
 
 	public override void OnKill(int timeLeft) {

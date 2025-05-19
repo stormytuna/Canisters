@@ -1,3 +1,5 @@
+using Canisters.Common;
+
 namespace Canisters.Content.Items.Canisters;
 
 public class EmptyCanister : ModItem
@@ -14,7 +16,8 @@ public class EmptyCanister : ModItem
 	}
 
 	public override void AddRecipes() {
-		CreateRecipe(300)
+		int amount = ServerConfig.Instance.LowGrind ? 300 : 150;
+		CreateRecipe(amount)
 			.AddRecipeGroup(RecipeGroupID.IronBar)
 			.AddIngredient(ItemID.Glass)
 			.AddTile(TileID.Anvils)

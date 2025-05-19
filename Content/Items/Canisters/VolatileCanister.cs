@@ -1,4 +1,5 @@
-﻿using Canisters.Content.Projectiles.VolatileCanister;
+﻿using Canisters.Common;
+using Canisters.Content.Projectiles.VolatileCanister;
 using Canisters.Helpers;
 using Terraria.Enums;
 
@@ -19,13 +20,14 @@ public class VolatileCanister : BaseCanisterItem
 	}
 
 	public override void SetDefaults() {
-		Item.DefaultToCanister(6, 2f, 3f);
+		Item.DefaultToCanister(6, 1f, 0f);
 		Item.SetShopValues(ItemRarityColor.Blue1, Item.buyPrice(copper: 75));
 	}
 
 	public override void AddRecipes() {
-		CreateRecipe(300)
-			.AddIngredient<EmptyCanister>(300)
+		int amount = ServerConfig.Instance.LowGrind ? 200 : 100;
+		CreateRecipe(amount)
+			.AddIngredient<EmptyCanister>(amount)
 			.AddIngredient(ItemID.Gel)
 			.AddTile(TileID.Bottles)
 			.Register();

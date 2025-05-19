@@ -1,4 +1,5 @@
-﻿using Canisters.Content.Projectiles.HarmonicCanister;
+﻿using Canisters.Common;
+using Canisters.Content.Projectiles.HarmonicCanister;
 using Canisters.DataStructures;
 using Canisters.Helpers;
 using Terraria.Enums;
@@ -20,7 +21,7 @@ public class HarmonicCanister : BaseCanisterItem
 	}
 
 	public override void SetDefaults() {
-		Item.DefaultToCanister(11, 2.5f, 4f);
+		Item.DefaultToCanister(10, 3.5f, 4f);
 		Item.SetShopValues(ItemRarityColor.LightRed4, Item.buyPrice(silver: 9));
 	}
 
@@ -37,8 +38,9 @@ public class HarmonicCanister : BaseCanisterItem
 	}
 
 	public override void AddRecipes() {
-		CreateRecipe(300)
-			.AddIngredient<EmptyCanister>(300)
+		int amount = ServerConfig.Instance.LowGrind ? 600 : 300;
+		CreateRecipe(amount)
+			.AddIngredient<EmptyCanister>(amount)
 			.AddIngredient(ItemID.SoulofNight)
 			.AddIngredient(ItemID.SoulofLight)
 			.AddTile(TileID.Bottles)

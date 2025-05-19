@@ -42,5 +42,7 @@ public static class ProjectileHelpers
 
 		projectile.friendly = true;
 		projectile.DamageType = DamageClass.Ranged;
+		projectile.usesLocalNPCImmunity = true;
+		projectile.localNPCHitCooldown = 10;
 	}
 }

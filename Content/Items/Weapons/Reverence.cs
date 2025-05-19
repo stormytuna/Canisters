@@ -25,7 +25,7 @@ public class Reverence : BaseCanisterUsingWeapon
 	}
 
 	public override void SetDefaults() {
-		Item.DefaultToCanisterUsingWeapon(22, 22, 10f, 16, 3f);
+		Item.DefaultToCanisterUsingWeapon(22, 22, 10f, 58, 6f);
 		Item.width = 48;
 		Item.height = 16;
 		Item.SetShopValues(ItemRarityColor.Pink5, Item.buyPrice(gold: 4));

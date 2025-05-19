@@ -24,7 +24,7 @@ public class AetherianCanister : BaseCanisterItem
 	}
 
 	public override void SetDefaults() {
-		Item.DefaultToCanister(6, 2f, 3f);
+		Item.DefaultToCanister(7, 3f, 0f);
 		Item.SetShopValues(ItemRarityColor.Green2, Item.buyPrice(copper: 75));
 	}
 
@@ -33,8 +33,8 @@ public class AetherianCanister : BaseCanisterItem
 			return;
 		}
 
-		stats.Damage /= 6;
-		stats.Knockback /= 6f;
+		stats.Damage /= 5;
+		stats.Knockback /= 5f;
 		stats.ProjectileCount *= 6;
 		stats.TotalSpread += 0.7f;
 	}

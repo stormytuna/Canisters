@@ -1,4 +1,5 @@
-﻿using Canisters.Content.Items.Weapons;
+﻿using Canisters.Common;
+using Canisters.Content.Items.Weapons;
 using Canisters.Content.Projectiles.VerdantCanister;
 using Canisters.Helpers;
 using Canisters.Helpers.Enums;
@@ -25,13 +26,14 @@ public class VerdantCanister : BaseCanisterItem
 	}
 
 	public override void SetDefaults() {
-		Item.DefaultToCanister(8, 2f, 2f);
+		Item.DefaultToCanister(8, 1.5f, 0f);
 		Item.SetShopValues(ItemRarityColor.Green2, Item.buyPrice(copper: 75));
 	}
 
 	public override void AddRecipes() {
-		CreateRecipe(300)
-			.AddIngredient<EmptyCanister>(300)
+		int amount = ServerConfig.Instance.LowGrind ? 400 : 200;
+		CreateRecipe(amount)
+			.AddIngredient<EmptyCanister>(amount)
 			.AddIngredient(ItemID.JungleSpores)
 			.AddTile(TileID.Bottles)
 			.Register();

@@ -34,6 +34,8 @@ public class VerdantVine : ModProjectile
 		Projectile.friendly = true;
 		Projectile.penetrate = -1;
 		Projectile.DamageType = DamageClass.Ranged;
+		Projectile.usesIDStaticNPCImmunity = true;
+		Projectile.idStaticNPCHitCooldown = 10;
 	}
 
 	public override void AI() {

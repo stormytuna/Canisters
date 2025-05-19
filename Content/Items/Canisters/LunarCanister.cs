@@ -1,4 +1,6 @@
-﻿using Canisters.Content.Projectiles.LunarCanister;
+﻿using Canisters.Common;
+using Canisters.Content.Projectiles.LunarCanister;
+using Canisters.DataStructures;
 using Canisters.Helpers;
 using Terraria.Enums;
 
@@ -15,7 +17,7 @@ public class LunarCanister : BaseCanisterItem
 	}
 
 	public override Color CanisterColor {
-		get => new(208, 253, 235);
+		get => Color.LightCyan;
 	}
 
 	public override void SetDefaults() {
@@ -23,9 +25,16 @@ public class LunarCanister : BaseCanisterItem
 		Item.SetShopValues(ItemRarityColor.Cyan9, Item.buyPrice(silver: 9));
 	}
 
+	public override void ApplyAmmoStats(ref CanisterShootStats stats) {
+		if (stats.IsLaunched) {
+			stats.TotalSpread += 0.3f;
+		}
+	}
+
 	public override void AddRecipes() {
-		CreateRecipe(300)
-			.AddIngredient<EmptyCanister>(300)
+		int amount = ServerConfig.Instance.LowGrind ? 600 : 300;
+		CreateRecipe(amount)
+			.AddIngredient<EmptyCanister>(amount)
 			.AddIngredient(ItemID.LunarBar)
 			.AddTile(TileID.Bottles)
 			.Register();

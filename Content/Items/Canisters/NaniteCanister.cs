@@ -1,4 +1,5 @@
-﻿using Canisters.Content.Projectiles.NaniteCanister;
+﻿using Canisters.Common;
+using Canisters.Content.Projectiles.NaniteCanister;
 using Canisters.Helpers;
 using Terraria.Enums;
 
@@ -19,14 +20,15 @@ public class NaniteCanister : BaseCanisterItem
 	}
 
 	public override void SetDefaults() {
-		Item.DefaultToCanister(16, 4f, 2f);
+		Item.DefaultToCanister(14, 3f, 1f);
 		Item.SetShopValues(ItemRarityColor.Yellow8, Item.buyPrice(silver: 3));
 	}
 
 	public override void AddRecipes() {
-		CreateRecipe(300)
-			.AddIngredient<EmptyCanister>(300)
-			.AddIngredient(ItemID.Nanites, 5)
+		int amount = ServerConfig.Instance.LowGrind ? 100 : 50;
+		CreateRecipe(amount)
+			.AddIngredient<EmptyCanister>(amount)
+			.AddIngredient(ItemID.Nanites)
 			.AddTile(TileID.Bottles)
 			.Register();
 	}

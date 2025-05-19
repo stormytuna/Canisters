@@ -1,5 +1,10 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
 using Canisters.Common;
+using Canisters.Content.Projectiles.GhastlyCanister;
+using Canisters.Content.Projectiles.LunarCanister;
+using Canisters.Content.Projectiles.NaniteCanister;
+using Canisters.Content.Projectiles.ToxicCanister;
 using Canisters.Helpers;
 using Canisters.Helpers.Enums;
 using Terraria.DataStructures;
@@ -23,7 +28,7 @@ public class Pneumaticannon : BaseCanisterUsingWeapon
 	}
 
 	public override void SetDefaults() {
-		Item.DefaultToCanisterUsingWeapon(32, 32, 10f, 16, 3f);
+		Item.DefaultToCanisterUsingWeapon(28, 28, 15f, 50, 3f);
 		Item.width = 48;
 		Item.height = 14;
 		Item.SetShopValues(ItemRarityColor.Pink5, Item.sellPrice(gold: 75));
@@ -33,8 +38,20 @@ public class Pneumaticannon : BaseCanisterUsingWeapon
 
 public class PneumaticannonGlobalItem : ShotByWeaponGlobalProjectile<Pneumaticannon>
 {
+	public static HashSet<int> ExemptProjectiles = new();
+
+	public override void SetStaticDefaults() {
+		ExemptProjectiles.UnionWith([
+			ModContent.ProjectileType<ToxicFog>(),
+			ModContent.ProjectileType<Nanites>(),
+			ModContent.ProjectileType<GhastlyExplosionEmitter>(),
+			ModContent.ProjectileType<LunarLightningEmitter>(),
+		]);
+	}
+
 	public override void SafeOnSpawn(Projectile projectile, IEntitySource source) {
-		if (IsActive) {
+		bool notExempt = ServerConfig.Instance.AllowExtraUpdatesOnWeirdProjectiles || !ExemptProjectiles.Contains(projectile.type);
+		if (IsActive && notExempt) {
 			projectile.extraUpdates = 2;
 		}
 	}
@@ -55,6 +72,6 @@ public class PneumaticannonGlobalNpc : GlobalNPC
 	}
 
 	public override void ModifyShop(NPCShop shop) {
-		shop.Add<Pneumaticannon>();
+		shop.Add<Pneumaticannon>(Condition.DownedMechBossAll);
 	}
 }

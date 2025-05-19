@@ -13,29 +13,31 @@ public class GhastlyShot : ModProjectile
 		Projectile.aiStyle = -1;
 		Projectile.extraUpdates = 2;
 		Projectile.tileCollide = false;
+
 		Projectile.friendly = true;
 		Projectile.DamageType = DamageClass.Ranged;
+		Projectile.usesLocalNPCImmunity = true;
+		Projectile.localNPCHitCooldown = -1;
 	}
 
 	public override void AI() {
 		bool inTile = Collision.SolidTiles(Projectile.Center, 1, 1);
 
-		for (int i = 0; i < 2; i++) {
-			Dust dust = Dust.NewDustPerfect(Projectile.Center, DustID.DungeonSpirit);
+		int numDust = inTile ? 3 : 6;
+		for (int i = 0; i < numDust; i++) {
+			Vector2 position = Projectile.Center + ((Projectile.velocity / numDust) * i);
+			Dust dust = Dust.NewDustPerfect(position, DustID.DungeonSpirit);
 			dust.position += Projectile.velocity * 0.6f;
-			dust.velocity *= 0.4f;
+			dust.velocity *= inTile ? 0.01f : 0.1f;
 			dust.noGravity = true;
-			dust.alpha = Main.rand.Next(50, 100);
-			if (inTile) {
-				dust.alpha *= 2;
-			}
+			dust.noLight = true;
 		}
 
 		if (inTile) {
 			_timeInTiles++;
 		}
 
-		if (_timeInTiles >= 12 && Main.myPlayer == Projectile.owner) {
+		if (_timeInTiles >= 40 && Main.myPlayer == Projectile.owner) {
 			Projectile.Kill();
 		}
 	}

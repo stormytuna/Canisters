@@ -38,6 +38,6 @@ public class FungalFuryGlobalNPC : GlobalNPC
 	}
 
 	public override void ModifyShop(NPCShop shop) {
-		shop.InsertAfter(ItemID.MushroomSpear, ModContent.ItemType<FungalFury>());
+		shop.InsertAfter(ItemID.MushroomSpear, ModContent.ItemType<FungalFury>(), Condition.DownedPlantera);
 	}
 }

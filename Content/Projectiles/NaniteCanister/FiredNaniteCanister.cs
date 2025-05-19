@@ -1,5 +1,4 @@
-﻿using Canisters.Content.Buffs;
-using Canisters.Helpers;
+﻿using Canisters.Helpers;
 using Terraria.Audio;
 
 namespace Canisters.Content.Projectiles.NaniteCanister;
@@ -14,7 +13,7 @@ public class FiredNaniteCanister : BaseFiredCanisterProjectile
 		if (Main.myPlayer == Projectile.owner) {
 			for (int i = 0; i < 6; i++) {
 				Vector2 velocity = Main.rand.NextVector2CircularEdge(5f, 5f) * Main.rand.NextFloat(0.5f, 1f);
-				Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, velocity, ModContent.ProjectileType<Nanites>(), Projectile.damage, 2f, Projectile.owner);
+				Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, velocity, ModContent.ProjectileType<Nanites>(), Projectile.damage / 4, 0f, Projectile.owner);
 			}
 		}
 
@@ -24,11 +23,7 @@ public class FiredNaniteCanister : BaseFiredCanisterProjectile
 	}
 
 	public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone) {
-		target.AddBuff(ModContent.BuffType<Devoured>(), 15 * 60);
-
-		// If we kill the npc with this projectile it won't get a chance to update buffs
-		if (!target.active) {
-			target.GetGlobalNPC<DevouredGlobalNpc>().SpawnNanite(target);
-		}
+		// TODO: MP
+		target.GetGlobalNPC<NaniteGlobalNpc>().NaniteCount++;
 	}
 }

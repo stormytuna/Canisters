@@ -21,7 +21,7 @@ public class FiredToxicCanister : BaseFiredCanisterProjectile
 			foreach (float angle in Main.rand.NextSegmentedAngles(10, 0.2f)) {
 				Vector2 spawnPosition = Projectile.Center + Main.rand.NextVector2Circular(20f, 20f);
 				Vector2 velocity = angle.ToRotationVector2() * Main.rand.NextFloat(1.5f, 4f);
-				Projectile.NewProjectile(Projectile.GetSource_FromThis(), spawnPosition, velocity, ModContent.ProjectileType<ToxicFog>(), int.Max(Projectile.damage / 10, 1), 0f, Main.myPlayer);
+				Projectile.NewProjectile(Projectile.GetSource_FromThis(), spawnPosition, velocity, ModContent.ProjectileType<ToxicFog>(), int.Max(Projectile.damage / 3, 1), 0f, Main.myPlayer);
 			}
 		}
 

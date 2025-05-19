@@ -1,4 +1,5 @@
-﻿using Canisters.Content.Projectiles.ToxicCanister;
+﻿using Canisters.Common;
+using Canisters.Content.Projectiles.ToxicCanister;
 using Canisters.Helpers;
 using Terraria.Enums;
 
@@ -19,13 +20,14 @@ public class ToxicCanister : BaseCanisterItem
 	}
 
 	public override void SetDefaults() {
-		Item.DefaultToCanister(12, 3f, 4f);
+		Item.DefaultToCanister(15, 2f, 2f);
 		Item.SetShopValues(ItemRarityColor.LightRed4, Item.buyPrice(silver: 3));
 	}
 
 	public override void AddRecipes() {
-		CreateRecipe(300)
-			.AddIngredient<EmptyCanister>(300)
+		int amount = ServerConfig.Instance.LowGrind ? 100 : 50;
+		CreateRecipe(amount)
+			.AddIngredient<EmptyCanister>(amount)
 			.AddIngredient(ItemID.VialofVenom)
 			.AddTile(TileID.Bottles)
 			.Register();

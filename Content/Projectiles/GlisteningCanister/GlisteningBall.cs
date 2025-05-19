@@ -19,9 +19,11 @@ public class GlisteningBall : ModProjectile
 		Projectile.width = 8;
 		Projectile.height = 8;
 		Projectile.aiStyle = -1;
-
 		Projectile.friendly = true;
 		Projectile.DamageType = DamageClass.Ranged;
+
+		Projectile.usesLocalNPCImmunity = true;
+		Projectile.localNPCHitCooldown = -1;
 	}
 
 	public override void AI() {
@@ -31,6 +33,7 @@ public class GlisteningBall : ModProjectile
 				Projectile.timeLeft = 15;
 				Projectile.extraUpdates = 1;
 				Projectile.tileCollide = false;
+				Projectile.penetrate = -1;
 			}
 		}
 

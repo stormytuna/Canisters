@@ -20,7 +20,7 @@ public class InfernalCannon : BaseCanisterUsingWeapon
 	}
 
 	public override void SetDefaults() {
-		Item.DefaultToCanisterUsingWeapon(36, 36, 13f, 42, 8f);
+		Item.DefaultToCanisterUsingWeapon(36, 36, 12f, 42, 8f);
 		Item.width = 54;
 		Item.height = 16;
 		Item.SetShopValues(ItemRarityColor.Orange3, Item.buyPrice(silver: 50));
@@ -29,7 +29,8 @@ public class InfernalCannon : BaseCanisterUsingWeapon
 
 	public override void AddRecipes() {
 		CreateRecipe()
-			.AddIngredient(ItemID.HellstoneBar, 16)
+			.AddIngredient(ItemID.HellstoneBar, 12)
+			.AddIngredient(ItemID.IllegalGunParts)
 			.AddTile(TileID.Hellforge)
 			.Register();
 	}

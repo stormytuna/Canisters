@@ -17,12 +17,14 @@ public class VerdantGas : ModProjectile
 		Projectile.friendly = true;
 		Projectile.penetrate = -1;
 		Projectile.DamageType = DamageClass.Ranged;
+		Projectile.usesLocalNPCImmunity = true;
+		Projectile.localNPCHitCooldown = 7;
 	}
 
 	public override void AI() {
 		if (_firstFrame) {
 			_firstFrame = false;
-			Projectile.scale = 0.5f; // Terraria resizes projectiles if they set scale in SetDefaults
+			Projectile.scale = 0.5f; // Terraria resizes projectile hitbox if set scale in SetDefaults
 			Projectile.frame = Main.rand.Next(Main.projFrames[Type]);
 		}
 

@@ -18,6 +18,8 @@ public class AetherBlob : ModProjectile
 
 		Projectile.friendly = true;
 		Projectile.DamageType = DamageClass.Ranged;
+		Projectile.usesLocalNPCImmunity = true;
+		Projectile.localNPCHitCooldown = 10;
 	}
 
 	public override void AI() {

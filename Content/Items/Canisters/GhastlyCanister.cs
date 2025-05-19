@@ -1,4 +1,5 @@
-﻿using Canisters.Content.Projectiles.GhastlyCanister;
+﻿using Canisters.Common;
+using Canisters.Content.Projectiles.GhastlyCanister;
 using Canisters.DataStructures;
 using Canisters.Helpers;
 using Terraria.Enums;
@@ -20,7 +21,7 @@ public class GhastlyCanister : BaseCanisterItem
 	}
 
 	public override void SetDefaults() {
-		Item.DefaultToCanister(16, 6f, 3f);
+		Item.DefaultToCanister(12, 4.5f, 1f);
 		Item.SetShopValues(ItemRarityColor.Yellow8, Item.buyPrice(copper: 5));
 	}
 
@@ -29,15 +30,16 @@ public class GhastlyCanister : BaseCanisterItem
 			return;
 		}
 
-		stats.Damage /= 6;
-		stats.Knockback /= 6f;
+		stats.Damage /= 5;
+		stats.Knockback /= 5f;
 		stats.ProjectileCount *= 6;
-		stats.TotalSpread += 0.15f;
+		stats.TotalSpread += 0.1f;
 	}
 
 	public override void AddRecipes() {
-		CreateRecipe(300)
-			.AddIngredient<EmptyCanister>(300)
+		int amount = ServerConfig.Instance.LowGrind ? 300 : 150;
+		CreateRecipe(amount)
+			.AddIngredient<EmptyCanister>(amount)
 			.AddIngredient(ItemID.Ectoplasm)
 			.AddTile(TileID.Bottles)
 			.Register();

@@ -25,6 +25,8 @@ public class GhastlyExplosion : ModProjectile
 		Projectile.friendly = true;
 		Projectile.penetrate = -1;
 		Projectile.DamageType = DamageClass.Ranged;
+		Projectile.usesLocalNPCImmunity = true;
+		Projectile.localNPCHitCooldown = -1;
 	}
 
 	public override Color? GetAlpha(Color lightColor) {
@@ -48,5 +50,9 @@ public class GhastlyExplosion : ModProjectile
 		}
 
 		Timer++;
+	}
+
+	public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers) {
+		modifiers.Knockback *= 0f;
 	}
 }

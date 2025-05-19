@@ -23,7 +23,7 @@ public class Resonance : BaseCanisterUsingWeapon
 	}
 
 	public override void SetDefaults() {
-		Item.DefaultToCanisterUsingWeapon(8, 8, 12f, 16, 3f);
+		Item.DefaultToCanisterUsingWeapon(10, 10, 12f, 32, 3f);
 		Item.width = 60;
 		Item.height = 20;
 		Item.SetShopValues(ItemRarityColor.LightRed4, Item.buyPrice(gold: 5));

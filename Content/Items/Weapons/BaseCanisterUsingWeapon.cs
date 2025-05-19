@@ -34,8 +34,8 @@ public abstract class BaseCanisterUsingWeapon : ModItem
 
 	public virtual IEnumerable<Projectile> ShootProjectiles(IEntitySource source, CanisterShootStats stats) {
 		for (int i = 0; i < stats.ProjectileCount; i++) {
-			Vector2 perturbedVelocity = i == 0
-				? stats.Velocity // Forces one projectile to go towards cursor
+			Vector2 perturbedVelocity = (i == 0 && stats.ProjectileCount > 1)
+				? stats.Velocity // Forces one projectile to go towards cursor, if we have multiple projectiles
 				: stats.Velocity.RotatedByRandom(stats.TotalSpread);
 			yield return Projectile.NewProjectileDirect(source, stats.Position, perturbedVelocity, stats.ProjectileType, stats.Damage, stats.Knockback, Main.myPlayer);
 		}

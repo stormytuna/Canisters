@@ -47,7 +47,7 @@ public class GhastlyExplosionEmitter : ModProjectile
 		if (Projectile.owner == Main.myPlayer && Timer % 6 == 0) {
 			Vector2 position = Main.rand.NextVector2Circular(ExplosionEmissionRange, ExplosionEmissionRange) + Projectile.Center;
 			Projectile explosionProj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), position, Vector2.Zero,
-				ModContent.ProjectileType<GhastlyExplosion>(), Projectile.damage, Projectile.knockBack,
+				ModContent.ProjectileType<GhastlyExplosion>(), Projectile.damage, 0f,
 				Projectile.owner);
 			explosionProj.originalDamage = Projectile.originalDamage;
 		}

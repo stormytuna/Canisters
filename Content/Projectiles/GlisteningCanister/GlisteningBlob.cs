@@ -20,6 +20,8 @@ public class GlisteningBlob : ModProjectile
 		Projectile.friendly = true;
 		Projectile.penetrate = 3;
 		Projectile.DamageType = DamageClass.Ranged;
+		Projectile.usesLocalNPCImmunity = true;
+		Projectile.localNPCHitCooldown = -1;
 	}
 
 	public override void AI() {
@@ -51,7 +53,7 @@ public class GlisteningBlob : ModProjectile
 		}
 
 		if (Projectile.velocity.Y != oldVelocity.Y) {
-			Projectile.velocity.Y = -oldVelocity.Y;
+			Projectile.velocity.Y = -oldVelocity.Y * 0.8f;
 		}
 
 		Projectile.velocity *= 0.8f;

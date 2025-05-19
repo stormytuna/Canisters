@@ -20,7 +20,7 @@ public class BarkBellower : BaseCanisterUsingWeapon
 	}
 
 	public override void SetDefaults() {
-		Item.DefaultToCanisterUsingWeapon(16, 16, 11f, 21, 3f);
+		Item.DefaultToCanisterUsingWeapon(16, 16, 11f, 19, 3f);
 		Item.width = 44;
 		Item.height = 20;
 		Item.SetShopValues(ItemRarityColor.Green2, Item.sellPrice(gold: 15));

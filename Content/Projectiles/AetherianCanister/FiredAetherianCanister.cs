@@ -9,20 +9,29 @@ public class FiredAetherianCanister : BaseFiredCanisterProjectile
 		get => "Canisters/Content/Items/Canisters/AetherianCanister";
 	}
 
+	public override void SetDefaults() {
+		Projectile.DefaultToFiredCanister();
+		Projectile.penetrate = -1;
+	}
+
 	public override void PostAI() {
-		if (Timer >= 20) {
+		if (Timer == 12f) {
+			Explode();
+		}
+
+		if (Timer >= 24) {
 			Projectile.Kill();
 		}
 	}
 
 	public override void Explode() {
 		if (Main.myPlayer == Projectile.owner) {
-			Projectile.Explode(60, 60);
+			Projectile.Explode(80, 80);
 		}
 
-		for (int numDust = 0; numDust < 7; numDust++) {
+		for (int numDust = 0; numDust < 15; numDust++) {
 			Vector2 position = Projectile.Center + Main.rand.NextVector2Circular(20f, 20f);
-			Vector2 velocity = Main.rand.NextVector2Circular(6f, 6f);
+			Vector2 velocity = Main.rand.NextVector2CircularEdge(6f, 6f) * Main.rand.NextFloat(0.8f, 1.2f);
 			Dust dust = Dust.NewDustPerfect(position, DustID.SparkForLightDisc, velocity, 0, Main.hslToRgb(Main.rand.NextFloat(), 1f, 0.5f), Main.rand.NextFloat(0.6f, 1.4f));
 			dust.noGravity = true;
 			dust.fadeIn = dust.scale + 0.05f;
@@ -32,7 +41,8 @@ public class FiredAetherianCanister : BaseFiredCanisterProjectile
 			dust.scale -= 0.3f;
 		}
 
-		// TODO: come back and fix this, party popper effect would be cool?
-		SoundEngine.PlaySound(SoundID.DD2_GoblinBomb, Projectile.Center);
+		DustHelpers.MakeDustExplosion(Projectile.Center, 20f, Main.rand.Next(DustID.Confetti, DustID.Confetti_Yellow + 1), 5, 1f, 3f);
+
+		SoundEngine.PlaySound(SoundID.NPCDeath63 with { PitchRange = (-0.8f, -0.2f), MaxInstances = 0 }, Projectile.Center);
 	}
 }

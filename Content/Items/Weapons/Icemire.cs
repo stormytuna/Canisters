@@ -21,7 +21,7 @@ public class Icemire : BaseCanisterUsingWeapon
 	}
 
 	public override void SetDefaults() {
-		Item.DefaultToCanisterUsingWeapon(24, 24 * 2, 15f, 16, 3f);
+		Item.DefaultToCanisterUsingWeapon(24, 24 * 2, 12f, 56, 6f);
 		Item.width = 74;
 		Item.height = 22;
 		Item.SetShopValues(ItemRarityColor.Pink5, Item.buyPrice(gold: 5));
@@ -56,7 +56,7 @@ public class IcemireGlobalProjectile : ShotByWeaponGlobalProjectile<Icemire>
 public class IcemireGlobalNpc : GlobalNPC
 {
 	public override bool AppliesToEntity(NPC entity, bool lateInstantiation) {
-		return entity.type == NPCID.ArmoredViking || entity.type == NPCID.IceTortoise;
+		return entity.type is NPCID.ArmoredViking or NPCID.IceTortoise or NPCID.IceElemental;
 	}
 
 	public override void ModifyNPCLoot(NPC npc, NPCLoot npcLoot) {

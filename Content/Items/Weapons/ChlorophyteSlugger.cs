@@ -1,4 +1,5 @@
-﻿using Canisters.Helpers;
+﻿using Canisters.DataStructures;
+using Canisters.Helpers;
 using Canisters.Helpers.Enums;
 using Terraria.Enums;
 
@@ -19,11 +20,15 @@ public class ChlorophyteSlugger : BaseCanisterUsingWeapon
 	}
 
 	public override void SetDefaults() {
-		Item.DefaultToCanisterUsingWeapon(18, 18, 11f, 21, 3f);
+		Item.DefaultToCanisterUsingWeapon(18, 18, 11f, 30, 1f);
 		Item.width = 50;
 		Item.height = 24;
 		Item.SetShopValues(ItemRarityColor.Lime7, Item.buyPrice(gold: 5, silver: 50));
 		Item.UseSound = SoundID.Item10 with { PitchRange = (0.8f, 1f), MaxInstances = 0 };
+	}
+
+	public override void ApplyWeaponStats(ref CanisterShootStats stats) {
+		stats.TotalSpread += 0.35f;
 	}
 
 	public override bool? UseItem(Player player) {

@@ -21,7 +21,7 @@ public class RepurposedSprayBottle : BaseCanisterUsingWeapon
 	}
 
 	public override void SetDefaults() {
-		Item.DefaultToCanisterUsingWeapon(8, 8, 5f, 36, 2f);
+		Item.DefaultToCanisterUsingWeapon(8, 8, 6f, 36, 0f);
 		Item.width = 14;
 		Item.height = 22;
 		Item.SetShopValues(ItemRarityColor.LightRed4, Item.buyPrice(gold: 25));

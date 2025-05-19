@@ -81,8 +81,8 @@ Items: {
 	ToxicCanister: {
 		Tooltip:
 			'''
-			Leaks a toxic aura when launched
-			Fires smart-bouncing venomous barbs when depleted
+			Leaves a toxic emanation when launched
+			Fires smart-bouncing venomous wisps when depleted
 			'''
 		DisplayName: Toxic Canister
 	}
@@ -132,7 +132,7 @@ Items: {
 		Tooltip:
 			'''
 			Explodes into a cluster bomb when launched
-			Fires a shotgun blast of quick spectral bolts when depleted
+			Fires a shotgun blast of spectral bolts when depleted
 			'''
 		DisplayName: Ghastly Canister
 	}
@@ -140,8 +140,8 @@ Items: {
 	LunarCanister: {
 		Tooltip:
 			'''
-			Explodes, calling a burst of lightning when launched
-			Fires lunar bolts that pierce, explode and home in on enemies when depleted
+			Explodes into a vortex of lightning when launched
+			Fires marking lunar energy when depleted
 			'''
 		DisplayName: Lunar Canister
 	}
@@ -198,7 +198,7 @@ Items: {
 
 	SlimeySlinger: {
 		DisplayName: Slimey Slinger
-		Tooltip: Coates fired canisters with bouncy slime
+		Tooltip: Coats fired canisters with bouncy slime
 	}
 
 	Splattergun: {
@@ -224,7 +224,7 @@ Items: {
 		Tooltip:
 			'''
 			Becomes a spread of bouncy aether blobs when launched
-			Releases an exploding aether canister when depleted
+			Releases a doubly-exploding canister when depleted
 			'''
 		DisplayName: Aetherian Canister
 	}
@@ -248,5 +248,21 @@ Buffs: {
 	Devoured: {
 		Description: Nanite time
 		DisplayName: Devoured
+	}
+}
+
+Configs: {
+	ServerConfig: {
+		DisplayName: Server Config
+
+		LowGrind: {
+			Label: Low Grind
+			Tooltip: Reduces the amount of grind needed to play this mod's content. Recipes are cheaper and drops are plentiful. If you are playing with many people or with many mods enabled, you may want to turn this on.
+		}
+
+		AllowExtraUpdatesOnWeirdProjectiles: {
+			Label: Allow Extra Updates On Weird Projectiles
+			Tooltip: Allows weapons like the Pneumati-cannon to apply extra updates to normally blacklisted projectiles. NOTE: Enabling this will affect gameplay balance, enable at your own risk!
+		}
 	}
 }

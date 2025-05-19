@@ -18,17 +18,6 @@ public class FiredHarmonicCanister : BaseFiredCanisterProjectile
 		Projectile.penetrate = -1;
 	}
 
-	public override void Explode() {
-		if (Main.myPlayer == Projectile.owner) {
-			Projectile.Explode(100, 100);
-		}
-
-		DustHelpers.MakeDustExplosion(Projectile.Center, 16f, DustID.PinkTorch, 15, 8f, 16f, noGravity: true);
-		DustHelpers.MakeDustExplosion(Projectile.Center, 16f, DustID.PurpleTorch, 15, 8f, 16f, noGravity: true);
-
-		SoundEngine.PlaySound(SoundID.Zombie103 with { Volume = 0.4f, PitchRange = (-0.4f, -0.1f), MaxInstances = 2, SoundLimitBehavior = SoundLimitBehavior.ReplaceOldest }, Projectile.Center);
-	}
-
 	public override void PostAI() {
 		if (HasGravity && Main.myPlayer == Projectile.owner) {
 			Projectile.Kill();
@@ -40,5 +29,18 @@ public class FiredHarmonicCanister : BaseFiredCanisterProjectile
 		if (Main.netMode == NetmodeID.MultiplayerClient) {
 			BroadcastExplosionSync(-1, Main.myPlayer, Projectile.identity);
 		}
+	}
+
+	public override void Explode() {
+		if (Main.myPlayer == Projectile.owner) {
+			Projectile.Explode(100, 100);
+		}
+
+		int dustMult = HasGravity ? 2 : 1;
+
+		DustHelpers.MakeDustExplosion(Projectile.Center, 30f, DustID.PinkTorch, 15 * dustMult, 6f, 10f, noGravity: true);
+		DustHelpers.MakeDustExplosion(Projectile.Center, 30f, DustID.PurpleTorch, 15 * dustMult, 6f, 10f, noGravity: true);
+
+		SoundEngine.PlaySound(SoundID.Zombie103 with { Volume = 0.4f, PitchRange = (-0.4f, -0.1f), MaxInstances = 2, SoundLimitBehavior = SoundLimitBehavior.ReplaceOldest }, Projectile.Center);
 	}
 }

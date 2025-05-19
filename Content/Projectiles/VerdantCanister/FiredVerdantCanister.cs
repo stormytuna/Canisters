@@ -26,14 +26,15 @@ public class FiredVerdantCanister : BaseFiredCanisterProjectile
 
 	public override void Explode() {
 		if (Main.myPlayer == Projectile.owner) {
-			List<float> startRots = Main.rand.NextSegmentedAngles(4, 0.5f);
-			for (int i = 0; i < 4; i++) {
+			int numTotalVines = _buffFromLushSlingshot ? 6 : 4;
+			List<float> startRots = Main.rand.NextSegmentedAngles(numTotalVines, 0.3f);
+			for (int i = 0; i < numTotalVines; i++) {
 				int numVines = _buffFromLushSlingshot ? Main.rand.Next(5, 8) : Main.rand.Next(3, 6);
 				float vineRot = Main.rand.NextGaussian(0f, 0.15f);
 				float startRot = startRots[i];
 				int damage = _buffFromLushSlingshot ? (int)(Projectile.damage * 1.1f) : Projectile.damage;
 				Vector2 offset = Vector2.UnitY.RotatedBy(startRot) * -20f;
-				Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center + offset, Vector2.Zero, ModContent.ProjectileType<VerdantVine>(), damage, Projectile.knockBack / 3f, Projectile.owner, numVines, startRot, vineRot);
+				Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center + offset, Vector2.Zero, ModContent.ProjectileType<VerdantVine>(), damage, 0f, Projectile.owner, numVines, startRot, vineRot);
 			}
 
 			Projectile.Explode(100, 100);

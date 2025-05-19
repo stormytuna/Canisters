@@ -25,7 +25,7 @@ public class FiredBlightedCanister : BaseFiredCanisterProjectile
 				Vector2 positionOffset = velocity * 2f;
 				Vector2 position = Projectile.Center + positionOffset;
 
-				Projectile.NewProjectile(Projectile.GetSource_FromThis(), position, velocity, ModContent.ProjectileType<BlightedBall>(), Projectile.damage / 3, Projectile.knockBack / 3f, Projectile.owner, sign);
+				Projectile.NewProjectile(Projectile.GetSource_FromThis(), position, velocity, ModContent.ProjectileType<BlightedBall>(), Projectile.damage / 3, 0f, Projectile.owner, sign);
 			}
 
 			Projectile.Explode(100, 100);

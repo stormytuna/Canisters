@@ -23,6 +23,8 @@ public class BlightedBall : ModProjectile
 		Projectile.friendly = true;
 		Projectile.penetrate = -1;
 		Projectile.DamageType = DamageClass.Ranged;
+		Projectile.usesLocalNPCImmunity = true;
+		Projectile.localNPCHitCooldown = -1;
 	}
 
 	public override void AI() {
@@ -38,6 +40,10 @@ public class BlightedBall : ModProjectile
 
 	public override Color? GetAlpha(Color lightColor) {
 		return Color.White;
+	}
+
+	public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers) {
+		modifiers.Knockback *= 0f;
 	}
 
 	public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone) {

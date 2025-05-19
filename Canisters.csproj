@@ -9,5 +9,6 @@
     </ItemGroup>
     <ItemGroup>
         <Folder Include="Assets\Gores"/>
+        <Folder Include="Content\Buffs\" />
     </ItemGroup>
 </Project>

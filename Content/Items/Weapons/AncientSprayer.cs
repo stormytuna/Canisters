@@ -22,7 +22,7 @@ public class AncientSprayer : BaseCanisterUsingWeapon
 	}
 
 	public override void SetDefaults() {
-		Item.DefaultToCanisterUsingWeapon(10, 10, 9f, 11, 1f);
+		Item.DefaultToCanisterUsingWeapon(10, 10, 8f, 10, 0f);
 		Item.width = 60;
 		Item.height = 14;
 		Item.SetShopValues(ItemRarityColor.Blue1, Item.buyPrice(silver: 40));

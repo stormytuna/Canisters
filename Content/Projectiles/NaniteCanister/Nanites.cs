@@ -1,14 +1,14 @@
-﻿using Canisters.Content.Buffs;
-using Canisters.Content.Dusts;
+﻿using Canisters.Content.Dusts;
 using Canisters.Helpers;
 using Terraria.DataStructures;
 
 namespace Canisters.Content.Projectiles.NaniteCanister;
 
+// TODO: rewrite?
 public class Nanites : ModProjectile
 {
-	private const float DetectionRange = 25f * 16f;
-	private const float RangeToKeepDetection = 50f * 16f;
+	private const float DetectionRange = 15f * 16f;
+	private const float RangeToKeepDetection = 25f * 16f;
 	private const float Acceleration = 0.3f;
 	private const float TopSpeed = 12f;
 
@@ -85,12 +85,8 @@ public class Nanites : ModProjectile
 	}
 
 	public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone) {
-		target.AddBuff(ModContent.BuffType<Devoured>(), 15 * 60);
-
-		// If we kill the npc with this projectile it won't get a chance to update buffs
-		if (!target.active) {
-			target.GetGlobalNPC<DevouredGlobalNpc>().SpawnNanite(target);
-		}
+		// TODO: MP
+		target.GetGlobalNPC<NaniteGlobalNpc>().NaniteCount++;
 	}
 
 	public override bool OnTileCollide(Vector2 oldVelocity) {

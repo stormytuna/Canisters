@@ -1,5 +1,4 @@
-﻿using Canisters.DataStructures;
-using Canisters.Helpers;
+﻿using Canisters.Helpers;
 using Canisters.Helpers.Enums;
 using Terraria.Enums;
 
@@ -20,15 +19,11 @@ public class Splattergun : BaseCanisterUsingWeapon
 	}
 
 	public override void SetDefaults() {
-		Item.DefaultToCanisterUsingWeapon(14, 14, 10f, 16, 3f);
+		Item.DefaultToCanisterUsingWeapon(14, 14, 12f, 38, 1f);
 		Item.width = 30;
 		Item.height = 26;
 		Item.SetShopValues(ItemRarityColor.LightRed4, Item.buyPrice(gold: 2, silver: 50));
 		Item.UseSound = SoundID.Item5 with { PitchRange = (0.9f, 1.3f), MaxInstances = 0, Volume = 0.6f };
-	}
-
-	public override void ApplyWeaponStats(ref CanisterShootStats stats) {
-		stats.Velocity *= 1.5f;
 	}
 
 	public override bool? UseItem(Player player) {

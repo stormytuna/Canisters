@@ -4,7 +4,7 @@ namespace Canisters.Content.Projectiles.ToxicCanister;
 
 public class ToxicFog : ModProjectile
 {
-	private const int MaxLifeTime = 2 * 60;
+	private const int MaxLifeTime = 4 * 60;
 	private int animationSpeed = 12;
 
 	private bool firstFrame = true;
@@ -20,12 +20,11 @@ public class ToxicFog : ModProjectile
 		Projectile.alpha = 200;
 		Projectile.timeLeft = MaxLifeTime;
 
+		Projectile.penetrate = -1;
 		Projectile.friendly = true;
 		Projectile.DamageType = DamageClass.Ranged;
-		Projectile.penetrate = -1;
-
 		Projectile.usesIDStaticNPCImmunity = true;
-		Projectile.idStaticNPCHitCooldown = 8;
+		Projectile.idStaticNPCHitCooldown = 20;
 	}
 
 	public override void AI() {

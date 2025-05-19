@@ -23,6 +23,8 @@ public class LunarShot : ModProjectile
 		Projectile.friendly = true;
 		Projectile.penetrate = 3;
 		Projectile.DamageType = DamageClass.Ranged;
+		Projectile.usesLocalNPCImmunity = true;
+		Projectile.localNPCHitCooldown = -1;
 	}
 
 	public override void AI() {
@@ -40,7 +42,7 @@ public class LunarShot : ModProjectile
 	}
 
 	public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone) {
-		Projectile.NewProjectile(Projectile.GetSource_FromThis(), target.Center, Vector2.Zero, ModContent.ProjectileType<LunarMark>(), Projectile.damage, 0f, Main.myPlayer);
+		Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<LunarMark>(), Projectile.damage / 3, 0f, Main.myPlayer);
 
 		_hitNpcs.Add(target.whoAmI);
 		List<NPC> nearbyNPCs = NpcHelpers.FindNearbyNPCs(50f * 16f, Projectile.Center, true, _hitNpcs);

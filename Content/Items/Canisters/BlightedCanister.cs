@@ -1,4 +1,5 @@
-﻿using Canisters.Content.Items.Weapons;
+﻿using Canisters.Common;
+using Canisters.Content.Items.Weapons;
 using Canisters.Content.Projectiles.BlightedCanister;
 using Canisters.Helpers;
 using Canisters.Helpers.Enums;
@@ -25,13 +26,14 @@ public class BlightedCanister : BaseCanisterItem
 	}
 
 	public override void SetDefaults() {
-		Item.DefaultToCanister(12, 2f, 4f);
+		Item.DefaultToCanister(12, 4f, 0f);
 		Item.SetShopValues(ItemRarityColor.LightRed4, Item.buyPrice(silver: 9));
 	}
 
 	public override void AddRecipes() {
-		CreateRecipe(300)
-			.AddIngredient<EmptyCanister>(300)
+		int amount = ServerConfig.Instance.LowGrind ? 300 : 150;
+		CreateRecipe(amount)
+			.AddIngredient<EmptyCanister>(amount)
 			.AddIngredient(ItemID.CursedFlame)
 			.AddTile(TileID.Bottles)
 			.Register();

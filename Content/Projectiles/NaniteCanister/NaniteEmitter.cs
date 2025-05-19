@@ -46,7 +46,7 @@ public class NaniteMistEmitter : ModProjectile
 		if (ShootTimer <= 0 && Collision.CanHit(Owner.Center, 0, 0, Projectile.Center, 0, 0) && _numFired < 3 && Main.myPlayer == Projectile.owner) {
 			Vector2 velocity = _startVelocity * Main.rand.NextFloat(0.95f, 1.05f);
 			velocity = velocity.RotatedByRandom(0.2f);
-			Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, velocity, ModContent.ProjectileType<Nanites>(), Projectile.damage / 3, Projectile.knockBack, Projectile.owner);
+			Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, velocity, ModContent.ProjectileType<Nanites>(), Projectile.damage / 2, Projectile.knockBack, Projectile.owner);
 			ShootTimer = _maxFireCounter;
 			_numFired++;
 

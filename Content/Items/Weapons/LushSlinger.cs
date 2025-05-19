@@ -19,7 +19,7 @@ public class LushSlinger : BaseCanisterUsingWeapon
 	}
 
 	public override void SetDefaults() {
-		Item.DefaultToCanisterUsingWeapon(20, 20, 10f, 31, 2f);
+		Item.DefaultToCanisterUsingWeapon(35, 35, 9f, 31, 4f);
 		Item.width = 20;
 		Item.height = 32;
 		Item.SetShopValues(ItemRarityColor.Orange3, Item.buyPrice(silver: 85));
@@ -28,7 +28,7 @@ public class LushSlinger : BaseCanisterUsingWeapon
 
 	public override void AddRecipes() {
 		CreateRecipe()
-			.AddIngredient<WoodenSlingshot>()
+			.AddIngredient(ItemID.RichMahogany, 8)
 			.AddIngredient(ItemID.Vine, 2)
 			.AddIngredient(ItemID.JungleSpores, 10)
 			.AddTile(TileID.WorkBenches)

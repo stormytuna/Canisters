@@ -20,7 +20,7 @@ public class TheColony : BaseCanisterUsingWeapon
 	}
 
 	public override void SetDefaults() {
-		Item.DefaultToCanisterUsingWeapon(25, 25, 12f, 36, 3f);
+		Item.DefaultToCanisterUsingWeapon(25, 25, 8f, 18, 3f);
 		Item.width = 32;
 		Item.height = 24;
 		Item.SetShopValues(ItemRarityColor.Orange3, Item.buyPrice(silver: 70));
@@ -29,7 +29,6 @@ public class TheColony : BaseCanisterUsingWeapon
 
 	public override void ApplyWeaponStats(ref CanisterShootStats stats) {
 		stats.ProjectileCount *= 4;
-		stats.Damage /= 4;
 		stats.TotalSpread += 0.35f;
 	}
 
