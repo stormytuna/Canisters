@@ -242,6 +242,11 @@ Items: {
 			Increases depleted projectile firerate by 15%
 			'''
 	}
+
+	AbyssalBlaster: {
+		DisplayName: Abyssal Blaster
+		Tooltip: ""
+	}
 }
 
 Buffs: {
