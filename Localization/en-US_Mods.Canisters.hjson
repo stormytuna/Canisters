@@ -259,7 +259,7 @@ Items: {
 
 	HypernovaRailgun: {
 		DisplayName: Hypernova Railgun
-		Tooltip: Launches canisters with unparallelled speed and increases damage the further they travel
+		Tooltip: Launches canisters with unparallelled speed and increases damage the further they travel, up to 20%
 	}
 
 	QuantumFluxCannon: {

@@ -36,6 +36,12 @@ public class HypernovaRailgun : BaseCanisterUsingWeapon
 
 public class HypernovaRailgunGlobalProjectile : ShotByWeaponGlobalProjectile<HypernovaRailgun>
 {
+	private const float MaxExtraDamage = 0.2f;
+	private const int MinFramesForExtraDamage = 30;
+	private const int MaxFramesForExtraDamage = 50;
+	
+	private int _framesTravelling = 0;
+	
 	public override void SafeOnSpawn(Projectile projectile, IEntitySource source) {
 		bool notExempt = ServerConfig.Instance.AllowExtraUpdatesOnWeirdProjectiles || !PneumaticannonGlobalProjectile.ExemptProjectiles.Contains(projectile.type);
 		if (IsActive && notExempt) {
@@ -49,8 +55,20 @@ public class HypernovaRailgunGlobalProjectile : ShotByWeaponGlobalProjectile<Hyp
 		}
 
 		projectile.rotation = projectile.velocity.ToRotation() + PiOver4;
-
+		
+		_framesTravelling++;
+		
 		return false;
+	}
+
+	public override void ModifyHitNPC(Projectile projectile, NPC target, ref NPC.HitModifiers modifiers) {
+		if (!IsActive || _framesTravelling <= MinFramesForExtraDamage) {
+			return;
+		}
+
+		float progress = (float)(_framesTravelling - MinFramesForExtraDamage) / (MaxFramesForExtraDamage - MinFramesForExtraDamage);
+		float extraDamage = float.Min(progress * MaxExtraDamage, MaxExtraDamage);
+		modifiers.FinalDamage += extraDamage;
 	}
 
 	public override bool PreDraw(Projectile projectile, ref Color lightColor) {
