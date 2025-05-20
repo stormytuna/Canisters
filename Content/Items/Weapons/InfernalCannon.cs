@@ -38,6 +38,10 @@ public class InfernalCannon : BaseCanisterUsingWeapon
 
 public class InfernalCannonGlobalProjectile : ShotByWeaponGlobalProjectile<InfernalCannon>
 {
+	public override bool ApplyFromParent() {
+		return true;
+	}
+
 	public override void AI(Projectile projectile) {
 		if (!IsActive || projectile.hide || Main.rand.NextBool(4, 5)) {
 			return;

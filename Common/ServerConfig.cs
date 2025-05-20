@@ -15,7 +15,4 @@ public class ServerConfig : ModConfig
 
 	[DefaultValue(false)]
 	public bool LowGrind;
-
-	[DefaultValue(false)]
-	public bool AllowExtraUpdatesOnWeirdProjectiles;
 }

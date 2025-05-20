@@ -34,6 +34,10 @@ public class Icemire : BaseCanisterUsingWeapon
 
 public class IcemireGlobalProjectile : ShotByWeaponGlobalProjectile<Icemire>
 {
+	public override bool ApplyFromParent() {
+		return true;
+	}
+
 	public override void AI(Projectile projectile) {
 		if (!IsActive || Main.rand.NextBool(4, 5)) {
 			return;

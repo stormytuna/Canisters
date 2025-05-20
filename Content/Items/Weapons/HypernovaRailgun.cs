@@ -43,8 +43,7 @@ public class HypernovaRailgunGlobalProjectile : ShotByWeaponGlobalProjectile<Hyp
 	private int _framesTravelling = 0;
 	
 	public override void SafeOnSpawn(Projectile projectile, IEntitySource source) {
-		bool notExempt = ServerConfig.Instance.AllowExtraUpdatesOnWeirdProjectiles || !PneumaticannonGlobalProjectile.ExemptProjectiles.Contains(projectile.type);
-		if (IsActive && notExempt) {
+		if (IsActive) {
 			projectile.extraUpdates = 8;
 		}
 	}

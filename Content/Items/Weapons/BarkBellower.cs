@@ -30,6 +30,10 @@ public class BarkBellower : BaseCanisterUsingWeapon
 
 public class BarkBellowerGlobalProjectile : ShotByWeaponGlobalProjectile<BarkBellower>
 {
+	public override bool ApplyFromParent() {
+		return true;
+	}
+
 	public override void AI(Projectile projectile) {
 		if (!IsActive || projectile.hide || Main.rand.NextBool(4, 5)) {
 			return;

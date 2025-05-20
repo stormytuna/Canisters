@@ -14,12 +14,16 @@ public abstract class ShotByWeaponGlobalProjectile<TWeapon> : GlobalProjectile
 		get => true;
 	}
 
+	public virtual bool ApplyFromParent() {
+		return false;
+	}
+
 	public virtual void SafeOnSpawn(Projectile projectile, IEntitySource source) { }
 
 	public sealed override void OnSpawn(Projectile projectile, IEntitySource source) {
 		bool shotByTWeapon = source is EntitySource_ItemUse_WithAmmo { Item.ModItem: TWeapon };
 		bool appliesToParent = source is EntitySource_Parent { Entity: Projectile parentProjectile } && parentProjectile.GetGlobalProjectile(this).IsActive;
-		IsActive = shotByTWeapon || appliesToParent;
+		IsActive = shotByTWeapon || (appliesToParent && ApplyFromParent());
 
 		SafeOnSpawn(projectile, source);
 	}

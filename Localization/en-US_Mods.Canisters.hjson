@@ -287,10 +287,5 @@ Configs: {
 			Label: Low Grind
 			Tooltip: Reduces the amount of grind needed to play this mod's content. Recipes are cheaper and drops are plentiful. If you are playing with many people or with many mods enabled, you may want to turn this on.
 		}
-
-		AllowExtraUpdatesOnWeirdProjectiles: {
-			Label: Allow Extra Updates On Weird Projectiles
-			Tooltip: Allows weapons like the Pneumati-cannon to apply extra updates to normally blacklisted projectiles. NOTE: Enabling this will affect gameplay balance, enable at your own risk!
-		}
 	}
 }

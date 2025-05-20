@@ -36,21 +36,8 @@ public class Pneumaticannon : BaseCanisterUsingWeapon
 
 public class PneumaticannonGlobalProjectile : ShotByWeaponGlobalProjectile<Pneumaticannon>
 {
-	// TODO: move somewhere else ?
-	public static HashSet<int> ExemptProjectiles = new();
-
-	public override void SetStaticDefaults() {
-		ExemptProjectiles.UnionWith([
-			ModContent.ProjectileType<ToxicFog>(),
-			ModContent.ProjectileType<Nanites>(),
-			ModContent.ProjectileType<GhastlyExplosionEmitter>(),
-			ModContent.ProjectileType<LunarLightningEmitter>(),
-		]);
-	}
-
 	public override void SafeOnSpawn(Projectile projectile, IEntitySource source) {
-		bool notExempt = ServerConfig.Instance.AllowExtraUpdatesOnWeirdProjectiles || !ExemptProjectiles.Contains(projectile.type);
-		if (IsActive && notExempt) {
+		if (IsActive) {
 			projectile.extraUpdates = 2;
 		}
 	}
