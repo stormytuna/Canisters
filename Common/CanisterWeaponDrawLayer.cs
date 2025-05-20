@@ -43,7 +43,7 @@ public class CanisterWeaponDrawLayer : PlayerDrawLayer
 			heldItem.GetAlpha(drawInfo.itemColor), rotation, origin, scale, drawInfo.itemEffect);
 		drawInfo.DrawDataCache.Add(baseDrawData);
 
-		DrawData canisterDrawData = baseDrawData with { texture = canisterWeapon.CanisterTexture.Value, color = CanisterHelpers.GetCanisterColor(usedAmmoItemId) * TileHelpers.GetBrightness(drawInfo.ItemLocation) };
+		DrawData canisterDrawData = baseDrawData with { texture = canisterWeapon.CanisterTexture.Value, color = heldItem.GetAlpha(CanisterHelpers.GetCanisterColor(usedAmmoItemId)) };
 		drawInfo.DrawDataCache.Add(canisterDrawData);
 	}
 }

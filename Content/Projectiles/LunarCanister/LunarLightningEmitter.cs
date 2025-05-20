@@ -1,4 +1,5 @@
 ﻿using Canisters.Common;
+using Canisters.DataStructures;
 using Canisters.Helpers;
 using ReLogic.Content;
 using Terraria.Audio;
@@ -157,8 +158,8 @@ public class LunarLightningEmitter : ModProjectile
 		RenderTargetBinding[] bindings = Main.graphics.GraphicsDevice.GetRenderTargets();
 		Main.graphics.GraphicsDevice.SetRenderTarget(_maskRenderTarget);
 		Main.graphics.GraphicsDevice.Clear(Color.Transparent);
-
-		Main.spriteBatch.Begin(default, default, Main.DefaultSamplerState, default, RasterizerState.CullNone, default);
+		
+		Main.spriteBatch.Begin(SpriteBatchParams.Default with { TransformMatrix = Matrix.Identity });
 
 		foreach (Projectile projectile in Main.ActiveProjectiles) {
 			if (projectile.ModProjectile is not LunarLightningEmitter modProj) {
@@ -194,19 +195,19 @@ public class LunarLightningEmitter : ModProjectile
 			origin = texture.Size() / 2f,
 		};
 		drawData.Draw(Main.spriteBatch);
-
-		Main.spriteBatch.End();
-		Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, DepthStencilState.None, RasterizerState.CullNone, _maskEffect.Value, Main.GameViewMatrix.TransformationMatrix);
+		
+		Main.spriteBatch.TakeSnapshotAndEnd(out SpriteBatchParams snapshot);
+		Main.spriteBatch.Begin(SpriteBatchParams.Default with { Effect = _maskEffect.Value });
 
 		Main.graphics.GraphicsDevice.Textures[1] = _maskBackgroundTexture.Value;
+		
 		Vector2 positionOnScreen = (Projectile.Center - Main.screenPosition) / Main.ScreenSize.ToVector2();
 		_maskEffect.Value.Parameters["position"].SetValue(positionOnScreen);
 		_maskEffect.Value.Parameters["screenResolution"].SetValue(new Vector2((float)Main.screenWidth / (Main.screenWidth + Main.screenHeight), (float)Main.screenHeight / (Main.screenWidth + Main.screenHeight)));
 
 		Main.spriteBatch.Draw(_maskRenderTarget, new Rectangle(0, 0, Main.screenWidth, Main.screenHeight), Color.White);
 
-		Main.spriteBatch.End();
-		Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, DepthStencilState.None, RasterizerState.CullNone, null, Main.GameViewMatrix.TransformationMatrix);
+		Main.spriteBatch.Restart(snapshot);
 
 		return false;
 	}

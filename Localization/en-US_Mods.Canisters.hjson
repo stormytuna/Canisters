@@ -270,6 +270,11 @@ Items: {
 			'It's not a bug - it's a feature!'
 			'''
 	}
+
+	PrismaticAnnihilation: {
+		DisplayName: Prismatic Annihilation
+		Tooltip: ""
+	}
 }
 
 Buffs: {
