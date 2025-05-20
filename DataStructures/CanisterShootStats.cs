@@ -12,6 +12,7 @@ public record struct CanisterShootStats
 	public int ProjectileType;
 	public float TotalSpread;
 	public Vector2 Velocity;
+	public int AmmoItemIdUsed;
 
 	public readonly bool IsDepleted {
 		get => FiringType == CanisterFiringType.Depleted;

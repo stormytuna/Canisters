@@ -36,8 +36,9 @@ public class Pneumaticannon : BaseCanisterUsingWeapon
 	}
 }
 
-public class PneumaticannonGlobalItem : ShotByWeaponGlobalProjectile<Pneumaticannon>
+public class PneumaticannonGlobalProjectile : ShotByWeaponGlobalProjectile<Pneumaticannon>
 {
+	// TODO: move somewhere else ?
 	public static HashSet<int> ExemptProjectiles = new();
 
 	public override void SetStaticDefaults() {
@@ -54,14 +55,6 @@ public class PneumaticannonGlobalItem : ShotByWeaponGlobalProjectile<Pneumatican
 		if (IsActive && notExempt) {
 			projectile.extraUpdates = 2;
 		}
-	}
-
-	public override void SendExtraAI(Projectile projectile, BitWriter bitWriter, BinaryWriter binaryWriter) {
-		binaryWriter.Write7BitEncodedInt(projectile.extraUpdates);
-	}
-
-	public override void ReceiveExtraAI(Projectile projectile, BitReader bitReader, BinaryReader binaryReader) {
-		projectile.extraUpdates = binaryReader.Read7BitEncodedInt();
 	}
 }
 

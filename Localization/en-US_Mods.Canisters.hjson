@@ -51,12 +51,12 @@ Projectiles: {
 
 Items: {
 	WoodenSlingshot: {
-		Tooltip: ""
+		Tooltip: Launches canisters
 		DisplayName: Wooden Slingshot
 	}
 
 	ModifiedHandgun: {
-		Tooltip: ""
+		Tooltip: Depletes canisters
 		DisplayName: Modified Handgun
 	}
 
@@ -142,6 +142,7 @@ Items: {
 			'''
 			Explodes into a vortex of lightning when launched
 			Fires marking lunar energy when depleted
+			'Yes, it glows in the dark. No, you can't use it as a nightlight.'
 			'''
 		DisplayName: Lunar Canister
 	}
@@ -198,7 +199,11 @@ Items: {
 
 	SlimeySlinger: {
 		DisplayName: Slimey Slinger
-		Tooltip: Coats fired canisters with bouncy slime
+		Tooltip:
+			'''
+			Coats fired canisters with bouncy slime
+			'Tactical ricochet!'
+			'''
 	}
 
 	Splattergun: {
@@ -245,7 +250,25 @@ Items: {
 
 	AbyssalBlaster: {
 		DisplayName: Abyssal Blaster
-		Tooltip: ""
+		Tooltip:
+			'''
+			Launches canisters in a spread
+			'I didn't ask how big the room is.'
+			'''
+	}
+
+	HypernovaRailgun: {
+		DisplayName: Hypernova Railgun
+		Tooltip: Launches canisters with unparallelled speed and increases damage the further they travel
+	}
+
+	QuantumFluxCannon: {
+		DisplayName: Quantum Flux Cannon
+		Tooltip:
+			'''
+			Uses cutting edge quantum technology to launch and deplete canisters simultaneously
+			'It's not a bug - it's a feature!'
+			'''
 	}
 }
 

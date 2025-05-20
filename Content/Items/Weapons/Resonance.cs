@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Canisters.DataStructures;
 using Canisters.Helpers;
 using Canisters.Helpers.Enums;
@@ -32,8 +33,12 @@ public class Resonance : BaseCanisterUsingWeapon
 
 	public override IEnumerable<Projectile> ShootProjectiles(IEntitySource source, CanisterShootStats stats) {
 		Vector2 normal = stats.Velocity.SafeNormalize(Vector2.Zero).RotatedBy(PiOver2) * Main.LocalPlayer.direction;
-		yield return Projectile.NewProjectileDirect(source, stats.Position + (normal * 3f), stats.Velocity, stats.ProjectileType, stats.Damage, stats.Knockback, Main.myPlayer);
-		yield return Projectile.NewProjectileDirect(source, stats.Position - (normal * 3f), stats.Velocity, stats.ProjectileType, stats.Damage, stats.Knockback, Main.myPlayer);
+		
+		var bottom = DefaultShoot(source, stats with { Position = stats.Position + (normal * 3f) });
+		var top = DefaultShoot(source, stats with { Position = stats.Position - (normal * 3f) });
+		foreach (var proj in bottom.Concat(top)) {
+			yield return proj;
+		}
 	}
 
 	public override void AddRecipes() {

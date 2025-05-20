@@ -24,11 +24,14 @@ public abstract class ShotByWeaponGlobalProjectile<TWeapon> : GlobalProjectile
 		SafeOnSpawn(projectile, source);
 	}
 
-	public override void SendExtraAI(Projectile projectile, BitWriter bitWriter, BinaryWriter binaryWriter) {
+	// Syncing extraUpdates as it's set by a couple of our weapons using this class
+	public sealed override void SendExtraAI(Projectile projectile, BitWriter bitWriter, BinaryWriter binaryWriter) {
 		bitWriter.WriteBit(IsActive);
+		binaryWriter.Write7BitEncodedInt(projectile.extraUpdates);
 	}
 
-	public override void ReceiveExtraAI(Projectile projectile, BitReader bitReader, BinaryReader binaryReader) {
+	public sealed override void ReceiveExtraAI(Projectile projectile, BitReader bitReader, BinaryReader binaryReader) {
 		IsActive = bitReader.ReadBit();
+		projectile.extraUpdates = binaryReader.Read7BitEncodedInt();
 	}
 }

@@ -26,14 +26,12 @@ public class GhastlyCanister : BaseCanisterItem
 	}
 
 	public override void ApplyAmmoStats(ref CanisterShootStats stats) {
-		if (stats.IsLaunched) {
-			return;
+		if (stats.IsDepleted) {
+			stats.Damage /= 5;
+			stats.Knockback /= 5f;
+			stats.ProjectileCount *= 6;
+			stats.TotalSpread += 0.1f;
 		}
-
-		stats.Damage /= 5;
-		stats.Knockback /= 5f;
-		stats.ProjectileCount *= 6;
-		stats.TotalSpread += 0.1f;
 	}
 
 	public override void AddRecipes() {

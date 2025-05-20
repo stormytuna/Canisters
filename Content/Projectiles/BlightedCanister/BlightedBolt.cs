@@ -20,7 +20,7 @@ public class BlightedBolt : ModProjectile
 		Projectile.aiStyle = -1;
 		Projectile.timeLeft = 200;
 		Projectile.extraUpdates = 200;
-
+		
 		Projectile.friendly = true;
 		Projectile.penetrate = 5;
 		Projectile.DamageType = DamageClass.Ranged;

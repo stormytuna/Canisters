@@ -12,11 +12,11 @@ public class AbyssalBlaster : BaseCanisterUsingWeapon
 	}
 
 	public override Vector2 MuzzleOffset {
-		get => new(20f, 0f);
+		get => new(40f, 0f);
 	}
 
 	public override Vector2? HoldoutOffset() {
-		return new Vector2(0f, -4f);
+		return new Vector2(-4f, 2f);
 	}
 
 	public override void SetDefaults() {

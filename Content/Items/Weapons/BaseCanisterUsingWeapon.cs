@@ -15,6 +15,8 @@ public abstract class BaseCanisterUsingWeapon : ModItem
 	private Asset<Texture2D> _baseTexture;
 	private Asset<Texture2D> _canisterTexture;
 
+	protected CanisterFiringType? _canisterFiringTypeOverride;
+
 	public Asset<Texture2D> BaseTexture {
 		get => _baseTexture ??= ModContent.Request<Texture2D>(Texture + "_Base");
 	}
@@ -31,14 +33,17 @@ public abstract class BaseCanisterUsingWeapon : ModItem
 
 	public virtual void ApplyWeaponStats(ref CanisterShootStats stats) { }
 
-
-	public virtual IEnumerable<Projectile> ShootProjectiles(IEntitySource source, CanisterShootStats stats) {
+	protected IEnumerable<Projectile> DefaultShoot(IEntitySource source, CanisterShootStats stats) {
 		for (int i = 0; i < stats.ProjectileCount; i++) {
 			Vector2 perturbedVelocity = (i == 0 && stats.ProjectileCount > 1)
 				? stats.Velocity // Forces one projectile to go towards cursor, if we have multiple projectiles
 				: stats.Velocity.RotatedByRandom(stats.TotalSpread);
 			yield return Projectile.NewProjectileDirect(source, stats.Position, perturbedVelocity, stats.ProjectileType, stats.Damage, stats.Knockback, Main.myPlayer);
 		}
+	}
+
+	public virtual IEnumerable<Projectile> ShootProjectiles(IEntitySource source, CanisterShootStats stats) {
+		return DefaultShoot(source, stats);
 	}
 
 	public sealed override void ModifyShootStats(Player player, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback) {
@@ -49,7 +54,7 @@ public abstract class BaseCanisterUsingWeapon : ModItem
 		}
 	}
 
-	public sealed override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback) {
+	public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback) {
 		if (ItemLoader.GetItem(source.AmmoItemIdUsed) is not BaseCanisterItem canister) {
 			return true;
 		}
@@ -63,7 +68,16 @@ public abstract class BaseCanisterUsingWeapon : ModItem
 			ProjectileCount = 1,
 			ProjectileType = type,
 			TotalSpread = 0f,
+			AmmoItemIdUsed = source.AmmoItemIdUsed,
 		};
+
+		if (_canisterFiringTypeOverride is not null) {
+			stats.FiringType = _canisterFiringTypeOverride.Value;
+			stats.ProjectileType = canister.GetProjectileType(_canisterFiringTypeOverride.Value);
+			
+			_canisterFiringTypeOverride = null;
+		}
+		
 		canister.ApplyAmmoStats(ref stats);
 		ApplyWeaponStats(ref stats);
 

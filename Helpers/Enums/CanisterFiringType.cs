@@ -3,5 +3,6 @@
 public enum CanisterFiringType
 {
 	Launched,
-	Depleted
+	Depleted,
+	Special,
 }
