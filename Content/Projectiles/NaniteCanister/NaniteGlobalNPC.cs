@@ -9,21 +9,15 @@ public class NaniteGlobalNpc : GlobalNPC
 	public int NaniteCount;
 
 	public float NaniteProgress {
-		get {
-			return (float)NaniteCount / MaxNanites;
-		}
+		get => (float)NaniteCount / MaxNanites;
 	}
 
 	public int NaniteDamage {
-		get {
-			return (int)(10 * NaniteProgress);
-		}
+		get => (int)(10 * NaniteProgress);
 	}
 
 	public bool Devoured {
-		get {
-			return NaniteCount > 0;
-		}
+		get => NaniteCount > 0;
 	}
 
 	public override bool InstancePerEntity {

@@ -33,7 +33,7 @@ public abstract class BaseCanisterUsingWeapon : ModItem
 
 	public virtual void ApplyWeaponStats(ref CanisterShootStats stats) { }
 
-	protected IEnumerable<Projectile> DefaultShoot(IEntitySource source, CanisterShootStats stats) {
+	protected static IEnumerable<Projectile> DefaultShoot(IEntitySource source, CanisterShootStats stats) {
 		for (int i = 0; i < stats.ProjectileCount; i++) {
 			Vector2 perturbedVelocity = (i == 0 && stats.ProjectileCount > 1)
 				? stats.Velocity // Forces one projectile to go towards cursor, if we have multiple projectiles
@@ -74,10 +74,10 @@ public abstract class BaseCanisterUsingWeapon : ModItem
 		if (_canisterFiringTypeOverride is not null) {
 			stats.FiringType = _canisterFiringTypeOverride.Value;
 			stats.ProjectileType = canister.GetProjectileType(_canisterFiringTypeOverride.Value);
-			
+
 			_canisterFiringTypeOverride = null;
 		}
-		
+
 		canister.ApplyAmmoStats(ref stats);
 		ApplyWeaponStats(ref stats);
 

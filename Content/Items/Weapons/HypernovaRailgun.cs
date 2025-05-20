@@ -1,4 +1,3 @@
-using System.IO;
 using Canisters.Common;
 using Canisters.Content.Projectiles;
 using Canisters.Helpers;
@@ -7,7 +6,6 @@ using Terraria.DataStructures;
 using Terraria.Enums;
 using Terraria.GameContent;
 using Terraria.GameContent.ItemDropRules;
-using Terraria.ModLoader.IO;
 using static Microsoft.Xna.Framework.MathHelper;
 
 namespace Canisters.Content.Items.Weapons;
@@ -17,7 +15,7 @@ public class HypernovaRailgun : BaseCanisterUsingWeapon
 	public override CanisterFiringType CanisterFiringType {
 		get => CanisterFiringType.Launched;
 	}
-	
+
 	public override Vector2 MuzzleOffset {
 		get => new(20f, -4f);
 	}
@@ -49,9 +47,9 @@ public class HypernovaRailgunGlobalProjectile : ShotByWeaponGlobalProjectile<Hyp
 		if (!IsActive || projectile.ModProjectile is not BaseFiredCanisterProjectile) {
 			return true;
 		}
-		
+
 		projectile.rotation = projectile.velocity.ToRotation() + PiOver4;
-		
+
 		return false;
 	}
 

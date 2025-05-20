@@ -33,10 +33,10 @@ public class Resonance : BaseCanisterUsingWeapon
 
 	public override IEnumerable<Projectile> ShootProjectiles(IEntitySource source, CanisterShootStats stats) {
 		Vector2 normal = stats.Velocity.SafeNormalize(Vector2.Zero).RotatedBy(PiOver2) * Main.LocalPlayer.direction;
-		
-		var bottom = DefaultShoot(source, stats with { Position = stats.Position + (normal * 3f) });
-		var top = DefaultShoot(source, stats with { Position = stats.Position - (normal * 3f) });
-		foreach (var proj in bottom.Concat(top)) {
+
+		IEnumerable<Projectile> bottom = DefaultShoot(source, stats with { Position = stats.Position + (normal * 3f) });
+		IEnumerable<Projectile> top = DefaultShoot(source, stats with { Position = stats.Position - (normal * 3f) });
+		foreach (Projectile proj in bottom.Concat(top)) {
 			yield return proj;
 		}
 	}

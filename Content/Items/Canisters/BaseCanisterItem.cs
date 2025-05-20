@@ -29,10 +29,12 @@ public abstract class BaseCanisterItem : ModItem
 
 		type = GetProjectileType(canisterWeapon.CanisterFiringType);
 	}
-	
-	public int GetProjectileType(CanisterFiringType firingType) => firingType switch {
-		CanisterFiringType.Depleted => DepletedProjectileType,
-		CanisterFiringType.Launched => LaunchedProjectileType,
-		CanisterFiringType.Special => ProjectileID.Beenade, // Our weapon *should* handle it
-	};
+
+	public int GetProjectileType(CanisterFiringType firingType) {
+		return firingType switch {
+			CanisterFiringType.Depleted => DepletedProjectileType,
+			CanisterFiringType.Launched => LaunchedProjectileType,
+			CanisterFiringType.Special => ProjectileID.Beenade, // Our weapon *should* handle it
+		};
+	}
 }

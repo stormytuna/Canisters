@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.IO;
 using Canisters.Common;
 using Canisters.Content.Projectiles.GhastlyCanister;
 using Canisters.Content.Projectiles.LunarCanister;
@@ -9,7 +8,6 @@ using Canisters.Helpers;
 using Canisters.Helpers.Enums;
 using Terraria.DataStructures;
 using Terraria.Enums;
-using Terraria.ModLoader.IO;
 
 namespace Canisters.Content.Items.Weapons;
 

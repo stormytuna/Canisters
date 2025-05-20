@@ -1,7 +1,3 @@
-using System.Collections.Generic;
-using System.Linq;
-using Canisters.Content.Items.Canisters;
-using Canisters.DataStructures;
 using Canisters.Helpers;
 using Canisters.Helpers.Enums;
 using Terraria.DataStructures;
@@ -14,7 +10,7 @@ public class QuantumFluxCannon : BaseCanisterUsingWeapon
 	public override CanisterFiringType CanisterFiringType {
 		get => CanisterFiringType.Special;
 	}
-	
+
 	public override Vector2 MuzzleOffset {
 		get => new(70f, -4f);
 	}
@@ -34,13 +30,13 @@ public class QuantumFluxCannon : BaseCanisterUsingWeapon
 
 	public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback) {
 		Vector2 normal = velocity.SafeNormalize(Vector2.Zero).RotatedBy(MathHelper.PiOver2) * player.direction;
-		
+
 		_canisterFiringTypeOverride = CanisterFiringType.Depleted;
 		base.Shoot(player, source, position + (normal * 5f), velocity, type, damage, knockback);
-		
+
 		_canisterFiringTypeOverride = CanisterFiringType.Launched;
 		base.Shoot(player, source, position - (normal * 5f), velocity, type, damage, knockback);
-		
+
 		return false;
 	}
 }

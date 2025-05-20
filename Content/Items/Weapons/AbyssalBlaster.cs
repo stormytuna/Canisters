@@ -32,6 +32,6 @@ public class AbyssalBlaster : BaseCanisterUsingWeapon
 		stats.ProjectileCount *= 3;
 		stats.TotalSpread += 0.2f;
 	}
-	
+
 	// TODO: acquisition
 }
