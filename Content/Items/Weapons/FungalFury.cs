@@ -8,7 +8,7 @@ namespace Canisters.Content.Items.Weapons;
 public class FungalFury : BaseCanisterUsingWeapon
 {
 	public override CanisterFiringType CanisterFiringType {
-		get => CanisterFiringType.Launched;
+		get => CanisterFiringType.Depleted;
 	}
 
 	public override Vector2 MuzzleOffset {
@@ -20,14 +20,16 @@ public class FungalFury : BaseCanisterUsingWeapon
 	}
 
 	public override void SetDefaults() {
-		Item.DefaultToCanisterUsingWeapon(10, 10, 9f, 11, 1f);
+		Item.DefaultToCanisterUsingWeapon(10, 10 * 4, 12f, 56, 1f);
 		Item.width = 60;
 		Item.height = 32;
-		Item.SetShopValues(ItemRarityColor.Blue1, Item.buyPrice(silver: 40));
+		Item.SetShopValues(ItemRarityColor.Lime7, Item.sellPrice(gold: 70));
+		// TODO: change use sound
+		Item.UseSound = SoundID.Item5 with { PitchRange = (0.7f, 1.1f), MaxInstances = 0, Volume = 0.6f };
 	}
 
 	public override void ApplyWeaponStats(ref CanisterShootStats stats) {
-		stats.Velocity = stats.Velocity.RotatedByRandom(0.4f);
+		stats.TotalSpread += 0.08f;
 	}
 }
 
