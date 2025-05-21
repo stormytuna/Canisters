@@ -39,4 +39,11 @@ public class QuantumFluxCannon : BaseCanisterUsingWeapon
 
 		return false;
 	}
+
+	public override void AddRecipes() {
+		CreateRecipe()
+			.AddIngredient(ItemID.FragmentVortex, 18)
+			.AddTile(TileID.LunarCraftingStation)
+			.Register();
+	}
 }

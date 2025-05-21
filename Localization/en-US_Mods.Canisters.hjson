@@ -47,6 +47,7 @@ Projectiles: {
 	FiredVolatileCanister.DisplayName: Fired Volatile Canister
 	GelBallEmitter.DisplayName: Gel Ball Emitter
 	LunarMark.DisplayName: Lunar Mark
+	PrismaticAnnihilationStar.DisplayName: Prismatic Annihilation Star
 }
 
 Items: {
