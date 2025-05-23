@@ -154,13 +154,13 @@ Items: {
 	}
 
 	AncientSprayer: {
-		Tooltip: ""
+		Tooltip: "Depletes canisters"
 		DisplayName: Ancient Sprayer
 	}
 
 	BarkBellower: {
 		DisplayName: Bark Bellower
-		Tooltip: Shots inflict Nature's Bane
+		Tooltip: Depleted canister shots inflict Nature's Bane
 	}
 
 	LushSlinger: {
@@ -170,27 +170,27 @@ Items: {
 
 	TheColony: {
 		DisplayName: The Colony
-		Tooltip: Fires a spread of projectiles
+		Tooltip: Depleted canisters fire a spread of projectiles
 	}
 
 	InfernalCannon: {
 		DisplayName: Infernal Cannon
-		Tooltip: Canisters are wreathed in Shadowflame
+		Tooltip: Launched canisters are wreathed in Shadowflame
 	}
 
 	RepurposedSprayBottle: {
 		DisplayName: Repurposed Spray Bottle
-		Tooltip: Depletes canisters with pathetic range, but tremendous firing speed
+		Tooltip: Depletes canisters with pathetic velocity, but tremendous firing speed
 	}
 
 	Icemire: {
 		DisplayName: Icemire
-		Tooltip: Fires a short burst of canisters coated in frostbite crystals
+		Tooltip: Launches a short burst of canisters coated in frostbite crystals
 	}
 
 	Resonance: {
 		DisplayName: Resonance
-		Tooltip: Fires two projectiles in harmony
+		Tooltip: Depleted canisters fire two projectiles in harmony
 	}
 
 	Pneumaticannon: {
@@ -202,14 +202,18 @@ Items: {
 		DisplayName: Slimey Slinger
 		Tooltip:
 			'''
-			Coats fired canisters with bouncy slime
+			Launches canisters coated with bouncy slime
 			'Tactical ricochet!'
 			'''
 	}
 
 	Splattergun: {
 		DisplayName: Splattergun
-		Tooltip: Firing speed accelerates the longer you are shooting
+		Tooltip:
+            '''
+            Depletes canisters
+            Firing speed accelerates the longer you are shooting
+		    '''
 	}
 
 	Reverence: {
@@ -223,7 +227,11 @@ Items: {
 
 	ChlorophyteSlugger: {
 		DisplayName: Chlorophyte Slugger
-		Tooltip: Firing speed accelerates tremendously the longer you are shooting
+		Tooltip:
+		    '''
+            Depletes canisters
+            Firing speed accelerates tremendously the longer you are shooting
+            '''
 	}
 
 	AetherianCanister: {
@@ -237,15 +245,15 @@ Items: {
 
 	FungalFury: {
 		DisplayName: Fungal Fury
-		Tooltip: ""
+		Tooltip: "Depletes canisters in a 4 round burst"
 	}
 
 	PneumaticPump: {
 		DisplayName: Pneumatic Pump
 		Tooltip:
 			'''
-			Increases launched projectile blast radius by 50%
-			Increases depleted projectile firerate by 15%
+			Increases blast radius of launched canisters by 50%
+			Increases firing speed of depleted canisters by 15%
 			'''
 	}
 
@@ -260,7 +268,7 @@ Items: {
 
 	HypernovaRailgun: {
 		DisplayName: Hypernova Railgun
-		Tooltip: Launches canisters with unparallelled speed and increases damage the further they travel, up to 20%
+		Tooltip: Launches canisters with unparalleled speed and increases damage the further they travel, up to 20%
 	}
 
 	QuantumFluxCannon: {
@@ -274,7 +282,20 @@ Items: {
 
 	PrismaticAnnihilation: {
 		DisplayName: Prismatic Annihilation
-		Tooltip: ""
+		Tooltip:
+		    '''
+		    Depletes canisters and releases a Prismatic Star every 4 shots
+            Firing speed accelerates the longer you are shooting
+		    '''
+	}
+
+	Coelacannon: {
+		DisplayName: Coelacannon
+		Tooltip:
+			'''
+			Launches homing "canisters"
+			'No animals were harmed in the making of this weapon!'
+			'''
 	}
 }
 

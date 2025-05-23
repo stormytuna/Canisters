@@ -16,7 +16,7 @@ public class ChlorophyteSlugger : BaseCanisterUsingWeapon
 	}
 
 	public override Vector2? HoldoutOffset() {
-		return new Vector2(-2f, 8f);
+		return new Vector2(-4f, 10f);
 	}
 
 	public override void SetDefaults() {

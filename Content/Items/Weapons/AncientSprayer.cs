@@ -18,7 +18,7 @@ public class AncientSprayer : BaseCanisterUsingWeapon
 	}
 
 	public override Vector2? HoldoutOffset() {
-		return new Vector2(-6f, 0f);
+		return new Vector2(0f, 0f);
 	}
 
 	public override void SetDefaults() {
@@ -67,10 +67,17 @@ public class AncientSprayerDrawLayer : PlayerDrawLayer
 
 	protected override void Draw(ref PlayerDrawSet drawInfo) {
 		Player drawPlayer = drawInfo.drawPlayer;
-
+		
 		Vector2 drawPosition = drawInfo.Position - Main.screenPosition + new Vector2(drawPlayer.width / 2, drawPlayer.height - (drawPlayer.bodyFrame.Height / 2));
 		drawPosition.X += drawPlayer.direction * -15f;
+		int bodyFrame = drawPlayer.bodyFrame.Y / drawPlayer.bodyFrame.Height;
+		if (bodyFrame is (>= 7 and <= 9) or (>= 14 and <= 16)) {
+			// Offset for when player is "taller"
+			drawPosition.Y -= 2f;
+		}
+
 		drawPosition = drawPosition.Floor();
+		
 		Rectangle sourceRect = new(0, 0, BaseTexture.Width(), BaseTexture.Height());
 		Vector2 origin = sourceRect.Size() / 2f;
 
