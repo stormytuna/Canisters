@@ -154,7 +154,7 @@ Items: {
 	}
 
 	AncientSprayer: {
-		Tooltip: "Depletes canisters"
+		Tooltip: Depletes canisters
 		DisplayName: Ancient Sprayer
 	}
 
@@ -210,10 +210,10 @@ Items: {
 	Splattergun: {
 		DisplayName: Splattergun
 		Tooltip:
-            '''
-            Depletes canisters
-            Firing speed accelerates the longer you are shooting
-		    '''
+			'''
+			Depletes canisters
+			Firing speed accelerates the longer you are shooting
+			'''
 	}
 
 	Reverence: {
@@ -228,10 +228,11 @@ Items: {
 	ChlorophyteSlugger: {
 		DisplayName: Chlorophyte Slugger
 		Tooltip:
-		    '''
-            Depletes canisters
-            Firing speed accelerates tremendously the longer you are shooting
-            '''
+			'''
+			      Depletes canisters
+			      Firing speed accelerates tremendously the longer you are shooting
+			      
+			'''
 	}
 
 	AetherianCanister: {
@@ -245,7 +246,7 @@ Items: {
 
 	FungalFury: {
 		DisplayName: Fungal Fury
-		Tooltip: "Depletes canisters in a 4 round burst"
+		Tooltip: Depletes canisters in a 4 round burst
 	}
 
 	PneumaticPump: {
@@ -283,10 +284,10 @@ Items: {
 	PrismaticAnnihilation: {
 		DisplayName: Prismatic Annihilation
 		Tooltip:
-		    '''
-		    Depletes canisters and releases a Prismatic Star every 4 shots
-            Firing speed accelerates the longer you are shooting
-		    '''
+			'''
+			Depletes canisters and releases a Prismatic Star every 4 shots
+			      Firing speed accelerates the longer you are shooting
+			'''
 	}
 
 	Coelacannon: {

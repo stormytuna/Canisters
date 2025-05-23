@@ -84,7 +84,7 @@ public class AncientSprayerDrawLayer : PlayerDrawLayer
 		DrawData drawData = new(BaseTexture.Value, drawPosition, sourceRect, drawInfo.colorArmorBody, drawPlayer.bodyRotation, origin, 1f, drawInfo.playerEffect);
 		drawInfo.DrawDataCache.Add(drawData);
 
-		Color canisterColor = CanisterHelpers.GetCanisterColorForHeldWeapon(drawPlayer);
+		Color canisterColor = Lighting.GetColor(drawInfo.Position.ToTileCoordinates(), CanisterHelpers.GetCanisterColorForHeldWeapon(drawPlayer));
 		drawInfo.DrawDataCache.Add(drawData with { texture = CanisterTexture.Value, color = canisterColor });
 	}
 }
