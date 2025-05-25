@@ -1,4 +1,5 @@
 ﻿using Canisters.Content.Dusts;
+using Canisters.Helpers;
 
 namespace Canisters.Content.Projectiles.ToxicCanister;
 
@@ -54,6 +55,14 @@ public class ToxicFog : ModProjectile
 				Projectile.frame = 0;
 			}
 		}
+	}
+
+	public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox) {
+		if (Collision.CanHitLine(projHitbox.Center.ToVector2(), 1, 1, targetHitbox.TopLeft(), targetHitbox.Width, targetHitbox.Height)) {
+			return false;
+		}
+		
+		return base.Colliding(projHitbox, targetHitbox);
 	}
 
 	public override bool OnTileCollide(Vector2 oldVelocity) {

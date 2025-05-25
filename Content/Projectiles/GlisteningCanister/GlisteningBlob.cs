@@ -22,6 +22,7 @@ public class GlisteningBlob : ModProjectile
 		Projectile.DamageType = DamageClass.Ranged;
 		Projectile.usesLocalNPCImmunity = true;
 		Projectile.localNPCHitCooldown = -1;
+		Projectile.ownerHitCheck = true;
 	}
 
 	public override void AI() {

@@ -17,8 +17,9 @@ public class VerdantGas : ModProjectile
 		Projectile.friendly = true;
 		Projectile.penetrate = -1;
 		Projectile.DamageType = DamageClass.Ranged;
-		Projectile.usesLocalNPCImmunity = true;
-		Projectile.localNPCHitCooldown = 7;
+		Projectile.usesIDStaticNPCImmunity = true;
+		Projectile.idStaticNPCHitCooldown = 10;
+		Projectile.ownerHitCheck = true;
 	}
 
 	public override void AI() {
