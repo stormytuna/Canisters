@@ -16,7 +16,7 @@ public class FiredAetherianCanister : BaseFiredCanisterProjectile
 
 	public override void PostAI() {
 		if (Timer == 12f) {
-			Explode();
+			Explode(Main.player[Projectile.owner]);
 		}
 
 		if (Timer >= 24) {
@@ -24,7 +24,7 @@ public class FiredAetherianCanister : BaseFiredCanisterProjectile
 		}
 	}
 
-	public override void Explode() {
+	protected override void ExplosionEffect() {
 		if (Main.myPlayer == Projectile.owner) {
 			Projectile.Explode(80, 80);
 		}

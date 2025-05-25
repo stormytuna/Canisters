@@ -9,7 +9,7 @@ public class FiredNaniteCanister : BaseFiredCanisterProjectile
 		get => "Canisters/Content/Items/Canisters/NaniteCanister";
 	}
 
-	public override void Explode() {
+	protected override void ExplosionEffect() {
 		if (Main.myPlayer == Projectile.owner) {
 			for (int i = 0; i < 6; i++) {
 				Vector2 velocity = Main.rand.NextVector2CircularEdge(5f, 5f) * Main.rand.NextFloat(0.5f, 1f);

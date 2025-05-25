@@ -45,7 +45,7 @@ public class SlimySlingerGlobalProjectile : ShotByWeaponGlobalProjectile<SlimeyS
 		}
 
 		if (projectile.ModProjectile is BaseFiredCanisterProjectile canisterProjectile) {
-			canisterProjectile.Explode();
+			canisterProjectile.Explode(Main.player[projectile.owner]);
 		}
 
 		if (projectile.velocity.X != oldVelocity.X) {
@@ -70,7 +70,7 @@ public class SlimySlingerGlobalProjectile : ShotByWeaponGlobalProjectile<SlimeyS
 		}
 
 		if (projectile.ModProjectile is BaseFiredCanisterProjectile canisterProjectile) {
-			canisterProjectile.Explode();
+			canisterProjectile.Explode(Main.player[projectile.owner]);
 		}
 
 		// Would instantly kill infinite pierce projectiles otherwise

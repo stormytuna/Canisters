@@ -5,6 +5,8 @@ namespace Canisters.Content.Projectiles;
 
 public abstract class BaseFiredCanisterProjectile : ModProjectile
 {
+	public static event Action<Player, Projectile> OnExplode;
+	
 	/// <summary>
 	///     Amount of time in frames this projectile will fly straight before being gravity affected.
 	///     Defaults to 20.
@@ -23,9 +25,15 @@ public abstract class BaseFiredCanisterProjectile : ModProjectile
 	}
 
 	/// <summary>
-	///     Use for client side explosion effects, such as dealing damage or spawning projectiles
+	/// Use for explosion effects, such as dealing damage, spawning projectiles, or creating dust. Called on all clients and the server.
+	/// <para/> NOTE: To manually cause an explosion for a canister, call the Explode method, not this one!
 	/// </summary>
-	public virtual void Explode() { }
+	protected virtual void ExplosionEffect() { }
+
+	public void Explode(Player player) {
+		ExplosionEffect();
+		OnExplode?.Invoke(player, Projectile);	
+	}
 
 	public override void SetDefaults() {
 		Projectile.DefaultToFiredCanister();
@@ -50,12 +58,12 @@ public abstract class BaseFiredCanisterProjectile : ModProjectile
 	}
 
 	public override void OnKill(int timeLeft) {
-		Explode();
+		Explode(Main.player[Projectile.owner]);
 		MakeCanisterGore();
 	}
 
 	public void ReceiveExplosionSync() {
-		Explode();
+		Explode(Main.player[Projectile.owner]);
 	}
 
 	public void BroadcastExplosionSync(int toWho, int fromWho, int identity) {

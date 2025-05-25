@@ -24,7 +24,7 @@ public class FiredVerdantCanister : BaseFiredCanisterProjectile
 		}
 	}
 
-	public override void Explode() {
+	protected override void ExplosionEffect() {
 		if (Main.myPlayer == Projectile.owner) {
 			int numTotalVines = _buffFromLushSlingshot ? 6 : 4;
 			List<float> startRots = Main.rand.NextSegmentedAngles(numTotalVines, 0.3f);

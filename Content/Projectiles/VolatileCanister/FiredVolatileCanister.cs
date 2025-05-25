@@ -17,7 +17,7 @@ public class FiredVolatileCanister : BaseFiredCanisterProjectile
 		target.AddBuff(BuffID.OnFire, 3 * 60);
 	}
 
-	public override void Explode() {
+	protected override void ExplosionEffect() {
 		if (Main.myPlayer == Projectile.owner) {
 			Projectile.Explode(100, 100);
 		}

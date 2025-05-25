@@ -16,7 +16,7 @@ public class FiredLunarCanister : BaseFiredCanisterProjectile
 		}
 	}
 
-	public override void Explode() {
+	protected override void ExplosionEffect() {
 		if (Projectile.owner == Main.myPlayer) {
 			Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Projectile.velocity, ModContent.ProjectileType<LunarLightningEmitter>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
 		}

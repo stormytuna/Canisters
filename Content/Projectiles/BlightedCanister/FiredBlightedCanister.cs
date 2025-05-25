@@ -15,7 +15,7 @@ public class FiredBlightedCanister : BaseFiredCanisterProjectile
 		get => "Canisters/Content/Items/Canisters/BlightedCanister";
 	}
 
-	public override void Explode() {
+	protected override void ExplosionEffect() {
 		if (Main.myPlayer == Projectile.owner) {
 			float rotationOffset = Main.rand.NextRadian();
 			float sign = Main.rand.NextBool().ToDirectionInt();

@@ -48,6 +48,7 @@ Projectiles: {
 	GelBallEmitter.DisplayName: Gel Ball Emitter
 	LunarMark.DisplayName: Lunar Mark
 	PrismaticAnnihilationStar.DisplayName: Prismatic Annihilation Star
+	ArcticCoolantSnowflake.DisplayName: Arctic Coolant Snowflake
 }
 
 Items: {
@@ -297,6 +298,11 @@ Items: {
 			Launches homing "canisters"
 			'No animals were harmed in the making of this weapon!'
 			'''
+	}
+
+	ArcticCoolant: {
+		DisplayName: Arctic Coolant
+		Tooltip: Launched canisters release a homing arctic snowflake
 	}
 }
 

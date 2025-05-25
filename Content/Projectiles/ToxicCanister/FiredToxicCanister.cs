@@ -14,7 +14,7 @@ public class FiredToxicCanister : BaseFiredCanisterProjectile
 		get => "Canisters/Content/Items/Canisters/ToxicCanister";
 	}
 
-	public override void Explode() {
+	protected override void ExplosionEffect() {
 		if (Main.myPlayer == Projectile.owner) {
 			Projectile.Explode(100, 100);
 

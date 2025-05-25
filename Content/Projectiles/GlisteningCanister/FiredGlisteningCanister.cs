@@ -13,7 +13,7 @@ public class FiredGlisteningCanister : BaseFiredCanisterProjectile
 		get => 12;
 	}
 
-	public override void Explode() {
+	protected override void ExplosionEffect() {
 		if (Main.myPlayer == Projectile.owner) {
 			for (int i = 0; i < 3; i++) {
 				Vector2 velocity = new(Main.rand.NextFloat(0.1f, 2.5f), Main.rand.NextFloat(1f, 5f));

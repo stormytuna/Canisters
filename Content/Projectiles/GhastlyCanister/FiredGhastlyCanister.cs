@@ -22,7 +22,7 @@ public class FiredGhastlyCanister : BaseFiredCanisterProjectile
 		}
 	}
 
-	public override void Explode() {
+	protected override void ExplosionEffect() {
 		if (Main.myPlayer == Projectile.owner) {
 			Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Projectile.velocity, ModContent.ProjectileType<GhastlyExplosionEmitter>(), Projectile.damage / 5, Projectile.knockBack, Projectile.owner);
 		}

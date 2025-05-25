@@ -25,13 +25,13 @@ public class FiredHarmonicCanister : BaseFiredCanisterProjectile
 	}
 
 	public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone) {
-		Explode();
+		Explode(Main.player[Projectile.owner]);
 		if (Main.netMode == NetmodeID.MultiplayerClient) {
 			BroadcastExplosionSync(-1, Main.myPlayer, Projectile.identity);
 		}
 	}
 
-	public override void Explode() {
+	protected override void ExplosionEffect() {
 		if (Main.myPlayer == Projectile.owner) {
 			Projectile.Explode(100, 100);
 		}
