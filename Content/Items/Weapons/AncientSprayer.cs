@@ -67,7 +67,7 @@ public class AncientSprayerDrawLayer : PlayerDrawLayer
 
 	protected override void Draw(ref PlayerDrawSet drawInfo) {
 		Player drawPlayer = drawInfo.drawPlayer;
-		
+
 		Vector2 drawPosition = drawInfo.Position - Main.screenPosition + new Vector2(drawPlayer.width / 2, drawPlayer.height - (drawPlayer.bodyFrame.Height / 2));
 		drawPosition.X += drawPlayer.direction * -15f;
 		int bodyFrame = drawPlayer.bodyFrame.Y / drawPlayer.bodyFrame.Height;
@@ -77,7 +77,7 @@ public class AncientSprayerDrawLayer : PlayerDrawLayer
 		}
 
 		drawPosition = drawPosition.Floor();
-		
+
 		Rectangle sourceRect = new(0, 0, BaseTexture.Width(), BaseTexture.Height());
 		Vector2 origin = sourceRect.Size() / 2f;
 

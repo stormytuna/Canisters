@@ -37,8 +37,8 @@ public class ArcticCoolantPlayer : ModPlayer
 
 	private static void OnExplode(Player player, Projectile projectile) {
 		if (player.GetModPlayer<ArcticCoolantPlayer>().Active) {
-			var source = player.GetSource_Accessory(player.GetModPlayer<ArcticCoolantPlayer>().Item);
-			var velocity = Main.rand.NextVector2CircularEdge(5f, 5f);
+			IEntitySource source = player.GetSource_Accessory(player.GetModPlayer<ArcticCoolantPlayer>().Item);
+			Vector2 velocity = Main.rand.NextVector2CircularEdge(5f, 5f);
 			Projectile.NewProjectile(source, projectile.Center, velocity, ModContent.ProjectileType<ArcticCoolantSnowflake>(), projectile.damage / 6, 0f);
 		}
 	}
@@ -78,35 +78,36 @@ public class ArcticCoolantSnowflake : ModProjectile
 		Projectile.friendly = true;
 		Projectile.DamageType = DamageClass.Ranged;
 	}
-	
+
 	public override void AI() {
 		if (_firstFrame) {
 			_firstFrame = false;
 			Projectile.friendly = false;
 			Projectile.scale = Main.rand.NextFloat(0.8f, 1f);
 		}
-		
+
 		_timer++;
 
 		if (_timer >= 18) {
 			Projectile.friendly = true;
 			if (_target is null || !_target.active) {
-				var nearbyNPCs = NpcHelpers.FindNearbyNPCs(32f * 16f, Projectile.Center, true);
+				System.Collections.Generic.List<NPC> nearbyNPCs = NpcHelpers.FindNearbyNPCs(32f * 16f, Projectile.Center, true);
 				if (nearbyNPCs.Count > 0) {
 					_target = Main.rand.Next(nearbyNPCs);
-				} else {
+				}
+				else {
 					_target = null;
 				}
 			}
 		}
-		
+
 		Projectile.rotation += 0.015f * Projectile.velocity.Length();
-		
+
 		if (_target is null) {
 			Projectile.velocity *= 0.97f;
 			return;
 		}
-		
+
 		EntityHelpers.SmoothHoming(Projectile, _target.Center, 0.3f, 16f, _target.velocity, false);
 		Projectile.timeLeft++;
 	}
@@ -137,7 +138,7 @@ public class ArcticCoolantSnowflake : ModProjectile
 	}
 
 	public override bool PreDraw(ref Color lightColor) {
-		var drawData = new DrawData {
+		DrawData drawData = new() {
 			texture = TextureAssets.Projectile[Type].Value,
 			position = (Projectile.Center - Main.screenPosition).Floor(),
 			sourceRect = TextureAssets.Projectile[Type].Value.Frame(),
@@ -146,9 +147,9 @@ public class ArcticCoolantSnowflake : ModProjectile
 			rotation = Projectile.rotation,
 			origin = TextureAssets.Projectile[Type].Value.Size() / 2f,
 		};
-		
+
 		for (int i = Projectile.oldPos.Length - 1; i >= 0; i--) {
-			var trailData = drawData with {
+			DrawData trailData = drawData with {
 				position = (Projectile.oldPos[i] + Projectile.Size / 2f - Main.screenPosition).Floor(),
 				color = drawData.color * 0.5f,
 			};

@@ -10,11 +10,11 @@ namespace Canisters.Content.Items.Weapons;
 public class PrismaticAnnihilation : BaseCanisterUsingWeapon
 {
 	private int _shootCount = 0;
-	
+
 	public override CanisterFiringType CanisterFiringType {
 		get => CanisterFiringType.Depleted;
 	}
-	
+
 	public override Vector2 MuzzleOffset {
 		get => new(90f, -6f);
 	}
@@ -33,7 +33,7 @@ public class PrismaticAnnihilation : BaseCanisterUsingWeapon
 	}
 
 	public override bool? UseItem(Player player) {
-		player.GetModPlayer<PrismaticAnnihilationPlayer>().UseItem();	
+		player.GetModPlayer<PrismaticAnnihilationPlayer>().UseItem();
 		return base.UseItem(player);
 	}
 
@@ -42,7 +42,7 @@ public class PrismaticAnnihilation : BaseCanisterUsingWeapon
 			_shootCount = 0;
 			Projectile.NewProjectile(source, position, velocity * 0.8f, ModContent.ProjectileType<PrismaticAnnihilationStar>(), damage / 2, knockback);
 		}
-		
+
 		return base.Shoot(player, source, position, velocity, type, damage, knockback);
 	}
 }

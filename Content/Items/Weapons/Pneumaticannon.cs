@@ -1,9 +1,4 @@
-﻿using System.Collections.Generic;
-using Canisters.Common;
-using Canisters.Content.Projectiles.GhastlyCanister;
-using Canisters.Content.Projectiles.LunarCanister;
-using Canisters.Content.Projectiles.NaniteCanister;
-using Canisters.Content.Projectiles.ToxicCanister;
+﻿using Canisters.Common;
 using Canisters.Helpers;
 using Canisters.Helpers.Enums;
 using Terraria.DataStructures;

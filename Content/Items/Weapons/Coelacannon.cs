@@ -5,7 +5,6 @@ using Canisters.Helpers.Enums;
 using ReLogic.Content;
 using Terraria.DataStructures;
 using Terraria.Enums;
-using static Microsoft.Xna.Framework.MathHelper;
 
 namespace Canisters.Content.Items.Weapons;
 
@@ -36,7 +35,7 @@ public class CoelacannonGlobalProjectile : ShotByWeaponGlobalProjectile<Coelacan
 {
 	private static Asset<Texture2D> _fishBaseTexture;
 	private static Asset<Texture2D> _fishCanisterTexture;
-	
+
 	private bool _firstFrame = true;
 	private float _maxSpeed;
 	private NPC _target;
@@ -72,7 +71,7 @@ public class CoelacannonGlobalProjectile : ShotByWeaponGlobalProjectile<Coelacan
 				return true;
 			}
 		}
-		
+
 		projectile.rotation = projectile.velocity.ToRotation();
 		EntityHelpers.SmoothHoming(projectile, _target.Center, 0.5f, _maxSpeed, _target.velocity, false);
 
@@ -83,8 +82,8 @@ public class CoelacannonGlobalProjectile : ShotByWeaponGlobalProjectile<Coelacan
 		if (!IsActive || projectile.ModProjectile is not BaseFiredCanisterProjectile) {
 			return true;
 		}
-		
-		var baseDrawData = new DrawData {
+
+		DrawData baseDrawData = new() {
 			texture = _fishBaseTexture.Value,
 			position = (projectile.Center - Main.screenPosition).Floor(),
 			sourceRect = _fishBaseTexture.Frame(),
@@ -94,11 +93,11 @@ public class CoelacannonGlobalProjectile : ShotByWeaponGlobalProjectile<Coelacan
 			origin = _fishBaseTexture.Size() / 2f,
 			effect = projectile.spriteDirection == -1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None
 		};
-		var canisterDrawData = baseDrawData with {
-			texture = _fishCanisterTexture.Value, 
+		DrawData canisterDrawData = baseDrawData with {
+			texture = _fishCanisterTexture.Value,
 			color = Lighting.GetColor(projectile.Center.ToTileCoordinates(), CanisterHelpers.GetCanisterColor(ShotByCanisterType)),
 		};
-		
+
 		baseDrawData.Draw(Main.spriteBatch);
 		canisterDrawData.Draw(Main.spriteBatch);
 

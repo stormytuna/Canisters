@@ -1,5 +1,4 @@
 ﻿using Canisters.Content.Dusts;
-using Canisters.Helpers;
 
 namespace Canisters.Content.Projectiles.ToxicCanister;
 
@@ -61,7 +60,7 @@ public class ToxicFog : ModProjectile
 		if (Collision.CanHitLine(projHitbox.Center.ToVector2(), 1, 1, targetHitbox.TopLeft(), targetHitbox.Width, targetHitbox.Height)) {
 			return false;
 		}
-		
+
 		return base.Colliding(projHitbox, targetHitbox);
 	}
 

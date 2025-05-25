@@ -1,8 +1,6 @@
 using Canisters.Helpers;
-using ReLogic.Content;
 using Terraria.DataStructures;
 using Terraria.GameContent;
-using static Microsoft.Xna.Framework.MathHelper;
 
 namespace Canisters.Content.Projectiles;
 
@@ -10,7 +8,6 @@ public class PrismaticAnnihilationStar : ModProjectile
 {
 	private bool _firstFrame = true;
 	private Color _starColor;
-	private float _timer;
 
 	public override void SetStaticDefaults() {
 		ProjectileID.Sets.TrailingMode[Type] = 2;
@@ -37,18 +34,18 @@ public class PrismaticAnnihilationStar : ModProjectile
 			_starColor = Color.Lerp(Main.hslToRgb(hue, 1f, 0.5f), Color.White, 0.3f) with { A = 50 };
 			Projectile.rotation = Main.rand.NextRadian();
 		}
-		
+
 		Projectile.direction = (Projectile.velocity.X > 0f).ToDirectionInt();
 		Projectile.rotation += 0.04f * Projectile.direction;
 	}
 
 	public override bool PreDraw(ref Color lightColor) {
-		var texture = TextureAssets.Projectile[Type].Value;
-		
+		Texture2D texture = TextureAssets.Projectile[Type].Value;
+
 		Vector2 position = (Projectile.Center - Main.screenPosition).Floor();
 		Vector2 origin = texture.Size() / 2f;
 
-		var data = new DrawData {
+		DrawData data = new() {
 			texture = texture,
 			position = position,
 			sourceRect = texture.Frame(),
@@ -57,14 +54,14 @@ public class PrismaticAnnihilationStar : ModProjectile
 			scale = new Vector2(Projectile.scale * 0.8f),
 			origin = origin,
 		};
-		
+
 		for (int i = Projectile.oldPos.Length - 1; i >= 0; i--) {
 			float progress = i / (float)ProjectileID.Sets.TrailCacheLength[Type];
 
 			Vector2 trailPos = (Projectile.oldPos[i] - Main.screenPosition + Projectile.Size / 2f).Floor();
 			float trailRot = Projectile.oldRot[i];
-			
-			var trailData = data with {
+
+			DrawData trailData = data with {
 				position = trailPos,
 				rotation = trailRot,
 				scale = new Vector2(float.Lerp(Projectile.scale, 0.6f, progress * progress)),
@@ -72,9 +69,9 @@ public class PrismaticAnnihilationStar : ModProjectile
 			};
 			trailData.Draw(Main.spriteBatch);
 		}
-		
+
 		data.Draw(Main.spriteBatch);
-		
+
 		return false;
 	}
 

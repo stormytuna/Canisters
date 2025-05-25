@@ -39,9 +39,9 @@ public class HypernovaRailgunGlobalProjectile : ShotByWeaponGlobalProjectile<Hyp
 	private const float MaxExtraDamage = 0.2f;
 	private const int MinFramesForExtraDamage = 30;
 	private const int MaxFramesForExtraDamage = 50;
-	
+
 	private int _framesTravelling = 0;
-	
+
 	public override void SafeOnSpawn(Projectile projectile, IEntitySource source) {
 		if (IsActive) {
 			projectile.extraUpdates = 8;
@@ -54,9 +54,9 @@ public class HypernovaRailgunGlobalProjectile : ShotByWeaponGlobalProjectile<Hyp
 		}
 
 		projectile.rotation = projectile.velocity.ToRotation() + PiOver4;
-		
+
 		_framesTravelling++;
-		
+
 		return false;
 	}
 

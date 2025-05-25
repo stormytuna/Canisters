@@ -9,7 +9,7 @@ public abstract class ShotByWeaponGlobalProjectile<TWeapon> : GlobalProjectile
 	where TWeapon : BaseCanisterUsingWeapon
 {
 	protected int ShotByCanisterType { get; private set; }
-	
+
 	protected bool IsActive { get; private set; }
 
 	public override bool InstancePerEntity {
@@ -34,7 +34,7 @@ public abstract class ShotByWeaponGlobalProjectile<TWeapon> : GlobalProjectile
 			appliesToParent = parentProjectile.GetGlobalProjectile(this).IsActive;
 			ShotByCanisterType = parentProjectile.GetGlobalProjectile(this).ShotByCanisterType;
 		}
-		
+
 		IsActive = shotByTWeapon || (appliesToParent && ApplyFromParent());
 
 		SafeOnSpawn(projectile, source);

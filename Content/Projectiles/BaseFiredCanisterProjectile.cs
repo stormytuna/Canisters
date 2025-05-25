@@ -6,7 +6,7 @@ namespace Canisters.Content.Projectiles;
 public abstract class BaseFiredCanisterProjectile : ModProjectile
 {
 	public static event Action<Player, Projectile> OnExplode;
-	
+
 	/// <summary>
 	///     Amount of time in frames this projectile will fly straight before being gravity affected.
 	///     Defaults to 20.
@@ -32,7 +32,7 @@ public abstract class BaseFiredCanisterProjectile : ModProjectile
 
 	public void Explode(Player player) {
 		ExplosionEffect();
-		OnExplode?.Invoke(player, Projectile);	
+		OnExplode?.Invoke(player, Projectile);
 	}
 
 	public override void SetDefaults() {

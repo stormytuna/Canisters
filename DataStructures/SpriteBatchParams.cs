@@ -20,7 +20,7 @@ public record SpriteBatchParams
 			DepthStencilState = DepthStencilState.None,
 			RasterizerState = RasterizerState.CullNone,
 			TransformMatrix = Main.GameViewMatrix.TransformationMatrix,
-			Effect = null,	
+			Effect = null,
 		};
 	}
 }
@@ -28,10 +28,10 @@ public record SpriteBatchParams
 public static class SpriteBatchParamsExtensions
 {
 	public static void TakeSnapshotAndEnd(this SpriteBatch sb, out SpriteBatchParams sbParams) {
-		sbParams = new SpriteBatchParams { 
-			SortMode = GetSortMode(sb), 
-			BlendState = GetBlendState(sb), 
-			SamplerState = GetSamplerState(sb), 
+		sbParams = new SpriteBatchParams {
+			SortMode = GetSortMode(sb),
+			BlendState = GetBlendState(sb),
+			SamplerState = GetSamplerState(sb),
 			DepthStencilState = GetDepthStencilState(sb),
 			RasterizerState = GetRasterizerState(sb),
 			TransformMatrix = GetTransformMatrix(sb),
@@ -48,25 +48,25 @@ public static class SpriteBatchParamsExtensions
 	public static void Begin(this SpriteBatch sb, SpriteBatchParams sbParams) {
 		sb.Begin(sbParams.SortMode, sbParams.BlendState, sbParams.SamplerState, sbParams.DepthStencilState, sbParams.RasterizerState, sbParams.Effect, sbParams.TransformMatrix);
 	}
-	
+
 	[UnsafeAccessor(UnsafeAccessorKind.Field, Name = "sortMode")]
 	extern static ref SpriteSortMode GetSortMode(SpriteBatch sb);
-	
+
 	[UnsafeAccessor(UnsafeAccessorKind.Field, Name = "blendState")]
 	extern static ref BlendState GetBlendState(SpriteBatch sb);
-	
+
 	[UnsafeAccessor(UnsafeAccessorKind.Field, Name = "samplerState")]
 	extern static ref SamplerState GetSamplerState(SpriteBatch sb);
-	
+
 	[UnsafeAccessor(UnsafeAccessorKind.Field, Name = "depthStencilState")]
 	extern static ref DepthStencilState GetDepthStencilState(SpriteBatch sb);
-	
+
 	[UnsafeAccessor(UnsafeAccessorKind.Field, Name = "rasterizerState")]
 	extern static ref RasterizerState GetRasterizerState(SpriteBatch sb);
-	
-	[UnsafeAccessor(UnsafeAccessorKind.Field, Name = "transformMatrix")] 
+
+	[UnsafeAccessor(UnsafeAccessorKind.Field, Name = "transformMatrix")]
 	extern static ref Matrix GetTransformMatrix(SpriteBatch sb);
-	
+
 	[UnsafeAccessor(UnsafeAccessorKind.Field, Name = "customEffect")]
 	extern static ref Effect GetEffect(SpriteBatch sb);
 }
