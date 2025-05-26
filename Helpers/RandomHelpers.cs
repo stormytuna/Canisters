@@ -61,7 +61,7 @@ public static class RandomHelpers
 	public static float NextRadian(this UnifiedRandom rand) {
 		return rand.NextFloat(MathHelper.TwoPi);
 	}
-	
+
 	/// <summary>
 	///     Generates a random point within the given rectangle
 	/// </summary>

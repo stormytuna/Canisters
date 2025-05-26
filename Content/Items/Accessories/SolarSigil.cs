@@ -35,12 +35,12 @@ public class SolarSigilPlayer : ModPlayer
 			return;
 		}
 
-		var laserTarget = NpcHelpers.GetRandomNearbyNPC(20f * 16f, target.Center, true, [target.whoAmI]);
+		NPC laserTarget = NpcHelpers.GetRandomNearbyNPC(20f * 16f, target.Center, true, [target.whoAmI]);
 		if (laserTarget is null) {
 			return;
 		}
 
-		var hitInfo = new NPC.HitInfo {
+		NPC.HitInfo hitInfo = new() {
 			Damage = hit.Damage / 6,
 			Crit = false,
 			DamageType = DamageClass.Ranged,
@@ -50,7 +50,7 @@ public class SolarSigilPlayer : ModPlayer
 
 		Vector2 dustStart = Main.rand.NextVectorWithin(target.Hitbox);
 		Vector2 dustEnd = Main.rand.NextVectorWithin(laserTarget.Hitbox);
-		
+
 		float length = (dustEnd - dustStart).Length();
 		for (float i = Main.rand.NextFloat(4f); i < length; i += 6f) {
 			Vector2 offset = dustStart.DirectionTo(dustEnd) * i;

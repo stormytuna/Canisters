@@ -21,12 +21,12 @@ public static class NpcHelpers
 
 	public static NPC GetRandomNearbyNPC(float range, Vector2 worldPos, bool careAboutCollision = false, List<int> ignoredNPCs = null) {
 		ignoredNPCs ??= [];
-		
-		var npcs = FindNearbyNPCs(range, worldPos, careAboutCollision, ignoredNPCs);
+
+		List<NPC> npcs = FindNearbyNPCs(range, worldPos, careAboutCollision, ignoredNPCs);
 		if (npcs.Count > 0) {
 			return Main.rand.Next(npcs);
 		}
-		
+
 		return null;
 	}
 

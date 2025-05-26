@@ -8,7 +8,7 @@ public class CanistersProjectileTracker : GlobalProjectile
 {
 	public bool IsDepletedCanisterProjectile { get; private set; }
 	public bool IsLaunchedCanisterProjectile { get; private set; }
-	
+
 	public override bool InstancePerEntity {
 		get => true;
 	}
