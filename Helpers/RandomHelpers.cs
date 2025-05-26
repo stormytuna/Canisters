@@ -8,13 +8,12 @@ public static class RandomHelpers
 {
 	// Adapted from here https://bitbucket.org/Superbest/superbest-random/src/f067e1dc014c31be62c5280ee16544381e04e303/Superbest%20random/RandomExtensions.cs#lines-19
 	/// <summary>
-	///     Generates normally distributed numbers. Each operation makes two Gaussians for the price of one, and apparently
-	///     they can be cached or something for better performance, but who cares.
+	/// Returns a normally distributed random float using the Box-Muller transform.
 	/// </summary>
-	/// <param name="r"></param>
-	/// <param name="mu">Mean of the distribution</param>
-	/// <param name="sigma">Standard deviation</param>
-	/// <returns></returns>
+	/// <param name="r">The UnifiedRandom to use.</param>
+	/// <param name="mu">The mean of the distribution. Defaults to 0.</param>
+	/// <param name="sigma">The standard deviation of the distribution. Defaults to 1.</param>
+	/// <returns>A normally distributed random float.</returns>
 	public static float NextGaussian(this UnifiedRandom r, float mu = 0, float sigma = 1) {
 		float u1 = r.NextFloat();
 		float u2 = r.NextFloat();
@@ -27,21 +26,14 @@ public static class RandomHelpers
 	}
 
 	/// <summary>
-	///     Generates a list of angles generated within segments of a circle
+	///     Generates a list of radian angles that are evenly spaced between 0 and 2Pi, with optional overlap and random offset.
 	/// </summary>
 	/// <param name="rand">The UnifiedRandom to use</param>
-	/// <param name="numSegments">The number of segments, or the number of angles to generate</param>
-	/// <param name="overlap">
-	///     The amount of overlap between each segment. Note that this is the total overlap, not the overlap
-	///     on each side of the segment
-	/// </param>
-	/// <param name="randomOffset">
-	///     Whether or not a random offset will be added to the angles. If set to false, no offset is
-	///     added
-	/// </param>
-	/// <returns></returns>
-	public static List<float> NextSegmentedAngles(this UnifiedRandom rand, int numSegments, float overlap = 0f,
-		bool randomOffset = true) {
+	/// <param name="numSegments">The number of evenly spaced angles to generate</param>
+	/// <param name="overlap">The amount of radians to allow the angles to overlap by</param>
+	/// <param name="randomOffset">Whether to add a random offset to the angles</param>
+	/// <returns>A list of radian angles that are evenly spaced between 0 and 2Pi, with optional overlap and random offset</returns>
+	public static List<float> NextSegmentedAngles(this UnifiedRandom rand, int numSegments, float overlap = 0f, bool randomOffset = true) {
 		List<float> angles = new();
 
 		// Build our list
@@ -62,9 +54,21 @@ public static class RandomHelpers
 	}
 
 	/// <summary>
-	///     Generates a random float between 0 and two pi
+	///     Generates a random radian value between 0 and 2Pi
 	/// </summary>
+	/// <param name="rand">The UnifiedRandom to use</param>
+	/// <returns>A random radian value between 0 and 2Pi</returns>
 	public static float NextRadian(this UnifiedRandom rand) {
 		return rand.NextFloat(MathHelper.TwoPi);
+	}
+	
+	/// <summary>
+	///     Generates a random point within the given rectangle
+	/// </summary>
+	/// <param name="rand">The UnifiedRandom to use</param>
+	/// <param name="rect">The rectangle to generate a point within</param>
+	/// <returns>A random point within the rectangle</returns>
+	public static Vector2 NextVectorWithin(this UnifiedRandom rand, Rectangle rect) {
+		return new Vector2(rect.Left + rand.Next(rect.Width + 1), rect.Top + rand.Next(rect.Height + 1));
 	}
 }

@@ -7,8 +7,8 @@ namespace Canisters.Content.Items.Accessories;
 public class PneumaticPump : ModItem
 {
 	public override void SetDefaults() {
-		Item.width = 28;
-		Item.height = 18;
+		Item.width = 34;
+		Item.height = 34;
 		Item.SetShopValues(ItemRarityColor.LightRed4, Item.buyPrice(gold: 2));
 		Item.accessory = true;
 	}

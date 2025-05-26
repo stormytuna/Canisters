@@ -5,7 +5,7 @@ namespace Canisters.Helpers;
 public static class NpcHelpers
 {
 	public static List<NPC> FindNearbyNPCs(float range, Vector2 worldPos, bool careAboutCollision = false, List<int> ignoredNPCs = null) {
-		List<NPC> npcs = new(50);
+		List<NPC> npcs = new(Main.maxNPCs);
 		ignoredNPCs ??= [];
 
 		foreach (NPC npc in Main.ActiveNPCs) {
@@ -17,6 +17,17 @@ public static class NpcHelpers
 		}
 
 		return npcs;
+	}
+
+	public static NPC GetRandomNearbyNPC(float range, Vector2 worldPos, bool careAboutCollision = false, List<int> ignoredNPCs = null) {
+		ignoredNPCs ??= [];
+		
+		var npcs = FindNearbyNPCs(range, worldPos, careAboutCollision, ignoredNPCs);
+		if (npcs.Count > 0) {
+			return Main.rand.Next(npcs);
+		}
+		
+		return null;
 	}
 
 	public static NPC FindClosestNPC(float range, Vector2 worldPos, bool checkCollision = true, List<int> excludedNpCs = null) {

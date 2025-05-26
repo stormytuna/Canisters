@@ -10,8 +10,8 @@ namespace Canisters.Content.Items.Accessories;
 public class ArcticCoolant : ModItem
 {
 	public override void SetDefaults() {
-		Item.width = 10;
-		Item.height = 10;
+		Item.width = 30;
+		Item.height = 30;
 		Item.SetShopValues(ItemRarityColor.Lime7, Item.sellPrice(gold: 4));
 		Item.accessory = true;
 	}
