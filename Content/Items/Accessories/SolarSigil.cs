@@ -1,3 +1,4 @@
+using System.Linq;
 using Canisters.Common;
 using Canisters.Helpers;
 using Terraria.Enums;
@@ -59,6 +60,49 @@ public class SolarSigilPlayer : ModPlayer
 			dust.velocity *= 0.1f;
 			dust.rotation = Main.rand.NextRadian();
 			dust.scale = Main.rand.NextFloat(0.6f, 0.8f);
+		}
+	}
+}
+
+public class SolarSigilWorldGen : ModSystem
+{
+	public override void PostWorldGen() {
+		int placedSigils = 0;
+		
+		for (int i = 0; i < Main.maxChests; i++) {
+			var chest = Main.chest[i];
+			if (chest is null) {
+				continue;
+			}
+
+			if (placedSigils >= 4) {
+				break;
+			}
+			
+			var chestTile = Main.tile[chest.x, chest.y];
+			// Placing in Lizhard chests
+			if (chestTile.TileType != TileID.Containers || chestTile.TileFrameX != 16 * 36) {
+				continue;
+			}
+
+			// Prevent placing in outside chest
+			if (chest.item[0].type != ItemID.LihzahrdPowerCell) {
+				continue;
+			}
+
+			// Ensure we always place at least one
+			if (placedSigils > 0 && Main.rand.NextBool(2)) {
+				continue;
+			}
+
+			// TODO: place nicely!
+			foreach (var inventorySlot in chest.item) {
+				if (inventorySlot.IsAir) {
+					inventorySlot.SetDefaults(ModContent.ItemType<SolarSigil>());
+					placedSigils++;
+					break;
+				}
+			}
 		}
 	}
 }
