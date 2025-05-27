@@ -9,5 +9,6 @@
     </ItemGroup>
     <ItemGroup>
         <Folder Include="Assets\Gores"/>
+        <Folder Include="Helpers\Enums\" />
     </ItemGroup>
 </Project>

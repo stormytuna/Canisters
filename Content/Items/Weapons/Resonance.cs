@@ -2,7 +2,6 @@
 using System.Linq;
 using Canisters.DataStructures;
 using Canisters.Helpers;
-using Canisters.Helpers.Enums;
 using Terraria.DataStructures;
 using Terraria.Enums;
 using static Microsoft.Xna.Framework.MathHelper;

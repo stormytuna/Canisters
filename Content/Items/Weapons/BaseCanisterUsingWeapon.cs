@@ -3,7 +3,6 @@ using System.Linq;
 using Canisters.Content.Items.Canisters;
 using Canisters.DataStructures;
 using Canisters.Helpers;
-using Canisters.Helpers.Enums;
 using ReLogic.Content;
 using Terraria.DataStructures;
 using static Microsoft.Xna.Framework.MathHelper;

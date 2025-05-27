@@ -1,7 +1,7 @@
 using Canisters.Common;
 using Canisters.Content.Projectiles;
+using Canisters.DataStructures;
 using Canisters.Helpers;
-using Canisters.Helpers.Enums;
 using ReLogic.Content;
 using Terraria.DataStructures;
 using Terraria.Enums;
@@ -66,14 +66,14 @@ public class CoelacannonGlobalProjectile : ShotByWeaponGlobalProjectile<Coelacan
 		}
 
 		if (_target is null || !_target.active) {
-			_target = NpcHelpers.FindClosestNPC(25f * 16f, projectile.Center);
+			_target = NPCHelpers.FindClosestNPC(25f * 16f, projectile.Center);
 			if (_target is null) {
 				return true;
 			}
 		}
 
 		projectile.rotation = projectile.velocity.ToRotation();
-		EntityHelpers.SmoothHoming(projectile, _target.Center, 0.5f, _maxSpeed, _target.velocity, false);
+		MathHelpers.SmoothHoming(projectile, _target.Center, 0.5f, _maxSpeed, _target.velocity);
 
 		return false;
 	}

@@ -1,6 +1,8 @@
-﻿using Canisters.Common;
+﻿using System.Collections.Generic;
+using Canisters.Common;
 using Canisters.DataStructures;
 using Canisters.Helpers;
+using FishUtils.DataStructures;
 using ReLogic.Content;
 using Terraria.Audio;
 using Terraria.DataStructures;
@@ -88,24 +90,24 @@ public class LunarLightningEmitter : ModProjectile
 
 		if (TimerForAttack >= 15 && Main.myPlayer == Projectile.owner) {
 			float radiusMult = Main.LocalPlayer.GetModPlayer<CanisterModifiersPlayer>().CanisterLaunchedExplosionRadiusMult;
-			System.Collections.Generic.List<NPC> closeNPCs = NpcHelpers.FindNearbyNPCs(30f * 16f * radiusMult, Projectile.Center, true);
-			if (closeNPCs.Count > 0) {
+			
+			var target = NPCHelpers.FindRandomNearbyNPC(30f * 16f * radiusMult, Projectile.Center, true);
+			if (target is not null) {
 				TimerForAttack = 0f;
 
-				NPC nextTarget = Main.rand.Next(closeNPCs);
 				NPC.HitInfo hitInfo = new() {
 					Damage = Projectile.damage / 2,
 					Knockback = 0f,
 					DamageType = DamageClass.Ranged,
-					HitDirection = (nextTarget.Center.X > Projectile.Center.X).ToDirectionInt(),
+					HitDirection = (target.Center.X > Projectile.Center.X).ToDirectionInt(),
 				};
-				nextTarget.StrikeNPC(hitInfo);
+				target.StrikeNPC(hitInfo);
 
-				LightningBoltEffects(Projectile.Center, nextTarget.Center);
+				LightningBoltEffects(Projectile.Center, target.Center);
 
 				if (Main.netMode != NetmodeID.SinglePlayer) {
-					NetMessage.SendStrikeNPC(nextTarget, in hitInfo, Main.myPlayer);
-					BroadcastLightningBoltSync(-1, Main.myPlayer, Projectile.Center, nextTarget.Center);
+					NetMessage.SendStrikeNPC(target, in hitInfo, Main.myPlayer);
+					BroadcastLightningBoltSync(-1, Main.myPlayer, Projectile.Center, target.Center);
 				}
 			}
 		}

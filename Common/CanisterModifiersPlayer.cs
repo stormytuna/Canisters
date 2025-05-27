@@ -1,5 +1,5 @@
 using Canisters.Content.Items.Weapons;
-using Canisters.Helpers.Enums;
+using Canisters.DataStructures;
 
 namespace Canisters.Common;
 

@@ -1,6 +1,5 @@
 using Canisters.Content.Items.Weapons;
 using Canisters.DataStructures;
-using Canisters.Helpers.Enums;
 
 namespace Canisters.Content.Items.Canisters;
 

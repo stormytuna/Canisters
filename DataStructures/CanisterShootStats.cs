@@ -1,5 +1,3 @@
-using Canisters.Helpers.Enums;
-
 namespace Canisters.DataStructures;
 
 public record struct CanisterShootStats

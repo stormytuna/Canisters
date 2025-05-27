@@ -91,7 +91,7 @@ public class ArcticCoolantSnowflake : ModProjectile
 		if (_timer >= 18) {
 			Projectile.friendly = true;
 			if (_target is null || !_target.active) {
-				System.Collections.Generic.List<NPC> nearbyNPCs = NpcHelpers.FindNearbyNPCs(32f * 16f, Projectile.Center, true);
+				System.Collections.Generic.List<NPC> nearbyNPCs = NPCHelpers.FindNearbyNPCs(32f * 16f, Projectile.Center, true);
 				if (nearbyNPCs.Count > 0) {
 					_target = Main.rand.Next(nearbyNPCs);
 				}
@@ -108,7 +108,7 @@ public class ArcticCoolantSnowflake : ModProjectile
 			return;
 		}
 
-		EntityHelpers.SmoothHoming(Projectile, _target.Center, 0.3f, 16f, _target.velocity, false);
+		MathHelpers.SmoothHoming(Projectile, _target.Center, 0.3f, 16f, _target.velocity);
 		Projectile.timeLeft++;
 	}
 

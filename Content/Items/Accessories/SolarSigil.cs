@@ -36,7 +36,7 @@ public class SolarSigilPlayer : ModPlayer
 			return;
 		}
 
-		NPC laserTarget = NpcHelpers.GetRandomNearbyNPC(20f * 16f, target.Center, true, [target.whoAmI]);
+		NPC laserTarget = NPCHelpers.FindRandomNearbyNPC(20f * 16f, target.Center, true, [target.whoAmI]);
 		if (laserTarget is null) {
 			return;
 		}

@@ -1,4 +1,4 @@
-﻿namespace Canisters.Helpers.Enums;
+﻿namespace Canisters.DataStructures;
 
 public enum CanisterFiringType
 {

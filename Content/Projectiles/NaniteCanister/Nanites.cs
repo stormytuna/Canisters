@@ -62,7 +62,7 @@ public class Nanites : ModProjectile
 		}
 
 		if (State == AiState.Idle) {
-			NPC closestNpc = NpcHelpers.FindClosestNPC(DetectionRange, Projectile.Center);
+			NPC closestNpc = NPCHelpers.FindClosestNPC(DetectionRange, Projectile.Center);
 			if (closestNpc is not null) {
 				State = AiState.Homing;
 				Target = closestNpc;
@@ -79,7 +79,7 @@ public class Nanites : ModProjectile
 			return;
 		}
 
-		EntityHelpers.SmoothHoming(Projectile, Target.Center, Acceleration, TopSpeed, Target.velocity, false);
+		MathHelpers.SmoothHoming(Projectile, Target.Center, Acceleration, TopSpeed, Target.velocity);
 
 		Projectile.timeLeft++;
 	}
