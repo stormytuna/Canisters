@@ -1,5 +1,4 @@
 ﻿using Canisters.DataStructures;
-using Canisters.Helpers;
 using Terraria.Audio;
 using Terraria.Enums;
 

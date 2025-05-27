@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using Canisters.Content.Items.Weapons;
-using Canisters.Helpers;
 using Terraria.Audio;
 using Terraria.DataStructures;
 

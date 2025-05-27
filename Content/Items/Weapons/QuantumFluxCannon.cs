@@ -1,5 +1,4 @@
 using Canisters.DataStructures;
-using Canisters.Helpers;
 using Terraria.DataStructures;
 using Terraria.Enums;
 

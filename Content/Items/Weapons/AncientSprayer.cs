@@ -1,5 +1,4 @@
 ﻿using Canisters.DataStructures;
-using Canisters.Helpers;
 using ReLogic.Content;
 using Terraria.DataStructures;
 using Terraria.Enums;

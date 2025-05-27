@@ -1,6 +1,5 @@
 using Canisters.Content.Projectiles;
 using Canisters.DataStructures;
-using Canisters.Helpers;
 using Terraria.DataStructures;
 using Terraria.Enums;
 using Terraria.GameContent.ItemDropRules;

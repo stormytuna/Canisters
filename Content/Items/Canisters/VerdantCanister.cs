@@ -2,7 +2,6 @@
 using Canisters.Content.Items.Weapons;
 using Canisters.Content.Projectiles.VerdantCanister;
 using Canisters.DataStructures;
-using Canisters.Helpers;
 using Terraria.Enums;
 
 namespace Canisters.Content.Items.Canisters;

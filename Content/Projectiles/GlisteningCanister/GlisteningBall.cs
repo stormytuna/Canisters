@@ -1,5 +1,4 @@
-﻿using Canisters.Helpers;
-using Terraria.Audio;
+﻿using Terraria.Audio;
 
 namespace Canisters.Content.Projectiles.GlisteningCanister;
 

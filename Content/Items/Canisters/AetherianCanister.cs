@@ -1,6 +1,5 @@
 using Canisters.Content.Projectiles.AetherianCanister;
 using Canisters.DataStructures;
-using Canisters.Helpers;
 using Terraria.Enums;
 
 namespace Canisters.Content.Items.Canisters;

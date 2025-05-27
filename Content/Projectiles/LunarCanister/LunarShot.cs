@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Canisters.Helpers;
 using static Microsoft.Xna.Framework.MathHelper;
 
 namespace Canisters.Content.Projectiles.LunarCanister;

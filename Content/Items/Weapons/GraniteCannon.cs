@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using Canisters.DataStructures;
-using Canisters.Helpers;
 using Terraria.Enums;
 using Terraria.GameContent.ItemDropRules;
 

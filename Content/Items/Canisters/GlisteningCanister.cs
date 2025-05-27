@@ -1,6 +1,5 @@
 ﻿using Canisters.Common;
 using Canisters.Content.Projectiles.GlisteningCanister;
-using Canisters.Helpers;
 using Terraria.Enums;
 
 namespace Canisters.Content.Items.Canisters;

@@ -1,5 +1,4 @@
 ﻿using System;
-using Canisters.Helpers;
 using Terraria.Audio;
 
 namespace Canisters.Content.Projectiles.HarmonicCanister;

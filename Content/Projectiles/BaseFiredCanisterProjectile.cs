@@ -1,5 +1,4 @@
 using System;
-using Canisters.Helpers;
 
 namespace Canisters.Content.Projectiles;
 

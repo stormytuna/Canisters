@@ -1,6 +1,5 @@
 using System.IO;
 using Canisters.Content.Dusts;
-using Canisters.Helpers;
 using Terraria.Audio;
 using Terraria.DataStructures;
 

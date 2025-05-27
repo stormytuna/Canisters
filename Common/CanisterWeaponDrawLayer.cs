@@ -1,5 +1,4 @@
 ﻿using Canisters.Content.Items.Weapons;
-using Canisters.Helpers;
 using Terraria.DataStructures;
 
 namespace Canisters.Common;

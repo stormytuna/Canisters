@@ -1,4 +1,3 @@
-using Canisters.Helpers;
 using Terraria.GameContent;
 using static Microsoft.Xna.Framework.MathHelper;
 
