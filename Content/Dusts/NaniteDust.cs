@@ -1,6 +1,4 @@
-﻿using Canisters.Helpers;
-
-namespace Canisters.Content.Dusts;
+﻿namespace Canisters.Content.Dusts;
 
 public class NaniteDust : ModDust
 {

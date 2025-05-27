@@ -1,4 +1,3 @@
-using Canisters.Helpers;
 using Terraria.Audio;
 using static Microsoft.Xna.Framework.MathHelper;
 

@@ -1,5 +1,4 @@
 ﻿using Canisters.Content.Dusts;
-using Canisters.Helpers;
 using Terraria.Audio;
 using Terraria.GameContent;
 

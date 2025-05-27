@@ -1,5 +1,4 @@
 ﻿using Canisters.Content.Dusts;
-using Canisters.Helpers;
 using Terraria.DataStructures;
 
 namespace Canisters.Content.Projectiles.NaniteCanister;

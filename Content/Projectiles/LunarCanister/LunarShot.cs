@@ -45,7 +45,7 @@ public class LunarShot : ModProjectile
 		Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<LunarMark>(), Projectile.damage / 3, 0f, Main.myPlayer);
 
 		_hitNpcs.Add(target.whoAmI);
-		var nextTarget = NPCHelpers.FindRandomNearbyNPC(50f * 16f, Projectile.Center, true, _hitNpcs);
+		NPC nextTarget = NPCHelpers.FindRandomNearbyNPC(50f * 16f, Projectile.Center, true, _hitNpcs);
 		if (nextTarget is not null) {
 			Projectile.velocity = Projectile.DirectionTo(nextTarget.Center) * Projectile.velocity.Length();
 			Projectile.netUpdate = true;

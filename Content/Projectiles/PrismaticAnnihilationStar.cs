@@ -1,4 +1,3 @@
-using Canisters.Helpers;
 using Terraria.DataStructures;
 using Terraria.GameContent;
 

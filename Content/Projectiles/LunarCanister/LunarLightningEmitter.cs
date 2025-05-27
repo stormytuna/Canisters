@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using Canisters.Common;
-using Canisters.DataStructures;
-using Canisters.Helpers;
+﻿using Canisters.Common;
 using FishUtils.DataStructures;
 using ReLogic.Content;
 using Terraria.Audio;
@@ -90,8 +87,8 @@ public class LunarLightningEmitter : ModProjectile
 
 		if (TimerForAttack >= 15 && Main.myPlayer == Projectile.owner) {
 			float radiusMult = Main.LocalPlayer.GetModPlayer<CanisterModifiersPlayer>().CanisterLaunchedExplosionRadiusMult;
-			
-			var target = NPCHelpers.FindRandomNearbyNPC(30f * 16f * radiusMult, Projectile.Center, true);
+
+			NPC target = NPCHelpers.FindRandomNearbyNPC(30f * 16f * radiusMult, Projectile.Center, true);
 			if (target is not null) {
 				TimerForAttack = 0f;
 

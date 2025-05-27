@@ -1,6 +1,4 @@
-﻿using Canisters.Helpers;
-
-namespace Canisters.Content.Projectiles.GhastlyCanister;
+﻿namespace Canisters.Content.Projectiles.GhastlyCanister;
 
 // TODO: Revisit visuals
 public class GhastlyShot : ModProjectile

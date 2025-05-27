@@ -36,7 +36,7 @@ public static class CanisterHelpers
 	public static string GetEmptyAssetString() {
 		return $"{nameof(Canisters)}/Assets/Empty";
 	}
-	
+
 	public static void DefaultToCanister(this Item item, int damage, float shootSpeed, float knockback) {
 		item.width = 22;
 		item.height = 22;
@@ -65,7 +65,7 @@ public static class CanisterHelpers
 		item.DamageType = DamageClass.Ranged;
 		item.useAmmo = ModContent.ItemType<VolatileCanister>();
 	}
-	
+
 	public static void Explode(this Projectile projectile, int width, int height, int? damage = null, float? knockback = null) {
 		if (Main.myPlayer != projectile.owner) {
 			return;

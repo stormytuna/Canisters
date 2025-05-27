@@ -1,4 +1,3 @@
-using Canisters.Helpers;
 using static Microsoft.Xna.Framework.MathHelper;
 
 namespace Canisters.Content.Dusts;

@@ -1,6 +1,4 @@
-using System.Linq;
 using Canisters.Common;
-using Canisters.Helpers;
 using Terraria.Enums;
 
 namespace Canisters.Content.Items.Accessories;
@@ -68,9 +66,9 @@ public class SolarSigilWorldGen : ModSystem
 {
 	public override void PostWorldGen() {
 		int placedSigils = 0;
-		
+
 		for (int i = 0; i < Main.maxChests; i++) {
-			var chest = Main.chest[i];
+			Chest chest = Main.chest[i];
 			if (chest is null) {
 				continue;
 			}
@@ -78,8 +76,8 @@ public class SolarSigilWorldGen : ModSystem
 			if (placedSigils >= 4) {
 				break;
 			}
-			
-			var chestTile = Main.tile[chest.x, chest.y];
+
+			Tile chestTile = Main.tile[chest.x, chest.y];
 			// Placing in Lizhard chests
 			if (chestTile.TileType != TileID.Containers || chestTile.TileFrameX != 16 * 36) {
 				continue;
@@ -96,7 +94,7 @@ public class SolarSigilWorldGen : ModSystem
 			}
 
 			// TODO: place nicely!
-			foreach (var inventorySlot in chest.item) {
+			foreach (Item inventorySlot in chest.item) {
 				if (inventorySlot.IsAir) {
 					inventorySlot.SetDefaults(ModContent.ItemType<SolarSigil>());
 					placedSigils++;
