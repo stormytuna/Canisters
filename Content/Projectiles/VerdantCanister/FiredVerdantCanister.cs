@@ -31,9 +31,9 @@ public class FiredVerdantCanister : BaseFiredCanisterProjectile
 				int numVines = _buffFromLushSlingshot ? Main.rand.Next(5, 8) : Main.rand.Next(3, 6);
 				float vineRot = Main.rand.NextGaussian(0f, 0.15f);
 				float startRot = startRots[i];
-				int damage = _buffFromLushSlingshot ? (int)(Projectile.damage * 1.1f) : Projectile.damage;
+				int damage = _buffFromLushSlingshot ? (int)(Projectile.damage * 1.2f) : Projectile.damage;
 				Vector2 offset = Vector2.UnitY.RotatedBy(startRot) * -20f;
-				Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center + offset, Vector2.Zero, ModContent.ProjectileType<VerdantVine>(), damage, 0f, Projectile.owner, numVines, startRot, vineRot);
+				Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center + offset, Vector2.Zero, ModContent.ProjectileType<VerdantVine>(), damage / 3, 0f, Projectile.owner, numVines, startRot, vineRot);
 			}
 
 			Projectile.Explode(100, 100);

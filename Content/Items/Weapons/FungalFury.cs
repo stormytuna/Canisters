@@ -23,7 +23,13 @@ public class FungalFury : BaseCanisterUsingWeapon
 		Item.width = 60;
 		Item.height = 32;
 		Item.SetShopValues(ItemRarityColor.Lime7, Item.sellPrice(gold: 70));
+		
 		Item.reuseDelay = 6;
+		Item.consumeAmmoOnLastShotOnly = true;
+	}
+	
+	public override bool CanConsumeAmmo(Item ammo, Player player) {
+		return Main.rand.NextBool(20, 100);
 	}
 
 	public override bool? UseItem(Player player) {

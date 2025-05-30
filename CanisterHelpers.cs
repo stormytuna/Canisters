@@ -49,6 +49,8 @@ public static class CanisterHelpers
 		item.shoot = ModContent.ProjectileType<FiredVolatileCanister>();
 		item.DamageType = DamageClass.Ranged;
 		item.ammo = ModContent.ItemType<VolatileCanister>();
+		// TODO: remove later
+		//item.consumable = true;
 	}
 
 	public static void DefaultToCanisterUsingWeapon(this Item item, int useTime, int useAnim, float shootSpeed, int damage, float knockback) {

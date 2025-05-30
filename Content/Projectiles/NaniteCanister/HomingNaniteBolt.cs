@@ -28,6 +28,7 @@ public class HomingNaniteBolt : ModProjectile
 
 	public override void AI() {
 		_timer++;
+		Projectile.friendly = false;
 
 		Projectile.rotation = Projectile.velocity.ToRotation() + PiOver2;
 
@@ -40,8 +41,12 @@ public class HomingNaniteBolt : ModProjectile
 			dust.noGravity = true;
 		}
 
-		if (_timer >= 10 && (_target is null || !_target.active)) {
-			_target = NPCHelpers.FindClosestNPC(25f * 16f, Projectile.Center);
+		if (_timer >= 10) {
+			Projectile.friendly = true;
+			if (_target is null || !_target.active) 
+			{
+				_target = NPCHelpers.FindClosestNPC(25f * 16f, Projectile.Center);
+			}
 		}
 
 		if (_target is null) {

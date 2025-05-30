@@ -75,7 +75,7 @@ public abstract class BaseCanisterUsingWeapon : ModItem
 
 			_canisterFiringTypeOverride = null;
 		}
-
+		
 		canister.ApplyAmmoStats(ref stats);
 		ApplyWeaponStats(ref stats);
 

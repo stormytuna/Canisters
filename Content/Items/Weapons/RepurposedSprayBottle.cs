@@ -27,6 +27,10 @@ public class RepurposedSprayBottle : BaseCanisterUsingWeapon
 		SoundStyle sound = new($"{nameof(Canisters)}/Assets/Sounds/SprayBottle");
 		Item.UseSound = sound with { Volume = 0.8f, PitchRange = (0.3f, 0.5f), MaxInstances = 5 };
 	}
+	
+	public override bool CanConsumeAmmo(Item ammo, Player player) {
+		return Main.rand.NextBool(40, 100);
+	}
 
 	public override void ApplyWeaponStats(ref CanisterShootStats stats) {
 		stats.TotalSpread += 0.25f;

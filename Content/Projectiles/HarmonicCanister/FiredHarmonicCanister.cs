@@ -40,6 +40,6 @@ public class FiredHarmonicCanister : BaseFiredCanisterProjectile
 		DustHelpers.MakeDustExplosion(Projectile.Center, 30f, DustID.PinkTorch, 15 * dustMult, 6f, 10f, noGravity: true);
 		DustHelpers.MakeDustExplosion(Projectile.Center, 30f, DustID.PurpleTorch, 15 * dustMult, 6f, 10f, noGravity: true);
 
-		SoundEngine.PlaySound(SoundID.Zombie103 with { Volume = 0.4f, PitchRange = (-0.4f, -0.1f), MaxInstances = 2, SoundLimitBehavior = SoundLimitBehavior.ReplaceOldest }, Projectile.Center);
+		SoundEngine.PlaySound(SoundID.Zombie103 with { Volume = 0.2f, PitchRange = (-0.4f, -0.1f), MaxInstances = 2, SoundLimitBehavior = SoundLimitBehavior.ReplaceOldest }, Projectile.Center);
 	}
 }

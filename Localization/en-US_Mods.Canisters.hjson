@@ -159,7 +159,11 @@ Items: {
 	}
 
 	AncientSprayer: {
-		Tooltip: Depletes canisters
+		Tooltip:
+			'''
+			Depletes canisters
+			20% chance to save ammo
+			'''
 		DisplayName: Ancient Sprayer
 	}
 
@@ -185,7 +189,11 @@ Items: {
 
 	RepurposedSprayBottle: {
 		DisplayName: Repurposed Spray Bottle
-		Tooltip: Depletes canisters with pathetic velocity, but tremendous firing speed
+		Tooltip:
+			'''
+			Depletes canisters with pathetic velocity, but tremendous firing speed
+			40% chance to save ammo
+			'''
 	}
 
 	Icemire: {
@@ -195,7 +203,11 @@ Items: {
 
 	Resonance: {
 		DisplayName: Resonance
-		Tooltip: Depleted canisters fire two projectiles in harmony
+		Tooltip:
+			'''
+			Depleted canisters fire two projectiles in harmony
+			30% chance to save ammo
+			'''
 	}
 
 	Pneumaticannon: {
@@ -218,6 +230,7 @@ Items: {
 			'''
 			Depletes canisters
 			Firing speed accelerates the longer you are shooting
+			25% chance to save ammo
 			'''
 	}
 
@@ -236,6 +249,7 @@ Items: {
 			'''
 			Depletes canisters
 			Firing speed accelerates tremendously the longer you are shooting
+			60% chance to save ammo
 			'''
 	}
 
@@ -250,7 +264,11 @@ Items: {
 
 	FungalFury: {
 		DisplayName: Fungal Fury
-		Tooltip: Depletes canisters in a 4 round burst
+		Tooltip:
+			'''
+			Depletes canisters in a 4 round burst
+			20% chance to save ammo
+			'''
 	}
 
 	PneumaticPump: {
@@ -281,6 +299,7 @@ Items: {
 		Tooltip:
 			'''
 			Uses cutting edge quantum technology to launch and deplete canisters simultaneously
+			20% chance to save ammo
 			'It's not a bug - it's a feature!'
 			'''
 	}
@@ -291,6 +310,7 @@ Items: {
 			'''
 			Depletes canisters and releases a Prismatic Star every 4 shots
 			Firing speed accelerates the longer you are shooting
+			50% chance to save ammo
 			'''
 	}
 
@@ -339,8 +359,4 @@ Buffs: {
 	}
 }
 
-Configs: {
-	ServerConfig: {
-		DisplayName: Server Config
-	}
-}
+Configs.ServerConfig.DisplayName: Server Config

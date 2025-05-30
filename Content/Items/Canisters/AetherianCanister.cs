@@ -29,8 +29,8 @@ public class AetherianCanister : BaseCanisterItem
 
 	public override void ApplyAmmoStats(ref CanisterShootStats stats) {
 		if (stats.IsLaunched) {
-			stats.Damage /= 5;
-			stats.Knockback /= 5f;
+			stats.Damage /= 4;
+			stats.Knockback = 0f;
 			stats.ProjectileCount *= 6;
 			stats.TotalSpread += 0.7f;
 		}

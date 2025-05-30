@@ -27,8 +27,12 @@ public class AncientSprayer : BaseCanisterUsingWeapon
 		Item.UseSound = SoundID.Item13 with { PitchVariance = 0.1f };
 	}
 
+	public override bool CanConsumeAmmo(Item ammo, Player player) {
+		return Main.rand.NextBool(20, 100);
+	}
+
 	public override void ApplyWeaponStats(ref CanisterShootStats stats) {
-		stats.Velocity = stats.Velocity.RotatedByRandom(0.4f);
+		stats.Velocity = stats.Velocity.RotatedByRandom(0.2f);
 	}
 
 	public override void AddRecipes() {

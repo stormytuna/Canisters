@@ -24,6 +24,10 @@ public class Splattergun : BaseCanisterUsingWeapon
 		Item.SetShopValues(ItemRarityColor.LightRed4, Item.buyPrice(gold: 2, silver: 50));
 		Item.UseSound = SoundID.Item5 with { PitchRange = (0.9f, 1.3f), MaxInstances = 0, Volume = 0.6f };
 	}
+	
+	public override bool CanConsumeAmmo(Item ammo, Player player) {
+		return Main.rand.NextBool(25, 100);
+	}
 
 	public override bool? UseItem(Player player) {
 		player.GetModPlayer<SplatterGunPlayer>().UseItem();

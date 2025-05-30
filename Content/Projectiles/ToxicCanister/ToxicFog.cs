@@ -56,12 +56,12 @@ public class ToxicFog : ModProjectile
 		}
 	}
 
-	public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox) {
-		if (Collision.CanHitLine(projHitbox.Center.ToVector2(), 1, 1, targetHitbox.TopLeft(), targetHitbox.Width, targetHitbox.Height)) {
+	public override bool? CanHitNPC(NPC target) {
+		if (!CollisionHelpers.CanHit(target, Projectile.Center)) {
 			return false;
 		}
-
-		return base.Colliding(projHitbox, targetHitbox);
+		
+		return base.CanHitNPC(target);
 	}
 
 	public override bool OnTileCollide(Vector2 oldVelocity) {

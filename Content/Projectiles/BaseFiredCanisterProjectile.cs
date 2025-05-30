@@ -28,8 +28,6 @@ public abstract class BaseFiredCanisterProjectile : ModProjectile
 	/// <para/> NOTE: To manually cause an explosion for a canister, call the Explode method, not this one!
 	/// </summary>
 	protected virtual void ExplosionEffect() { }
-	
-	protected virtual void SafeModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers) { }
 
 	public void Explode(Player player) {
 		ExplosionEffect();
@@ -89,9 +87,21 @@ public abstract class BaseFiredCanisterProjectile : ModProjectile
 		gore.timeLeft = 120;
 	}
 
-	public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers) {
-		SafeModifyHitNPC(target, ref modifiers);
+	/// <summary>
+	/// Prevents hitting targets that are out of line of sight.
+	/// </summary>
+	public override bool? CanHitNPC(NPC target) {
+		if (!CollisionHelpers.CanHit(target, Projectile.Center)) {
+			return false;
+		}
 		
+		return base.CanHitNPC(target);
+	}
+	
+	/// <summary>
+	/// Reduces damage against the Eater of Worlds' segments in Expert mode.
+	/// </summary>
+	public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers) {
 		if (Main.expertMode && target.type is NPCID.EaterofWorldsBody or NPCID.EaterofWorldsHead or NPCID.EaterofWorldsTail) {
 			modifiers.FinalDamage /= 5;
 		}

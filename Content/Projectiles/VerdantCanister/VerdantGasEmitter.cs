@@ -53,7 +53,7 @@ public class VerdantGasEmitter : ModProjectile
 			if (Main.myPlayer == Projectile.owner) {
 				Vector2 velocity = _startVelocity * Main.rand.NextFloat(0.95f, 1.05f);
 				velocity = velocity.RotatedByRandom(0.1f);
-				Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, velocity, ModContent.ProjectileType<VerdantGas>(), Projectile.damage / 3, Projectile.knockBack, Projectile.owner);
+				Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, velocity, ModContent.ProjectileType<VerdantGas>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
 			}
 
 			Rectangle dustSpawnBox = Projectile.Hitbox;

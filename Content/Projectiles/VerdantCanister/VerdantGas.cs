@@ -19,7 +19,6 @@ public class VerdantGas : ModProjectile
 		Projectile.DamageType = DamageClass.Ranged;
 		Projectile.usesIDStaticNPCImmunity = true;
 		Projectile.idStaticNPCHitCooldown = 10;
-		Projectile.ownerHitCheck = true;
 	}
 
 	public override void AI() {
@@ -46,6 +45,14 @@ public class VerdantGas : ModProjectile
 				Projectile.frame = 0;
 			}
 		}
+	}
+
+	public override bool? CanHitNPC(NPC target) {
+		if (!CollisionHelpers.CanHit(target, Projectile.Center)) {
+			return false;
+		}
+		
+		return base.CanHitNPC(target);
 	}
 
 	public override bool OnTileCollide(Vector2 oldVelocity) {

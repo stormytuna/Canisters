@@ -31,6 +31,10 @@ public class PrismaticAnnihilation : BaseCanisterUsingWeapon
 		Item.SetShopValues(ItemRarityColor.StrongRed10, Item.sellPrice(gold: 10));
 		Item.UseSound = SoundID.Item5 with { PitchRange = (0.6f, 1.2f), MaxInstances = 0, Volume = 0.6f };
 	}
+	
+	public override bool CanConsumeAmmo(Item ammo, Player player) {
+		return Main.rand.NextBool(50, 100);
+	}
 
 	public override bool? UseItem(Player player) {
 		player.GetModPlayer<PrismaticAnnihilationPlayer>().UseItem();

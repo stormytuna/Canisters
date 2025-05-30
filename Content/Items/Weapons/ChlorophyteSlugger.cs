@@ -25,6 +25,10 @@ public class ChlorophyteSlugger : BaseCanisterUsingWeapon
 		Item.UseSound = SoundID.Item10 with { PitchRange = (0.8f, 1f), MaxInstances = 0 };
 	}
 
+	public override bool CanConsumeAmmo(Item ammo, Player player) {
+		return Main.rand.NextBool(60, 100);
+	}
+
 	public override void ApplyWeaponStats(ref CanisterShootStats stats) {
 		stats.TotalSpread += 0.35f;
 	}
