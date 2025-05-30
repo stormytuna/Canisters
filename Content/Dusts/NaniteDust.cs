@@ -12,7 +12,7 @@ public class NaniteDust : ModDust
 		dust.rotation = Main.rand.NextRadian();
 
 		if (dust.customData is Projectile { active: true } projectile) {
-			dust.position += projectile.velocity; 
+			dust.position += projectile.velocity;
 		}
 
 		dust.scale *= 0.96f;

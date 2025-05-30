@@ -6,8 +6,8 @@ namespace Canisters.Content.Projectiles.NaniteCanister;
 
 public class HomingNaniteBolt : ModProjectile
 {
-	private static VertexStrip _vertexStrip = new();
-	
+	private static readonly VertexStrip _vertexStrip = new();
+
 	private NPC _target = null;
 	private int _timer = 0;
 
@@ -21,16 +21,16 @@ public class HomingNaniteBolt : ModProjectile
 		Projectile.height = 8;
 		Projectile.aiStyle = -1;
 		Projectile.timeLeft = 3 * 60;
-		
+
 		Projectile.friendly = true;
 		Projectile.DamageType = DamageClass.Ranged;
 	}
 
 	public override void AI() {
 		_timer++;
-		
+
 		Projectile.rotation = Projectile.velocity.ToRotation() + PiOver2;
-		
+
 		if (Main.rand.NextBool()) {
 			Dust dust = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.GolfPaticle);
 			dust.color = CanisterHelpers.GetCanisterColor<Items.Canisters.NaniteCanister>();
@@ -64,19 +64,19 @@ public class HomingNaniteBolt : ModProjectile
 	}
 
 	public override bool PreDraw(ref Color lightColor) {
-		var miscShaderData = GameShaders.Misc["LightDisc"];
+		MiscShaderData miscShaderData = GameShaders.Misc["LightDisc"];
 		miscShaderData.UseSaturation(-2.8f);
 		miscShaderData.UseOpacity(2f);
 		miscShaderData.Apply();
-		
-		_vertexStrip.PrepareStripWithProceduralPadding(Projectile.oldPos, Projectile.oldRot, StripColor, StripHalfWidth, (Projectile.Size / 2f) - Main.screenPosition);	
+
+		_vertexStrip.PrepareStripWithProceduralPadding(Projectile.oldPos, Projectile.oldRot, StripColor, StripHalfWidth, (Projectile.Size / 2f) - Main.screenPosition);
 		_vertexStrip.DrawTrail();
-		
+
 		Main.pixelShader.CurrentTechnique.Passes[0].Apply();
 
 		return true;
 	}
-	
+
 	private Color StripColor(float progress) {
 		float inverse = 1f - progress;
 		Color result = CanisterHelpers.GetCanisterColor<Items.Canisters.NaniteCanister>() * float.Pow(inverse, 4) * 0.5f;

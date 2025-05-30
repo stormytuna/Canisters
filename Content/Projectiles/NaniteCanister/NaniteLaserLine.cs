@@ -1,5 +1,3 @@
-using System;
-using System.Linq;
 using Canisters.Content.Dusts;
 using ReLogic.Content;
 using Terraria.DataStructures;
@@ -9,7 +7,7 @@ namespace Canisters.Content.Projectiles.NaniteCanister;
 public class NaniteLaserLine : ModProjectile
 {
 	private static Asset<Texture2D> _sourceTexture;
-	
+
 	private Vector2 _topSource;
 	private Vector2 _bottomSource;
 	private bool _firstFrame = true;
@@ -27,20 +25,20 @@ public class NaniteLaserLine : ModProjectile
 		Projectile.width = 2;
 		Projectile.height = 2;
 		Projectile.aiStyle = -1;
-		
+
 		Projectile.friendly = true;
 		Projectile.penetrate = -1;
 		Projectile.DamageType = DamageClass.Ranged;
 		Projectile.ignoreWater = true;
 	}
-	
+
 	public override void AI() {
 		if (_firstFrame) {
 			_firstFrame = false;
 
 			_tangent = Projectile.velocity.SafeNormalize(Vector2.Zero).RotatedBy(MathHelper.PiOver2);
 			_topSource = Projectile.Center + _tangent;
-			_bottomSource = Projectile.Center - _tangent;	
+			_bottomSource = Projectile.Center - _tangent;
 		}
 
 		float length = _topSource.Distance(_bottomSource);
@@ -50,15 +48,15 @@ public class NaniteLaserLine : ModProjectile
 		}
 
 		if (Main.rand.NextBool(15)) {
-			var lightningDusts = DustHelpers.MakeLightningDust(_topSource, _bottomSource, ModContent.DustType<NaniteDust>(), 1.2f, 50f, 0.3f);
-			foreach (var lightningDust in lightningDusts) {
-				lightningDust.customData = Projectile;	
+			System.Collections.Generic.List<Dust> lightningDusts = DustHelpers.MakeLightningDust(_topSource, _bottomSource, ModContent.DustType<NaniteDust>(), 1.2f, 50f, 0.3f);
+			foreach (Dust lightningDust in lightningDusts) {
+				lightningDust.customData = Projectile;
 			}
 		}
 
 		for (float i = Main.rand.NextFloat(10f); i < length; i += 10f) {
 			Vector2 offset = _topSource.DirectionTo(_bottomSource) * Main.rand.NextFloat(length);
-			var dust = Dust.NewDustPerfect(_topSource + offset, ModContent.DustType<NaniteDust>());
+			Dust dust = Dust.NewDustPerfect(_topSource + offset, ModContent.DustType<NaniteDust>());
 			dust.velocity *= 0.2f;
 			dust.customData = Projectile;
 		}
@@ -68,16 +66,16 @@ public class NaniteLaserLine : ModProjectile
 	}
 
 	public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox) {
-		var topHitbox = new Rectangle((int)_topSource.X - 4, (int)_topSource.Y - 4, 8, 8);
+		Rectangle topHitbox = new((int)_topSource.X - 4, (int)_topSource.Y - 4, 8, 8);
 		if (topHitbox.Intersects(targetHitbox)) {
 			return true;
 		}
 
-		var bottomHitbox = new Rectangle((int)_bottomSource.X - 4, (int)_bottomSource.Y - 4, 8, 8);
+		Rectangle bottomHitbox = new((int)_bottomSource.X - 4, (int)_bottomSource.Y - 4, 8, 8);
 		if (bottomHitbox.Intersects(targetHitbox)) {
 			return true;
 		}
-		
+
 		return base.Colliding(projHitbox, targetHitbox);
 	}
 
@@ -87,8 +85,8 @@ public class NaniteLaserLine : ModProjectile
 	}
 
 	public override bool PreDraw(ref Color lightColor) {
-		var topDrawData = new DrawData {
-			texture	= _sourceTexture.Value,
+		DrawData topDrawData = new() {
+			texture = _sourceTexture.Value,
 			position = _topSource - Main.screenPosition,
 			sourceRect = _sourceTexture.Value.Frame(),
 			color = Projectile.GetAlpha(lightColor),
@@ -96,14 +94,14 @@ public class NaniteLaserLine : ModProjectile
 			scale = new Vector2(Projectile.scale),
 			origin = _sourceTexture.Value.Size() / 2f
 		};
-		
-		var bottomDrawData = topDrawData with {
+
+		DrawData bottomDrawData = topDrawData with {
 			position = _bottomSource - Main.screenPosition,
 		};
-		
+
 		topDrawData.Draw(Main.spriteBatch);
 		bottomDrawData.Draw(Main.spriteBatch);
-		
+
 		return false;
 	}
 }
