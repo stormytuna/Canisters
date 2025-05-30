@@ -27,8 +27,7 @@ public class AbyssalBlaster : BaseCanisterUsingWeapon
 		Item.width = 56;
 		Item.height = 18;
 		Item.SetShopValues(ItemRarityColor.Lime7, Item.sellPrice(gold: 7));
-		// TODO: revisit sound
-		Item.UseSound = SoundID.Item10 with { PitchRange = (-1f, -0.8f) };
+		Item.UseSound = SoundID.Item10 with { PitchRange = (-1.3f, -1f) };
 	}
 
 	public override void ApplyWeaponStats(ref CanisterShootStats stats) {

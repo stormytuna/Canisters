@@ -24,7 +24,7 @@ public class QuantumFluxCannon : BaseCanisterUsingWeapon
 		Item.height = 28;
 		Item.SetShopValues(ItemRarityColor.Yellow8, Item.sellPrice(gold: 10));
 		// TODO: revisit sound
-		Item.UseSound = SoundID.Item10 with { PitchRange = (-1f, -0.8f) };
+		Item.UseSound = SoundID.NPCDeath56 with { PitchRange = (0.3f, 0.5f), Volume = 0.5f };
 	}
 
 	public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback) {

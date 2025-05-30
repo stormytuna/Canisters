@@ -1,4 +1,5 @@
 ﻿using Canisters.DataStructures;
+using Terraria.Audio;
 using Terraria.Enums;
 
 namespace Canisters.Content.Items.Weapons;
@@ -22,8 +23,14 @@ public class FungalFury : BaseCanisterUsingWeapon
 		Item.width = 60;
 		Item.height = 32;
 		Item.SetShopValues(ItemRarityColor.Lime7, Item.sellPrice(gold: 70));
-		// TODO: change use sound
-		Item.UseSound = SoundID.Item5 with { PitchRange = (0.7f, 1.1f), MaxInstances = 0, Volume = 0.6f };
+		Item.reuseDelay = 6;
+	}
+
+	public override bool? UseItem(Player player) {
+		var sound = SoundID.Item5 with { PitchRange = (0.7f, 1.1f), MaxInstances = 0, Volume = 0.6f };
+		SoundEngine.PlaySound(sound, player.Center);
+		
+		return true;
 	}
 
 	public override void ApplyWeaponStats(ref CanisterShootStats stats) {

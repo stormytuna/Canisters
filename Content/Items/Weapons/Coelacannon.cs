@@ -26,7 +26,7 @@ public class Coelacannon : BaseCanisterUsingWeapon
 		Item.width = 72;
 		Item.height = 36;
 		Item.SetShopValues(ItemRarityColor.Lime7, Item.buyPrice(gold: 8));
-		Item.UseSound = SoundID.Item10 with { PitchRange = (0.8f, 1f), MaxInstances = 0 };
+		Item.UseSound = SoundID.Item10 with { PitchRange = (-1f, -0.8f) };
 	}
 }
 

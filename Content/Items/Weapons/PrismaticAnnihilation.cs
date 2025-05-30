@@ -1,5 +1,6 @@
 using Canisters.Content.Projectiles;
 using Canisters.DataStructures;
+using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.Enums;
 using Terraria.GameContent.ItemDropRules;
@@ -40,6 +41,7 @@ public class PrismaticAnnihilation : BaseCanisterUsingWeapon
 		if (_shootCount++ > 1) {
 			_shootCount = 0;
 			Projectile.NewProjectile(source, position, velocity * 0.8f, ModContent.ProjectileType<PrismaticAnnihilationStar>(), damage / 2, knockback);
+			SoundEngine.PlaySound(SoundID.Item9, player.Center);
 		}
 
 		return base.Shoot(player, source, position, velocity, type, damage, knockback);
@@ -70,7 +72,7 @@ public class PrismaticAnnihilationPlayer : ModPlayer
 	}
 
 	public override float UseTimeMultiplier(Item item) {
-		if (item.ModItem is not ChlorophyteSlugger) {
+		if (item.ModItem is not PrismaticAnnihilation) {
 			return base.UseTimeMultiplier(item);
 		}
 
