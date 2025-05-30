@@ -1,5 +1,6 @@
 using Canisters.Common;
 using Terraria.Enums;
+using Terraria.GameContent.ItemDropRules;
 
 namespace Canisters.Content.Items.Accessories;
 
@@ -62,45 +63,13 @@ public class SolarSigilPlayer : ModPlayer
 	}
 }
 
-public class SolarSigilWorldGen : ModSystem
+public class SolarSigilGlobalNPC : GlobalNPC
 {
-	public override void PostWorldGen() {
-		int placedSigils = 0;
+	public override bool AppliesToEntity(NPC entity, bool lateInstantiation) {
+		return entity.type is NPCID.Lihzahrd or NPCID.LihzahrdCrawler or NPCID.FlyingSnake;
+	}
 
-		for (int i = 0; i < Main.maxChests; i++) {
-			Chest chest = Main.chest[i];
-			if (chest is null) {
-				continue;
-			}
-
-			if (placedSigils >= 4) {
-				break;
-			}
-
-			Tile chestTile = Main.tile[chest.x, chest.y];
-			// Placing in Lizhard chests
-			if (chestTile.TileType != TileID.Containers || chestTile.TileFrameX != 16 * 36) {
-				continue;
-			}
-
-			// Prevent placing in outside chest
-			if (chest.item[0].type != ItemID.LihzahrdPowerCell) {
-				continue;
-			}
-
-			// Ensure we always place at least one
-			if (placedSigils > 0 && Main.rand.NextBool(2)) {
-				continue;
-			}
-
-			// TODO: place nicely!
-			foreach (Item inventorySlot in chest.item) {
-				if (inventorySlot.IsAir) {
-					inventorySlot.SetDefaults(ModContent.ItemType<SolarSigil>());
-					placedSigils++;
-					break;
-				}
-			}
-		}
+	public override void ModifyNPCLoot(NPC npc, NPCLoot npcLoot) {
+		npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<SolarSigil>(), 80));
 	}
 }

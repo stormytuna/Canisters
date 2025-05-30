@@ -1,3 +1,4 @@
+using System.Linq;
 using Canisters.Content.Projectiles;
 using Canisters.DataStructures;
 using Terraria.Audio;
@@ -87,7 +88,31 @@ public class PrismaticAnnihilationGlobalNPC : GlobalNPC
 	}
 
 	public override void ModifyNPCLoot(NPC npc, NPCLoot npcLoot) {
-		// todo: insert properly
-		npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<PrismaticAnnihilation>(), 5));
+		var rule = npcLoot.Get()
+			.First(x => x is LeadingConditionRule { condition: Conditions.NotExpert })
+			.ChainedRules
+			.First(x => x.RuleToChain is FromOptionsWithoutRepeatsDropRule)
+			.RuleToChain as FromOptionsWithoutRepeatsDropRule;
+
+		var drops = rule.dropIds.ToList();
+		drops.Add(ModContent.ItemType<PrismaticAnnihilation>());
+		rule.dropIds = drops.ToArray();
+	}
+}
+
+public class PrismaticAnnihilationGlobalItem : GlobalItem
+{
+	public override bool AppliesToEntity(Item item, bool lateInstantiation) {
+		return item.type == ItemID.MoonLordBossBag;
+	}
+
+	public override void ModifyItemLoot(Item item, ItemLoot itemLoot) {
+		var rule = itemLoot.Get()
+			.First(x => x is FromOptionsWithoutRepeatsDropRule)
+			as FromOptionsWithoutRepeatsDropRule;
+
+		var drops = rule.dropIds.ToList();
+		drops.Add(ModContent.ItemType<PrismaticAnnihilation>());
+		rule.dropIds = drops.ToArray();
 	}
 }

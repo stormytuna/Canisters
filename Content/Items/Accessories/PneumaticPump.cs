@@ -1,3 +1,4 @@
+using System.Linq;
 using Canisters.Common;
 using Terraria.Enums;
 using Terraria.GameContent.ItemDropRules;
@@ -26,8 +27,14 @@ public class PneumaticPumpDropCondition : GlobalNPC
 	}
 
 	public override void ModifyNPCLoot(NPC npc, NPCLoot npcLoot) {
-		// TODO: integrate into loot, implement low grind
-		npcLoot.Add(ItemDropRule.ByCondition(new Conditions.IsHardmode(), ModContent.ItemType<PneumaticPump>(), 5));
-		npcLoot.Add(ItemDropRule.ByCondition(new Conditions.RemixSeedHardmode(), ModContent.ItemType<PneumaticPump>(), 5));
+		var rule = npcLoot.Get()
+			.First(x => x is LeadingConditionRule { condition: Conditions.NotRemixSeed })
+			.ChainedRules
+			.First(x => x.RuleToChain is OneFromOptionsDropRule)
+			.RuleToChain as OneFromOptionsDropRule;
+		
+		var drops = rule.dropIds.ToList();
+		drops.Add(ModContent.ItemType<PneumaticPump>());
+		rule.dropIds = drops.ToArray();
 	}
 }
