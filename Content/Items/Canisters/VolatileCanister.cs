@@ -24,9 +24,8 @@ public class VolatileCanister : BaseCanisterItem
 	}
 
 	public override void AddRecipes() {
-		int amount = ServerConfig.Instance.LowGrind ? 200 : 100;
-		CreateRecipe(amount)
-			.AddIngredient<EmptyCanister>(amount)
+		CreateRecipe(100)
+			.AddIngredient<EmptyCanister>(100)
 			.AddIngredient(ItemID.Gel)
 			.AddTile(TileID.Bottles)
 			.Register();

@@ -31,9 +31,8 @@ public class NaniteCanister : BaseCanisterItem
 	}
 
 	public override void AddRecipes() {
-		int amount = ServerConfig.Instance.LowGrind ? 100 : 50;
-		CreateRecipe(amount)
-			.AddIngredient<EmptyCanister>(amount)
+		CreateRecipe(50)
+			.AddIngredient<EmptyCanister>(50)
 			.AddIngredient(ItemID.Nanites)
 			.AddTile(TileID.Bottles)
 			.Register();

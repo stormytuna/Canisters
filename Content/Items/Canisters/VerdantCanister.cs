@@ -30,9 +30,8 @@ public class VerdantCanister : BaseCanisterItem
 	}
 
 	public override void AddRecipes() {
-		int amount = ServerConfig.Instance.LowGrind ? 400 : 200;
-		CreateRecipe(amount)
-			.AddIngredient<EmptyCanister>(amount)
+		CreateRecipe(200)
+			.AddIngredient<EmptyCanister>(200)
 			.AddIngredient(ItemID.JungleSpores)
 			.AddTile(TileID.Bottles)
 			.Register();

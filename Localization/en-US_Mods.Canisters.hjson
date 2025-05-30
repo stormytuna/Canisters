@@ -342,10 +342,5 @@ Buffs: {
 Configs: {
 	ServerConfig: {
 		DisplayName: Server Config
-
-		LowGrind: {
-			Label: Low Grind
-			Tooltip: Reduces the amount of grind needed to play this mod's content. Recipes are cheaper and drops are plentiful. If you are playing with many people or with many mods enabled, you may want to turn this on.
-		}
 	}
 }

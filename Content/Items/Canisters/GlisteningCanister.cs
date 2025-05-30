@@ -24,9 +24,8 @@ public class GlisteningCanister : BaseCanisterItem
 	}
 
 	public override void AddRecipes() {
-		int amount = ServerConfig.Instance.LowGrind ? 300 : 150;
-		CreateRecipe(amount)
-			.AddIngredient<EmptyCanister>(amount)
+		CreateRecipe(150)
+			.AddIngredient<EmptyCanister>(150)
 			.AddIngredient(ItemID.Ichor)
 			.AddTile(TileID.Bottles)
 			.Register();

@@ -34,9 +34,8 @@ public class GhastlyCanister : BaseCanisterItem
 	}
 
 	public override void AddRecipes() {
-		int amount = ServerConfig.Instance.LowGrind ? 300 : 150;
-		CreateRecipe(amount)
-			.AddIngredient<EmptyCanister>(amount)
+		CreateRecipe(300)
+			.AddIngredient<EmptyCanister>(300)
 			.AddIngredient(ItemID.Ectoplasm)
 			.AddTile(TileID.Bottles)
 			.Register();

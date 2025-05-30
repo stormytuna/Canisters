@@ -37,9 +37,8 @@ public class HarmonicCanister : BaseCanisterItem
 	}
 
 	public override void AddRecipes() {
-		int amount = ServerConfig.Instance.LowGrind ? 600 : 300;
-		CreateRecipe(amount)
-			.AddIngredient<EmptyCanister>(amount)
+		CreateRecipe(300)
+			.AddIngredient<EmptyCanister>(300)
 			.AddIngredient(ItemID.SoulofNight)
 			.AddIngredient(ItemID.SoulofLight)
 			.AddTile(TileID.Bottles)

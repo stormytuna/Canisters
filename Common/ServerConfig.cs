@@ -12,7 +12,4 @@ public class ServerConfig : ModConfig
 	public static ServerConfig Instance {
 		get => ModContent.GetInstance<ServerConfig>();
 	}
-
-	[DefaultValue(false)]
-	public bool LowGrind;
 }
