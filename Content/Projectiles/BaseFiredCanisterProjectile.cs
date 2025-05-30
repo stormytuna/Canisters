@@ -28,6 +28,8 @@ public abstract class BaseFiredCanisterProjectile : ModProjectile
 	/// <para/> NOTE: To manually cause an explosion for a canister, call the Explode method, not this one!
 	/// </summary>
 	protected virtual void ExplosionEffect() { }
+	
+	protected virtual void SafeModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers) { }
 
 	public void Explode(Player player) {
 		ExplosionEffect();
@@ -85,5 +87,13 @@ public abstract class BaseFiredCanisterProjectile : ModProjectile
 		gore.timeLeft = 120;
 		gore = Gore.NewGoreDirect(Projectile.GetSource_FromThis(), Projectile.Center, -canisterVelocity + (Projectile.velocity * 0.5f), canisterGore2.Type);
 		gore.timeLeft = 120;
+	}
+
+	public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers) {
+		SafeModifyHitNPC(target, ref modifiers);
+		
+		if (Main.expertMode && target.type is NPCID.EaterofWorldsBody or NPCID.EaterofWorldsHead or NPCID.EaterofWorldsTail) {
+			modifiers.FinalDamage /= 5;
+		}
 	}
 }

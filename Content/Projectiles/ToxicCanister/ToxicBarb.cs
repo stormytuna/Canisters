@@ -23,6 +23,7 @@ public class ToxicBarb : ModProjectile
 	public override void SetStaticDefaults() {
 		ProjectileID.Sets.TrailCacheLength[Type] = 20;
 		ProjectileID.Sets.TrailingMode[Type] = 0;
+		ProjectileID.Sets.CultistIsResistantTo[Type] = true;
 	}
 
 	public override void SetDefaults() {
