@@ -91,6 +91,7 @@ public class SlimeySlingerGlobalNpc : GlobalNPC
 	}
 
 	public override void ModifyNPCLoot(NPC npc, NPCLoot npcLoot) {
+		// TODO: insert properly
 		LeadingConditionRule notExpertLeadingRule = new(new Conditions.NotExpert());
 		notExpertLeadingRule.OnSuccess(ItemDropRule.Common(ModContent.ItemType<SlimeySlinger>(), 4));
 	}

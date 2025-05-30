@@ -26,6 +26,7 @@ public class PneumaticPumpDropCondition : GlobalNPC
 	}
 
 	public override void ModifyNPCLoot(NPC npc, NPCLoot npcLoot) {
+		// TODO: integrate into loot, implement low grind
 		npcLoot.Add(ItemDropRule.ByCondition(new Conditions.IsHardmode(), ModContent.ItemType<PneumaticPump>(), 5));
 		npcLoot.Add(ItemDropRule.ByCondition(new Conditions.RemixSeedHardmode(), ModContent.ItemType<PneumaticPump>(), 5));
 	}

@@ -1,4 +1,6 @@
 using Canisters.DataStructures;
+using Mono.Cecil.Cil;
+using MonoMod.Cil;
 using Terraria.Enums;
 
 namespace Canisters.Content.Items.Weapons;
@@ -17,6 +19,10 @@ public class AbyssalBlaster : BaseCanisterUsingWeapon
 		return new Vector2(-4f, 2f);
 	}
 
+	public override void Load() {
+		IL_Item.GetShimmered += InsertAbyssalBlasterShimmerCondition;
+	}
+
 	public override void SetDefaults() {
 		Item.DefaultToCanisterUsingWeapon(50, 50, 10f, 36, 4f);
 		Item.width = 56;
@@ -31,5 +37,38 @@ public class AbyssalBlaster : BaseCanisterUsingWeapon
 		stats.TotalSpread += 0.2f;
 	}
 
-	// TODO: acquisition
+	private void InsertAbyssalBlasterShimmerCondition(ILContext il) {
+		var cursor = new ILCursor(il);
+
+		// Find label for end of if else chain
+		ILLabel endIfElseChainLabel = cursor.DefineLabel();
+		cursor.GotoNext(
+			MoveType.Before,
+			i => i.MatchBr(out endIfElseChainLabel),
+			i => i.MatchLdloc0(),
+			i => i.MatchLdcI4(1326)
+		);
+		
+		cursor.Index = 0;
+		
+		// Insert before if statement begins
+		cursor.GotoNext(MoveType.Before, i => i.MatchLdsfld<ItemID.Sets>(nameof(ItemID.Sets.CoinLuckValue)));
+
+		cursor.EmitLdloc0(); // shimmerEquivalentType
+		cursor.EmitLdarg0(); // this (the item)
+		
+		cursor.EmitDelegate((int shimmerEquivalentType, Item item) => {
+			if (shimmerEquivalentType == ModContent.ItemType<InfernalCannon>() && NPC.downedPlantBoss) {
+				int originalStack = item.stack;
+				item.SetDefaults(ModContent.ItemType<AbyssalBlaster>());
+				item.stack = originalStack;
+				item.shimmered = true;
+				return true;
+			}
+			
+			return false;
+		});
+		
+		cursor.EmitBrtrue(endIfElseChainLabel);
+	}
 }

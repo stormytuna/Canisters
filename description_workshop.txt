@@ -1,0 +1,19 @@
+Canisters adds a new Ranger subclass centered around a new ammo type: Canisters!
+Some weapons launch canisters, creating an explosion on impact. Other weapons deplete canisters to fire a projectile.
+
+[h2]TLDR[/h2]
+
+- Adds 10 Canister ammo items, each with 2 different behaviours that can be used by weapons
+- Adds 22 new weapons spaced throughout progression
+- Multiplayer is supported
+- Currently only supports English, see below if you'd like to contribute another translation
+
+[hr][/hr]
+
+Source code: https://github.com/stormytuna/Canisters
+
+Join the [url=https://discord.gg/yr3hUxUxpg]discord server![/url]
+
+If you enjoy my work, [url=https://ko-fi.com/stormytuna]please consider donating[/url]
+
+If you're able to contribute translations it would be much appreciated! Please open an issue with the translations, or create a PR with the new .hjson localisation file

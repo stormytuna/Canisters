@@ -10,6 +10,7 @@ public class GhastlyShot : ModProjectile
 		Projectile.height = 18;
 		Projectile.aiStyle = -1;
 		Projectile.extraUpdates = 2;
+		Projectile.timeLeft = 3 * 60;
 		Projectile.tileCollide = false;
 
 		Projectile.friendly = true;

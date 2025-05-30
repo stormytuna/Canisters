@@ -86,6 +86,7 @@ public class PrismaticAnnihilationGlobalNPC : GlobalNPC
 	}
 
 	public override void ModifyNPCLoot(NPC npc, NPCLoot npcLoot) {
+		// todo: insert properly
 		npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<PrismaticAnnihilation>(), 5));
 	}
 }

@@ -33,6 +33,13 @@ public class ChlorophyteSlugger : BaseCanisterUsingWeapon
 		player.GetModPlayer<ChlorophyteSluggerPlayer>().UseItem();
 		return base.UseItem(player);
 	}
+
+	public override void AddRecipes() {
+		CreateRecipe()
+			.AddIngredient(ItemID.ChlorophyteBar, 18)
+			.AddTile(TileID.MythrilAnvil)
+			.Register();
+	}
 }
 
 public class ChlorophyteSluggerPlayer : ModPlayer

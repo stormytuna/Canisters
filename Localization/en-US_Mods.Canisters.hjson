@@ -49,6 +49,10 @@ Projectiles: {
 	LunarMark.DisplayName: Lunar Mark
 	PrismaticAnnihilationStar.DisplayName: Prismatic Annihilation Star
 	ArcticCoolantSnowflake.DisplayName: Arctic Coolant Snowflake
+	HomingNaniteBolt.DisplayName: Homing Nanite Bolt
+	NaniteShot.DisplayName: Nanite Shot
+	NaniteLaserLine.DisplayName: Nanite Laser Line
+	NaniteLaserLineEmitter.DisplayName: Nanite Laser Line Emitter
 }
 
 Items: {
