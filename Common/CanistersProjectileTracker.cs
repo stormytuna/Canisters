@@ -13,7 +13,6 @@ public class CanistersProjectileTracker : GlobalProjectile
 		get => true;
 	}
 
-	// TODO: Custom source? would be a pain to refactor though..
 	public override void OnSpawn(Projectile projectile, IEntitySource source) {
 		if (source is EntitySource_ItemUse_WithAmmo { Item.ModItem: BaseCanisterUsingWeapon canisterWeapon }) {
 			IsDepletedCanisterProjectile = canisterWeapon.CanisterFiringType == CanisterFiringType.Depleted;

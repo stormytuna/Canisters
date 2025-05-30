@@ -1,6 +1,5 @@
 ﻿namespace Canisters.Content.Projectiles.GhastlyCanister;
 
-// TODO: Revisit visuals
 public class GhastlyShot : ModProjectile
 {
 	private int _timeInTiles = 0;

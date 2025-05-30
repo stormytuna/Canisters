@@ -28,7 +28,6 @@ public class PrismaticAnnihilation : BaseCanisterUsingWeapon
 		Item.width = 36;
 		Item.height = 18;
 		Item.SetShopValues(ItemRarityColor.StrongRed10, Item.sellPrice(gold: 10));
-		// TODO: use sound
 		Item.UseSound = SoundID.Item5 with { PitchRange = (0.6f, 1.2f), MaxInstances = 0, Volume = 0.6f };
 	}
 

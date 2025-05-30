@@ -80,8 +80,6 @@ public class SlimySlingerGlobalProjectile : ShotByWeaponGlobalProjectile<SlimeyS
 		projectile.velocity = projectile.DirectionFrom(target.Center) * projectile.velocity.Length();
 		projectile.netUpdate = true;
 	}
-
-	// TODO: Some visuals as it depletes bounces?
 }
 
 public class SlimeySlingerGlobalNpc : GlobalNPC

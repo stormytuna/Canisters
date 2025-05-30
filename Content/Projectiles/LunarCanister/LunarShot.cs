@@ -3,7 +3,6 @@ using static Microsoft.Xna.Framework.MathHelper;
 
 namespace Canisters.Content.Projectiles.LunarCanister;
 
-// TODO: Sounds?
 public class LunarShot : ModProjectile
 {
 	private readonly List<int> _hitNpcs = new();
