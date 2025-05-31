@@ -22,8 +22,8 @@ public class BlightedBall : ModProjectile
 		Projectile.friendly = true;
 		Projectile.penetrate = -1;
 		Projectile.DamageType = DamageClass.Ranged;
-		Projectile.usesLocalNPCImmunity = true;
-		Projectile.localNPCHitCooldown = -1;
+		Projectile.usesIDStaticNPCImmunity = true;
+		Projectile.idStaticNPCHitCooldown = -1;
 	}
 
 	public override void AI() {

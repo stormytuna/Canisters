@@ -81,8 +81,8 @@ public class NaniteLaserLine : ModProjectile
 	}
 
 	public override void OnKill(int timeLeft) {
-		DustHelpers.MakeDustExplosion(_topSource, 4f, ModContent.DustType<NaniteDust>(), 4, 1f, 2f);
-		DustHelpers.MakeDustExplosion(_bottomSource, 4f, ModContent.DustType<NaniteDust>(), 4, 1f, 2f);
+		DustHelpers.MakeDustExplosion(_topSource, 4f, ModContent.DustType<NaniteDust>(), 4, 1f, 2f, noGravity: true);
+		DustHelpers.MakeDustExplosion(_bottomSource, 4f, ModContent.DustType<NaniteDust>(), 4, 1f, 2f, noGravity: true);
 		SoundEngine.PlaySound(SoundID.DD2_LightningAuraZap with { Volume = 0.8f, PitchRange = (0.5f, 0.8f) }, Projectile.Center);
 	}
 

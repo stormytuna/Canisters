@@ -15,7 +15,7 @@ public class NaniteDust : ModDust
 			dust.position += projectile.velocity;
 		}
 
-		dust.scale *= 0.96f;
+		dust.scale *= 0.99f;
 		if (dust.scale < 0.5f) {
 			dust.active = false;
 		}
