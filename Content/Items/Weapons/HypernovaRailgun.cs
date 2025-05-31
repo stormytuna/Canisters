@@ -29,6 +29,8 @@ public class HypernovaRailgun : BaseCanisterUsingWeapon
 		Item.height = 28;
 		Item.SetShopValues(ItemRarityColor.Yellow8, Item.sellPrice(gold: 10));
 		Item.UseSound = SoundID.NPCDeath44 with { PitchRange = (0.5f, 0.8f) };
+		
+		Item.crit = 11;
 	}
 }
 

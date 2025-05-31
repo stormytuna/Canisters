@@ -28,6 +28,8 @@ public class Icemire : BaseCanisterUsingWeapon
 
 		Item.reuseDelay = 40;
 		Item.consumeAmmoOnLastShotOnly = true;
+		
+		Item.crit = 2;
 	}
 }
 

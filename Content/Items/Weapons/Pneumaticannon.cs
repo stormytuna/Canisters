@@ -25,6 +25,8 @@ public class Pneumaticannon : BaseCanisterUsingWeapon
 		Item.height = 14;
 		Item.SetShopValues(ItemRarityColor.Pink5, Item.sellPrice(gold: 75));
 		Item.UseSound = SoundID.Item10 with { PitchRange = (-0.6f, -0.4f) };
+		
+		Item.crit = 6;
 	}
 }
 
