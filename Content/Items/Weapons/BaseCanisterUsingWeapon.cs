@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Canisters.Content.Items.Canisters;
+using Canisters.Content.Projectiles.HarmonicCanister;
 using Canisters.DataStructures;
 using ReLogic.Content;
 using Terraria.DataStructures;
@@ -82,6 +83,12 @@ public abstract class BaseCanisterUsingWeapon : ModItem
 		Projectile[] projectiles = ShootProjectiles(source, stats).ToArray();
 		for (int i = 0; i < projectiles.Length; i++) {
 			Projectile projectile = projectiles[i];
+				
+			// Hacky and fucked up but i cba rewriting everything
+			if (projectiles.Length > 2 && projectile.type != ModContent.ProjectileType<HelixBolt>()) {
+				projectile.velocity *= Main.rand.NextFloat(0.7f, 1f);
+			}
+			
 			canister.ModifyProjectile(projectile, i);
 			if (Main.netMode != NetmodeID.SinglePlayer) {
 				NetMessage.SendData(MessageID.SyncProjectile, ignoreClient: Main.myPlayer, number: projectile.whoAmI);
