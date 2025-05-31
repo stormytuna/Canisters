@@ -229,7 +229,7 @@ Items: {
 		Tooltip:
 			'''
 			Depletes canisters
-			Firing speed accelerates the longer you are shooting
+			Rate of fire accelerates the longer you are shooting
 			25% chance to save ammo
 			'''
 	}
@@ -248,7 +248,7 @@ Items: {
 		Tooltip:
 			'''
 			Depletes canisters
-			Firing speed accelerates tremendously the longer you are shooting
+			Rate of fire accelerates tremendously the longer you are shooting
 			60% chance to save ammo
 			'''
 	}
@@ -276,7 +276,7 @@ Items: {
 		Tooltip:
 			'''
 			Increases blast radius of launched canisters by 50%
-			Increases firing speed of depleted canisters by 15%
+			Increases rate of fire of depleted canisters by 15%
 			'''
 	}
 
@@ -309,7 +309,7 @@ Items: {
 		Tooltip:
 			'''
 			Depletes canisters and releases a Prismatic Star every 4 shots
-			Firing speed accelerates the longer you are shooting
+			Rate of fire accelerates the longer you are shooting
 			50% chance to save ammo
 			'''
 	}
@@ -346,7 +346,7 @@ Items: {
 		DisplayName: Sun Blessed Tech
 		Tooltip:
 			'''
-			Increases firing speed of depleted canisters by 15%
+			Increases rate of fire of depleted canisters by 15%
 			Critical hits with launched canister projectiles damage nearby enemies with solar rays
 			'''
 	}
