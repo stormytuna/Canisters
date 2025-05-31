@@ -52,7 +52,7 @@ public class CoelacannonGlobalProjectile : ShotByWeaponGlobalProjectile<Coelacan
 	}
 
 	public override bool PreAI(Projectile projectile) {
-		if (!IsActive || projectile.ModProjectile is not BaseFiredCanisterProjectile) {
+		if (!IsActive) {
 			return true;
 		}
 
@@ -80,7 +80,7 @@ public class CoelacannonGlobalProjectile : ShotByWeaponGlobalProjectile<Coelacan
 	}
 
 	public override bool PreDraw(Projectile projectile, ref Color lightColor) {
-		if (!IsActive || projectile.ModProjectile is not BaseFiredCanisterProjectile) {
+		if (!IsActive) {
 			return true;
 		}
 
