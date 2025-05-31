@@ -4,6 +4,8 @@ namespace Canisters.Content.Projectiles.LunarCanister;
 
 public class FiredLunarCanister : BaseFiredCanisterProjectile
 {
+	private int _timer = 0;
+	
 	public override string Texture {
 		get => "Canisters/Content/Items/Canisters/LunarCanister";
 	}
@@ -11,7 +13,9 @@ public class FiredLunarCanister : BaseFiredCanisterProjectile
 	public override int TimeBeforeGravityAffected { get => 12; }
 
 	public override void PostAI() {
-		if (HasGravity) {
+		_timer++;
+		
+		if (_timer > TimeBeforeGravityAffected) {
 			Projectile.Kill();
 		}
 	}
