@@ -24,12 +24,6 @@ public class LunarCanister : BaseCanisterItem
 		Item.SetShopValues(ItemRarityColor.Cyan9, Item.buyPrice(silver: 9));
 	}
 
-	public override void ApplyAmmoStats(ref CanisterShootStats stats) {
-		if (stats.IsLaunched) {
-			stats.TotalSpread += 0.3f;
-		}
-	}
-
 	public override void AddRecipes() {
 		CreateRecipe(300)
 			.AddIngredient<EmptyCanister>(300)
