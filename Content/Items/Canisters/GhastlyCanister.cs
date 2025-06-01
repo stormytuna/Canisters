@@ -1,5 +1,4 @@
-﻿using Canisters.Common;
-using Canisters.Content.Projectiles.GhastlyCanister;
+﻿using Canisters.Content.Projectiles.GhastlyCanister;
 using Canisters.DataStructures;
 using Terraria.Enums;
 

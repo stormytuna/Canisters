@@ -27,14 +27,14 @@ public class PneumaticPumpDropCondition : GlobalNPC
 	}
 
 	public override void ModifyNPCLoot(NPC npc, NPCLoot npcLoot) {
-		var rule = npcLoot.Get()
+		OneFromOptionsDropRule rule = npcLoot.Get()
 			.First(x => x is LeadingConditionRule { condition: Conditions.NotRemixSeed })
 			.ChainedRules
 			.First(x => x.RuleToChain is OneFromOptionsDropRule)
 			.RuleToChain as OneFromOptionsDropRule;
-		
-		var drops = rule.dropIds.ToList();
+
+		System.Collections.Generic.List<int> drops = [.. rule.dropIds];
 		drops.Add(ModContent.ItemType<PneumaticPump>());
-		rule.dropIds = drops.ToArray();
+		rule.dropIds = [.. drops];
 	}
 }

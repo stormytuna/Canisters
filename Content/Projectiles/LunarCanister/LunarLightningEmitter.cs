@@ -91,7 +91,7 @@ public class LunarLightningEmitter : ModProjectile
 			NPC target = NPCHelpers.FindRandomNearbyNPC(30f * 16f * radiusMult, Projectile.Center, true);
 			if (target is not null) {
 				TimerForAttack = 0f;
-                
+
 				NPC.HitInfo hitInfo = new() {
 					Damage = Projectile.damage / 2,
 					Knockback = 0f,

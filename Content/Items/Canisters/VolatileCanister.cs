@@ -1,5 +1,4 @@
-﻿using Canisters.Common;
-using Canisters.Content.Projectiles.VolatileCanister;
+﻿using Canisters.Content.Projectiles.VolatileCanister;
 using Terraria.Enums;
 
 namespace Canisters.Content.Items.Canisters;

@@ -28,14 +28,14 @@ public class Icemire : BaseCanisterUsingWeapon
 
 		Item.reuseDelay = 40;
 		Item.consumeAmmoOnLastShotOnly = true;
-		
+
 		Item.crit = 2;
 	}
 
 	public override bool? UseItem(Player player) {
-		var sound = SoundID.Item10 with { PitchRange = (0.1f, 0.4f), MaxInstances = 0 };
+		SoundStyle sound = SoundID.Item10 with { PitchRange = (0.1f, 0.4f), MaxInstances = 0 };
 		SoundEngine.PlaySound(sound, player.Center);
-		
+
 		return base.UseItem(player);
 	}
 }

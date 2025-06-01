@@ -40,7 +40,7 @@ public class ToxicFog : ModProjectile
 
 		Projectile.velocity *= 0.95f;
 
-		foreach (var proj in Main.ActiveProjectiles) {
+		foreach (Projectile proj in Main.ActiveProjectiles) {
 			if (proj.ModProjectile is not ToxicFog) {
 				continue;
 			}
@@ -50,12 +50,12 @@ public class ToxicFog : ModProjectile
 				if (pushAwayVelocity.HasNaNs() || pushAwayVelocity == Vector2.Zero) {
 					pushAwayVelocity = Main.rand.NextVector2Circular(1f, 1f);
 				}
-				
+
 				Projectile.velocity = Vector2.Lerp(Projectile.velocity, Projectile.velocity - pushAwayVelocity, 0.6f);
 				proj.velocity = Vector2.Lerp(proj.velocity, proj.velocity + pushAwayVelocity, 0.6f);
 			}
 		}
-		
+
 		Vector2 testPosition = Projectile.Center + Projectile.velocity.SafeNormalize(Vector2.Zero) * 16f;
 		if (Collision.IsWorldPointSolid(testPosition, true)) {
 			Projectile.velocity = Vector2.Lerp(Projectile.velocity, Projectile.velocity - Projectile.velocity.SafeNormalize(Vector2.Zero), 0.5f);
@@ -81,13 +81,13 @@ public class ToxicFog : ModProjectile
 		if (!CollisionHelpers.CanHit(target, Projectile.Center)) {
 			return false;
 		}
-		
+
 		return base.CanHitNPC(target);
 	}
 
 	public override bool OnTileCollide(Vector2 oldVelocity) {
-		Projectile.velocity = Projectile.velocity.BounceOffTiles(oldVelocity); 
-		
+		Projectile.velocity = Projectile.velocity.BounceOffTiles(oldVelocity);
+
 		return false;
 	}
 

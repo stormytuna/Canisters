@@ -5,7 +5,7 @@ namespace Canisters.Content.Projectiles.HarmonicCanister;
 public class FiredHarmonicCanister : BaseFiredCanisterProjectile
 {
 	private int _timer = 0;
-	
+
 	public override int TimeBeforeGravityAffected {
 		get => 35;
 	}
@@ -21,7 +21,7 @@ public class FiredHarmonicCanister : BaseFiredCanisterProjectile
 
 	public override void PostAI() {
 		_timer++;
-		
+
 		if (_timer > TimeBeforeGravityAffected && Main.myPlayer == Projectile.owner) {
 			Projectile.Kill();
 		}

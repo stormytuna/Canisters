@@ -17,7 +17,7 @@ public class ChlorophyteSlugger : BaseCanisterUsingWeapon
 	public override Vector2? HoldoutOffset() {
 		return new Vector2(-4f, 10f);
 	}
-	
+
 	public override void SetStaticDefaults() {
 		ItemID.Sets.SkipsInitialUseSound[Type] = true;
 	}
@@ -40,9 +40,9 @@ public class ChlorophyteSlugger : BaseCanisterUsingWeapon
 
 	public override bool? UseItem(Player player) {
 		player.GetModPlayer<ChlorophyteSluggerPlayer>().UseItem();
-		
+
 		SoundEngine.PlaySound(Item.UseSound, player.Center);
-			
+
 		return base.UseItem(player);
 	}
 

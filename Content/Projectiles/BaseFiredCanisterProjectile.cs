@@ -94,10 +94,10 @@ public abstract class BaseFiredCanisterProjectile : ModProjectile
 		if (!CollisionHelpers.CanHit(target, Projectile.Center)) {
 			return false;
 		}
-		
+
 		return base.CanHitNPC(target);
 	}
-	
+
 	/// <summary>
 	/// Reduces damage against the Eater of Worlds' segments in Expert mode.
 	/// </summary>

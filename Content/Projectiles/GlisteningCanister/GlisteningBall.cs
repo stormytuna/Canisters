@@ -48,7 +48,7 @@ public class GlisteningBall : ModProjectile
 		dust.velocity *= 0.3f;
 		dust.noGravity = true;
 		dust.noLight = true;
-		
+
 		Lighting.AddLight(Projectile.Center, TorchID.Ichor);
 	}
 

@@ -25,7 +25,7 @@ public class QuantumFluxCannon : BaseCanisterUsingWeapon
 		Item.SetShopValues(ItemRarityColor.Yellow8, Item.sellPrice(gold: 10));
 		Item.UseSound = SoundID.NPCDeath56 with { PitchRange = (0.3f, 0.5f), Volume = 0.5f };
 	}
-	
+
 	public override bool CanConsumeAmmo(Item ammo, Player player) {
 		return Main.rand.NextBool(20, 100);
 	}

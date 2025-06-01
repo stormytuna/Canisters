@@ -5,7 +5,7 @@ namespace Canisters.Content.Projectiles.AetherianCanister;
 public class FiredAetherianCanister : BaseFiredCanisterProjectile
 {
 	private int _timer = 0;
-	
+
 	public override string Texture {
 		get => "Canisters/Content/Items/Canisters/AetherianCanister";
 	}
@@ -17,7 +17,7 @@ public class FiredAetherianCanister : BaseFiredCanisterProjectile
 
 	public override void PostAI() {
 		_timer++;
-		
+
 		if (_timer == 12f) {
 			Explode(Main.player[Projectile.owner]);
 		}

@@ -23,7 +23,7 @@ public class PrismaticAnnihilation : BaseCanisterUsingWeapon
 	public override Vector2? HoldoutOffset() {
 		return new Vector2(-6f, 0f);
 	}
-	
+
 	public override void SetStaticDefaults() {
 		ItemID.Sets.SkipsInitialUseSound[Type] = true;
 	}
@@ -35,16 +35,16 @@ public class PrismaticAnnihilation : BaseCanisterUsingWeapon
 		Item.SetShopValues(ItemRarityColor.StrongRed10, Item.sellPrice(gold: 10));
 		Item.UseSound = SoundID.Item5 with { PitchRange = (0.6f, 1.2f), MaxInstances = 0, Volume = 0.6f };
 	}
-	
+
 	public override bool CanConsumeAmmo(Item ammo, Player player) {
 		return Main.rand.NextBool(50, 100);
 	}
 
 	public override bool? UseItem(Player player) {
 		player.GetModPlayer<PrismaticAnnihilationPlayer>().UseItem();
-		
+
 		SoundEngine.PlaySound(Item.UseSound, player.Center);
-		
+
 		return base.UseItem(player);
 	}
 
@@ -99,15 +99,15 @@ public class PrismaticAnnihilationGlobalNPC : GlobalNPC
 	}
 
 	public override void ModifyNPCLoot(NPC npc, NPCLoot npcLoot) {
-		var rule = npcLoot.Get()
+		FromOptionsWithoutRepeatsDropRule rule = npcLoot.Get()
 			.First(x => x is LeadingConditionRule { condition: Conditions.NotExpert })
 			.ChainedRules
 			.First(x => x.RuleToChain is FromOptionsWithoutRepeatsDropRule)
 			.RuleToChain as FromOptionsWithoutRepeatsDropRule;
 
-		var drops = rule.dropIds.ToList();
+		System.Collections.Generic.List<int> drops = [.. rule.dropIds];
 		drops.Add(ModContent.ItemType<PrismaticAnnihilation>());
-		rule.dropIds = drops.ToArray();
+		rule.dropIds = [.. drops];
 	}
 }
 
@@ -118,12 +118,12 @@ public class PrismaticAnnihilationGlobalItem : GlobalItem
 	}
 
 	public override void ModifyItemLoot(Item item, ItemLoot itemLoot) {
-		var rule = itemLoot.Get()
+		FromOptionsWithoutRepeatsDropRule rule = itemLoot.Get()
 			.First(x => x is FromOptionsWithoutRepeatsDropRule)
 			as FromOptionsWithoutRepeatsDropRule;
 
-		var drops = rule.dropIds.ToList();
+		System.Collections.Generic.List<int> drops = [.. rule.dropIds];
 		drops.Add(ModContent.ItemType<PrismaticAnnihilation>());
-		rule.dropIds = drops.ToArray();
+		rule.dropIds = [.. drops];
 	}
 }

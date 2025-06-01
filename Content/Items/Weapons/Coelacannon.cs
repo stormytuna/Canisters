@@ -1,5 +1,4 @@
 using Canisters.Common;
-using Canisters.Content.Projectiles;
 using Canisters.DataStructures;
 using ReLogic.Content;
 using Terraria.DataStructures;
@@ -27,7 +26,7 @@ public class Coelacannon : BaseCanisterUsingWeapon
 		Item.height = 36;
 		Item.SetShopValues(ItemRarityColor.Lime7, Item.buyPrice(gold: 8));
 		Item.UseSound = SoundID.Item10 with { PitchRange = (-1f, -0.8f) };
-		
+
 		Item.crit = 6;
 	}
 }

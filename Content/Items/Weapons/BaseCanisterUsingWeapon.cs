@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using Canisters.Content.Items.Canisters;
-using Canisters.Content.Projectiles.HarmonicCanister;
 using Canisters.DataStructures;
 using ReLogic.Content;
 using Terraria.DataStructures;
@@ -76,18 +75,18 @@ public abstract class BaseCanisterUsingWeapon : ModItem
 
 			_canisterFiringTypeOverride = null;
 		}
-		
+
 		canister.ApplyAmmoStats(ref stats);
 		ApplyWeaponStats(ref stats);
 
 		Projectile[] projectiles = ShootProjectiles(source, stats).ToArray();
 		for (int i = 0; i < projectiles.Length; i++) {
 			Projectile projectile = projectiles[i];
-				
+
 			if (projectiles.Length > 1) {
 				projectile.velocity *= Main.rand.NextFloat(0.7f, 1f);
 			}
-			
+
 			if (Main.netMode != NetmodeID.SinglePlayer) {
 				NetMessage.SendData(MessageID.SyncProjectile, ignoreClient: Main.myPlayer, number: projectile.whoAmI);
 			}

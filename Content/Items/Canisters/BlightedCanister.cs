@@ -1,5 +1,4 @@
-﻿using Canisters.Common;
-using Canisters.Content.Items.Weapons;
+﻿using Canisters.Content.Items.Weapons;
 using Canisters.Content.Projectiles.BlightedCanister;
 using Canisters.DataStructures;
 using Terraria.Enums;

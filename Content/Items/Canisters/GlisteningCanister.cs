@@ -1,5 +1,4 @@
-﻿using Canisters.Common;
-using Canisters.Content.Projectiles.GlisteningCanister;
+﻿using Canisters.Content.Projectiles.GlisteningCanister;
 using Terraria.Enums;
 
 namespace Canisters.Content.Items.Canisters;

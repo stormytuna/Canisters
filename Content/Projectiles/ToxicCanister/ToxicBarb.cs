@@ -51,7 +51,7 @@ public class ToxicBarb : ModProjectile
 			_firstFrame = false;
 			_speed = Projectile.velocity.Length() / Projectile.MaxUpdates;
 		}
-		
+
 		Projectile.velocity = Projectile.velocity.SafeNormalize(Vector2.Zero) * _speed;
 		Projectile.rotation = Projectile.velocity.ToRotation() + PiOver2;
 
@@ -90,7 +90,7 @@ public class ToxicBarb : ModProjectile
 	}
 
 	public override bool OnTileCollide(Vector2 oldVelocity) {
-		Projectile.velocity = Projectile.velocity.BounceOffTiles(oldVelocity); 
+		Projectile.velocity = Projectile.velocity.BounceOffTiles(oldVelocity);
 
 		return false;
 	}

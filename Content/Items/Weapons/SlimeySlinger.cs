@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using Canisters.Common;
+﻿using Canisters.Common;
 using Canisters.Content.Projectiles;
 using Canisters.DataStructures;
 using Terraria.Enums;

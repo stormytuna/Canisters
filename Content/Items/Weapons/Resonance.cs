@@ -28,7 +28,7 @@ public class Resonance : BaseCanisterUsingWeapon
 		Item.SetShopValues(ItemRarityColor.LightRed4, Item.buyPrice(gold: 5));
 		Item.UseSound = SoundID.Item42 with { PitchRange = (0.1f, 0.4f) };
 	}
-	
+
 	public override bool CanConsumeAmmo(Item ammo, Player player) {
 		return Main.rand.NextBool(30, 100);
 	}

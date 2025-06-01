@@ -51,7 +51,7 @@ public class VerdantGas : ModProjectile
 		if (!CollisionHelpers.CanHit(target, Projectile.Center)) {
 			return false;
 		}
-		
+
 		return base.CanHitNPC(target);
 	}
 

@@ -24,7 +24,7 @@ public class InfernalCannon : BaseCanisterUsingWeapon
 		Item.height = 16;
 		Item.SetShopValues(ItemRarityColor.Orange3, Item.buyPrice(silver: 50));
 		Item.UseSound = SoundID.Item10 with { PitchRange = (-1f, -0.8f) };
-		
+
 		Item.crit = 2;
 	}
 

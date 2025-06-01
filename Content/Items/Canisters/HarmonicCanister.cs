@@ -1,6 +1,4 @@
-﻿using Canisters.Common;
-using Canisters.Content.Projectiles.HarmonicCanister;
-using Canisters.DataStructures;
+﻿using Canisters.Content.Projectiles.HarmonicCanister;
 using Terraria.Enums;
 
 namespace Canisters.Content.Items.Canisters;

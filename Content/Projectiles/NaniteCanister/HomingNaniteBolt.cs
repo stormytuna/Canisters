@@ -43,8 +43,7 @@ public class HomingNaniteBolt : ModProjectile
 
 		if (_timer >= 10) {
 			Projectile.friendly = true;
-			if (_target is null || !_target.active) 
-			{
+			if (_target is null || !_target.active) {
 				_target = NPCHelpers.FindClosestNPC(25f * 16f, Projectile.Center);
 			}
 		}

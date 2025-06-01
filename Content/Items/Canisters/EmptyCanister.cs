@@ -1,5 +1,3 @@
-using Canisters.Common;
-
 namespace Canisters.Content.Items.Canisters;
 
 public class EmptyCanister : ModItem

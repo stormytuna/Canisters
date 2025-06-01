@@ -12,7 +12,7 @@ public class FiredNaniteCanister : BaseFiredCanisterProjectile
 	protected override void ExplosionEffect() {
 		if (Main.myPlayer == Projectile.owner) {
 			Projectile.Explode(100, 100);
-			
+
 			for (int i = 0; i < 3; i++) {
 				Vector2 velocity = Main.rand.NextVector2CircularEdge(5f, 5f) * Main.rand.NextFloat(0.5f, 1f);
 				Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, velocity, ModContent.ProjectileType<HomingNaniteBolt>(), Projectile.damage / 4, 0f, Projectile.owner);
