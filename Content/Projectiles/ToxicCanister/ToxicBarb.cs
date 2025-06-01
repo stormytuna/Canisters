@@ -11,6 +11,8 @@ public class ToxicBarb : ModProjectile
 	private float _bounceTime;
 	private float _bounceTimeBase;
 	private float _bounceTimeVariance;
+	private float _speed;
+	private bool _firstFrame = true;
 
 	private ref float Timer {
 		get => ref Projectile.ai[0];
@@ -45,7 +47,12 @@ public class ToxicBarb : ModProjectile
 	}
 
 	public override void AI() {
-		Projectile.velocity = Projectile.velocity.SafeNormalize(Vector2.Zero) * 2f;
+		if (_firstFrame) {
+			_firstFrame = false;
+			_speed = Projectile.velocity.Length() / Projectile.MaxUpdates;
+		}
+		
+		Projectile.velocity = Projectile.velocity.SafeNormalize(Vector2.Zero) * _speed;
 		Projectile.rotation = Projectile.velocity.ToRotation() + PiOver2;
 
 		NPC closestNpc = NPCHelpers.FindClosestNPC(50f * 16f, Projectile.Center);

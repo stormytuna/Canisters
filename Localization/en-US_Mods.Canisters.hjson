@@ -53,6 +53,7 @@ Projectiles: {
 	NaniteShot.DisplayName: Nanite Shot
 	NaniteLaserLine.DisplayName: Nanite Laser Line
 	NaniteLaserLineEmitter.DisplayName: Nanite Laser Line Emitter
+	HelixBoltEmitter.DisplayName: Helix Bolt Emitter
 }
 
 Items: {

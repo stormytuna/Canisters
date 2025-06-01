@@ -84,12 +84,10 @@ public abstract class BaseCanisterUsingWeapon : ModItem
 		for (int i = 0; i < projectiles.Length; i++) {
 			Projectile projectile = projectiles[i];
 				
-			// Hacky and fucked up but i cba rewriting everything
-			if (projectiles.Length > 2 && projectile.type != ModContent.ProjectileType<HelixBolt>()) {
+			if (projectiles.Length > 1) {
 				projectile.velocity *= Main.rand.NextFloat(0.7f, 1f);
 			}
 			
-			canister.ModifyProjectile(projectile, i);
 			if (Main.netMode != NetmodeID.SinglePlayer) {
 				NetMessage.SendData(MessageID.SyncProjectile, ignoreClient: Main.myPlayer, number: projectile.whoAmI);
 			}

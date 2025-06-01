@@ -12,7 +12,7 @@ public class HarmonicCanister : BaseCanisterItem
 	}
 
 	public override int DepletedProjectileType {
-		get => ModContent.ProjectileType<HelixBolt>();
+		get => ModContent.ProjectileType<HelixBoltEmitter>();
 	}
 
 	public override Color CanisterColor {
@@ -22,18 +22,6 @@ public class HarmonicCanister : BaseCanisterItem
 	public override void SetDefaults() {
 		Item.DefaultToCanister(10, 3.5f, 4f);
 		Item.SetShopValues(ItemRarityColor.LightRed4, Item.buyPrice(silver: 9));
-	}
-
-	public override void ApplyAmmoStats(ref CanisterShootStats stats) {
-		if (stats.IsDepleted) {
-			stats.ProjectileCount = 2;
-		}
-	}
-
-	public override void ModifyProjectile(Projectile projectile, int numInTotalAmount) {
-		if (projectile.ModProjectile is HelixBolt bolt) {
-			bolt.IsLight = numInTotalAmount % 2 == 0;
-		}
 	}
 
 	public override void AddRecipes() {

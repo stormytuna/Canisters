@@ -9,8 +9,6 @@ public abstract class BaseCanisterItem : ModItem
 	public abstract int DepletedProjectileType { get; }
 	public abstract Color CanisterColor { get; }
 
-	public virtual void ModifyProjectile(Projectile projectile, int numInTotalAmount) { }
-
 	public virtual void ApplyAmmoStats(ref CanisterShootStats stats) { }
 
 	public virtual bool SuppressWeaponUseSound(BaseCanisterUsingWeapon weapon) {
