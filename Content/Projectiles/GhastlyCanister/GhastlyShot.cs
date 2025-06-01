@@ -25,7 +25,7 @@ public class GhastlyShot : ModProjectile
 		for (int i = 0; i < numDust; i++) {
 			Vector2 position = Projectile.Center + ((Projectile.velocity / numDust) * i);
 			Dust dust = Dust.NewDustPerfect(position, DustID.DungeonSpirit);
-			dust.position += Projectile.velocity * 0.6f;
+			dust.position += Projectile.velocity * Main.rand.NextFloat(0.5f, 1f);
 			dust.velocity *= inTile ? 0.01f : 0.1f;
 			dust.noGravity = true;
 			dust.noLight = true;
@@ -41,6 +41,8 @@ public class GhastlyShot : ModProjectile
 	}
 
 	public override void OnKill(int timeLeft) {
-		DustHelpers.MakeDustExplosion(Projectile.Center, 4f, DustID.DungeonSpirit, 5, 0f, 1f, 120, 200, noGravity: true);
+		// Adding velocity to position so our trail seems to line up properly
+		// Our trail actually goes in front of the projectile
+		DustHelpers.MakeDustExplosion(Projectile.Center + Projectile.velocity, 4f, DustID.DungeonSpirit, 5, 0f, 1f, 120, 200, noGravity: true);
 	}
 }

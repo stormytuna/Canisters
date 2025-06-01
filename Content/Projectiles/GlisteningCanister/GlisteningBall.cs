@@ -20,6 +20,7 @@ public class GlisteningBall : ModProjectile
 		Projectile.aiStyle = -1;
 		Projectile.friendly = true;
 		Projectile.DamageType = DamageClass.Ranged;
+		Projectile.hide = true;
 
 		Projectile.usesLocalNPCImmunity = true;
 		Projectile.localNPCHitCooldown = -1;
@@ -37,17 +38,17 @@ public class GlisteningBall : ModProjectile
 		}
 
 		Dust dust = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.IchorTorch, Alpha: Main.rand.Next(100, 200), Scale: Main.rand.NextFloat(1f, 1.2f));
-		dust.position += Projectile.velocity * 0.6f;
+		dust.position += Projectile.velocity * Main.rand.NextFloat(0.5f, 1f);
 		dust.velocity *= 0.3f;
 		dust.noGravity = true;
 		dust.noLight = true;
 
 		dust = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.Ichor, Alpha: Main.rand.Next(100, 200), Scale: Main.rand.NextFloat(1f, 1.2f));
-		dust.position += Projectile.velocity * 0.6f;
+		dust.position += Projectile.velocity * Main.rand.NextFloat(0.5f, 1f);
 		dust.velocity *= 0.3f;
 		dust.noGravity = true;
 		dust.noLight = true;
-
+		
 		Lighting.AddLight(Projectile.Center, TorchID.Ichor);
 	}
 

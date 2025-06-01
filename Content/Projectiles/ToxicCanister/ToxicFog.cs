@@ -48,7 +48,7 @@ public class ToxicFog : ModProjectile
 			if (Projectile.Hitbox.Intersects(proj.Hitbox)) {
 				Vector2 pushAwayVelocity = Projectile.DirectionTo(proj.Center) * 0.004f;
 				if (pushAwayVelocity.HasNaNs() || pushAwayVelocity == Vector2.Zero) {
-					pushAwayVelocity = new Vector2(1f, -1f)		;
+					pushAwayVelocity = Main.rand.NextVector2Circular(1f, 1f);
 				}
 				
 				Projectile.velocity = Vector2.Lerp(Projectile.velocity, Projectile.velocity - pushAwayVelocity, 0.6f);

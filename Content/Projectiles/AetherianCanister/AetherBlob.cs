@@ -10,8 +10,8 @@ public class AetherBlob : ModProjectile
 	}
 
 	public override void SetDefaults() {
-		Projectile.width = 10;
-		Projectile.height = 10;
+		Projectile.width = 8;
+		Projectile.height = 8;
 		Projectile.aiStyle = -1;
 		Projectile.timeLeft = 90;
 
@@ -32,8 +32,8 @@ public class AetherBlob : ModProjectile
 
 		for (int i = 0; i < 3; i++) {
 			Dust dust = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.PinkTorch);
-			dust.velocity += Projectile.velocity * 0.6f;
-			dust.velocity *= 0.6f;
+			dust.position += Projectile.velocity * Main.rand.NextFloat(0.9f, 1.3f);
+			dust.velocity *= 0.9f;
 			dust.noGravity = true;
 		}
 	}

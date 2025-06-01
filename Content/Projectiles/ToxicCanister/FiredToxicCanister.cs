@@ -17,11 +17,9 @@ public class FiredToxicCanister : BaseFiredCanisterProjectile
 		if (Main.myPlayer == Projectile.owner) {
 			Projectile.Explode(100, 100);
 
-			// TODO: tweak velocity calcs, this makes X patterns a lot and doesnt feel random
-			foreach (float angle in Main.rand.NextSegmentedAngles(8, 0.2f)) {
-				Vector2 spawnPosition = Projectile.Center;
-				Vector2 velocity = angle.ToRotationVector2() * Main.rand.NextFloat(0.1f, 1f);
-				Projectile.NewProjectile(Projectile.GetSource_FromThis(), spawnPosition, velocity, ModContent.ProjectileType<ToxicFog>(), int.Max(Projectile.damage / 3, 1), 0f, Main.myPlayer);
+			for (int i = 0; i < 8; i++) {
+				Vector2 velocity = Main.rand.NextVector2Circular(1f, 1f) * Main.rand.NextFloat();
+				Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, velocity, ModContent.ProjectileType<ToxicFog>(), int.Max(Projectile.damage / 3, 1), 0f, Main.myPlayer);
 			}
 		}
 
