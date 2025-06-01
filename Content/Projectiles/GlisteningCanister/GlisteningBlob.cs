@@ -48,13 +48,7 @@ public class GlisteningBlob : ModProjectile
 	}
 
 	public override bool OnTileCollide(Vector2 oldVelocity) {
-		if (Projectile.velocity.X != oldVelocity.X) {
-			Projectile.velocity.X = -oldVelocity.X;
-		}
-
-		if (Projectile.velocity.Y != oldVelocity.Y) {
-			Projectile.velocity.Y = -oldVelocity.Y * 0.8f;
-		}
+		Projectile.velocity = Projectile.velocity.BounceOffTiles(oldVelocity, yMult: 0.8f);
 
 		Projectile.velocity *= 0.8f;
 

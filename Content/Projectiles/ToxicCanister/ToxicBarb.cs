@@ -83,13 +83,7 @@ public class ToxicBarb : ModProjectile
 	}
 
 	public override bool OnTileCollide(Vector2 oldVelocity) {
-		if (Projectile.velocity.X != oldVelocity.X) {
-			Projectile.velocity.X = -oldVelocity.X;
-		}
-
-		if (Projectile.velocity.Y != oldVelocity.Y) {
-			Projectile.velocity.Y = -oldVelocity.Y;
-		}
+		Projectile.velocity = Projectile.velocity.BounceOffTiles(oldVelocity); 
 
 		return false;
 	}

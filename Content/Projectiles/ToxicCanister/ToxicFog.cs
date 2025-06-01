@@ -40,6 +40,27 @@ public class ToxicFog : ModProjectile
 
 		Projectile.velocity *= 0.95f;
 
+		foreach (var proj in Main.ActiveProjectiles) {
+			if (proj.ModProjectile is not ToxicFog) {
+				continue;
+			}
+
+			if (Projectile.Hitbox.Intersects(proj.Hitbox)) {
+				Vector2 pushAwayVelocity = Projectile.DirectionTo(proj.Center) * 0.004f;
+				if (pushAwayVelocity.HasNaNs() || pushAwayVelocity == Vector2.Zero) {
+					pushAwayVelocity = new Vector2(1f, -1f)		;
+				}
+				
+				Projectile.velocity = Vector2.Lerp(Projectile.velocity, Projectile.velocity - pushAwayVelocity, 0.6f);
+				proj.velocity = Vector2.Lerp(proj.velocity, proj.velocity + pushAwayVelocity, 0.6f);
+			}
+		}
+		
+		Vector2 testPosition = Projectile.Center + Projectile.velocity.SafeNormalize(Vector2.Zero) * 16f;
+		if (Collision.IsWorldPointSolid(testPosition, true)) {
+			Projectile.velocity = Vector2.Lerp(Projectile.velocity, Projectile.velocity - Projectile.velocity.SafeNormalize(Vector2.Zero), 0.5f);
+		}
+
 		if (Main.rand.NextBool(10)) {
 			Dust dust = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, ModContent.DustType<ToxicDust>());
 			dust.alpha = Main.rand.Next(Projectile.alpha - 20, Projectile.alpha + 20);
@@ -65,6 +86,8 @@ public class ToxicFog : ModProjectile
 	}
 
 	public override bool OnTileCollide(Vector2 oldVelocity) {
+		Projectile.velocity = Projectile.velocity.BounceOffTiles(oldVelocity); 
+		
 		return false;
 	}
 

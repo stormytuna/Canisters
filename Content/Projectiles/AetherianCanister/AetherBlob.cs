@@ -46,13 +46,7 @@ public class AetherBlob : ModProjectile
 	}
 
 	public override bool OnTileCollide(Vector2 oldVelocity) {
-		if (Projectile.velocity.X != oldVelocity.X) {
-			Projectile.velocity.X = oldVelocity.X * -0.6f;
-		}
-
-		if (Projectile.velocity.Y != oldVelocity.Y) {
-			Projectile.velocity.Y = oldVelocity.Y * -0.95f;
-		}
+		Projectile.velocity = Projectile.velocity.BounceOffTiles(oldVelocity, 0.6f, 0.95f);
 
 		SoundEngine.PlaySound(SoundID.Item56 with { Volume = 0.3f, PitchRange = (0.6f, 1.2f), MaxInstances = 3, SoundLimitBehavior = SoundLimitBehavior.IgnoreNew }, Projectile.Center);
 
