@@ -21,7 +21,7 @@ public class GhastlyShot : ModProjectile
 	public override void AI() {
 		bool inTile = Collision.SolidTiles(Projectile.Center, 1, 1);
 
-		int numDust = inTile ? 3 : 6;
+		int numDust = inTile ? 2 : 4;
 		for (int i = 0; i < numDust; i++) {
 			Vector2 position = Projectile.Center + ((Projectile.velocity / numDust) * i);
 			Dust dust = Dust.NewDustPerfect(position, DustID.DungeonSpirit);

@@ -23,6 +23,10 @@ public class PrismaticAnnihilation : BaseCanisterUsingWeapon
 	public override Vector2? HoldoutOffset() {
 		return new Vector2(-6f, 0f);
 	}
+	
+	public override void SetStaticDefaults() {
+		ItemID.Sets.SkipsInitialUseSound[Type] = true;
+	}
 
 	public override void SetDefaults() {
 		Item.DefaultToCanisterUsingWeapon(18, 18, 11f, 71, 2f);
@@ -38,6 +42,9 @@ public class PrismaticAnnihilation : BaseCanisterUsingWeapon
 
 	public override bool? UseItem(Player player) {
 		player.GetModPlayer<PrismaticAnnihilationPlayer>().UseItem();
+		
+		SoundEngine.PlaySound(Item.UseSound, player.Center);
+		
 		return base.UseItem(player);
 	}
 

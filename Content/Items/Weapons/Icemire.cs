@@ -1,5 +1,6 @@
 ﻿using Canisters.Common;
 using Canisters.DataStructures;
+using Terraria.Audio;
 using Terraria.Enums;
 using Terraria.GameContent.ItemDropRules;
 
@@ -24,12 +25,18 @@ public class Icemire : BaseCanisterUsingWeapon
 		Item.width = 74;
 		Item.height = 22;
 		Item.SetShopValues(ItemRarityColor.Pink5, Item.buyPrice(gold: 5));
-		Item.UseSound = SoundID.Item10 with { PitchRange = (0.1f, 0.4f), MaxInstances = 0 };
 
 		Item.reuseDelay = 40;
 		Item.consumeAmmoOnLastShotOnly = true;
 		
 		Item.crit = 2;
+	}
+
+	public override bool? UseItem(Player player) {
+		var sound = SoundID.Item10 with { PitchRange = (0.1f, 0.4f), MaxInstances = 0 };
+		SoundEngine.PlaySound(sound, player.Center);
+		
+		return base.UseItem(player);
 	}
 }
 

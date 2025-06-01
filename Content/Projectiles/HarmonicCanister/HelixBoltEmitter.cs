@@ -20,15 +20,10 @@ public class HelixBoltEmitter : ModProjectile
 			return;
 		}
 
-		var darkProj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Projectile.velocity, ModContent.ProjectileType<HelixBolt>(), Projectile.damage, Projectile.knockBack);
-		if (darkProj.ModProjectile is HelixBolt darkHelixBolt) {
-			darkHelixBolt.IsLight = false;
-		}
+		Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Projectile.velocity, ModContent.ProjectileType<HelixBolt>(), Projectile.damage, Projectile.knockBack);
 
-		var lightProj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Projectile.velocity, ModContent.ProjectileType<HelixBolt>(), Projectile.damage, Projectile.knockBack);
-		if (lightProj.ModProjectile is HelixBolt lightHelixBolt) {
-			lightHelixBolt.IsLight = true;
-		}
+		// ai1 == 1f means light projectile to our helix bolt
+		Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Projectile.velocity, ModContent.ProjectileType<HelixBolt>(), Projectile.damage, Projectile.knockBack, ai1: 1f);
 		
 		Projectile.Kill();
 	}

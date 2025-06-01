@@ -1,4 +1,5 @@
 ﻿using Canisters.DataStructures;
+using Terraria.Audio;
 using Terraria.Enums;
 
 namespace Canisters.Content.Items.Weapons;
@@ -16,6 +17,10 @@ public class Splattergun : BaseCanisterUsingWeapon
 	public override Vector2? HoldoutOffset() {
 		return new Vector2(0f, 0f);
 	}
+	
+	public override void SetStaticDefaults() {
+		ItemID.Sets.SkipsInitialUseSound[Type] = true;
+	}
 
 	public override void SetDefaults() {
 		Item.DefaultToCanisterUsingWeapon(14, 14, 12f, 38, 1f);
@@ -31,6 +36,9 @@ public class Splattergun : BaseCanisterUsingWeapon
 
 	public override bool? UseItem(Player player) {
 		player.GetModPlayer<SplatterGunPlayer>().UseItem();
+		
+		SoundEngine.PlaySound(Item.UseSound, player.Center);
+		
 		return base.UseItem(player);
 	}
 
