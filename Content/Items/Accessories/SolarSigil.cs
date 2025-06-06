@@ -39,9 +39,9 @@ public class SolarSigilPlayer : ModPlayer
 		if (laserTarget is null) {
 			return;
 		}
-		
+
 		Main.LocalPlayer.ApplyDamageToNPC(laserTarget, hit.Damage / 6, 0f, 1, false, DamageClass.Ranged, true);
-		
+
 		Vector2 dustStart = Main.rand.NextVectorWithin(target.Hitbox);
 		Vector2 dustEnd = Main.rand.NextVectorWithin(laserTarget.Hitbox);
 

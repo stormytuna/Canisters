@@ -37,13 +37,13 @@ public class GhastlyExplosion : ModProjectile
 	public override void AI() {
 		if (_firstFrame) {
 			_firstFrame = false;
-			
+
 			Projectile.scale = Main.rand.NextFloat(0.8f, 1.2f);
 			Projectile.spriteDirection = Main.rand.NextBool().ToDirectionInt();
-			
+
 			DustHelpers.MakeDustExplosion(Projectile.Center, 8f, DustID.DungeonSpirit, 14, 0f, 8f, 50, 120, 1f, 1.5f, true);
 			DustHelpers.MakeDustExplosion(Projectile.Center, 8f, DustID.DungeonSpirit, 8, 4f, 14f, 70, 120, 1f, 1.3f, true);
-			
+
 			SoundEngine.PlaySound(SoundID.Item14 with { Volume = 0.2f, PitchRange = (0.7f, 0.9f), MaxInstances = 3, SoundLimitBehavior = SoundLimitBehavior.ReplaceOldest });
 		}
 
@@ -63,10 +63,10 @@ public class GhastlyExplosion : ModProjectile
 	}
 
 	public override bool PreDraw(ref Color lightColor) {
-		var texture = TextureAssets.Projectile[Type].Value;
-		var sourceRect = texture.Frame(verticalFrames: Main.projFrames[Type], frameY: Projectile.frame);
-		var position = (Projectile.Center - Main.screenPosition).Floor();
-		var effects = Projectile.spriteDirection == -1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
+		Texture2D texture = TextureAssets.Projectile[Type].Value;
+		Rectangle sourceRect = texture.Frame(verticalFrames: Main.projFrames[Type], frameY: Projectile.frame);
+		Vector2 position = (Projectile.Center - Main.screenPosition).Floor();
+		SpriteEffects effects = Projectile.spriteDirection == -1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
 		Main.EntitySpriteDraw(texture, position, sourceRect, Projectile.GetAlpha(lightColor), Projectile.rotation, sourceRect.Size() / 2f, Projectile.scale, effects);
 		return false;
 	}

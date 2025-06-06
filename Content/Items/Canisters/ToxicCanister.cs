@@ -14,7 +14,7 @@ public class ToxicCanister : BaseCanisterItem
 	}
 
 	public override Color CanisterColor {
-		get => new Color(87, 17, 172, 200);
+		get => new(87, 17, 172, 200);
 	}
 
 	public override void SetDefaults() {

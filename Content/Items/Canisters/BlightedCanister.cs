@@ -16,7 +16,7 @@ public class BlightedCanister : BaseCanisterItem
 	}
 
 	public override Color CanisterColor {
-		get => new Color(30, 246, 51, 220);
+		get => new(30, 246, 51, 220);
 	}
 
 	public override bool SuppressWeaponUseSound(BaseCanisterUsingWeapon weapon) {

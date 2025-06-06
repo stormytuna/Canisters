@@ -15,7 +15,7 @@ public class GhastlyCanister : BaseCanisterItem
 	}
 
 	public override Color CanisterColor {
-		get => new Color(112, 253, 255, 122);
+		get => new(112, 253, 255, 122);
 	}
 
 	public override void SetDefaults() {

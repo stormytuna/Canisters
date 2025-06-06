@@ -16,7 +16,7 @@ public class AetherianCanister : BaseCanisterItem
 	}
 
 	public override Color CanisterColor {
-		get => new Color(227, 134, 224, 100);
+		get => new(227, 134, 224, 100);
 	}
 
 	public override void SetStaticDefaults() {
@@ -33,15 +33,15 @@ public class AetherianCanister : BaseCanisterItem
 			stats.Damage = (int)(stats.Damage / 3.5f);
 			stats.Knockback = 0f;
 			stats.ProjectileCount *= 6;
-			
+
 			if (Main.LocalPlayer.GetModPlayer<CanisterModifiersPlayer>().CanisterLaunchedExplosionRadiusMult > 1f) {
 				stats.ProjectileCount++;
 			}
-			
+
 			if (Main.LocalPlayer.GetModPlayer<CanisterModifiersPlayer>().CanisterLaunchedExplosionRadiusMult > 1.5f) {
 				stats.ProjectileCount++;
 			}
-			
+
 			stats.TotalSpread += 0.7f;
 		}
 	}
