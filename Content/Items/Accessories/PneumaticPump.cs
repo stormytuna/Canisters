@@ -16,7 +16,7 @@ public class PneumaticPump : ModItem
 
 	public override void UpdateAccessory(Player player, bool hideVisual) {
 		player.GetModPlayer<CanisterModifiersPlayer>().CanisterLaunchedExplosionRadiusMult += 0.5f;
-		player.GetModPlayer<CanisterModifiersPlayer>().CanisterDepletedFireRateMult += 0.15f;
+		player.GetModPlayer<CanisterModifiersPlayer>().CanisterDepletedFireRateMult += 0.08f;
 	}
 }
 

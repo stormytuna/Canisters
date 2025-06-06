@@ -14,12 +14,6 @@ public class GhastlyExplosionEmitter : ModProjectile
 		get => ref Projectile.ai[0];
 	}
 
-	/*
-	public override string Texture {
-		get => CanisterHelpers.GetEmptyAssetString();
-	}
-	*/
-
 	public override void SetDefaults() {
 		Projectile.width = 16;
 		Projectile.height = 16;

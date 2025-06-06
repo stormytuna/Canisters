@@ -45,14 +45,14 @@ public class Splattergun : BaseCanisterUsingWeapon
 	public override void AddRecipes() {
 		CreateRecipe()
 			.AddIngredient(ItemID.PainterPaintballGun)
-			.AddIngredient(ItemID.OrichalcumBar, 12)
-			.AddTile(TileID.MythrilAnvil)
+			.AddIngredient(ItemID.PalladiumBar, 12)
+			.AddTile(TileID.Anvils)
 			.Register();
 
 		CreateRecipe()
 			.AddIngredient(ItemID.PainterPaintballGun)
-			.AddIngredient(ItemID.MythrilBar, 12)
-			.AddTile(TileID.MythrilAnvil)
+			.AddIngredient(ItemID.CobaltBar, 12)
+			.AddTile(TileID.Anvils)
 			.Register();
 	}
 }

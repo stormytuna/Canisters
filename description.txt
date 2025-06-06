@@ -1,1 +1,10 @@
-Canisters is a pretty cool mod, it does...this. Modify this file with a description of your mod.
+Canisters adds a new Ranged subclass centered around a new ammo type: Canisters!
+Some weapons launch canisters, creating an explosion on impact. Other weapons deplete canisters to fire a projectile.
+
+[h2]TLDR[/h2]
+
+- Adds 10 Canister ammo items, each with 2 different behaviours that can be used by weapons
+- Adds 22 new weapons spaced throughout progression
+- Adds 5 new Canister-based accessories
+- Multiplayer is supported
+- Currently only supports English, see the Steam Workshop page if you'd like to contribute another translation

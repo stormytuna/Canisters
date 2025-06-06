@@ -1,3 +1,4 @@
+using Canisters.Common;
 using Canisters.Content.Projectiles.AetherianCanister;
 using Canisters.DataStructures;
 using Terraria.Enums;
@@ -32,6 +33,15 @@ public class AetherianCanister : BaseCanisterItem
 			stats.Damage = (int)(stats.Damage / 3.5f);
 			stats.Knockback = 0f;
 			stats.ProjectileCount *= 6;
+			
+			if (Main.LocalPlayer.GetModPlayer<CanisterModifiersPlayer>().CanisterLaunchedExplosionRadiusMult > 1f) {
+				stats.ProjectileCount++;
+			}
+			
+			if (Main.LocalPlayer.GetModPlayer<CanisterModifiersPlayer>().CanisterLaunchedExplosionRadiusMult > 1.5f) {
+				stats.ProjectileCount++;
+			}
+			
 			stats.TotalSpread += 0.7f;
 		}
 	}

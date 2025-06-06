@@ -54,7 +54,7 @@ public class Resonance : BaseCanisterUsingWeapon
 		CreateRecipe()
 			.AddIngredient(ItemID.LightShard)
 			.AddIngredient(ItemID.DarkShard)
-			.AddIngredient(ItemID.PalladiumBar, 16)
+			.AddIngredient(ItemID.OrichalcumBar, 16)
 			.AddTile(TileID.MythrilAnvil)
 			.Register();
 	}

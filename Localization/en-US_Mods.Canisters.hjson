@@ -277,7 +277,7 @@ Items: {
 		Tooltip:
 			'''
 			Increases blast radius of launched canisters by 50%
-			Increases rate of fire of depleted canisters by 15%
+			Increases rate of fire of depleted canisters by 8%
 			'''
 	}
 
@@ -340,7 +340,7 @@ Items: {
 
 	SolarSigil: {
 		DisplayName: Solar Sigil
-		Tooltip: Critical hits with launched canister projectiles damage nearby enemies with solar rays
+		Tooltip: Critical hits with depleted canister projectiles damage nearby enemies with solar rays
 	}
 
 	SunBlessedTech: {

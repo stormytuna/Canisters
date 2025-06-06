@@ -20,10 +20,10 @@ public class Pneumaticannon : BaseCanisterUsingWeapon
 	}
 
 	public override void SetDefaults() {
-		Item.DefaultToCanisterUsingWeapon(28, 28, 15f, 50, 3f);
+		Item.DefaultToCanisterUsingWeapon(28, 28, 15f, 60, 3f);
 		Item.width = 48;
 		Item.height = 14;
-		Item.SetShopValues(ItemRarityColor.Pink5, Item.sellPrice(gold: 75));
+		Item.SetShopValues(ItemRarityColor.Pink5, Item.sellPrice(gold: 60));
 		Item.UseSound = SoundID.Item10 with { PitchRange = (-0.6f, -0.4f) };
 
 		Item.crit = 6;
