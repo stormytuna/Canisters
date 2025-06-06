@@ -18,7 +18,7 @@ public class TheColony : BaseCanisterUsingWeapon
 	}
 
 	public override void SetDefaults() {
-		Item.DefaultToCanisterUsingWeapon(25, 25, 8f, 16, 3f);
+		Item.DefaultToCanisterUsingWeapon(28, 28, 8f, 12, 3f);
 		Item.width = 32;
 		Item.height = 24;
 		Item.SetShopValues(ItemRarityColor.Orange3, Item.buyPrice(silver: 70));

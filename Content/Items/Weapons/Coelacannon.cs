@@ -21,7 +21,7 @@ public class Coelacannon : BaseCanisterUsingWeapon
 	}
 
 	public override void SetDefaults() {
-		Item.DefaultToCanisterUsingWeapon(32, 32, 9f, 86, 6f);
+		Item.DefaultToCanisterUsingWeapon(32, 32, 9f, 125, 6f);
 		Item.width = 72;
 		Item.height = 36;
 		Item.SetShopValues(ItemRarityColor.Lime7, Item.buyPrice(gold: 8));

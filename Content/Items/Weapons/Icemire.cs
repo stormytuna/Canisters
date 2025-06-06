@@ -26,7 +26,7 @@ public class Icemire : BaseCanisterUsingWeapon
 		Item.height = 22;
 		Item.SetShopValues(ItemRarityColor.Pink5, Item.buyPrice(gold: 5));
 
-		Item.reuseDelay = 40;
+		Item.reuseDelay = 20;
 		Item.consumeAmmoOnLastShotOnly = true;
 
 		Item.crit = 2;

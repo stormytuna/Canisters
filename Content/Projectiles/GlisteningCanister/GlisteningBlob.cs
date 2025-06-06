@@ -19,9 +19,8 @@ public class GlisteningBlob : ModProjectile
 		Projectile.friendly = true;
 		Projectile.penetrate = 3;
 		Projectile.DamageType = DamageClass.Ranged;
-		Projectile.usesLocalNPCImmunity = true;
-		Projectile.localNPCHitCooldown = -1;
-		Projectile.ownerHitCheck = true;
+		Projectile.usesIDStaticNPCImmunity = true;
+		Projectile.idStaticNPCHitCooldown = -1;
 	}
 
 	public override void AI() {

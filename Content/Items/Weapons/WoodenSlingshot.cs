@@ -18,7 +18,7 @@ public class WoodenSlingshot : BaseCanisterUsingWeapon
 	}
 
 	public override void SetDefaults() {
-		Item.DefaultToCanisterUsingWeapon(30, 30, 8f, 9, 1f);
+		Item.DefaultToCanisterUsingWeapon(30, 30, 8f, 18, 1f);
 		Item.width = 20;
 		Item.height = 32;
 		Item.SetShopValues(ItemRarityColor.Blue1, Item.buyPrice(silver: 2));

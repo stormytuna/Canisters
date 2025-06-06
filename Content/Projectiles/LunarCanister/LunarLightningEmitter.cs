@@ -92,18 +92,13 @@ public class LunarLightningEmitter : ModProjectile
 			if (target is not null) {
 				TimerForAttack = 0f;
 
-				NPC.HitInfo hitInfo = new() {
-					Damage = Projectile.damage / 2,
-					Knockback = 0f,
-					DamageType = DamageClass.Ranged,
-					HitDirection = (target.Center.X > Projectile.Center.X).ToDirectionInt(),
-				};
-				target.StrikeNPC(hitInfo);
+				int hitDirection = (target.Center.X > Projectile.Center.X).ToDirectionInt();
+				bool crit = Main.rand.Next(100) < Main.LocalPlayer.GetTotalCritChance(DamageClass.Ranged);
+				Main.LocalPlayer.ApplyDamageToNPC(target, Projectile.damage / 2, 0f, hitDirection, crit, DamageClass.Ranged, true);
 
 				LightningBoltEffects(Projectile.Center, target.Center);
 
 				if (Main.netMode != NetmodeID.SinglePlayer) {
-					NetMessage.SendStrikeNPC(target, in hitInfo, Main.myPlayer);
 					BroadcastLightningBoltSync(-1, Main.myPlayer, Projectile.Center, target.Center);
 				}
 			}

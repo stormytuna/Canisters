@@ -29,7 +29,7 @@ public class PrismaticAnnihilation : BaseCanisterUsingWeapon
 	}
 
 	public override void SetDefaults() {
-		Item.DefaultToCanisterUsingWeapon(18, 18, 11f, 71, 2f);
+		Item.DefaultToCanisterUsingWeapon(18, 18, 11f, 92, 2f);
 		Item.width = 36;
 		Item.height = 18;
 		Item.SetShopValues(ItemRarityColor.StrongRed10, Item.sellPrice(gold: 10));

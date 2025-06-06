@@ -23,7 +23,7 @@ public class FiredGhastlyCanister : BaseFiredCanisterProjectile
 
 	protected override void ExplosionEffect() {
 		if (Main.myPlayer == Projectile.owner) {
-			Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Projectile.velocity, ModContent.ProjectileType<GhastlyExplosionEmitter>(), Projectile.damage / 5, Projectile.knockBack, Projectile.owner);
+			Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Projectile.velocity, ModContent.ProjectileType<GhastlyExplosionEmitter>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
 		}
 
 		DustHelpers.MakeDustExplosion(Projectile.Center, 8f, DustID.DungeonSpirit, 22, 0f, 8f, 50, 120, 1f, 1.5f, true);

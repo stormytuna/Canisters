@@ -129,8 +129,8 @@ Items: {
 	NaniteCanister: {
 		Tooltip:
 			'''
-			Explodes into a swarm of nanites when launched
-			Fires a blob of nanites when depleted
+			Releases heat-seeking darts when launched
+			Fires a piercing laser line when depleted
 			'''
 		DisplayName: Nanite Canister
 	}
@@ -170,7 +170,7 @@ Items: {
 
 	BarkBellower: {
 		DisplayName: Bark Bellower
-		Tooltip: Depleted canister shots inflict Nature's Bane
+		Tooltip: Depleted canister projectiles inflict Nature's Bane
 	}
 
 	LushSlinger: {
@@ -180,7 +180,7 @@ Items: {
 
 	TheColony: {
 		DisplayName: The Colony
-		Tooltip: Depleted canisters fire a spread of projectiles
+		Tooltip: Depletes canisters in a spread
 	}
 
 	InfernalCannon: {
@@ -192,21 +192,21 @@ Items: {
 		DisplayName: Repurposed Spray Bottle
 		Tooltip:
 			'''
-			Depletes canisters with pathetic velocity, but tremendous firing speed
+			Depletes canisters with pathetic velocity, but with tremendous rate of fire
 			40% chance to save ammo
 			'''
 	}
 
 	Icemire: {
 		DisplayName: Icemire
-		Tooltip: Launches a short burst of canisters coated in frostbite crystals
+		Tooltip: Launches a short burst of supercooled canisters
 	}
 
 	Resonance: {
 		DisplayName: Resonance
 		Tooltip:
 			'''
-			Depleted canisters fire two projectiles in harmony
+			Depletes canisters in 2 harmonious projectiles
 			30% chance to save ammo
 			'''
 	}
@@ -285,8 +285,8 @@ Items: {
 		DisplayName: Abyssal Blaster
 		Tooltip:
 			'''
-			Launches canisters in a spread
-			'I didn't ask how big the room is.'
+			Launches 3 canisters in a spread
+			'I didn't ask how big the room is...'
 			'''
 	}
 
@@ -326,7 +326,7 @@ Items: {
 
 	ArcticCoolant: {
 		DisplayName: Arctic Coolant
-		Tooltip: Launched canisters release a homing arctic snowflake
+		Tooltip: Launched canisters release a homing arctic snowflake when they explode
 	}
 
 	CryoPumpAssembly: {
@@ -334,7 +334,7 @@ Items: {
 		Tooltip:
 			'''
 			Increases blast radius of launched canisters by 50%
-			Launched canisters release a homing arctic snowflake
+			Launched canisters release a homing arctic snowflake when they explode
 			'''
 	}
 
@@ -350,13 +350,6 @@ Items: {
 			Increases rate of fire of depleted canisters by 15%
 			Critical hits with launched canister projectiles damage nearby enemies with solar rays
 			'''
-	}
-}
-
-Buffs: {
-	Devoured: {
-		Description: Nanite time
-		DisplayName: Devoured
 	}
 }
 

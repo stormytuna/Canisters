@@ -25,7 +25,7 @@ public class GhastlyCanister : BaseCanisterItem
 
 	public override void ApplyAmmoStats(ref CanisterShootStats stats) {
 		if (stats.IsDepleted) {
-			stats.Damage /= 5;
+			stats.Damage = (int)(stats.Damage / 3.5f);
 			stats.Knockback /= 5f;
 			stats.ProjectileCount *= 6;
 			stats.TotalSpread += 0.1f;

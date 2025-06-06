@@ -24,7 +24,7 @@ public class HypernovaRailgun : BaseCanisterUsingWeapon
 	}
 
 	public override void SetDefaults() {
-		Item.DefaultToCanisterUsingWeapon(26, 26, 12f, 60, 8f);
+		Item.DefaultToCanisterUsingWeapon(36, 36, 12f, 160, 8f);
 		Item.width = 66;
 		Item.height = 28;
 		Item.SetShopValues(ItemRarityColor.Yellow8, Item.sellPrice(gold: 10));

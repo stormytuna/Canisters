@@ -21,7 +21,7 @@ public class BlightedBolt : ModProjectile
 		Projectile.extraUpdates = 200;
 
 		Projectile.friendly = true;
-		Projectile.penetrate = 5;
+		Projectile.penetrate = 3;
 		Projectile.DamageType = DamageClass.Ranged;
 		Projectile.usesLocalNPCImmunity = true;
 		Projectile.localNPCHitCooldown = -1;

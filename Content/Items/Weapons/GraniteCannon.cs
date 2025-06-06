@@ -20,7 +20,7 @@ public class GraniteCannon : BaseCanisterUsingWeapon
 	}
 
 	public override void SetDefaults() {
-		Item.DefaultToCanisterUsingWeapon(42, 42, 13f, 16, 3f);
+		Item.DefaultToCanisterUsingWeapon(42, 42, 13f, 24, 3f);
 		Item.width = 44;
 		Item.height = 16;
 		Item.SetShopValues(ItemRarityColor.Blue1, Item.buyPrice(silver: 30));

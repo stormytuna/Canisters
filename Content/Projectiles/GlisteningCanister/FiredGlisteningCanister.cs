@@ -17,7 +17,7 @@ public class FiredGlisteningCanister : BaseFiredCanisterProjectile
 			for (int i = 0; i < 3; i++) {
 				Vector2 velocity = new(Main.rand.NextFloat(0.1f, 2.5f), Main.rand.NextFloat(1f, 5f));
 				velocity *= Main.rand.NextBool().ToDirectionInt();
-				Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, velocity, ModContent.ProjectileType<GlisteningBlob>(), Projectile.damage / 6, 0f, Projectile.owner);
+				Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, velocity, ModContent.ProjectileType<GlisteningBlob>(), Projectile.damage / 3, 0f, Projectile.owner);
 			}
 
 			Projectile.Explode(100, 100);

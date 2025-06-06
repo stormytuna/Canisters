@@ -23,13 +23,13 @@ public class FungalFury : BaseCanisterUsingWeapon
 	}
 
 	public override void SetDefaults() {
-		Item.DefaultToCanisterUsingWeapon(10, 10 * 4, 12f, 56, 1f);
+		Item.DefaultToCanisterUsingWeapon(10, 10 * 4, 12f, 60, 1f);
 		Item.width = 60;
 		Item.height = 32;
 		Item.SetShopValues(ItemRarityColor.Lime7, Item.sellPrice(gold: 70));
 		Item.UseSound = SoundID.Item5 with { PitchRange = (0.7f, 1.1f), MaxInstances = 0, Volume = 0.6f };
 
-		Item.reuseDelay = 6;
+		Item.reuseDelay = 12;
 		Item.consumeAmmoOnLastShotOnly = true;
 	}
 

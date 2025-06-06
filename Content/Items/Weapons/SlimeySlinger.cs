@@ -21,7 +21,7 @@ public class SlimeySlinger : BaseCanisterUsingWeapon
 	}
 
 	public override void SetDefaults() {
-		Item.DefaultToCanisterUsingWeapon(32, 32, 15f, 22, 6f);
+		Item.DefaultToCanisterUsingWeapon(32, 32, 12f, 40, 6f);
 		Item.width = 20;
 		Item.height = 32;
 		Item.SetShopValues(ItemRarityColor.Pink5, Item.buyPrice(gold: 1));
