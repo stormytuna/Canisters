@@ -14,8 +14,6 @@ public class GhastlyShot : ModProjectile
 
 		Projectile.friendly = true;
 		Projectile.DamageType = DamageClass.Ranged;
-		Projectile.usesLocalNPCImmunity = true;
-		Projectile.localNPCHitCooldown = -1;
 	}
 
 	public override void AI() {

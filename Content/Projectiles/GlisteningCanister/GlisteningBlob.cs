@@ -15,12 +15,13 @@ public class GlisteningBlob : ModProjectile
 		Projectile.height = 16;
 		Projectile.aiStyle = -1;
 		Projectile.extraUpdates = 1;
+		Projectile.timeLeft = 4 * 60;
 
 		Projectile.friendly = true;
 		Projectile.penetrate = 3;
 		Projectile.DamageType = DamageClass.Ranged;
 		Projectile.usesIDStaticNPCImmunity = true;
-		Projectile.idStaticNPCHitCooldown = -1;
+		Projectile.idStaticNPCHitCooldown = 20;
 	}
 
 	public override void AI() {

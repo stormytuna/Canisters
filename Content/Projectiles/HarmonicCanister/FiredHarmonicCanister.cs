@@ -17,6 +17,7 @@ public class FiredHarmonicCanister : BaseFiredCanisterProjectile
 	public override void SetDefaults() {
 		Projectile.DefaultToFiredCanister();
 		Projectile.penetrate = -1;
+		Projectile.localNPCHitCooldown = 20;
 	}
 
 	public override void PostAI() {

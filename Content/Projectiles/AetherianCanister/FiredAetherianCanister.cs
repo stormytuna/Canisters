@@ -46,6 +46,6 @@ public class FiredAetherianCanister : BaseFiredCanisterProjectile
 
 		DustHelpers.MakeDustExplosion(Projectile.Center, 20f, Main.rand.Next(DustID.Confetti, DustID.Confetti_Yellow + 1), 5, 1f, 3f);
 
-		SoundEngine.PlaySound(SoundID.NPCDeath63 with { PitchRange = (-0.8f, -0.2f), MaxInstances = 0 }, Projectile.Center);
+		SoundEngine.PlaySound(SoundID.NPCDeath63 with { Volume = 0.6f, PitchRange = (-0.8f, -0.2f), MaxInstances = 2 }, Projectile.Center);
 	}
 }
