@@ -14,7 +14,7 @@ public class HarmonicCanister : BaseCanisterItem
 	}
 
 	public override Color CanisterColor {
-		get => Color.Purple;
+		get => new Color(233, 37, 188, 150);
 	}
 
 	public override void SetDefaults() {

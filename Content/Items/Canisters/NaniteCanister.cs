@@ -15,7 +15,7 @@ public class NaniteCanister : BaseCanisterItem
 	}
 
 	public override Color CanisterColor {
-		get => Color.LightCyan;
+		get => new Color(119, 195, 253, 200);
 	}
 
 	public override void SetDefaults() {

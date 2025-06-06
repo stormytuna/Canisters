@@ -14,7 +14,7 @@ public class LunarCanister : BaseCanisterItem
 	}
 
 	public override Color CanisterColor {
-		get => Color.LightCyan;
+		get => new Color(73, 243, 185, 100);
 	}
 
 	public override void SetDefaults() {

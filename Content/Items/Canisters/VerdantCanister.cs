@@ -16,7 +16,7 @@ public class VerdantCanister : BaseCanisterItem
 	}
 
 	public override Color CanisterColor {
-		get => Color.Green;
+		get => new(24, 154, 26, 255);
 	}
 
 	public override bool SuppressWeaponUseSound(BaseCanisterUsingWeapon weapon) {

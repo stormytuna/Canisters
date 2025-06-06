@@ -14,7 +14,7 @@ public class GlisteningCanister : BaseCanisterItem
 	}
 
 	public override Color CanisterColor {
-		get => Color.Yellow;
+		get => new Color(237, 211, 44, 200);
 	}
 
 	public override void SetDefaults() {

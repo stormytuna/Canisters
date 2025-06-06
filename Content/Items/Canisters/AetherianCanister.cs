@@ -15,7 +15,7 @@ public class AetherianCanister : BaseCanisterItem
 	}
 
 	public override Color CanisterColor {
-		get => Color.Purple;
+		get => new Color(227, 134, 224, 100);
 	}
 
 	public override void SetStaticDefaults() {
