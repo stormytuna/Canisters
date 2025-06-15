@@ -1,0 +1,356 @@
+Projectiles: {
+	BlightedBall.DisplayName: 咒火球
+	BlightedBolt.DisplayName: 诅咒能量
+	BlightedCanister.DisplayName: 枯萎罐
+	GlisteningBall.DisplayName: 灵液球
+	GlisteningBlob.DisplayName: 灵液滴
+	GlisteningCanister.DisplayName: 闪耀罐
+	HarmonicCanister.DisplayName: 谐波罐
+	HelixBolt.DisplayName: 毒液弹
+	ToxicBarb.DisplayName: 毒液滴
+	ToxicCanister.DisplayName: 毒液罐
+	VerdantCanister.DisplayName: 葱郁罐
+	VerdantGas.DisplayName: 葱郁毒气
+	VerdantGas_Helper.DisplayName: 葱郁毒气
+	VerdantVine.DisplayName: 葱郁藤蔓
+	GelBall.DisplayName: 凝胶球
+	VolatileCanister.DisplayName: 易爆罐
+	Nanites.DisplayName: 纳米机器人
+	NaniteCanister.DisplayName: 纳米罐
+	NaniteBlob.DisplayName: 纳米滴
+	GhastlyShot.DisplayName: 鬼魂射击
+	GhastlyExplosion.DisplayName: 鬼魂爆炸
+	GhastlyCanister.DisplayName: 鬼魂罐
+	LunarCanister.DisplayName: 月曜罐
+	LunarShot.DisplayName: 月曜射击
+	LunarExplosion.DisplayName: 月曜爆炸
+	VerdantGasEmitter.DisplayName: 葱郁毒气发射器
+	GhastlyExplosionEmitter.DisplayName: 鬼魂爆炸发射器
+	HarmonicExplosion.DisplayName: 谐波爆炸
+	LunarLightningEmitter.DisplayName: 月曜闪电发射器
+	ToxicFogEmitter.DisplayName: 剧毒雾发射器
+	ToxicFog.DisplayName: 剧毒雾
+	NaniteMist.DisplayName: 纳米雾
+	NaniteMistEmitter.DisplayName: 纳米雾发射器
+	AetherBlob.DisplayName: 以太滴
+	AetherianCanister.DisplayName: 以太罐
+	FiredAetherianCanister.DisplayName: 以太罐
+	FiredBlightedCanister.DisplayName: 枯萎罐
+	FiredGhastlyCanister.DisplayName: 鬼魂罐
+	FiredGlisteningCanister.DisplayName: 闪耀罐
+	FiredHarmonicCanister.DisplayName: 谐波罐
+	FiredLunarCanister.DisplayName: 月曜罐
+	FiredNaniteCanister.DisplayName: 纳米罐
+	FiredToxicCanister.DisplayName: 毒液罐
+	FiredVerdantCanister.DisplayName: 葱郁罐
+	DepletedVolatileCanister.DisplayName: 喷射凝胶
+	FiredVolatileCanister.DisplayName: 易爆罐
+	GelBallEmitter.DisplayName: 凝胶球发射器
+	LunarMark.DisplayName: 月曜印记
+	PrismaticAnnihilationStar.DisplayName: 棱镜星
+	ArcticCoolantSnowflake.DisplayName: 北极雪花
+	HomingNaniteBolt.DisplayName: 追踪纳米弹
+	NaniteShot.DisplayName: 纳米射击
+	NaniteLaserLine.DisplayName: 纳米激光
+	NaniteLaserLineEmitter.DisplayName: 纳米激光发射器
+	HelixBoltEmitter.DisplayName: 螺旋弹发射器
+}
+
+Items: {
+	WoodenSlingshot: {
+		Tooltip: 发射药剂罐
+		DisplayName: 木弹弓
+	}
+
+	ModifiedHandgun: {
+		Tooltip: 喷射药剂
+		DisplayName: 改装手枪
+	}
+
+	VolatileCanister: {
+		Tooltip:
+			'''
+			发射药剂罐时发生剧烈爆炸
+			喷射药剂时发射一股使敌人更易燃的凝胶
+			'''
+		DisplayName: 易爆罐
+	}
+
+	VerdantCanister: {
+		Tooltip:
+			'''
+			发射药剂罐时爆发出藤蔓
+			喷射药剂时发射一团毒气
+			'''
+		DisplayName: 葱郁罐
+	}
+
+	ToxicCanister: {
+		Tooltip:
+			'''
+			发射药剂罐时留下剧毒雾气
+			喷射药剂时发射向敌人反弹的毒液
+			'''
+		DisplayName: 毒液罐
+	}
+
+	HarmonicCanister: {
+		Tooltip:
+			'''
+			发射药剂罐时发射穿透的罐子
+			喷射药剂时发射螺旋
+			'''
+		DisplayName: 谐波罐
+	}
+
+	GlisteningCanister: {
+		Tooltip:
+			'''
+			发射药剂罐时炸出弹跳的灵液球
+			喷射药剂时喷出分散灵液滴
+			'''
+		DisplayName: 闪耀罐
+	}
+
+	EmptyCanister: {
+		Tooltip: 用于制造药剂罐
+		DisplayName: 空罐
+	}
+
+	BlightedCanister: {
+		Tooltip:
+			'''
+			发射药剂罐时释放出一圈咒火球
+			喷射药剂时发射诅咒能量
+			'''
+		DisplayName: 枯萎罐
+	}
+
+	NaniteCanister: {
+		Tooltip:
+			'''
+			发射药剂罐时释放追踪飞镖
+			喷射药剂时发射穿透激光
+			'''
+		DisplayName: 纳米罐
+	}
+
+	GhastlyCanister: {
+		Tooltip:
+			'''
+			发射药剂罐时爆裂成集束炸弹
+			喷射药剂时发射散射的幽灵弹
+			'''
+		DisplayName: 鬼魂罐
+	}
+
+	LunarCanister: {
+		Tooltip:
+			'''
+			发射药剂罐时爆出闪电漩涡
+			喷射药剂时发射标记式月曜能量
+			'对，它在黑暗中会发光。但不代表你能把它当夜灯用。'
+			'''
+		DisplayName: 月曜罐
+	}
+
+	GraniteCannon: {
+		DisplayName: 花岗岩手炮
+		Tooltip: 发射药剂罐
+	}
+
+	AncientSprayer: {
+		Tooltip:
+			'''
+			喷射药剂
+			20%几率不消耗弹药
+			'''
+		DisplayName: 古代喷雾器
+	}
+
+	BarkBellower: {
+		DisplayName: 树皮啸叫
+		Tooltip: 喷射药剂时造成自然诅咒减益
+	}
+
+	LushSlinger: {
+		DisplayName: 葱翠弹弓
+		Tooltip: 发射的葱郁罐生成更多藤蔓
+	}
+
+	TheColony: {
+		DisplayName: 殖民地
+		Tooltip: 喷射扩散的药剂
+	}
+
+	InfernalCannon: {
+		DisplayName: 地狱手炮
+		Tooltip: 发射的药剂罐会被暗影焰包裹
+	}
+
+	RepurposedSprayBottle: {
+		DisplayName: 改装喷雾瓶
+		Tooltip:
+			'''
+			以惊人的速度喷射药剂，但药剂飞行速度很慢
+			40%几率不消耗弹药
+			'''
+	}
+
+	Icemire: {
+		DisplayName: 冰潭
+		Tooltip: 发射一堆过冷罐
+	}
+
+	Resonance: {
+		DisplayName: 谐振
+		Tooltip:
+			'''
+			喷射药剂时发射2发谐振射弹
+			30%几率不消耗弹药
+			'''
+	}
+
+	Pneumaticannon: {
+		DisplayName: 气动手炮
+		Tooltip: 以惊人的速度发射药剂罐
+	}
+
+	SlimeySlinger: {
+		DisplayName: 史莱姆弹弓
+		Tooltip:
+			'''
+			发射沾满弹性粘液的药剂罐
+			'战术性反弹!'
+			'''
+	}
+
+	Splattergun: {
+		DisplayName: 飞溅枪
+		Tooltip:
+			'''
+			喷射药剂
+			射击时间越长，射速越快
+			25%几率不消耗弹药
+			'''
+	}
+
+	Reverence: {
+		DisplayName: 尊严
+		Tooltip:
+			'''
+			左键发射药剂罐
+			右键喷射药剂
+			'''
+	}
+
+	ChlorophyteSlugger: {
+		DisplayName: 叶绿重炮
+		Tooltip:
+			'''
+			喷射药剂
+			射速随着射击时间增加而大幅加快
+			60%几率不消耗弹药
+			'''
+	}
+
+	AetherianCanister: {
+		Tooltip:
+			'''
+			发射罐子时喷射一片弹性以太滴
+			喷射药剂时发射双重爆炸罐
+			'''
+		DisplayName: 以太罐
+	}
+
+	FungalFury: {
+		DisplayName: 菌怒
+		Tooltip:
+			'''
+			四轮喷发式喷射药剂
+			20%几率不消耗弹药
+			'''
+	}
+
+	PneumaticPump: {
+		DisplayName: 气动泵
+		Tooltip:
+			'''
+			发射的药剂罐爆炸半径增加50%
+			喷射药剂时的射速提高8%
+			'''
+	}
+
+	AbyssalBlaster: {
+		DisplayName: 深渊爆破手
+		Tooltip:
+			'''
+			发射3发药剂罐
+			'我没问你房间有多大...给我射'
+			'''
+	}
+
+	HypernovaRailgun: {
+		DisplayName: 极超新星轨道炮
+		Tooltip: 极快速的发射药剂罐，伤害随飞行距离增加，最高20%
+	}
+
+	QuantumFluxCannon: {
+		DisplayName: 量子通量炮
+		Tooltip:
+			'''
+			使用尖端量子技术同时发射药剂罐并喷射药剂
+			20%几率不消耗弹药
+			'不是bug，是特性!'
+			'''
+	}
+
+	PrismaticAnnihilation: {
+		DisplayName: 棱镜湮灭
+		Tooltip:
+			'''
+			喷射药剂，每四发发射一颗棱镜星
+			射击时间越长，射速越快
+			50%几率不消耗弹药
+			'''
+	}
+
+	Coelacannon: {
+		DisplayName: 腔棘鱼炮
+		Tooltip:
+			'''
+			发射追踪的"药剂罐"
+			'没有动物在制造武器的过程中受到伤害'
+			'''
+	}
+
+	ArcticCoolant: {
+		DisplayName: 北极冷却剂
+		Tooltip: 发射的药剂罐爆炸时放出一片追踪的北极雪花
+	}
+
+	CryoPumpAssembly: {
+		DisplayName: 低温泵元件
+		Tooltip:
+			'''
+			发射的药剂罐爆炸半径增加50%
+			发射的药剂罐爆炸时放出一片追踪的北极雪花
+			'''
+	}
+
+	SolarSigil: {
+		DisplayName: 太阳魔符
+		Tooltip: 喷射药剂造成暴击会对附近的敌人发射阳光射线
+	}
+
+	SunBlessedTech: {
+		DisplayName: 日佑科技
+		Tooltip:
+			'''
+			喷射药剂时的射速提高15%
+			喷射药剂造成暴击会对附近的敌人发射阳光射线
+			'''
+	}
+}
+
+Configs.ServerConfig.DisplayName: 服务器设置
