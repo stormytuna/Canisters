@@ -13,9 +13,9 @@ For a complete list of items and how to acquire them, see the [url=https://githu
 
 [h2]Credits[/h2]
 
-- [url=https://github.com/shrinkviolet77]shrinkviolet77[/url] for Chinese localization
-
 [hr][/hr]
+
+- [url=https://github.com/shrinkviolet77]shrinkviolet77[/url] for Chinese localization
 
 [hr][/hr]
 
